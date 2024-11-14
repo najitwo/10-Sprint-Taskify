@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import "./variables.css";
 import "./reset.css";
 
 const pretendard = localFont({
