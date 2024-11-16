@@ -6,12 +6,18 @@ interface AuthState {
   removeAccessToken: () => void;
 }
 
-function setAccessTokenFn(set: any, token: string) {
-  set({ accessToken: token });
+type SetState = <T>(fn: (state: T) => T) => void;
+
+function setAccessTokenFn(set: SetState, token: string) {
+  set(function (state: AuthState) {
+    return { ...state, accessToken: token };
+  });
 }
 
-function removeAccessTokenFn(set: any) {
-  set({ accessToken: null });
+function removeAccessTokenFn(set: SetState) {
+  set(function (state: AuthState) {
+    return { ...state, accessToken: null };
+  });
 }
 
 function createAuthStore(set: any) {
