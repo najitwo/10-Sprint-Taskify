@@ -2,7 +2,10 @@ import axios from 'axios';
 import { AUTH_URL } from '@/constants/urls';
 import useAuthStore from '@/store/authStore';
 
-export default async function handleLogin(email: string, password: string) {
+export default async function handleLogin(
+  email: string,
+  password: string
+): Promise<boolean> {
   try {
     const response = await axios.post(`${AUTH_URL}/login`, { email, password });
     const { accessToken } = response.data;
