@@ -8,10 +8,11 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 export default function Button({
   className = '',
   children,
+  type = 'button',
   ...props
 }: PropsWithChildren<ButtonProps>) {
   return (
-    <button className={`${styles.button} ${className}`} {...props}>
+    <button type={type} className={`${styles.button} ${className}`} {...props}>
       {children}
     </button>
   );
