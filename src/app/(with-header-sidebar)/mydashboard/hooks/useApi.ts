@@ -50,7 +50,7 @@ export default function useApi<
     } finally {
       setLoading(false);
     }
-  }, [url, options.method, options.params, options.body]);
+  }, [url, JSON.stringify(options)]);
 
   useEffect(() => {
     fetchData();
