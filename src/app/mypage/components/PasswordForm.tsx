@@ -1,9 +1,8 @@
-'use client';
-
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
+import axios from '../lib/axios';
 import Input from './Input';
-import Button from './Button';
+import Button from '@/components/Button';
 import styles from './PasswordForm.module.css';
 
 interface FormValues {
@@ -16,14 +15,40 @@ export default function PasswordForm() {
   const {
     register,
     handleSubmit,
-    formState: { errors, isValid },
+    formState: { errors },
     watch,
     trigger,
+    setError,
+    reset,
   } = useForm<FormValues>({ mode: 'onChange' });
 
+  const customIsValid = Object.keys(errors).length === 0;
   const watchedPassword = watch('newPassword');
 
-  const onSubmit = () => {};
+  const onSubmit = async (data: FormValues) => {
+    try {
+      await axios.put('/auth/password', {
+        password: data.currentPassword,
+        newPassword: data.newPassword,
+      });
+      reset();
+    } catch (error) {
+      if (error instanceof Error) {
+        if (error.message === '현재 비밀번호가 틀렸습니다.') {
+          setError('currentPassword', {
+            type: 'manual',
+            message: error.message,
+          });
+        }
+        if (error.message === '기존 비밀번호와 동일합니다.') {
+          setError('newPassword', {
+            type: 'manual',
+            message: error.message,
+          });
+        }
+      }
+    }
+  };
 
   useEffect(() => {
     if (watchedPassword) {
@@ -40,6 +65,8 @@ export default function PasswordForm() {
         name="currentPassword"
         label="현재 비밀번호"
         placeholder="비밀번호 입력"
+        register={register('currentPassword')}
+        error={errors.currentPassword}
       />
       <Input
         className={styles.input}
@@ -68,7 +95,7 @@ export default function PasswordForm() {
         })}
         error={errors.newPasswordConfirmation}
       />
-      <Button className={styles.button} type="submit" disabled={!isValid}>
+      <Button className={styles.button} type="submit" disabled={!customIsValid}>
         변경
       </Button>
     </form>

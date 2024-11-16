@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { ChangeEvent, useState } from 'react';
 import Image from 'next/image';
 import { UseFormSetValue } from 'react-hook-form';
@@ -5,12 +6,13 @@ import { FormValues } from './ProfileForm';
 import styles from './FileInput.module.css';
 
 interface FileInputProps {
-  name: 'imgFile';
+  name: string;
   setValue: UseFormSetValue<FormValues>;
+  url: string | null | undefined;
 }
 
-export default function FileInput({ name, setValue }: FileInputProps) {
-  const [preview, setPreview] = useState('');
+export default function FileInput({ name, setValue, url }: FileInputProps) {
+  const [preview, setPreview] = useState<string | null>(null);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -19,6 +21,12 @@ export default function FileInput({ name, setValue }: FileInputProps) {
       setValue('image', file);
     }
   };
+
+  useEffect(() => {
+    if (url) {
+      setPreview(url);
+    }
+  }, [url]);
 
   return (
     <>
