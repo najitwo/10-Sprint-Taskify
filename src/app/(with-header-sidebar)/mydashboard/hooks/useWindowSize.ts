@@ -18,7 +18,7 @@ export default function useWindowSize(): WindowSize {
       setWindowSize({
         width: window.innerWidth,
         height: window.innerHeight,
-        isMobile: window.innerWidth <= 768,
+        isMobile: window.innerWidth < 768,
       });
     }
 

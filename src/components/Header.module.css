@@ -1,3 +1,38 @@
 .header {
+  padding: 16px;
   border-bottom: 1px solid var(--gray-300);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 16px;
+}
+
+.title {
+  flex: 1;
+  color: var(--black-100);
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 6px;
+}
+
+.button {
+  padding: 6px 12px;
+  background-color: transparent;
+  border-radius: 6px;
+  border: 1px solid var(--gray-300);
+  color: var(---gray-500);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+@media screen and (min-width: 768px) {
+  .buttonContainer {
+    gap: 16px;
+  }
 }
