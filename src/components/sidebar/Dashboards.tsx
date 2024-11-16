@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import type { GetDashboardsResponse } from '@/app/(with-header-sidebar)/mydashboard/types/dashboards';
+import type { GetDashboardsResponse } from '@/app/(with-header-sidebar)/mydashboard/_types/dashboards';
 import styles from './Dashboards.module.css';
-import useApi from '@/app/(with-header-sidebar)/mydashboard/hooks/useApi';
+import useApi from '@/app/(with-header-sidebar)/mydashboard/_hooks/useApi';
 
 export default function Dashboards() {
   const pathname = usePathname();

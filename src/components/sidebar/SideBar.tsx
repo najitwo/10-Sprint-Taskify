@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import Button from '../Button';
-import useWindowSize from '@/app/(with-header-sidebar)/mydashboard/hooks/useWindowSize';
+import useWindowSize from '@/app/(with-header-sidebar)/mydashboard/_hooks/useWindowSize';
 import Dashboards from './DashBoards';
 import styles from './SideBar.module.css';
 
