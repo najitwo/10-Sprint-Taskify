@@ -13,13 +13,14 @@ export default function SideBar() {
 
   return (
     <div className={styles.sideBar}>
-      <Button aria-label="홈페이지 이동" className={styles.button}>
+      <Button aria-label="홈페이지 이동" className={styles.logo}>
         {isMobile ? (
           <Image
             src="/images/logo_small.svg"
             alt="로고 홈페이지이동"
             width={24}
             height={27}
+            priority
           />
         ) : (
           <Image
@@ -27,29 +28,35 @@ export default function SideBar() {
             alt="로고 홈페이지이동"
             width={109}
             height={33}
+            priority
           />
         )}
       </Button>
-      <Button aria-label="대시보드 추가하기" className={styles.button}>
-        <Image
-          src="/icons/add_box.svg"
-          alt="대시보드 추가하기"
-          width={20}
-          height={20}
-        />
-      </Button>
-      <Link
-        href={'/dashboard/1'}
-        className={`link ${pathname === '/dashboard/1' ? styles.active : ''}`}
-      >
-        O
-      </Link>
-      <Link
-        href={'/dashboard/2'}
-        className={`link ${pathname === '/dashboard/2' ? styles.active : ''}`}
-      >
-        O
-      </Link>
+      <div className={styles.dashBoardsContainer}>
+        <span className={styles.addDashBoardsTitle}>Dash Boards</span>
+        <Button aria-label="대시보드 추가하기" className={styles.addButton}>
+          <Image
+            src="/icons/add_box.svg"
+            alt="대시보드 추가하기"
+            width={20}
+            height={20}
+          />
+        </Button>
+      </div>
+      <div className={styles.dashboardsContainer}>
+        <Link
+          href={'/dashboard/1'}
+          className={`link ${pathname === '/dashboard/1' ? styles.active : ''}`}
+        >
+          O
+        </Link>
+        <Link
+          href={'/dashboard/2'}
+          className={`link ${pathname === '/dashboard/2' ? styles.active : ''}`}
+        >
+          O
+        </Link>
+      </div>
     </div>
   );
 }

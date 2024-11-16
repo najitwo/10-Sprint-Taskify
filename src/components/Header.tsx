@@ -14,7 +14,7 @@ export default function Header({ component: Component }: HeaderProps) {
 
   return (
     <header className={styles.header}>
-      <span className={styles.title}>내 대시보드</span>
+      <h2 className={styles.title}>내 대시보드</h2>
       <div className={styles.buttonContainer}>
         <Button className={styles.button}>
           <Image

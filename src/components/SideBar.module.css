@@ -2,10 +2,35 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 30px;
 }
 
-.button {
+.logo {
   background-color: transparent;
+  text-align: left;
+}
+
+.dashBoardsContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.addDashBoardsTitle {
+  display: none;
+}
+
+.addButton {
+  background-color: transparent;
+  width: 20px;
+}
+
+.dashboardsContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
 }
 
 .active {
@@ -15,5 +40,18 @@
 @media screen and (min-width: 768px) {
   .sideBar {
     min-width: 155px;
+  }
+
+  .addDashBoardsTitle {
+    display: inline;
+    color: var(--gray-500);
+    font-size: 12px;
+    font-weight: 600;
+  }
+}
+
+@media screen and (min-width: 1199px) {
+  .sideBar {
+    min-width: 300px;
   }
 }
