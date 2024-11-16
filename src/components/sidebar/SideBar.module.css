@@ -10,7 +10,7 @@
   text-align: left;
 }
 
-.dashBoardsContainer {
+.addDashBoardsContainer {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -24,17 +24,6 @@
 .addButton {
   background-color: transparent;
   width: 20px;
-}
-
-.dashboardsContainer {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 6px;
-}
-
-.active {
-  color: salmon;
 }
 
 @media screen and (min-width: 768px) {

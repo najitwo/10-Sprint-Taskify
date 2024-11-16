@@ -1,14 +1,12 @@
 'use client';
 
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 import Image from 'next/image';
-import Button from './Button';
+import Button from '../Button';
 import useWindowSize from '@/app/(with-header-sidebar)/mydashboard/hooks/useWindowSize';
+import Dashboards from './DashBoards';
 import styles from './SideBar.module.css';
 
 export default function SideBar() {
-  const pathname = usePathname();
   const { isMobile } = useWindowSize();
 
   return (
@@ -32,7 +30,7 @@ export default function SideBar() {
           />
         )}
       </Button>
-      <div className={styles.dashBoardsContainer}>
+      <div className={styles.addDashBoardsContainer}>
         <span className={styles.addDashBoardsTitle}>Dash Boards</span>
         <Button aria-label="대시보드 추가하기" className={styles.addButton}>
           <Image
@@ -43,20 +41,7 @@ export default function SideBar() {
           />
         </Button>
       </div>
-      <div className={styles.dashboardsContainer}>
-        <Link
-          href={'/dashboard/1'}
-          className={`link ${pathname === '/dashboard/1' ? styles.active : ''}`}
-        >
-          O
-        </Link>
-        <Link
-          href={'/dashboard/2'}
-          className={`link ${pathname === '/dashboard/2' ? styles.active : ''}`}
-        >
-          O
-        </Link>
-      </div>
+      <Dashboards />
     </div>
   );
 }

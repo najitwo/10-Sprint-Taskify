@@ -1,4 +1,4 @@
-interface Dashboard {
+export interface Dashboard {
   id: number;
   title: string;
   color: string;
@@ -8,14 +8,14 @@ interface Dashboard {
   createdByMe: boolean;
 }
 
-interface GetDashboardsRequestParams {
+export interface GetDashboardsRequestParams {
   navigationMethod: 'infiniteScroll' | 'pagination';
   cursorId?: number;
   page?: number;
   size?: number;
 }
 
-interface GetDashboardsResponse {
+export interface GetDashboardsResponse {
   dashboards: Dashboard[];
   totalCount: number;
   cursorId: number | null;

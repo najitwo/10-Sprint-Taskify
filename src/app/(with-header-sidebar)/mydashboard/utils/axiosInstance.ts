@@ -11,7 +11,8 @@ const axiosInstance: AxiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
   (config) => {
-    const token = 'your-token-here'; // TODO: Add token
+    const token =
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDgwNCwidGVhbUlkIjoiMTAtMSIsImlhdCI6MTczMTcyMzkwNywiaXNzIjoic3AtdGFza2lmeSJ9.k8FqEAl7DbhwxhJNAkkMq8lYrgStN-9I3xrsR0cYm2c'; // TODO: Add token
     if (token) {
       config.headers['Authorization'] = `Bearer ${token}`;
     }
