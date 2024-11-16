@@ -32,6 +32,149 @@
   line-height: 26px;
 }
 
+.main,
+.section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.section {
+  padding-top: 164px;
+  width: 1200px;
+}
+
+.section:first-child {
+  margin-bottom: 180px;
+}
+
+.imgWrapper {
+  position: relative;
+  width: 100%;
+}
+
+.img {
+  object-fit: cover;
+}
+
+.imgMainWrapper {
+  max-width: 722px;
+  margin-bottom: 40px;
+}
+
+.titleMainWrapper {
+  display: flex;
+  gap: 28px;
+  margin-bottom: 110px;
+  align-items: center;
+  line-height: 90px;
+}
+
+.titleMain {
+  font-size: 76px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.titleBrand {
+  color: var(--violet);
+  font-family: Montserrat;
+  font-size: 90px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding-bottom: 10px;
+}
+
+.loginBtn {
+  border-radius: 8px;
+  background: var(--violet);
+  height: 54px;
+  padding: 9px 101px;
+  display: flex;
+  align-items: center;
+}
+
+.sectionCard:first-child .imgLandingWrapper {
+  max-width: 594px;
+}
+
+.sectionCard:nth-child(2) .imgLandingWrapper {
+  max-width: 436px;
+}
+
+.sectionCard:last-child .imgLandingWrapper {
+  max-width: 300;
+}
+
+.sectionCard {
+  width: 100%;
+  height: 600px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  background: var(--black-200);
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 90px;
+}
+
+.sectionCard:first-child .titleLanding {
+  width: 302px;
+}
+
+.sectionCard:last-child .titleLanding {
+  width: 230px;
+}
+
+.sectionContent {
+  width: 100%;
+  display: flex;
+}
+
+.sectionCard:last-child .sectionContent {
+  flex-direction: row-reverse;
+}
+
+.titleLandingWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.sectionCard:first-child .titleLandingWrapper {
+  margin-left: 60px;
+  margin-right: 244px;
+}
+
+.sectionCard:last-child .titleLandingWrapper {
+  margin-left: 100px;
+  margin-right: 326px;
+}
+
+.titleSub {
+  color: var(--gray-400);
+  font-size: 22px;
+  font-weight: 500;
+  margin-bottom: 100px;
+}
+
+.sectionCard:first-child .titleSub {
+  margin-top: 20px;
+}
+
+.sectionCard:last-child .titleSub {
+  margin-top: 25px;
+}
+
+.titleLanding {
+  color: white;
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 64px;
+}
+
+.titleAccent {
+  color: var(--gray-300, #d9d9d9);
+}
+
 .footer {
   display: flex;
   align-items: center;
