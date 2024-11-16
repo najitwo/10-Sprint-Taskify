@@ -31,15 +31,18 @@ export default function useApi<
   const [error, setError] = useState<AxiosError | null>(null);
 
   const fetchData = useCallback(async () => {
+    // TODO if (loading) return; add?
     setLoading(true);
+    setError(null);
+
+    const config = {
+      method: options.method,
+      url,
+      params: options.params,
+      data: options.body,
+    };
 
     try {
-      const config = {
-        method: options.method,
-        url,
-        params: options.params,
-        data: options.body,
-      };
       const response: AxiosResponse<T> = await axiosInstance.request(config);
       setData(response.data);
     } catch (err) {
@@ -47,7 +50,7 @@ export default function useApi<
     } finally {
       setLoading(false);
     }
-  }, [url, options]);
+  }, [url, options.method, options.params, options.body]);
 
   useEffect(() => {
     fetchData();

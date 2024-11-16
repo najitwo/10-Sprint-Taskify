@@ -2,10 +2,10 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import styles from './SideBar.module.css';
 import Image from 'next/image';
 import Button from './Button';
 import useWindowSize from '@/app/(with-header-sidebar)/mydashboard/hooks/useWindowSize';
+import styles from './SideBar.module.css';
 
 export default function SideBar() {
   const pathname = usePathname();

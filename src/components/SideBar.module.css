@@ -5,9 +5,15 @@
 }
 
 .button {
-  background-color: transparent !important;
+  background-color: transparent;
 }
 
 .active {
   color: salmon;
+}
+
+@media screen and (min-width: 768px) {
+  .sideBar {
+    min-width: 155px;
+  }
 }
