@@ -1,38 +1,67 @@
 'use client';
 
 import styles from './page.module.css';
-import dynamic from 'next/dynamic';
 import Link from 'next/link';
-
-const Logo = dynamic(() => import('../../public/images/logo_large.svg'), {
-  ssr: false,
-});
+import Logo from '/public/images/logo.svg';
+import EmailIcon from '/public/icons/email.svg';
+import FacebookIcon from '/public/icons/facebook.svg';
+import InstagramIcon from '/public/icons/instagram.svg';
 
 export default function Home() {
   return (
     <div className={styles.page}>
-      <header>
-        <div>
-          <Link href="/" aria-label="홈으로 이동">
-            <Logo aria-hidden="true" />
+      <header className={styles.header}>
+        <Link href="/" aria-label="홈으로 이동">
+          <Logo className={styles.logo} alt="로고" />
+        </Link>
+
+        <nav className={styles.nav}>
+          <Link href="/login" className={styles.navLink}>
+            로그인
           </Link>
-        </div>
-        <nav>
-          <Link href="/login">로그인</Link>
-          <Link href="/signup">회원가입</Link>
+          <Link href="/signup" className={styles.navLink}>
+            회원가입
+          </Link>
         </nav>
       </header>
 
-      <main>
-        <section></section>
-        <section></section>
-        <section></section>
-      </main>
+      <main className={styles.main}></main>
 
-      <footer>
-        <div></div>
-        <div></div>
-        <div></div>
+      <footer className={styles.footer}>
+        <div>©codeit - 2023</div>
+        <div className={styles.legalLinks}>
+          <Link href="/privacy-policy">Privacy Policy</Link>
+          <Link href="/faq">FAQ</Link>
+        </div>
+        <div className={styles.socialLinks}>
+          <a
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.socialLink}
+            aria-label="이메일 바로가기"
+          >
+            <EmailIcon aria-hidden="true" />
+          </a>
+          <a
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.socialLink}
+            aria-label="페이스북 바로가기"
+          >
+            <FacebookIcon aria-hidden="true" />
+          </a>
+          <a
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.socialLink}
+            aria-label="인스타그램 바로가기"
+          >
+            <InstagramIcon aria-hidden="true" />
+          </a>
+        </div>
       </footer>
     </div>
   );
