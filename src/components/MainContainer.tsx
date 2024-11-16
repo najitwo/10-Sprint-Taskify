@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
+import Header from './header/Header';
 import styles from './MainContainer.module.css';
-import Header from './Header';
 
 export default function MainContainer({ children }: { children: ReactNode }) {
   return (

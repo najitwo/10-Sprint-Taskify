@@ -4,7 +4,7 @@ import type { User } from '@/app/(with-header-sidebar)/mydashboard/types/user';
 import Image from 'next/image';
 import useWindowSize from '@/app/(with-header-sidebar)/mydashboard/hooks/useWindowSize';
 import { useState, useEffect } from 'react';
-import UserInfoSkeleton from './skeleton/UserInfoSkeleton';
+import UserInfoSkeleton from '../skeleton/UserInfoSkeleton';
 import styles from './UserInfo.module.css';
 
 const user: User = {
