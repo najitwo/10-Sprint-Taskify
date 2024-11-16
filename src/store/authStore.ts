@@ -30,7 +30,7 @@ function removeAccessTokenFn(set: SetState) {
   });
 }
 
-function createAuthStore(set: any) {
+function createAuthStore(set: SetState) {
   return {
     accessToken: null,
     setAccessToken: function (token: string) {
