@@ -1,5 +1,5 @@
 import ImageWrapper from '@/components/root/ImageWrapper';
-import styles from './SectionCard.module.css';
+import styles from './MainCard.module.css';
 
 interface Props {
   title: string;
@@ -10,7 +10,7 @@ interface Props {
   imgFirst?: boolean;
 }
 
-export default function SectionCard({
+export default function MainCard({
   title,
   subTitle,
   src,
