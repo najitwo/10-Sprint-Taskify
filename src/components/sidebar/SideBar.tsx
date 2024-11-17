@@ -4,14 +4,20 @@ import Image from 'next/image';
 import Button from '../Button';
 import useWindowSize from '@/app/(with-header-sidebar)/mydashboard/_hooks/useWindowSize';
 import Dashboards from './Dashboards';
+import { useRouter } from 'next/navigation';
 import styles from './SideBar.module.css';
 
 export default function SideBar() {
   const { isMobile } = useWindowSize();
+  const router = useRouter();
 
   return (
     <div className={styles.sideBar}>
-      <Button aria-label="홈페이지 이동" className={styles.logo}>
+      <Button
+        aria-label="홈페이지 이동"
+        className={styles.logo}
+        onClick={() => router.push('/')}
+      >
         {isMobile ? (
           <Image
             src="/images/logo_small.svg"
