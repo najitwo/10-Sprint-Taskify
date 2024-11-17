@@ -1,0 +1,30 @@
+.title {
+  margin-bottom: 36px;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.cards {
+  display: flex;
+  gap: 33px;
+}
+
+.cardSm1,
+.cardSm2,
+.cardSm3 {
+  width: 300px;
+}
+
+.cardSm1 {
+  height: 124px;
+}
+
+.cardSm2 {
+  width: 300px;
+  height: 231px;
+}
+
+.cardSm3 {
+  width: 300px;
+  height: 195px;
+}

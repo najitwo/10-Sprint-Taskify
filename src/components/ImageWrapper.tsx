@@ -1,5 +1,5 @@
-import styles from './ImageWrapper.module.css';
 import Image from 'next/image';
+import styles from './ImageWrapper.module.css';
 
 interface Props {
   src: string;
