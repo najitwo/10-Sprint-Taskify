@@ -4,7 +4,7 @@ import axiosInstance from '../_utils/axiosInstance';
 
 type UseApiFetchReturnType<T> = {
   data: T | null;
-  loading: boolean;
+  isLoading: boolean;
   error: AxiosError | null;
   refetch: () => Promise<void>;
 };
@@ -27,12 +27,12 @@ export default function useApi<
   options: RequestOptions<TParams, TBody>
 ): UseApiFetchReturnType<T> {
   const [data, setData] = useState<T | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<AxiosError | null>(null);
 
   const fetchData = useCallback(async () => {
     // TODO if (loading) return; add?
-    setLoading(true);
+    setIsLoading(true);
     setError(null);
 
     const config = {
@@ -48,7 +48,7 @@ export default function useApi<
     } catch (err) {
       setError(err as AxiosError);
     } finally {
-      setLoading(false);
+      setIsLoading(false);
     }
   }, [url, JSON.stringify(options)]);
 
@@ -56,5 +56,5 @@ export default function useApi<
     fetchData();
   }, [fetchData]);
 
-  return { data, loading, error, refetch: fetchData };
+  return { data, isLoading, error, refetch: fetchData };
 }

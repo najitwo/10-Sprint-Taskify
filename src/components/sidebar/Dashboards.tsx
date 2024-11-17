@@ -11,7 +11,7 @@ import Image from 'next/image';
 export default function Dashboards() {
   const { data } = useApi<GetDashboardsResponse>('/dashboards', {
     method: 'GET',
-    params: { navigationMethod: 'infiniteScroll', page: 1, size: 10 },
+    params: { navigationMethod: 'pagination', page: 1, size: 10 },
   });
 
   const dashboards = data?.dashboards ?? [];
