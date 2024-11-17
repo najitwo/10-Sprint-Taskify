@@ -1,27 +1,23 @@
 import { useEffect } from 'react';
 import { ChangeEvent, useState } from 'react';
 import Image from 'next/image';
-import { UseFormSetValue, FieldValues, Path, PathValue } from 'react-hook-form';
 import styles from './FileInput.module.css';
 
-interface FileInputProps<T extends FieldValues> {
-  name: Path<T>;
-  setValue: UseFormSetValue<T>;
+interface FileInputProps {
+  id: string;
+  name: 'image';
+  setValue: (name: 'image', value: File | null) => void;
   url?: string | null;
 }
 
-export default function FileInput<T extends FieldValues>({
-  name,
-  setValue,
-  url,
-}: FileInputProps<T>) {
+export default function FileInput({ name, setValue, url, id }: FileInputProps) {
   const [preview, setPreview] = useState<string | null>(null);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
       setPreview(URL.createObjectURL(file));
-      setValue(name, file as PathValue<T, Path<T>>);
+      setValue(name, file);
     }
   };
 
@@ -33,7 +29,7 @@ export default function FileInput<T extends FieldValues>({
 
   return (
     <>
-      <label className={styles.label} htmlFor={name}>
+      <label className={styles.label} htmlFor={id}>
         {preview ? (
           <Image src={preview} alt="미리보기" fill />
         ) : (
@@ -45,9 +41,9 @@ export default function FileInput<T extends FieldValues>({
       <input
         className={styles.input}
         type="file"
-        accept="image/png, image/jpeg"
+        id={id}
         name={name}
-        id={name}
+        accept="image/png, image/jpeg"
         onChange={handleChange}
       />
     </>

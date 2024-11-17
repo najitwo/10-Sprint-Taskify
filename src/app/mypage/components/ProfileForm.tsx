@@ -37,7 +37,8 @@ export default function ProfileForm() {
   return (
     <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
       <h2>프로필</h2>
-      <FileInput<ProfileFormValues>
+      <FileInput
+        id="image"
         name="image"
         setValue={setValue}
         url={user?.profileImageUrl}
