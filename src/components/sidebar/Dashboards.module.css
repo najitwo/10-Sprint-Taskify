@@ -1,0 +1,10 @@
+.dashBoards {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+}
+
+.active {
+  color: salmon;
+}

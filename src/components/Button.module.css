@@ -1,0 +1,14 @@
+.button {
+  width: 100%;
+  background-color: var(--violet);
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--white);
+  white-space: nowrap;
+}
+
+.button:disabled {
+  background-color: var(--gray-400);
+  cursor: auto;
+}

@@ -1,3 +1,13 @@
-.header {
-  color: yellowgreen;
+.container {
+  display: flex;
+  height: 100%;
+}
+
+.sideBarWrapper {
+  border-right: 1px solid var(--gray-300);
+  padding: 22px;
+}
+
+.mainWrapper {
+  flex: 1;
 }
