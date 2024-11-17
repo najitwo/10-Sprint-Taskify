@@ -32,6 +32,16 @@
   font-weight: 500;
 }
 
+.arrow {
+  border-radius: 4px 0px 0px 4px;
+  border: 1px solid var(--gray-300);
+  background: var(--white);
+}
+
+.arrow:disabled {
+  background: var(--white);
+}
+
 @media screen and (min-width: 768px) {
   .dashboardsWrapper {
     margin-top: 10px;
@@ -53,5 +63,14 @@
     justify-content: flex-start;
     gap: 16px;
     padding: 8px 10px;
+  }
+
+  .arrowWrapper {
+    margin-top: 20px;
+  }
+
+  .arrow {
+    width: 40px;
+    height: 40px;
   }
 }
