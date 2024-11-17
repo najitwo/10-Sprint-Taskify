@@ -1,12 +1,12 @@
-'use client';
-
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import Input from './Input';
-import Button from './Button';
-import styles from './PasswordForm.module.css';
+import Button from '@/components/Button';
+import { ERROR_MESSAGES } from '../constants/message';
+import styles from './Form.module.css';
+import { updatePassword } from '../lib/authHelper';
 
-interface FormValues {
+export interface PasswordFormValues {
   currentPassword: string;
   newPassword: string;
   newPasswordConfirmation: string;
@@ -16,14 +16,18 @@ export default function PasswordForm() {
   const {
     register,
     handleSubmit,
-    formState: { errors, isValid },
+    formState: { errors },
     watch,
     trigger,
-  } = useForm<FormValues>({ mode: 'onChange' });
+    setError,
+    reset,
+  } = useForm<PasswordFormValues>({ mode: 'onChange' });
 
+  const customIsValid = Object.keys(errors).length === 0;
   const watchedPassword = watch('newPassword');
 
-  const onSubmit = () => {};
+  const onSubmit = async (data: PasswordFormValues) =>
+    updatePassword(data, reset, setError);
 
   useEffect(() => {
     if (watchedPassword) {
@@ -40,6 +44,8 @@ export default function PasswordForm() {
         name="currentPassword"
         label="현재 비밀번호"
         placeholder="비밀번호 입력"
+        register={register('currentPassword')}
+        error={errors.currentPassword}
       />
       <Input
         className={styles.input}
@@ -50,7 +56,7 @@ export default function PasswordForm() {
         register={register('newPassword', {
           minLength: {
             value: 8,
-            message: '비밀번호를 8자 이상 입력해주세요.',
+            message: ERROR_MESSAGES.PASSWORD_TOO_SHORT,
           },
         })}
         error={errors.newPassword}
@@ -63,12 +69,12 @@ export default function PasswordForm() {
         register={register('newPasswordConfirmation', {
           validate: {
             matchesPassword: (value) =>
-              value === watchedPassword || '비밀번호가 일치하지 않습니다.',
+              value === watchedPassword || ERROR_MESSAGES.PASSWORDS_MATCH,
           },
         })}
         error={errors.newPasswordConfirmation}
       />
-      <Button className={styles.button} type="submit" disabled={!isValid}>
+      <Button className={styles.button} type="submit" disabled={!customIsValid}>
         변경
       </Button>
     </form>
