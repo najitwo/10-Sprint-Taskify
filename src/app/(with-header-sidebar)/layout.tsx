@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import SideBar from '@/components/SideBar';
+import SideBar from '@/components/sidebar/SideBar';
 import styles from './layout.module.css';
 import MainContainer from '@/components/MainContainer';
 

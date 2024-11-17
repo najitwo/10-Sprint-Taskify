@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { AxiosResponse, AxiosError } from 'axios';
-import axiosInstance from '../utils/axiosInstance';
+import axiosInstance from '../_utils/axiosInstance';
 
 type UseApiFetchReturnType<T> = {
   data: T | null;
@@ -50,7 +50,7 @@ export default function useApi<
     } finally {
       setLoading(false);
     }
-  }, [url, options.method, options.params, options.body]);
+  }, [url, JSON.stringify(options)]);
 
   useEffect(() => {
     fetchData();
