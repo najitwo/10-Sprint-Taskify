@@ -3,10 +3,11 @@
 import styles from './page.module.css';
 import Link from 'next/link';
 import Logo from '/public/images/logo.svg';
+import LogoTypo from '/public/images/logo_typo.svg';
 import EmailIcon from '/public/icons/email.svg';
 import FacebookIcon from '/public/icons/facebook.svg';
 import InstagramIcon from '/public/icons/instagram.svg';
-import Image from 'next/image';
+import ImageWrapper from '@/components/root/ImageWrapper';
 
 export default function Home() {
   return (
@@ -28,21 +29,21 @@ export default function Home() {
 
       <main className={styles.main}>
         <section className={styles.section}>
-          <div className={`${styles.imgWrapper} ${styles.imgMainWrapper}`}>
-            <Image
-              src={'/images/ehmo.png'}
-              className={styles.img}
-              width={722}
-              height={423}
-              alt="일정 관리 웹 어플리케이션"
-              loading="eager"
-              priority={true}
-            />
-          </div>
+          <ImageWrapper
+            src="/images/home.png"
+            alt="일정 관리 웹 어플리케이션"
+            className={styles.homeImg}
+            priority={true}
+          />
 
-          <div className={styles.titleMainWrapper}>
-            <div className={styles.titleMain}>새로운 일정관리</div>
-            <div className={styles.titleBrand}>Taskify</div>
+          <div className={styles.homeTitleWrapper}>
+            <div className={styles.homeTitle}>새로운 일정관리</div>
+            <LogoTypo
+              className={styles.logoTypo}
+              alt="로고"
+              width={327}
+              height={65}
+            />
           </div>
 
           <Link href="/login" className={styles.loginBtn}>
@@ -59,21 +60,13 @@ export default function Home() {
                   관리하세요
                 </div>
               </div>
-              <div
-                className={`${styles.imgWrapper} ${styles.imgLandingWrapper}`}
-              >
-                <Image
-                  src={'/images/landing1.png'}
-                  className={styles.img}
-                  width={594}
-                  height={498}
-                  alt="우선순위 설정 기능"
-                  loading="lazy"
-                />
-              </div>
+              <ImageWrapper
+                src={'/images/landing1.png'}
+                alt="우선순위 설정 기능"
+                className={styles.img}
+              />
             </div>
           </div>
-
           <div className={styles.sectionCard}>
             <div className={styles.sectionContent}>
               <div className={styles.titleLandingWrapper}>
@@ -82,24 +75,16 @@ export default function Home() {
                   해야 할 일을 등록하세요
                 </div>
               </div>
-              <div
-                className={`${styles.imgWrapper} ${styles.imgLandingWrapper}`}
-              >
-                <Image
-                  src={'/images/landing2.png'}
-                  className={styles.img}
-                  width={436}
-                  height={502}
-                  alt="할 일 카드 생성 기능"
-                  loading="lazy"
-                />
-              </div>
+              <ImageWrapper
+                src={'/images/landing2.png'}
+                alt="할 일 카드 생성 기능"
+                className={styles.img}
+              />
             </div>
           </div>
         </section>
         <section></section>
       </main>
-
       <footer className={styles.footer}>
         <div>©codeit - 2023</div>
         <div className={styles.legalLinks}>
