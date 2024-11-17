@@ -17,8 +17,8 @@ export default function Dashboards() {
   const dashboards = data?.dashboards ?? [];
 
   return (
-    <div className={styles.dashBoards}>
-      <ul>
+    <div className={styles.dashboards}>
+      <ul className={styles.dashboardsWrapper}>
         {dashboards.map((board) => (
           <DashboardItem key={board.id} {...board} />
         ))}
