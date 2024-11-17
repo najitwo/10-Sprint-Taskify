@@ -1,11 +1,12 @@
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import axios from '../lib/axios';
 import Input from './Input';
 import Button from '@/components/Button';
-import styles from './PasswordForm.module.css';
+import { ERROR_MESSAGES } from '../constants/message';
+import styles from './Form.module.css';
+import { updatePassword } from '../lib/authHelper';
 
-interface FormValues {
+export interface PasswordFormValues {
   currentPassword: string;
   newPassword: string;
   newPasswordConfirmation: string;
@@ -20,35 +21,13 @@ export default function PasswordForm() {
     trigger,
     setError,
     reset,
-  } = useForm<FormValues>({ mode: 'onChange' });
+  } = useForm<PasswordFormValues>({ mode: 'onChange' });
 
   const customIsValid = Object.keys(errors).length === 0;
   const watchedPassword = watch('newPassword');
 
-  const onSubmit = async (data: FormValues) => {
-    try {
-      await axios.put('/auth/password', {
-        password: data.currentPassword,
-        newPassword: data.newPassword,
-      });
-      reset();
-    } catch (error) {
-      if (error instanceof Error) {
-        if (error.message === '현재 비밀번호가 틀렸습니다.') {
-          setError('currentPassword', {
-            type: 'manual',
-            message: error.message,
-          });
-        }
-        if (error.message === '기존 비밀번호와 동일합니다.') {
-          setError('newPassword', {
-            type: 'manual',
-            message: error.message,
-          });
-        }
-      }
-    }
-  };
+  const onSubmit = async (data: PasswordFormValues) =>
+    updatePassword(data, reset, setError);
 
   useEffect(() => {
     if (watchedPassword) {
@@ -77,7 +56,7 @@ export default function PasswordForm() {
         register={register('newPassword', {
           minLength: {
             value: 8,
-            message: '비밀번호를 8자 이상 입력해주세요.',
+            message: ERROR_MESSAGES.PASSWORD_TOO_SHORT,
           },
         })}
         error={errors.newPassword}
@@ -90,7 +69,7 @@ export default function PasswordForm() {
         register={register('newPasswordConfirmation', {
           validate: {
             matchesPassword: (value) =>
-              value === watchedPassword || '비밀번호가 일치하지 않습니다.',
+              value === watchedPassword || ERROR_MESSAGES.PASSWORDS_MATCH,
           },
         })}
         error={errors.newPasswordConfirmation}
