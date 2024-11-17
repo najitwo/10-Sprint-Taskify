@@ -32,13 +32,21 @@
   font-weight: 500;
 }
 
-.arrow {
-  border-radius: 4px 0px 0px 4px;
+.arrowLeft,
+.arrowRight {
   border: 1px solid var(--gray-300);
+  border-right: none;
+  border-radius: 0;
   background: var(--white);
+  height: 35px;
 }
 
-.arrow:disabled {
+.arrowRight {
+  border-top: none;
+}
+
+.arrowLeft:disabled,
+.arrowRight:disabled {
   background: var(--white);
 }
 
@@ -69,8 +77,18 @@
     margin-top: 20px;
   }
 
-  .arrow {
+  .arrowLeft,
+  .arrowRight {
+    border: 1px solid var(--gray-300);
     width: 40px;
     height: 40px;
+  }
+
+  .arrowLeft {
+    border-radius: 4px 0px 0px 4px;
+  }
+
+  .arrowRight {
+    border-radius: 0px 4px 4px 0px;
   }
 }

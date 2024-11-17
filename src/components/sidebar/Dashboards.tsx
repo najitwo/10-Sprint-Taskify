@@ -91,7 +91,7 @@ function Pagination({
   return (
     <div className={styles.arrowWrapper}>
       <Button
-        className={styles.arrow}
+        className={styles.arrowLeft}
         onClick={() => onPageChange('prev')}
         disabled={isFirstPage}
       >
@@ -107,7 +107,7 @@ function Pagination({
         />
       </Button>
       <Button
-        className={styles.arrow}
+        className={styles.arrowRight}
         onClick={() => onPageChange('next')}
         disabled={isLastPage}
       >
