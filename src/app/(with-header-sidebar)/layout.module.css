@@ -3,6 +3,10 @@
   height: 100%;
 }
 
+.sideBarWrapper {
+  border-right: 1px solid var(--gray-300);
+}
+
 .mainWrapper {
   flex: 1;
 }
