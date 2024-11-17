@@ -8,7 +8,6 @@ const useAuth = () => {
   const getMe = async () => {
     try {
       const response = await axios.get('/users/me');
-      console.log('user:', response.data);
       setUser(response.data);
     } catch (error) {
       throw error;
