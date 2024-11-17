@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
+import { Montserrat } from 'next/font/google';
 import './variables.css';
 import './reset.css';
 
@@ -8,6 +9,12 @@ const pretendard = localFont({
   display: 'swap',
   weight: '45 920',
   variable: '--font-pretendard',
+});
+
+export const montserrat = Montserrat({
+  display: 'swap',
+  subsets: ['latin'],
+  variable: '--font-montserrat',
 });
 
 export const metadata: Metadata = {
@@ -22,7 +29,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="kr">
-      <body className={pretendard.variable}>{children}</body>
+      <body className={`${pretendard.variable} ${montserrat.variable}`}>
+        {children}
+      </body>
     </html>
   );
 }
