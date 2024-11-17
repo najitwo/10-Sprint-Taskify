@@ -11,9 +11,9 @@ const user: User = {
   id: 1,
   email: 'heejin@gmail.com',
   nickname: 'heejin',
-  // profileImageUrl:
-  // 'https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/taskify/profile_image/10-1_4804_1731757528194.jpeg',
-  profileImageUrl: null,
+  profileImageUrl:
+    'https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/taskify/profile_image/10-1_4804_1731757528194.jpeg',
+  // profileImageUrl: null,
   createdAt: '2024-11-15T14:29:07.482Z',
 };
 
@@ -37,16 +37,16 @@ export default function UserInfo() {
 
   return (
     <>
-      {profileImageUrl ? (
-        <Image
-          src={profileImageUrl}
-          alt="프로필 이미지"
-          width={30}
-          height={30}
-          className={styles.image}
-        />
-      ) : (
-        <div className={styles.userInfo}>
+      <div className={styles.userInfo}>
+        {profileImageUrl ? (
+          <Image
+            src={profileImageUrl}
+            alt="프로필 이미지"
+            width={30}
+            height={30}
+            className={styles.image}
+          />
+        ) : (
           <div
             style={{
               backgroundColor: colors.randomColor,
@@ -56,9 +56,9 @@ export default function UserInfo() {
           >
             <span>{email[0].toUpperCase()}</span>
           </div>
-          {!isMobile && <span className={styles.nickname}>{nickname}</span>}
-        </div>
-      )}
+        )}
+        <span className={styles.nickname}>{nickname}</span>
+      </div>
     </>
   );
 }
