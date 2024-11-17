@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import Button from '../Button';
 import useWindowSize from '@/app/(with-header-sidebar)/mydashboard/_hooks/useWindowSize';
-import Dashboards from './DashBoards';
+import Dashboards from './Dashboards';
 import styles from './SideBar.module.css';
 
 export default function SideBar() {

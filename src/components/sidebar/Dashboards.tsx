@@ -16,16 +16,19 @@ export default function Dashboards() {
 
   return (
     <div className={styles.dashBoards}>
-      {dashboards &&
-        dashboards.map((board) => (
-          <Link
-            key={board.id}
-            href={`/dashboard/${board.id}`}
-            className={`link ${pathname === '/dashboard/' + board.id ? styles.active : ''}`}
-          >
-            {board.title}
-          </Link>
-        ))}
+      <ul>
+        {dashboards &&
+          dashboards.map((board) => (
+            <li key={board.id}>
+              <Link
+                href={`/dashboard/${board.id}`}
+                className={`link ${pathname === '/dashboard/' + board.id ? styles.active : ''}`}
+              >
+                {board.title}
+              </Link>
+            </li>
+          ))}
+      </ul>
     </div>
   );
 }
