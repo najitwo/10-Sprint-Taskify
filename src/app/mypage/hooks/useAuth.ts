@@ -27,8 +27,6 @@ const useAuth = () => {
   };
 
   const logout = async () => {
-    const setAccessToken = useAuthStore.getState().setAccessToken;
-
     setAccessToken(null);
   };
 
