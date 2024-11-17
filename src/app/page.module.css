@@ -1,19 +1,20 @@
 .page {
   background-color: black;
   color: white;
+  height: 100%;
 }
 
 .header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 15px 80px;
   position: fixed;
-  top: 0;
   left: 0;
-  width: 100%;
+  top: 0;
   z-index: 999;
+  width: 100%;
   height: 70px;
+  padding: 15px 80px;
   background-color: inherit;
 }
 
@@ -31,16 +32,6 @@
   font-weight: 400;
   line-height: 26px;
 }
-
-.main {
-  padding-top: 164px;
-}
-
-.seciton {
-  max-width: 1200px;
-  width: 100%;
-}
-
 .main,
 .section {
   display: flex;
@@ -48,10 +39,21 @@
   align-items: center;
 }
 
+.main {
+  padding-top: 164px;
+}
+
+.section {
+  width: 100%;
+  max-width: 1200px;
+}
+
 .homeTitleWrapper {
   display: flex;
-  gap: 28px;
   align-items: center;
+  margin-bottom: 110px;
+  margin-top: 40px;
+  gap: 28px;
 }
 
 .homeImg {
@@ -60,15 +62,67 @@
 }
 
 .homeTitle {
-  color: white;
   font-size: 76px;
   font-weight: 700;
+  color: white;
   line-height: 100px;
   letter-spacing: 2px;
 }
 
-.logoTypo {
-  fill: var(--violet);
+.homeBrand {
+  font-family: var(--font-montserrat);
+  font-size: 90px;
+  font-weight: 700;
+  color: var(--violet);
+  line-height: 65px;
+  letter-spacing: 1px;
+}
+
+.homeLoginBtn {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  height: 54px;
+  margin-bottom: 180px;
+  padding: 9px 101px;
+  border-radius: 8px;
+  background: var(--violet);
+}
+
+.supplementTitle {
+  margin-bottom: 36px;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.cardSmalls {
+  display: flex;
+  gap: 33px;
+}
+
+.cardLg1 {
+  width: 594px;
+  height: 498px;
+}
+
+.cardLg2 {
+  width: 436px;
+  height: 502px;
+}
+
+.cardSm1 {
+  width: 300px;
+  height: 124px;
+}
+
+.cardSm2 {
+  width: 300px;
+  height: 231px;
+}
+
+.cardSm3 {
+  width: 300px;
+  height: 195px;
 }
 
 .footer {
