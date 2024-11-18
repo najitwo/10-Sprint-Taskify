@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Button from '@/components/Button';
 import styles from './layout.module.css';
 import { useRouter } from 'next/navigation';
-import Modal from './_components/modal';
+import Modal from './_components/Modal';
 
 export default function Layout({ children }: { children: ReactNode }) {
   const router = useRouter();
