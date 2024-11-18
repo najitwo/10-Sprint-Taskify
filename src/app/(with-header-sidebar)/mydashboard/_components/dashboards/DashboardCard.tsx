@@ -1,8 +1,8 @@
 import type { Dashboard } from '@/app/(with-header-sidebar)/mydashboard/_types/dashboards';
-import styles from './DashboardCard.module.css';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import Button from '../Button';
+import Button from '@/components/Button';
+import styles from './DashboardCard.module.css';
 
 export default function DashboardCard({
   id,

@@ -5,7 +5,7 @@
   gap: 8px;
 }
 
-.addDashboard {
+.addDashboard.addDashboard {
   background: var(--white);
   color: var(--black-100);
   font-size: 14px;
@@ -21,7 +21,7 @@
   transition: background-color 0.3s ease;
 }
 
-.addDashboard:hover {
+.addDashboard.addDashboard:hover {
   background-color: var(--violet-light);
 }
 
@@ -40,7 +40,7 @@
     gap: 10px;
   }
 
-  .addDashboard {
+  .addDashboard.addDashboard {
     font-size: 16px;
   }
 }

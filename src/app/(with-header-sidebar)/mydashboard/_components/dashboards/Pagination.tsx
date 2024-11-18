@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import Button from '../Button';
+import Button from '@/components/Button';
 import styles from './Pagination.module.css';
 
 export default function Pagination({

@@ -12,24 +12,30 @@
   font-weight: 400;
 }
 
-.arrowLeft,
-.arrowRight {
+.arrowLeft.arrowLeft,
+.arrowRight.arrowRight {
   border: 1px solid var(--gray-300);
   background: var(--white);
   width: 40px;
   height: 40px;
+  transition: background-color 0.3s ease;
 }
 
-.arrowLeft {
+.arrowLeft.arrowLeft {
   border-radius: 4px 0px 0px 4px;
 }
 
-.arrowRight {
+.arrowRight.arrowRight {
   border-radius: 0px 4px 4px 0px;
   border-left: none;
 }
 
-.arrowLeft:disabled,
-.arrowRight:disabled {
+.arrowLeft.arrowLeft:hover,
+.arrowRight.arrowRight:hover {
+  background: var(--violet-light);
+}
+
+.arrowLeft.arrowLeft:disabled,
+.arrowRight.arrowRight:disabled {
   background: var(--white);
 }

@@ -2,10 +2,10 @@
 
 import useDashboards from '../../_hooks/useDashboards';
 import Pagination from './Pagination';
-import styles from './Dashboards.module.css';
 import DashboardCard from './DashboardCard';
-import Button from '../Button';
+import Button from '@/components/Button';
 import Image from 'next/image';
+import styles from './Dashboards.module.css';
 
 const PAGE_SIZE = 5;
 
