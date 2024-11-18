@@ -14,6 +14,14 @@ export default function Pagination({
   const isFirstPage = currentPage === 1;
   const isLastPage = currentPage >= totalPages;
 
+  const leftArrowSrc = isFirstPage
+    ? '/icons/arrow_left_light.svg'
+    : '/icons/arrow_left.svg';
+
+  const rightArrowSrc = isLastPage
+    ? '/icons/arrow_right_light.svg'
+    : '/icons/arrow_right.svg';
+
   return (
     <div className={styles.pagination}>
       <span
@@ -26,11 +34,7 @@ export default function Pagination({
           disabled={isFirstPage}
         >
           <Image
-            src={
-              isFirstPage
-                ? '/icons/arrow_left_light.svg'
-                : '/icons/arrow_left.svg'
-            }
+            src={leftArrowSrc}
             alt="왼쪽으로 이동"
             width={16}
             height={16}
@@ -42,11 +46,7 @@ export default function Pagination({
           disabled={isLastPage}
         >
           <Image
-            src={
-              isLastPage
-                ? '/icons/arrow_right_light.svg'
-                : '/icons/arrow_right.svg'
-            }
+            src={rightArrowSrc}
             alt="오른쪽으로 이동"
             width={16}
             height={16}
