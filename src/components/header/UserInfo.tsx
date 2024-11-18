@@ -1,6 +1,6 @@
 'use client';
 
-import type { User } from '@/app/(with-header-sidebar)/mydashboard/_types/user';
+import type { User } from '@/types/user';
 import Image from 'next/image';
 import useWindowSize from '@/app/(with-header-sidebar)/mydashboard/_hooks/useWindowSize';
 import { useState, useEffect } from 'react';
