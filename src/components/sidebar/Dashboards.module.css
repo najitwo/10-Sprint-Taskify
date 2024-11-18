@@ -58,6 +58,12 @@
     gap: 15px;
   }
 
+  .titleContainer {
+    justify-content: flex-start;
+    gap: 16px;
+    padding: 8px 10px;
+  }
+
   .title,
   .crown {
     display: inline;
@@ -65,12 +71,6 @@
 
   .crown {
     margin-left: -8px;
-  }
-
-  .titleContainer {
-    justify-content: flex-start;
-    gap: 16px;
-    padding: 8px 10px;
   }
 
   .arrowWrapper {

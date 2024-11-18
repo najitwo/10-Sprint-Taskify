@@ -1,0 +1,6 @@
+.dashboardsWrapper {
+  display: grid;
+  grid-template-rows: repeat(6, 1fr);
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
