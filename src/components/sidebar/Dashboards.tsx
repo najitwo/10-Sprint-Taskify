@@ -1,35 +1,21 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import type {
-  Dashboard,
-  GetDashboardsResponse,
-} from '@/app/(with-header-sidebar)/mydashboard/_types/dashboards';
-import useApi from '@/app/(with-header-sidebar)/mydashboard/_hooks/useApi';
+import type { Dashboard } from '@/app/(with-header-sidebar)/mydashboard/_types/dashboards';
 import Image from 'next/image';
 import Button from '../Button';
-import { useState } from 'react';
 import styles from './Dashboards.module.css';
+import useDashboards from '@/app/(with-header-sidebar)/mydashboard/_hooks/useDashboards';
 
 const PAGE_SIZE = 12;
 
 export default function Dashboards() {
-  const [page, setPage] = useState(1);
-  const { data } = useApi<GetDashboardsResponse>('/dashboards', {
-    method: 'GET',
-    params: { navigationMethod: 'pagination', page, size: PAGE_SIZE },
+  const { page, dashboards, totalPages, handlePageChange } = useDashboards({
+    pageSize: PAGE_SIZE,
   });
 
-  const dashboards = data?.dashboards ?? [];
-  const totalCount = data?.totalCount ?? 0;
-  const totalPages = Math.ceil(totalCount / PAGE_SIZE);
-
-  const handlePageChange = (direction: 'next' | 'prev') => {
-    setPage((prevPage) => {
-      if (direction === 'next' && prevPage < totalPages) return prevPage + 1;
-      if (direction === 'prev' && prevPage > 1) return prevPage - 1;
-      return prevPage;
-    });
-  };
+  if (dashboards.length === 0) {
+    return null;
+  }
 
   return (
     <div className={styles.dashboards}>

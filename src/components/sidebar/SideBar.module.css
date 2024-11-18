@@ -5,7 +5,7 @@
   gap: 15px;
 }
 
-.logo {
+.logo.logo {
   background-color: transparent;
   padding-top: 22px;
   margin-bottom: 10px;
@@ -20,7 +20,7 @@
   display: none;
 }
 
-.addButton {
+.addButton.addButton {
   background-color: transparent;
   width: 20px;
 }
