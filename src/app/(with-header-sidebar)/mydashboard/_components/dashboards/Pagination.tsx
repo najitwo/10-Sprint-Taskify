@@ -15,8 +15,10 @@ export default function Pagination({
   const isLastPage = currentPage >= totalPages;
 
   return (
-    <div>
-      <span>{`${totalPages} 페이지 중 ${currentPage}`}</span>
+    <div className={styles.pagination}>
+      <span
+        className={styles.pageNavigation}
+      >{`${totalPages} 페이지 중 ${currentPage}`}</span>
       <div className={styles.arrowWrapper}>
         <Button
           className={styles.arrowLeft}
