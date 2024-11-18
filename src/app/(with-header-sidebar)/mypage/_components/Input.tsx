@@ -1,3 +1,5 @@
+'use client';
+
 import { ReactNode } from 'react';
 import { FieldError, UseFormRegisterReturn } from 'react-hook-form';
 import Label from './Label';
@@ -38,8 +40,8 @@ export default function Input({
           {...register}
         />
         {children}
-        {error && <span className={styles.error}>{error.message}</span>}
       </div>
+      {error && <span className={styles.error}>{error.message}</span>}
     </div>
   );
 }

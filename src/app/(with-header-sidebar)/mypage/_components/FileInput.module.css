@@ -20,6 +20,26 @@
   display: none;
 }
 
+.image {
+  border-radius: 8px;
+}
+
+.hoverContent {
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.label:hover .image {
+  filter: brightness(50%);
+  transition: filter 0.3s ease-in-out;
+}
+
+.label:hover .hoverContent {
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
+  z-index: 1;
+}
+
 @media screen and (min-width: 768px) {
   .label {
     width: 182px;

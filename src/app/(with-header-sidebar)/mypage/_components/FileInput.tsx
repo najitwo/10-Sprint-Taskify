@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect } from 'react';
 import { ChangeEvent, useState } from 'react';
 import Image from 'next/image';
@@ -31,7 +33,16 @@ export default function FileInput({ name, setValue, url, id }: FileInputProps) {
     <>
       <label className={styles.label} htmlFor={id}>
         {preview ? (
-          <Image src={preview} alt="미리보기" fill />
+          <>
+            <Image src={preview} alt="미리보기" fill className={styles.image} />
+            <Image
+              src="/icons/edit.svg"
+              alt="이미지수정"
+              width={30}
+              height={30}
+              className={styles.hoverContent}
+            />
+          </>
         ) : (
           <div className={styles.iconContainer}>
             <Image src="/icons/add.svg" alt="이미지 추가" fill />

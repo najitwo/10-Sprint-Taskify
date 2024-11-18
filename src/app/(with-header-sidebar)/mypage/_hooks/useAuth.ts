@@ -1,5 +1,5 @@
-import useAuthStore from '../store/authStore';
-import axios from '../lib/axios';
+import useAuthStore from '../_store/authStore';
+import axios from '../_lib/axios';
 
 const useAuth = () => {
   const { user, accessToken, setUser, setAccessToken } = useAuthStore();
