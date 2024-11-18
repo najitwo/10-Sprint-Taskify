@@ -32,11 +32,13 @@ export default function Dashboards() {
           <DashboardCard key={board.id} {...board} />
         ))}
       </section>
-      <Pagination
-        currentPage={page}
-        totalPages={totalPages}
-        onPageChange={handlePageChange}
-      />
+      {dashboards.length > 0 && (
+        <Pagination
+          currentPage={page}
+          totalPages={totalPages}
+          onPageChange={handlePageChange}
+        />
+      )}
     </div>
   );
 }

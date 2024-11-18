@@ -13,6 +13,10 @@ export default function Dashboards() {
     pageSize: PAGE_SIZE,
   });
 
+  if (dashboards.length === 0) {
+    return null;
+  }
+
   return (
     <div className={styles.dashboards}>
       <ul className={styles.dashboardsWrapper}>
