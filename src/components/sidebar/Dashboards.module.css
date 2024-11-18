@@ -61,13 +61,12 @@
     margin-top: 10px;
     display: flex;
     flex-direction: column;
-    gap: 15px;
   }
 
   .titleContainer {
     justify-content: flex-start;
     gap: 16px;
-    padding: 8px 10px;
+    padding: 20px 10px;
   }
 
   .title,
