@@ -1,9 +1,9 @@
 import axios from './axios';
 import { UseFormSetError } from 'react-hook-form';
-import useAuthStore from '../store/authStore';
-import { ERROR_MESSAGES } from '../constants/message';
-import { ProfileFormValues } from '../components/ProfileForm';
-import { PasswordFormValues } from '../components/PasswordForm';
+import useAuthStore from '../_store/authStore';
+import { ERROR_MESSAGES } from '../_constants/message';
+import { ProfileFormValues } from '../_components/ProfileForm';
+import { PasswordFormValues } from '../_components/PasswordForm';
 
 export const updateProfile = async (data: ProfileFormValues) => {
   const { image, nickname } = data;

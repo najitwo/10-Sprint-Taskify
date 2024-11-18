@@ -70,7 +70,7 @@
 }
 
 .homeBrand {
-  font-family: var(--font-montserrat);
+  /* font-family: var(--font-montserrat); */
   font-size: 90px;
   font-weight: 700;
   color: var(--violet);

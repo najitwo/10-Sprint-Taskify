@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
-import { Montserrat } from 'next/font/google';
+// import { Montserrat } from 'next/font/google';
 import './variables.css';
 import './reset.css';
 
@@ -11,11 +11,11 @@ const pretendard = localFont({
   variable: '--font-pretendard',
 });
 
-export const montserrat = Montserrat({
-  display: 'swap',
-  subsets: ['latin'],
-  variable: '--font-montserrat',
-});
+// export const montserrat = Montserrat({
+//   display: 'swap',
+//   subsets: ['latin'],
+//   variable: '--font-montserrat',
+// });
 
 export const metadata: Metadata = {
   title: 'Taskify',
@@ -28,10 +28,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="kr">
-      <body className={`${pretendard.variable} ${montserrat.variable}`}>
-        {children}
-      </body>
+    <html lang="ko">
+      <body className={`${pretendard.variable}`}>{children}</body>
     </html>
   );
 }
