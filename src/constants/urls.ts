@@ -1,4 +1,4 @@
-const BASE_URL = 'https://sp-taskify-api.vercel.app/10-1';
+export const BASE_URL = 'https://sp-taskify-api.vercel.app/10-1';
 
 export const AUTH_URL = `${BASE_URL}/auth`;
 export const CARD_URL = `${BASE_URL}/cards`;

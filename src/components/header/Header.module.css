@@ -1,0 +1,127 @@
+.header {
+  padding: 16px;
+  border-bottom: 1px solid var(--gray-300);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 16px;
+}
+
+.title {
+  flex: 1;
+  color: var(--black-100);
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 6px;
+}
+
+.button {
+  padding: 6px 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: transparent;
+  border: 1px solid var(--gray-300);
+  border-radius: 6px;
+  color: var(--gray-500);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.icon {
+  display: none;
+}
+
+.userInfoContainer {
+  display: flex;
+  align-items: center;
+}
+
+.userInfoContainer::before {
+  content: '';
+  border: 0.5px solid var(--gray-300);
+  height: 34px;
+}
+
+.userInfoWrapper {
+  margin-left: 16px;
+  display: flex;
+  align-items: center;
+}
+
+.userInfoWrapper:hover {
+  cursor: pointer;
+}
+
+.myMenu {
+  position: absolute;
+  top: 75px;
+  right: 10px;
+  padding: 6px 0;
+  border: 1px solid var(--gray-300);
+  border-radius: 6px;
+  color: var(--gray-500);
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.myMenu div {
+  padding: 3px 12px;
+  transition: background-color 0.3s ease;
+}
+
+.myMenu div:hover {
+  cursor: pointer;
+  background: var(--gray-200);
+}
+
+@media screen and (min-width: 768px) {
+  .header {
+    padding-left: 40px;
+    padding-right: 30px;
+    gap: 36px;
+  }
+
+  .title {
+    font-size: 20px;
+  }
+
+  .buttonContainer {
+    gap: 16px;
+  }
+
+  .button {
+    padding: 10px 16px;
+    font-size: 16px;
+  }
+
+  .icon {
+    display: block;
+  }
+
+  .userInfoWrapper {
+    margin-left: 36px;
+  }
+
+  .myMenu {
+    min-width: 120px;
+    text-align: center;
+    top: 80px;
+    right: 50px;
+  }
+}
+
+@media screen and (min-width: 1199px) {
+  .header {
+    padding-right: 80px;
+  }
+}

@@ -1,0 +1,59 @@
+.sideBar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.logo {
+  background-color: transparent;
+  padding-top: 22px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.addDashBoardsContainer {
+  padding: 0 22px;
+}
+
+.addDashBoardsTitle {
+  display: none;
+}
+
+.addButton {
+  background-color: transparent;
+  width: 20px;
+}
+
+@media screen and (min-width: 768px) {
+  .sideBar {
+    min-width: 155px;
+    padding: 0 12px;
+  }
+
+  .logo {
+    text-align: left;
+    margin-bottom: 25px;
+  }
+
+  .addDashBoardsContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0;
+  }
+
+  .addDashBoardsTitle {
+    display: inline;
+    color: var(--gray-500);
+    font-size: 12px;
+    font-weight: 600;
+  }
+}
+
+@media screen and (min-width: 1199px) {
+  .sideBar {
+    min-width: 300px;
+  }
+}
