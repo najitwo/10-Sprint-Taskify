@@ -28,8 +28,8 @@ jobs:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
         run: |
-          if [ "${{ github.event_name }}" == "push" ]; then
-            npx vercel deploy --prod --token=$VERCEL_TOKEN --confirm
+          if [ "${{ github.event_name }}" == "pull_request" ]; then
+            npx vercel deploy --token=$VERCEL_TOKEN --confirm --env=Preview
           else
-            npx vercel deploy --pre --token=$VERCEL_TOKEN --confirm
+            npx vercel deploy --prod --token=$VERCEL_TOKEN --confirm
           fi
