@@ -28,7 +28,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="kr">
+    <html lang="ko">
       <body className={`${pretendard.variable} ${montserrat.variable}`}>
         {children}
       </body>
