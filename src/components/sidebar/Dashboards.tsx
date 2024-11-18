@@ -33,23 +33,17 @@ export default function Dashboards() {
 
   return (
     <div className={styles.dashboards}>
-      <DashboardList dashboards={dashboards} />
+      <ul className={styles.dashboardsWrapper}>
+        {dashboards.map((board) => (
+          <DashboardItem key={board.id} {...board} />
+        ))}
+      </ul>
       <Pagination
         currentPage={page}
         totalPages={totalPages}
         onPageChange={handlePageChange}
       />
     </div>
-  );
-}
-
-function DashboardList({ dashboards }: { dashboards: Dashboard[] }) {
-  return (
-    <ul className={styles.dashboardsWrapper}>
-      {dashboards.map((board) => (
-        <DashboardItem key={board.id} {...board} />
-      ))}
-    </ul>
   );
 }
 
