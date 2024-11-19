@@ -53,7 +53,7 @@ export default function Modal({
         <FocusTrap>
           <div className={styles.titleContainer}>
             {title && <h3 className={styles.title}>{title}</h3>}
-            <button
+            {/* <button
               onClick={onClose}
               className={styles.close}
               aria-label="Close modal"
@@ -64,7 +64,7 @@ export default function Modal({
                 width={10}
                 height={10}
               />
-            </button>
+            </button> */}
           </div>
           {children}
         </FocusTrap>
