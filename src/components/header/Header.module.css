@@ -21,17 +21,22 @@
   gap: 6px;
 }
 
-.button {
+.button.button {
   padding: 6px 12px;
   display: flex;
   align-items: center;
   gap: 8px;
   background-color: transparent;
-  border-radius: 6px;
   border: 1px solid var(--gray-300);
+  border-radius: 6px;
   color: var(--gray-500);
   font-size: 14px;
   font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.button.button:hover {
+  background-color: var(--violet-light);
 }
 
 .icon {
@@ -55,6 +60,36 @@
   align-items: center;
 }
 
+.userInfoWrapper:hover {
+  cursor: pointer;
+}
+
+.myMenu {
+  position: absolute;
+  top: 75px;
+  right: 10px;
+  padding: 6px 0;
+  border: 1px solid var(--gray-300);
+  border-radius: 6px;
+  color: var(--gray-500);
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: var(--white);
+}
+
+.myMenu div {
+  padding: 3px 12px;
+  transition: background-color 0.3s ease;
+}
+
+.myMenu div:hover {
+  cursor: pointer;
+  background: var(--violet-light);
+}
+
 @media screen and (min-width: 768px) {
   .header {
     padding-left: 40px;
@@ -75,17 +110,24 @@
     font-size: 16px;
   }
 
+  .icon {
+    display: block;
+  }
+
   .userInfoWrapper {
     margin-left: 36px;
+  }
+
+  .myMenu {
+    min-width: 120px;
+    text-align: center;
+    top: 80px;
+    right: 50px;
   }
 }
 
 @media screen and (min-width: 1199px) {
   .header {
     padding-right: 80px;
-  }
-
-  .icon {
-    display: block;
   }
 }

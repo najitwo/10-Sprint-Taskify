@@ -1,9 +1,10 @@
 'use client';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Button from '../Button';
 import UserInfo from './UserInfo';
 import styles from './Header.module.css';
+import { useState } from 'react';
 
 interface HeaderProps {
   component?: React.ComponentType;
@@ -11,6 +12,13 @@ interface HeaderProps {
 
 export default function Header({ component: Component }: HeaderProps) {
   const pathname = usePathname();
+  const router = useRouter();
+
+  const [isMenuVisible, setIsMenuVisible] = useState(false);
+
+  const handleUserInfoClick = () => {
+    setIsMenuVisible(!isMenuVisible);
+  };
 
   return (
     <header className={styles.header}>
@@ -43,9 +51,16 @@ export default function Header({ component: Component }: HeaderProps) {
         </div>
       )}
       <div className={styles.userInfoContainer}>
-        <div className={styles.userInfoWrapper}>
+        <div className={styles.userInfoWrapper} onClick={handleUserInfoClick}>
           <UserInfo />
         </div>
+        {isMenuVisible && (
+          <div className={styles.myMenu}>
+            <div onClick={() => router.push('/mydashboard')}>내 대시보드</div>
+            <div onClick={() => router.push('/mypage')}>내 정보</div>
+            <div onClick={() => router.push('/')}>로그아웃</div>
+          </div>
+        )}
       </div>
     </header>
   );
