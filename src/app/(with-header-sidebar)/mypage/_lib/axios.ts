@@ -1,5 +1,5 @@
 import axios from 'axios';
-import useAuthStore from '../_store/authStore';
+import useAuthStore from '@/store/authStore';
 import { BASE_URL } from '@/constants/urls';
 
 const instance = axios.create({

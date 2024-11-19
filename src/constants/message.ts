@@ -5,4 +5,5 @@ export const ERROR_MESSAGES = {
   PASSWORD_TOO_SHORT: '비밀번호를 8자 이상 입력해주세요.',
   NICKNAME_REQUIRE: '닉네임을 입력해주세요.',
   PASSWORD_REQUIRE: '비밀번호를 입력해주세요.',
+  DASHBOARD_TITLE_REQUIRE: '대시보드 이름은 필수입니다.',
 };
