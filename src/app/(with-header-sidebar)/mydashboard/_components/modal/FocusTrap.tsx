@@ -42,5 +42,9 @@ export default function FocusTrap({ children }: FocusTrapProps) {
     };
   }, []);
 
-  return <div ref={startRef}>{children}</div>;
+  return (
+    <div ref={startRef} style={{ width: '100%' }}>
+      {children}
+    </div>
+  );
 }
