@@ -1,4 +1,4 @@
-import ImageWrapper from '@/components/root/ImageWrapper';
+import ImageWrapper from '@/components/ImageWrapper';
 import styles from './MainCard.module.css';
 
 interface Props {
