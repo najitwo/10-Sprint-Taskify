@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import useAuth from '../_hooks/useAuth';
 import FileInput from './FileInput';
-import Input from './Input';
+import Input from '@/components/Input';
 import Button from '@/components/Button';
 import { updateProfile } from '../_lib/userService';
 import { ERROR_MESSAGES } from '@/constants/message';

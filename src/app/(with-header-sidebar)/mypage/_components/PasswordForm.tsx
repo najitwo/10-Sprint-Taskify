@@ -6,7 +6,7 @@ import { ERROR_MESSAGES } from '@/constants/message';
 import useModalStore from '../_store/modalStore';
 import axiosInstance from '@/lib/axiosInstance';
 import Button from '@/components/Button';
-import Input from './Input';
+import Input from '@/components/Input';
 import AlertModal from './AlertModal';
 import styles from './Form.module.css';
 
