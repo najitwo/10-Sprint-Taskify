@@ -28,7 +28,7 @@ export const updateBoard = async (
   }
 };
 
-export const createBoard = async ({
+export const createDashboard = async ({
   title,
   color,
 }: CreateDashboardRequestBody) => {

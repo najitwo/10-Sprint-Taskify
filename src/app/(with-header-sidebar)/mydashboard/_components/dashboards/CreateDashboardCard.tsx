@@ -20,7 +20,7 @@ export default function CreateDashboardCard() {
       </Button>
       {isOpen && (
         <Modal isClosing={isClosing} onClose={closeModal} title={TITLE}>
-          <CreateDashboardForm />
+          <CreateDashboardForm closeModal={closeModal} />
         </Modal>
       )}
     </div>

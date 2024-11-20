@@ -12,3 +12,9 @@
   background-color: var(--gray-400);
   cursor: auto;
 }
+
+@media screen and (min-width: 768px) {
+  .button {
+    font-size: 16px;
+  }
+}

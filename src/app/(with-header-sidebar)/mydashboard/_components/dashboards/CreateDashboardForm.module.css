@@ -1,3 +1,31 @@
 .form {
   margin-top: 24px;
 }
+
+.input {
+  font-size: 16px;
+}
+
+.input label {
+  font-size: 18px;
+}
+
+.buttonWrapper {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 30px;
+  height: 54px;
+}
+
+.btnCancel.btnCancel {
+  border-radius: 8px;
+  border: 1px solid var(--gray-300);
+  background: var(--white);
+  color: var(--gray-500);
+  transition: background-color 0.3s ease;
+}
+
+.btnCancel.btnCancel:hover {
+  background-color: var(--violet-light);
+}

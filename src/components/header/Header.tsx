@@ -1,4 +1,5 @@
 'use client';
+
 import { usePathname, useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Button from '../Button';
@@ -18,6 +19,11 @@ export default function Header({ component: Component }: HeaderProps) {
 
   const handleUserInfoClick = () => {
     setIsMenuVisible(!isMenuVisible);
+  };
+
+  const navigateTo = (href: string) => {
+    router.push(href);
+    handleUserInfoClick();
   };
 
   return (
@@ -56,9 +62,9 @@ export default function Header({ component: Component }: HeaderProps) {
         </div>
         {isMenuVisible && (
           <div className={styles.myMenu}>
-            <div onClick={() => router.push('/mydashboard')}>내 대시보드</div>
-            <div onClick={() => router.push('/mypage')}>내 정보</div>
-            <div onClick={() => router.push('/')}>로그아웃</div>
+            <div onClick={() => navigateTo('/mydashboard')}>내 대시보드</div>
+            <div onClick={() => navigateTo('/mypage')}>내 정보</div>
+            <div onClick={() => navigateTo('/')}>로그아웃</div>
           </div>
         )}
       </div>

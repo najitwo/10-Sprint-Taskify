@@ -26,7 +26,11 @@ export default function DashboardInput({
         })}
         error={errors.title}
       />
-      <ColorRadioInput register={register('color')} />
+      <ColorRadioInput
+        register={register('color', {
+          required: true,
+        })}
+      />
       {children}
     </div>
   );

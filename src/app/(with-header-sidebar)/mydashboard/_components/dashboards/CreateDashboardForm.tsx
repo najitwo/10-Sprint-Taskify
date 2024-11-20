@@ -1,43 +1,44 @@
 import { useForm } from 'react-hook-form';
 import Button from '@/components/Button';
-import { ERROR_MESSAGES } from '../../_constants/message';
+import DashboardInput from '@/components/DashboardInput';
 import styles from './CreateDashboardForm.module.css';
-import Input from '../Input';
+import { CreateDashboardRequestBody } from '@/types/dashboards';
+import { createDashboard } from '@/app/(with-header-sidebar)/dashboard/[id]/edit/_lib/boardService';
 
-interface CreateDashboardFormValue {
-  title: string;
-  color: string;
+interface CreateDashboardFormProps {
+  closeModal: () => void;
 }
 
-export default function CreateDashboardForm() {
+export default function CreateDashboardForm({
+  closeModal,
+}: CreateDashboardFormProps) {
   const {
     register,
     handleSubmit,
     formState: { errors, isValid },
-  } = useForm<CreateDashboardFormValue>({ mode: 'onChange' });
+  } = useForm<CreateDashboardRequestBody>({ mode: 'onChange' });
 
-  const onSubmit = () => {
-    // TODO
-    console.log('CreateDashboardContent');
+  const onSubmit = async (newDashboard: CreateDashboardRequestBody) => {
+    await createDashboard(newDashboard);
+    closeModal();
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-      <Input
-        name="title"
-        label="대시보드 이름"
-        placeholder="새로운 프로젝트"
-        register={register('title', {
-          required: ERROR_MESSAGES.DASHBOARD_TITLE_REQUIRE,
-        })}
-        error={errors.title}
-      />
-      <div>
-        <Button>취소</Button>
-        <Button type="submit" disabled={!isValid}>
-          생성
-        </Button>
-      </div>
+      <DashboardInput
+        register={register}
+        errors={errors}
+        className={styles.input}
+      >
+        <div className={styles.buttonWrapper}>
+          <Button className={styles.btnCancel} onClick={() => closeModal()}>
+            취소
+          </Button>
+          <Button type="submit" disabled={!isValid}>
+            생성
+          </Button>
+        </div>
+      </DashboardInput>
     </form>
   );
 }
