@@ -1,7 +1,7 @@
 import axios from './axios';
 import { UseFormSetError } from 'react-hook-form';
-import useAuthStore from '../_store/authStore';
-import { ERROR_MESSAGES } from '../_constants/message';
+import useAuthStore from '@/store/authStore';
+import { ERROR_MESSAGES } from '@/constants/message';
 import { ProfileFormValues } from '../_components/ProfileForm';
 import { PasswordFormValues } from '../_components/PasswordForm';
 

@@ -7,8 +7,8 @@ import FileInput from './FileInput';
 import Input from './Input';
 import Button from '@/components/Button';
 import { updateProfile } from '../_lib/userService';
+import { ERROR_MESSAGES } from '@/constants/message';
 import styles from './Form.module.css';
-import { ERROR_MESSAGES } from '../_constants/message';
 
 export interface ProfileFormValues {
   image: File | null;
