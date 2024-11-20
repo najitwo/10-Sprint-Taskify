@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { getInvitations } from '../_lib/boardService';
+import { getInvitations } from '../_lib/invitationService';
 import useApi from './useApi';
 import { GetInvitationsResponse, Invitation } from '@/types/invitation';
 
