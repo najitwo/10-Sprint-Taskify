@@ -1,5 +1,5 @@
 import axiosInstance from '@/lib/axiosInstance';
-import { UpdateDashboardRequestParams } from '../_types/board';
+import { UpdateDashboardRequestParams } from '@/types/dashboards';
 
 export const getBoard = async (id: string) => {
   try {

@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import useIdStore from '../_store/idStore';
 import { getBoard, updateBoard } from '../_lib/boardService';
-import { Dashboard, UpdateDashboardRequestParams } from '../_types/board';
+import { Dashboard, UpdateDashboardRequestParams } from '@/types/dashboards';
 import Input from '@/components/Input';
 import Button from '@/components/Button';
 import RadioInput from './RadioInput';

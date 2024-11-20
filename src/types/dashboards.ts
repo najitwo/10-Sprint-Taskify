@@ -20,3 +20,8 @@ export interface GetDashboardsResponse {
   totalCount: number;
   cursorId: number | null;
 }
+
+export interface UpdateDashboardRequestParams {
+  title: string;
+  color: string;
+}
