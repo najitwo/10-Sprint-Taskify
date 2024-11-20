@@ -1,0 +1,31 @@
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 40px 140px;
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--gray-400);
+}
+
+.legalLinks {
+  display: flex;
+  gap: 32px;
+}
+
+.socialLinks {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.socialLink:first-child {
+  width: 20px;
+  height: 20px;
+}
+
+.socialLink {
+  width: 22px;
+  height: 22px;
+  fill: white;
+}

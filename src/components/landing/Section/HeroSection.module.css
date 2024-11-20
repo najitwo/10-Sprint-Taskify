@@ -1,0 +1,48 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  margin-bottom: 180px;
+}
+
+.homeTitleWrapper {
+  display: flex;
+  align-items: center;
+  margin-bottom: 110px;
+  margin-top: 40px;
+  gap: 28px;
+}
+
+.homeImg {
+  width: 722px;
+  height: 423px;
+}
+
+.homeTitle {
+  font-size: 76px;
+  font-weight: 700;
+  color: white;
+  line-height: 100px;
+  letter-spacing: 2px;
+}
+
+.homeBrand {
+  font-family: var(--font-montserrat);
+  font-size: 90px;
+  font-weight: 700;
+  color: var(--violet);
+  line-height: 65px;
+  letter-spacing: 1px;
+}
+
+.homeLoginBtn {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  height: 54px;
+  padding: 9px 101px;
+  border-radius: 8px;
+  background: var(--violet);
+}

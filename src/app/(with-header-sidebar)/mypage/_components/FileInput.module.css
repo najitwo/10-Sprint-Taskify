@@ -1,0 +1,52 @@
+.label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 100px;
+  border-radius: 8px;
+  background-color: var(--gray-200);
+  cursor: pointer;
+  position: relative;
+}
+
+.iconContainer {
+  position: relative;
+  width: 20px;
+  height: 20px;
+}
+
+.input {
+  display: none;
+}
+
+.image {
+  border-radius: 8px;
+}
+
+.hoverContent {
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.label:hover .image {
+  filter: brightness(50%);
+  transition: filter 0.3s ease-in-out;
+}
+
+.label:hover .hoverContent {
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
+  z-index: 1;
+}
+
+@media screen and (min-width: 768px) {
+  .label {
+    width: 182px;
+    height: 182px;
+  }
+  .imageContainer {
+    width: 30px;
+    height: 30px;
+  }
+}

@@ -1,0 +1,47 @@
+.container {
+  display: flex;
+  gap: 8px;
+}
+
+.radio {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+  transition:
+    filter 0.3s ease,
+    transform 0.3s ease;
+}
+
+.radio:hover {
+  filter: drop-shadow(4px 4px 10px rgba(0, 0, 0, 0.2));
+  transform: translateY(-2px);
+}
+
+.radio:checked::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  width: 24px;
+  height: 24px;
+  background: url('/icons/done.svg') no-repeat center;
+  background-size: 24px 24px;
+  animation: fadeInScale 0.5s ease forwards;
+}
+
+@keyframes fadeInScale {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+}

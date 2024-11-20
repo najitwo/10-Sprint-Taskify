@@ -2,10 +2,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 15px;
+  gap: 12px;
+  height: 100%;
+  overflow-y: auto;
 }
 
-.logo {
+.logo.logo {
   background-color: transparent;
   padding-top: 22px;
   margin-bottom: 10px;
@@ -20,7 +22,7 @@
   display: none;
 }
 
-.addButton {
+.addButton.addButton {
   background-color: transparent;
   width: 20px;
 }

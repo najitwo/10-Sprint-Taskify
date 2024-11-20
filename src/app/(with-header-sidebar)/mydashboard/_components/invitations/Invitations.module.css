@@ -1,0 +1,39 @@
+.invitations {
+  background-color: var(--white);
+  border-radius: 8px;
+  padding: 24px 20px 80px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 30px;
+}
+
+.title {
+  color: var(--black-100);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.descriptionWrapper {
+  text-align: center;
+}
+
+.description {
+  color: var(--gray-400);
+  font-size: 12px;
+  font-weight: 400;
+}
+
+@media screen and (min-width: 768px) {
+  .invitations {
+    padding: 24px 40px 120px 40px;
+    gap: 60px;
+  }
+
+  .title {
+    font-size: 24px;
+  }
+  .description {
+    font-size: 18px;
+  }
+}
