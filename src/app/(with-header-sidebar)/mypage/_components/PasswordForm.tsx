@@ -3,10 +3,10 @@
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { ERROR_MESSAGES } from '@/constants/message';
-import useModalStore from '../_store/modalStore';
-import axios from '../_lib/axios';
+import useModalStore from '@/store/modalStore';
+import axiosInstance from '@/lib/axiosInstance';
 import Button from '@/components/Button';
-import Input from './Input';
+import Input from '@/components/Input';
 import AlertModal from './AlertModal';
 import styles from './Form.module.css';
 
@@ -33,7 +33,7 @@ export default function PasswordForm() {
 
   const onSubmit = async (data: PasswordFormValues) => {
     try {
-      await axios.put('/auth/password', {
+      await axiosInstance.put('/auth/password', {
         password: data.currentPassword,
         newPassword: data.newPassword,
       });

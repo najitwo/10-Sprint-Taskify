@@ -1,9 +1,9 @@
 import { UseFormRegisterReturn } from 'react-hook-form';
-import styles from './RadioInput.module.css';
+import styles from './ColorRadioInput.module.css';
 
 const COLOR_VALUES = ['#7AC555', '#760DDE', '#FFA500', '#76A5EA', '#E876EA'];
 
-export default function RadioInput({
+export default function ColorRadioInput({
   register,
 }: {
   register: UseFormRegisterReturn;

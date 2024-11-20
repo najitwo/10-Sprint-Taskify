@@ -12,27 +12,6 @@
   margin-bottom: 24px;
 }
 
-.input {
-  margin-bottom: 16px;
-}
-
-.input label {
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 26px;
-}
-
-.input input {
-  font-size: 14px;
-  line-height: 24px;
-}
-
-.input span {
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 24px;
-}
-
 .button {
   line-height: 24px;
   margin-top: 32px;

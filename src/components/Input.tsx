@@ -6,8 +6,8 @@ import Label from './Label';
 import styles from './Input.module.css';
 
 interface InputProps {
-  name: string;
   type?: string;
+  name: string;
   className?: string;
   label?: string;
   placeholder?: string;
@@ -18,8 +18,8 @@ interface InputProps {
 }
 
 export default function Input({
-  name,
   type = 'text',
+  name,
   className = '',
   label = '',
   placeholder = '',

@@ -1,4 +1,4 @@
-import type { Dashboard } from '@/app/(with-header-sidebar)/mydashboard/_types/dashboards';
+import type { Dashboard } from '@/types/dashboards';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import Button from '@/components/Button';

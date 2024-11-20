@@ -2,13 +2,11 @@
 
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import useIdStore from '../_store/idStore';
+import useIdStore from '@/store/idStore';
 import { getBoard, updateBoard } from '../_lib/boardService';
-import { Dashboard, UpdateDashboardRequestParams } from '../_types/board';
-import Input from './Input';
+import { Dashboard, UpdateDashboardRequestParams } from '@/types/dashboards';
 import Button from '@/components/Button';
-import RadioInput from './RadioInput';
-import { ERROR_MESSAGES } from '@/constants/message';
+import DashboardInput from '@/components/DashboardInput';
 import styles from './EditForm.module.css';
 
 export default function EditForm() {
@@ -48,19 +46,11 @@ export default function EditForm() {
     board && (
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
         <h2>{board.title}</h2>
-        <Input
-          className={styles.input}
-          name="title"
-          label="대시보드 이름"
-          register={register('title', {
-            required: ERROR_MESSAGES.DASHBOARD_TITLE_REQUIRE,
-          })}
-          error={errors.title}
-        />
-        <RadioInput register={register('color')} />
-        <Button className={styles.button} type="submit" disabled={!isValid}>
-          변경
-        </Button>
+        <DashboardInput register={register} errors={errors}>
+          <Button className={styles.button} type="submit" disabled={!isValid}>
+            변경
+          </Button>
+        </DashboardInput>
       </form>
     )
   );

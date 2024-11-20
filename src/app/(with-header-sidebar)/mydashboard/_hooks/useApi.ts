@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { AxiosResponse, AxiosError } from 'axios';
-import axiosInstance from '../_lib/axiosInstance';
+import axiosInstance from '@/lib/axiosInstance';
 
 type UseApiFetchReturnType<T> = {
   data: T | null;

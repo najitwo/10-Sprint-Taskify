@@ -1,5 +1,5 @@
 import axiosInstance from './axiosInstance';
-import { GetDashboardsRequestParams } from '../_types/dashboards';
+import type { GetDashboardsRequestParams } from '@/types/dashboards';
 
 export const dashboardsApi = {
   // getMyDashboards: (params: GetDashboardsRequestParams) =>

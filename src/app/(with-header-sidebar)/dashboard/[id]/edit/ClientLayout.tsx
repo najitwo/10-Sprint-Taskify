@@ -6,7 +6,7 @@ import Image from 'next/image';
 import Button from '@/components/Button';
 import Modal from '@/app/(with-header-sidebar)/mypage/_components/Modal';
 import styles from './layout.module.css';
-import useIdStore from './_store/idStore';
+import useIdStore from '@/store/idStore';
 
 export default function Layout({
   id,
@@ -19,7 +19,6 @@ export default function Layout({
   const handleBack = () => {
     router.push(`/dashboard/${id}`);
   };
-
   const setId = useIdStore.getState().setId;
   setId(id);
 
