@@ -1,0 +1,25 @@
+.addDashboard.addDashboard {
+  background: var(--white);
+  color: var(--black-100);
+  font-size: 14px;
+  font-weight: 600;
+  padding: 15px 20px;
+  background: var(--white);
+  border: 1px solid var(--gray-300);
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  transition: background-color 0.3s ease;
+}
+
+.addDashboard.addDashboard:hover {
+  background-color: var(--violet-light);
+}
+
+@media screen and (min-width: 768px) {
+  .addDashboard.addDashboard {
+    font-size: 16px;
+  }
+}

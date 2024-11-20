@@ -6,7 +6,7 @@ export default function MainContainer({ children }: { children: ReactNode }) {
   return (
     <>
       <Header />
-      <main className={styles.main}>{children}</main>
+      <main className={styles.mainContainer}>{children}</main>
     </>
   );
 }
