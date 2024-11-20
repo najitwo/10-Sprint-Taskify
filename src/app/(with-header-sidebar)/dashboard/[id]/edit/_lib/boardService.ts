@@ -21,7 +21,6 @@ export const getInvitations = async (
     );
     return response.data;
   } catch (error) {
-    console.log('야 에러났어');
     throw error;
   }
 };
