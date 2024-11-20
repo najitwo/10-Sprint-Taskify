@@ -25,3 +25,8 @@ export interface UpdateDashboardRequestParams {
   title: string;
   color: string;
 }
+
+export interface CreateDashboardRequestBody {
+  title: string;
+  color: string;
+}

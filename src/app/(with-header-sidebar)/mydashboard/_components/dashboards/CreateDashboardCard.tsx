@@ -1,18 +1,18 @@
 import Button from '@/components/Button';
 import Image from 'next/image';
-import styles from './AddDashboardCard.module.css';
 import { useModal } from '../../_hooks/useModal';
 import Modal from '../modal/Modal';
-import AddDashboardContent from './AddDashboardForm';
+import CreateDashboardForm from './CreateDashboardForm';
+import styles from './CreateDashboardCard.module.css';
 
 const TITLE = '새로운 대시보드';
 
-export default function AddDashboardCard() {
+export default function CreateDashboardCard() {
   const { isOpen, openModal, isClosing, closeModal } = useModal();
 
   return (
     <div>
-      <Button className={styles.addDashboard} onClick={openModal}>
+      <Button className={styles.createDashboard} onClick={openModal}>
         <span>{TITLE}</span>
         <span className={styles.addIconWrapper}>
           <Image src="/icons/add.svg" alt={TITLE} width={16} height={16} />
@@ -20,7 +20,7 @@ export default function AddDashboardCard() {
       </Button>
       {isOpen && (
         <Modal isClosing={isClosing} onClose={closeModal} title={TITLE}>
-          <AddDashboardContent />
+          <CreateDashboardForm />
         </Modal>
       )}
     </div>

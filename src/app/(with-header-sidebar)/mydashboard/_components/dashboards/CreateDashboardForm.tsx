@@ -1,24 +1,24 @@
 import { useForm } from 'react-hook-form';
 import Button from '@/components/Button';
 import { ERROR_MESSAGES } from '../../_constants/message';
-import styles from './AddDashboardForm.module.css';
+import styles from './CreateDashboardForm.module.css';
 import Input from '../Input';
 
-interface AddDashboardFormValue {
+interface CreateDashboardFormValue {
   title: string;
   color: string;
 }
 
-export default function AddDashboardForm() {
+export default function CreateDashboardForm() {
   const {
     register,
     handleSubmit,
     formState: { errors, isValid },
-  } = useForm<AddDashboardFormValue>({ mode: 'onChange' });
+  } = useForm<CreateDashboardFormValue>({ mode: 'onChange' });
 
   const onSubmit = () => {
     // TODO
-    console.log('AddDashboardContent');
+    console.log('CreateDashboardContent');
   };
 
   return (

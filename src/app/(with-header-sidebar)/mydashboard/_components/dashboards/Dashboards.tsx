@@ -4,7 +4,7 @@ import useDashboards from '../../_hooks/useDashboards';
 import Pagination from './Pagination';
 import DashboardCard from './DashboardCard';
 import styles from './Dashboards.module.css';
-import AddDashboardCard from './AddDashboardCard';
+import CreateDashboardCard from './CreateDashboardCard';
 
 const PAGE_SIZE = 5;
 
@@ -16,7 +16,7 @@ export default function Dashboards() {
   return (
     <div>
       <section className={styles.dashboardsWrapper}>
-        <AddDashboardCard />
+        <CreateDashboardCard />
         {dashboards.map((board) => (
           <DashboardCard key={board.id} {...board} />
         ))}

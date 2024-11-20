@@ -14,11 +14,11 @@
   text-align: center;
 }
 
-.addDashBoardsContainer {
+.createDashboardContainer {
   padding: 0 22px;
 }
 
-.addDashBoardsTitle {
+.createDashboardTitle {
   display: none;
 }
 
@@ -38,7 +38,7 @@
     margin-bottom: 25px;
   }
 
-  .addDashBoardsContainer {
+  .createDashboardContainer {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -46,7 +46,7 @@
     padding: 0;
   }
 
-  .addDashBoardsTitle {
+  .createDashboardTitle {
     display: inline;
     color: var(--gray-500);
     font-size: 12px;

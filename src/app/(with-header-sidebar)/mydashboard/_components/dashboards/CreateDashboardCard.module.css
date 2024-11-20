@@ -1,4 +1,4 @@
-.addDashboard.addDashboard {
+.createDashboard.createDashboard {
   background: var(--white);
   color: var(--black-100);
   font-size: 14px;
@@ -14,12 +14,12 @@
   transition: background-color 0.3s ease;
 }
 
-.addDashboard.addDashboard:hover {
+.createDashboard.createDashboard:hover {
   background-color: var(--violet-light);
 }
 
 @media screen and (min-width: 768px) {
-  .addDashboard.addDashboard {
+  .createDashboard.createDashboard {
     font-size: 16px;
   }
 }

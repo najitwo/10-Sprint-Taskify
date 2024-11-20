@@ -36,8 +36,8 @@ export default function SideBar() {
           />
         )}
       </Button>
-      <div className={styles.addDashBoardsContainer}>
-        <span className={styles.addDashBoardsTitle}>Dash Boards</span>
+      <div className={styles.createDashboardContainer}>
+        <span className={styles.createDashboardTitle}>Dash Boards</span>
         <Button aria-label="대시보드 추가하기" className={styles.addButton}>
           <Image
             src="/icons/add_box.svg"
