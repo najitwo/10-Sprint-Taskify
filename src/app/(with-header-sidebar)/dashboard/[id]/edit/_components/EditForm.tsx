@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import useIdStore from '../_store/idStore';
+import useIdStore from '@/store/idStore';
 import { getBoard, updateBoard } from '../_lib/boardService';
 import { Dashboard, UpdateDashboardRequestParams } from '@/types/dashboards';
 import Input from '@/components/Input';

@@ -3,7 +3,7 @@
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { ERROR_MESSAGES } from '@/constants/message';
-import useModalStore from '../_store/modalStore';
+import useModalStore from '@/store/modalStore';
 import axiosInstance from '@/lib/axiosInstance';
 import Button from '@/components/Button';
 import Input from '@/components/Input';

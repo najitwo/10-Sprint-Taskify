@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import useModalStore from '../_store/modalStore';
+import useModalStore from '@/store/modalStore';
 import styles from './Modal.module.css';
 
 export default function Modal() {
