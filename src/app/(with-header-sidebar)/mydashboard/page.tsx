@@ -1,12 +1,12 @@
 import Dashboards from './_components/dashboards/Dashboards';
-import Invitations from './_components/invitations/Invitations';
+import MyInvitations from './_components/invitations/MyInvitations';
 import styles from './page.module.css';
 
 export default function Page() {
   return (
     <div className={styles.mydashboard}>
       <Dashboards />
-      <Invitations />
+      <MyInvitations />
     </div>
   );
 }

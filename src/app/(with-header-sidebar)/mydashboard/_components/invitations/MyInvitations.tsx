@@ -1,7 +1,13 @@
-import Image from 'next/image';
-import styles from './Invitations.module.css';
+'use client';
 
-export default function Invitations() {
+import Image from 'next/image';
+import styles from './MyInvitations.module.css';
+import { useMyInvitations } from '../../_hooks/useMyInvitations';
+
+export default function MyInvitations() {
+  const { myInvitations, isLoading, error } = useMyInvitations();
+  console.log(myInvitations);
+
   return (
     <section className={styles.invitations}>
       <h2 className={styles.title}>초대받은 대시보드</h2>
