@@ -1,3 +1,4 @@
+import { MouseEventHandler } from 'react';
 import Image from 'next/image';
 import Button from '@/components/Button';
 import Pagination from './Pagination';
@@ -7,12 +8,14 @@ interface ListHeaderProps {
   totalPages: number;
   page: number;
   handlePageChange: (direction: 'next' | 'prev') => void;
+  onOpenModal: MouseEventHandler<HTMLButtonElement>;
 }
 
 export default function ListHeader({
   totalPages,
   page,
   handlePageChange,
+  onOpenModal,
 }: ListHeaderProps) {
   return (
     <div className={styles.container}>
@@ -30,8 +33,8 @@ export default function ListHeader({
           />
         </div>
       </div>
-      <h4 className={styles.subtitle}>이메일</h4>
-      <Button className={styles.button}>
+      {totalPages > 0 && <h4 className={styles.subtitle}>이메일</h4>}
+      <Button className={styles.button} onClick={onOpenModal}>
         <Image
           src="/icons/add_box.svg"
           width={14}

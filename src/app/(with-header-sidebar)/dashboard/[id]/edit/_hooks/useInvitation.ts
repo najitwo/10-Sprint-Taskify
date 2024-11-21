@@ -1,5 +1,9 @@
 import { useCallback, useEffect, useState } from 'react';
-import { deleteInvitation, getInvitations } from '../_lib/invitationService';
+import {
+  createInvitation,
+  deleteInvitation,
+  getInvitations,
+} from '../_lib/invitationService';
 import useApi from './useApi';
 import { GetInvitationsResponse, Invitation } from '@/types/invitation';
 
@@ -65,6 +69,15 @@ const useInvitation = (dashboardId: string, pageSize = 5) => {
     }
   };
 
+  const handleInvite = async (email: string) => {
+    try {
+      await createInvitation(dashboardId, email);
+      handleLoad(invitationState.page);
+    } catch (error) {
+      throw error;
+    }
+  };
+
   useEffect(() => {
     handleLoad(invitationState.page);
   }, [handleLoad, invitationState.page]);
@@ -77,6 +90,7 @@ const useInvitation = (dashboardId: string, pageSize = 5) => {
     error,
     handlePageChange,
     handleCancel,
+    handleInvite,
   };
 };
 

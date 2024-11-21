@@ -1,18 +1,18 @@
 import { MouseEventHandler } from 'react';
+import Button from '@/components/Button';
 import { Invitee } from '@/types/invitation';
 import styles from './ListItem.module.css';
-import Button from '@/components/Button';
 
 interface ListItemProps {
   invitee: Invitee;
-  handleCancel: MouseEventHandler<HTMLButtonElement>;
+  onCancel: MouseEventHandler<HTMLButtonElement>;
 }
 
-export default function ListItem({ invitee, handleCancel }: ListItemProps) {
+export default function ListItem({ invitee, onCancel }: ListItemProps) {
   return (
     <li className={styles.item}>
       <span className={styles.content}>{invitee.email}</span>
-      <Button className={styles.button} onClick={handleCancel}>
+      <Button className={styles.button} onClick={onCancel}>
         취소
       </Button>
     </li>
