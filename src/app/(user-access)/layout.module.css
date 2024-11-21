@@ -7,7 +7,6 @@
   width: 100%;
   background-color: var(--white);
 }
-
 .authContent {
   width: 100%;
   max-width: 400px;
@@ -18,7 +17,6 @@
   border-radius: 8px;
   padding: 20px;
 }
-
 .logoContainer {
   display: flex;
   flex-direction: column;
@@ -26,12 +24,10 @@
   align-items: center;
   margin: 16px 0;
 }
-
 .logo {
   width: 100%;
   height: auto;
 }
-
 @media screen and (min-width: 768px) {
   .authContent {
     max-width: 351px;
