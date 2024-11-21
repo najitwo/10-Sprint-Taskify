@@ -2,33 +2,36 @@
 
 import useIdStore from '@/store/idStore';
 import { Invitation } from '@/types/invitation';
-import Pagination from './Pagination';
 import useInvitation from '../_hooks/useInvitation';
 import styles from './Invitations.module.css';
+import ListHeader from './ListHeader';
+import ListItem from './ListItem';
 
 export default function Invitations() {
-  const id = useIdStore((state) => state.id);
-  const { page, invitations, totalPages, handlePageChange } = useInvitation(id);
+  const dashboardId = useIdStore((state) => state.id);
+  const { page, invitations, totalPages, handlePageChange, handleCancel } =
+    useInvitation(dashboardId);
 
   return (
     <div className={styles.container}>
-      <div className={styles.header}>
-        <h2>초대 내역</h2>
-        <Pagination
-          currentPage={page}
-          totalPages={totalPages}
-          onPageChange={handlePageChange}
-        />
-      </div>
-      <div className={styles.list}>
-        {invitations.length > 0 ? (
-          invitations.map(({ id, invitee }: Invitation) => (
-            <div key={id}>{invitee.email}</div>
-          ))
-        ) : (
-          <div>초대없음</div>
-        )}
-      </div>
+      <ListHeader
+        page={page}
+        totalPages={totalPages}
+        handlePageChange={handlePageChange}
+      />
+      {invitations.length > 0 ? (
+        <ul className={styles.list}>
+          {invitations.map(({ id, invitee }: Invitation) => (
+            <ListItem
+              key={id}
+              invitee={invitee}
+              handleCancel={() => handleCancel(id)}
+            />
+          ))}
+        </ul>
+      ) : (
+        <div>초대없음</div>
+      )}
     </div>
   );
 }

@@ -14,3 +14,16 @@ export const getInvitations = async (
     throw error;
   }
 };
+
+export const deleteInvitation = async (
+  dashboardId: string,
+  invitationId: number
+) => {
+  try {
+    await axiosInstance.delete(
+      `/dashboards/${dashboardId}/invitations/${invitationId}`
+    );
+  } catch (error) {
+    throw error;
+  }
+};
