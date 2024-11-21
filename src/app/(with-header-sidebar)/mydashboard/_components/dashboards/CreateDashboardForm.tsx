@@ -25,11 +25,7 @@ export default function CreateDashboardForm({
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-      <DashboardInput
-        register={register}
-        errors={errors}
-        className={styles.input}
-      >
+      <DashboardInput register={register} errors={errors}>
         <div className={styles.buttonWrapper}>
           <Button className={styles.btnCancel} onClick={() => closeModal()}>
             취소
