@@ -7,7 +7,6 @@ import Button from '@/components/Button';
 
 export default function MyInvitations() {
   const { myInvitations, isLoading, error, observerRef } = useMyInvitations();
-  console.log(myInvitations);
 
   return (
     <section className={styles.invitations}>

@@ -7,34 +7,28 @@ const PAGE_SIZE = 10;
 export const useMyInvitations = (title?: string) => {
   const [myInvitations, setMyInvitations] = useState<Invitation[]>([]);
   const [isFetching, setIsFetching] = useState(false);
-  const [hasMore, setHasMore] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [cursorId, setCursorId] = useState<number | null>(null);
   const observerRef = useRef<HTMLDivElement | null>(null);
 
   const fetchMyInvitations = async () => {
-    setIsLoading(true);
+    if (isFetching) return;
+
+    setIsFetching(true);
     setError(null);
 
     const params: { size: number; cursorId?: number; title?: string } = {
       size: PAGE_SIZE,
+      ...(cursorId !== null && { cursorId }),
+      ...(title !== null && { title }),
     };
-
-    if (cursorId !== null) {
-      params.cursorId = cursorId;
-    }
-
-    if (title) {
-      params.title = title;
-    }
 
     try {
       const response = await getMyInvitations(params);
 
       setMyInvitations((prev) => [...prev, ...response.invitations]);
       setCursorId(response.cursorId || null);
-      setHasMore(!!response.cursorId);
     } catch (err) {
       console.error(err);
       setError('Failed to fetch invitations');
@@ -47,15 +41,15 @@ export const useMyInvitations = (title?: string) => {
   useEffect(() => {
     setMyInvitations([]);
     setCursorId(null);
-    setHasMore(true);
+    setIsLoading(true);
     fetchMyInvitations();
   }, [title]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        if (entries[0].isIntersecting && !isFetching && hasMore) {
-          setIsFetching(true);
+        if (entries[0].isIntersecting && cursorId != null && !isFetching) {
+          fetchMyInvitations();
         }
       },
       { threshold: 0.5 }
@@ -67,7 +61,7 @@ export const useMyInvitations = (title?: string) => {
     return () => {
       if (current) observer.unobserve(current);
     };
-  }, [isFetching, hasMore]);
+  }, [isFetching]);
 
   return {
     myInvitations,
