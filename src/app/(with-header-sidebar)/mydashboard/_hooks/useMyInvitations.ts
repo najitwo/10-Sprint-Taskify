@@ -21,7 +21,7 @@ export const useMyInvitations = (title?: string) => {
       size: PAGE_SIZE,
     };
 
-    if (cursorId) {
+    if (cursorId !== null) {
       params.cursorId = cursorId;
     }
 
@@ -32,12 +32,8 @@ export const useMyInvitations = (title?: string) => {
     try {
       const response = await getMyInvitations(params);
 
-      setMyInvitations((prevMyInvitations) => [
-        ...prevMyInvitations,
-        ...response.invitations,
-      ]);
-
-      setCursorId(response.cursorId);
+      setMyInvitations((prev) => [...prev, ...response.invitations]);
+      setCursorId(response.cursorId || null);
       setHasMore(!!response.cursorId);
     } catch (err) {
       console.error(err);
@@ -49,6 +45,9 @@ export const useMyInvitations = (title?: string) => {
   };
 
   useEffect(() => {
+    setMyInvitations([]);
+    setCursorId(null);
+    setHasMore(true);
     fetchMyInvitations();
   }, [title]);
 
