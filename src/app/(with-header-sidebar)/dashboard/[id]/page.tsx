@@ -2,6 +2,9 @@
 
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
+import axiosInstance from '@/lib/axiosInstance';
+import { COLUMN_URL, CARD_URL } from '@/constants/urls';
+
 import {
   DragDropContext,
   Droppable,
@@ -10,50 +13,103 @@ import {
 } from 'react-beautiful-dnd';
 import styles from './page.module.css';
 
-const initialColumns = [
-  {
-    id: 'col-1',
-    title: 'To do',
-    items: [
-      { id: '1', content: '아이템 1' },
-      { id: '2', content: '아이템 2' },
-    ],
-  },
-  {
-    id: 'col-2',
-    title: 'On Progress',
-    items: [
-      { id: '3', content: '아이템 3' },
-      { id: '4', content: '아이템 4' },
-    ],
-  },
-  {
-    id: 'col-3',
-    title: 'Done',
-    items: [
-      { id: '5', content: '아이템 5' },
-      { id: '6', content: '아이템 6' },
-    ],
-  },
-];
+interface Column {
+  id: number;
+  title: string;
+  teamId?: string;
+  createdAt?: string;
+  updatedAt?: string;
+  items: Card[];
+}
+
+interface Assignee {
+  profileImageUrl: string;
+  nickname: string;
+  id: number;
+}
+
+interface Card {
+  id: number;
+  title: string;
+  description: string;
+  tags: string[];
+  dueDate: string;
+  assignee: Assignee;
+  imageUrl: string;
+  teamId: string;
+  columnId: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+// interface CardResponse {
+//   cursorId: number;
+//   totalCount: number;
+//   cards: Card[];
+// }
 
 export default function DashBoardView() {
   const { id } = useParams();
-  const [columns, setColumns] = useState(() => initialColumns);
+  const [columns, setColumns] = useState<Column[]>([]);
+  // const [cards, setCards] = useState<Card[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
   useEffect(() => {
-    if (id) {
-      setColumns(initialColumns);
-    }
+    if (!id || Array.isArray(id)) return;
+
+    console.log(id);
+
+    const fetchData = async (id: string) => {
+      setLoading(true);
+      try {
+        const { data: columnData } = await axiosInstance.get(
+          `${COLUMN_URL}?dashboardId=${id}`
+        );
+
+        const columns = columnData.data;
+
+        const columnIds: number[] = columns.map((column: Column) => column.id);
+
+        const cardRequests = columnIds.map((columnId) =>
+          axiosInstance.get(`${CARD_URL}?size=10&columnId=${columnId}`)
+        );
+
+        const cardResponses = await Promise.all(cardRequests);
+
+        const updatedColumns = columns.map((column: Column, index: number) => {
+          const cardData = cardResponses[index].data.cards;
+          return { ...column, items: cardData || [] };
+        });
+
+        setColumns(updatedColumns);
+      } catch (err: unknown) {
+        if (err instanceof Error) setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData(id);
   }, [id]);
+
+  if (loading) return <div>Loading...</div>;
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
 
   const handleOnDragEnd = (result: DropResult) => {
     const { source, destination } = result;
 
     if (!destination) return;
 
-    if (source.droppableId === destination.droppableId) {
+    const sourceDroppableId = Number(source.droppableId);
+    const destinationDroppableId = Number(destination.droppableId);
+
+    if (sourceDroppableId === destinationDroppableId) {
       const columnIndex = columns.findIndex(
-        (col) => col.id === source.droppableId
+        (col) => col.id === sourceDroppableId
       );
       const column = columns[columnIndex];
       const reorderedItems = Array.from(column.items);
@@ -65,10 +121,10 @@ export default function DashBoardView() {
       setColumns(newColumns);
     } else {
       const sourceColumnIndex = columns.findIndex(
-        (col) => col.id === source.droppableId
+        (col) => col.id === sourceDroppableId
       );
       const destinationColumnIndex = columns.findIndex(
-        (col) => col.id === destination.droppableId
+        (col) => col.id === destinationDroppableId
       );
 
       const sourceColumn = columns[sourceColumnIndex];
@@ -95,7 +151,7 @@ export default function DashBoardView() {
           <div key={column.id} className={styles.column}>
             <div>{column.title}</div>
             <Droppable
-              droppableId={column.id}
+              droppableId={column.id.toString()}
               // 하위 옵션 없을 경우 에러
               isDropDisabled={false}
               isCombineEnabled={false}
@@ -111,7 +167,7 @@ export default function DashBoardView() {
                   {column.items.map((item, index) => (
                     <Draggable
                       key={item.id}
-                      draggableId={item.id}
+                      draggableId={item.id.toString()}
                       index={index}
                     >
                       {(provided, snapshot) => (
@@ -124,15 +180,11 @@ export default function DashBoardView() {
                           }}
                           className={`${styles.card} ${snapshot.isDragging ? styles.dragging : ''}`}
                         >
-                          {item.content}
+                          {item.id}
                         </div>
                       )}
                     </Draggable>
                   ))}
-
-                  {/* <div className={styles.placeholder}>
-                    {provided.placeholder}
-                  </div> */}
                   {provided.placeholder}
                 </div>
               )}
