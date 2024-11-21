@@ -1,5 +1,8 @@
 import axiosInstance from '@/lib/axiosInstance';
-import { UpdateDashboardRequestParams } from '@/types/dashboards';
+import {
+  UpdateDashboardRequestParams,
+  CreateDashboardRequestBody,
+} from '@/types/dashboards';
 
 export const getBoard = async (id: string) => {
   try {
@@ -16,6 +19,21 @@ export const updateBoard = async (
 ) => {
   try {
     const response = await axiosInstance.put(`/dashboards/${id}`, {
+      title,
+      color,
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const createDashboard = async ({
+  title,
+  color,
+}: CreateDashboardRequestBody) => {
+  try {
+    const response = await axiosInstance.post(`/dashboards`, {
       title,
       color,
     });
