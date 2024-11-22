@@ -1,7 +1,7 @@
 .form {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 18px;
   width: 100%;
   max-width: 400px;
   margin: 0 auto;
@@ -13,24 +13,30 @@
 }
 
 .label {
+  color: var(--black-100);
   font-weight: bold;
   margin-top: 24px;
-  margin-bottom: 4px;
+  margin-bottom: 14px;
 }
 
 .input {
   padding: 8px;
-  border: 1px solid #d9d9d9;
+  border: 1px solid var(--gray-300);
   border-radius: 8px;
 }
 
 .inputError {
-  border-color: red;
+  border-color: var(--red);
 }
 
+.input:focus {
+  border-color: var(--violet);
+  outline: none;
+}
 .errorMessage {
-  color: red;
+  color: var(--red);
   font-size: 12px;
+  margin-top: 10px;
 }
 
 .logoContainer {
@@ -51,4 +57,10 @@
   margin-top: 16px;
   font-size: 20px;
   text-align: center;
+}
+
+.disabled {
+  background-color: var(--gray-400);
+  cursor: not-allowed;
+  opacity: 0.5;
 }

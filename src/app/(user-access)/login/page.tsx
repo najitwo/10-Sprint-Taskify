@@ -1,31 +1,41 @@
 'use client';
 
 import React from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, FieldValues, UseFormReturn } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
-import axios from 'axios';
 import useAuthStore from '@/store/authStore';
-import { AUTH_URL } from '@/constants/urls';
 import Button from '@/components/Button';
 import styles from './loginPage.module.css';
+import axiosInstance from '@/lib/axiosInstance';
+import Image from 'next/image';
+import { ERROR_MESSAGES } from '@/constants/message';
 
 type LoginFormInputs = {
   email: string;
   password: string;
 };
 
+type CustomUseFormReturn<TFieldValues extends FieldValues = FieldValues> =
+  UseFormReturn<TFieldValues> & {
+    formState: {
+      isValid: boolean;
+    };
+  };
 export default function LoginPage() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
-  } = useForm<LoginFormInputs>();
+    formState: { errors, isValid },
+  } = useForm<LoginFormInputs>({
+    mode: 'onChange',
+  }) as CustomUseFormReturn<LoginFormInputs>;
+
   const router = useRouter();
   const { setAccessToken } = useAuthStore();
 
   const onSubmit = async (data: LoginFormInputs) => {
     try {
-      const response = await axios.post(`${AUTH_URL}/login`, data);
+      const response = await axiosInstance.post('/login', data);
       const { accessToken } = response.data;
 
       setAccessToken(accessToken);
@@ -40,9 +50,11 @@ export default function LoginPage() {
     <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
       <div className={styles.inputWrapper}>
         <div className={styles.logoContainer}>
-          <img
+          <Image
             src="/images/logo_main.svg"
             alt="로고"
+            width={100}
+            height={100}
             className={styles.logo}
             onClick={() => router.push('/')}
             style={{ cursor: 'pointer' }}
@@ -58,15 +70,15 @@ export default function LoginPage() {
           type="email"
           className={`${styles.input} ${errors.email ? styles.inputError : ''}`}
           {...register('email', {
-            required: '이메일을 입력해 주세요.',
+            required: ERROR_MESSAGES.REQUIRED_EMAIL,
             pattern: {
               value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-              message: '이메일 형식으로 작성해 주세요.',
+              message: ERROR_MESSAGES.INVALID_EMAIL,
             },
           })}
         />
         {errors.email && (
-          <p className={styles.errorMessage}>{errors.email.message}</p>
+          <span className={styles.errorMessage}>{errors.email.message}</span>
         )}
       </div>
 
@@ -79,10 +91,10 @@ export default function LoginPage() {
           type="password"
           className={`${styles.input} ${errors.password ? styles.inputError : ''}`}
           {...register('password', {
-            required: '비밀번호를 입력해 주세요.',
+            required: ERROR_MESSAGES.PASSWORD_REQUIRE,
             minLength: {
               value: 8,
-              message: '8자 이상 작성해 주세요.',
+              message: ERROR_MESSAGES.PASSWORD_TOO_SHORT,
             },
           })}
         />
@@ -91,8 +103,29 @@ export default function LoginPage() {
         )}
       </div>
 
-      <Button type="submit">로그인</Button>
-      <p>회원이 아니신가요? 회원가입하기</p>
+      <Button
+        type="submit"
+        disabled={!isValid}
+        className={!isValid ? styles.disabled : ''}
+        style={{ height: '40px' }}
+      >
+        로그인
+      </Button>
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <p>
+          회원이 아니신가요?{' '}
+          <span
+            style={{
+              color: 'var(--violet)',
+              textDecoration: 'underline',
+              cursor: 'pointer',
+            }}
+            onClick={() => router.push('/signup')}
+          >
+            회원가입하기
+          </span>{' '}
+        </p>
+      </div>
     </form>
   );
 }
