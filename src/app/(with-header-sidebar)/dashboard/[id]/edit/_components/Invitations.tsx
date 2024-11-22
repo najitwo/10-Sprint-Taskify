@@ -1,14 +1,13 @@
 'use client';
 
 import useIdStore from '@/store/idStore';
+import useModalStore from '@/store/modalStore';
 import useInvitation from '../_hooks/useInvitation';
 import ListHeader from './ListHeader';
 import ListItem from './ListItem';
-import { Invitation } from '@/types/invitation';
-import styles from './Invitations.module.css';
-import useModalStore from '@/store/modalStore';
 import InvitationModal from './InvitationModal';
 import EmptyInvitations from './EmptyInvitations';
+import styles from './Invitations.module.css';
 
 export default function Invitations() {
   const dashboardId = useIdStore((state) => state.id);
@@ -29,6 +28,8 @@ export default function Invitations() {
   return (
     <div className={styles.container}>
       <ListHeader
+        title="초대 내역"
+        subtitle="이메일"
         page={page}
         totalPages={totalPages}
         handlePageChange={handlePageChange}
@@ -36,11 +37,12 @@ export default function Invitations() {
       />
       {invitations.length > 0 ? (
         <ul className={styles.list}>
-          {invitations.map(({ id, invitee }: Invitation) => (
+          {invitations.map(({ id, invitee }) => (
             <ListItem
               key={id}
-              invitee={invitee}
-              onCancel={() => handleCancel(id)}
+              user={invitee}
+              type="invitee"
+              onDelete={() => handleCancel(id)}
             />
           ))}
         </ul>

@@ -4,11 +4,11 @@ type ApiFunction<TArgs extends readonly unknown[], TResult> = (
   ...args: TArgs
 ) => Promise<TResult>;
 
-type UseApiReturn<TArgs extends readonly unknown[], TResult> = [
-  isLoading: boolean,
-  error: Error | null,
-  wrappedFunction: (...args: TArgs) => Promise<TResult | undefined>,
-];
+type UseApiReturn<TArgs extends readonly unknown[], TResult> = {
+  isLoading: boolean;
+  error: Error | null;
+  wrappedFunction: (...args: TArgs) => Promise<TResult | undefined>;
+};
 
 const useApi = <TArgs extends readonly unknown[], TResult>(
   apiFunction: ApiFunction<TArgs, TResult>
@@ -31,7 +31,7 @@ const useApi = <TArgs extends readonly unknown[], TResult>(
     [apiFunction]
   );
 
-  return [isLoading, error, wrappedFunction];
+  return { isLoading, error, wrappedFunction };
 };
 
 export default useApi;
