@@ -6,16 +6,15 @@ const PAGE_SIZE = 10;
 
 export const useMyInvitations = (title?: string) => {
   const [myInvitations, setMyInvitations] = useState<Invitation[]>([]);
-  const [isFetching, setIsFetching] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [cursorId, setCursorId] = useState<number | null>(null);
   const observerRef = useRef<HTMLDivElement | null>(null);
 
   const fetchMyInvitations = async () => {
-    if (isFetching) return;
+    if (isLoading) return;
 
-    setIsFetching(true);
+    setIsLoading(true);
     setError(null);
 
     const params: { size: number; cursorId?: number; title?: string } = {
@@ -33,7 +32,7 @@ export const useMyInvitations = (title?: string) => {
       console.error(err);
       setError('Failed to fetch invitations');
     } finally {
-      setIsFetching(false);
+      setIsLoading(false);
       setIsLoading(false);
     }
   };
@@ -48,7 +47,7 @@ export const useMyInvitations = (title?: string) => {
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        if (entries[0].isIntersecting && cursorId != null && !isFetching) {
+        if (entries[0].isIntersecting && cursorId != null && !isLoading) {
           fetchMyInvitations();
         }
       },
@@ -61,7 +60,7 @@ export const useMyInvitations = (title?: string) => {
     return () => {
       if (current) observer.unobserve(current);
     };
-  }, [isFetching]);
+  }, [isLoading]);
 
   return {
     myInvitations,
