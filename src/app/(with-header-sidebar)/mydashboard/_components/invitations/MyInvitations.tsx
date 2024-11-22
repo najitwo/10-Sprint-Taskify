@@ -30,14 +30,14 @@ export default function MyInvitations() {
           <div className={styles.searchBarWrapper}>
             <SearchBar title={title || ''} onChange={handleInputChange} />
           </div>
-          <div>
+          <ul>
             {myInvitations.map((invitation, index) => (
-              <div key={invitation.id} className={styles.myInvitation}>
+              <li key={invitation.id} className={styles.myInvitation}>
                 {index === 0 && <MyInvitationHeader />}
                 <MyInvitationCard {...invitation} />
-              </div>
+              </li>
             ))}
-          </div>
+          </ul>
           <div ref={observerRef} style={{ height: '1px' }}></div>
         </div>
       ) : (
