@@ -52,7 +52,7 @@ export default function DashBoardView() {
   const { id } = useParams();
   const [columns, setColumns] = useState<Column[]>([]);
   // const [cards, setCards] = useState<Card[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
