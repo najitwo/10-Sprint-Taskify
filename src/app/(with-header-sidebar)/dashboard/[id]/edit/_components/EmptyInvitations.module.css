@@ -1,0 +1,32 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  padding: 80px 0;
+}
+
+.description {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+  color: var(--gray-400);
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+    gap: 24px;
+    padding-bottom: 120px;
+  }
+
+  .container img {
+    width: 100px;
+    height: 100px;
+  }
+
+  .description {
+    font-size: 18px;
+    line-height: 26px;
+  }
+}

@@ -6,18 +6,20 @@ interface PaginationProps {
   currentPage: number;
   totalPages: number;
   onPageChange: (direction: 'next' | 'prev') => void;
+  className?: string;
 }
 
 export default function Pagination({
   currentPage,
   totalPages,
   onPageChange,
+  className = '',
 }: PaginationProps) {
   const isFirstPage = currentPage === 1;
   const isLastPage = currentPage >= totalPages;
 
   return (
-    <div className={styles.arrowWrapper}>
+    <div className={`${styles.arrowWrapper} ${className}`}>
       <Button
         className={styles.arrowLeft}
         onClick={() => onPageChange('prev')}

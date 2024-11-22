@@ -1,5 +1,9 @@
 import { useCallback, useEffect, useState } from 'react';
-import { getInvitations } from '../_lib/invitationService';
+import {
+  createInvitation,
+  deleteInvitation,
+  getInvitations,
+} from '../_lib/invitationService';
 import useApi from './useApi';
 import { GetInvitationsResponse, Invitation } from '@/types/invitation';
 
@@ -15,7 +19,7 @@ const DEFAULT_INVITATION_STATE: InvitationState = {
   invitations: [],
 };
 
-const useInvitation = (id: string, pageSize = 5) => {
+const useInvitation = (dashboardId: string, pageSize = 5) => {
   const [invitationState, setInvitationState] = useState<InvitationState>(
     DEFAULT_INVITATION_STATE
   );
@@ -23,10 +27,10 @@ const useInvitation = (id: string, pageSize = 5) => {
 
   const handleLoad = useCallback(
     async (page: number) => {
-      if (!id) return;
+      if (!dashboardId) return;
       try {
         const response: GetInvitationsResponse | undefined =
-          await getInvitationsAsync(id, page);
+          await getInvitationsAsync(dashboardId, page);
 
         const invitations = response?.invitations ?? [];
         const totalCount = response?.totalCount ?? 0;
@@ -41,7 +45,7 @@ const useInvitation = (id: string, pageSize = 5) => {
         throw error;
       }
     },
-    [getInvitationsAsync, id, pageSize]
+    [getInvitationsAsync, dashboardId, pageSize]
   );
 
   const handlePageChange = (direction: 'next' | 'prev') => {
@@ -56,6 +60,24 @@ const useInvitation = (id: string, pageSize = 5) => {
     });
   };
 
+  const handleCancel = async (invitationId: number) => {
+    try {
+      await deleteInvitation(dashboardId, invitationId);
+      handleLoad(invitationState.page);
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  const handleInvite = async (email: string) => {
+    try {
+      await createInvitation(dashboardId, email);
+      handleLoad(invitationState.page);
+    } catch (error) {
+      throw error;
+    }
+  };
+
   useEffect(() => {
     handleLoad(invitationState.page);
   }, [handleLoad, invitationState.page]);
@@ -67,6 +89,8 @@ const useInvitation = (id: string, pageSize = 5) => {
     isLoading,
     error,
     handlePageChange,
+    handleCancel,
+    handleInvite,
   };
 };
 
