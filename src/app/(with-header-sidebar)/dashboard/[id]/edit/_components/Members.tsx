@@ -10,7 +10,7 @@ export default function Members() {
   const dashboardId = useIdStore((state) => state.id);
   const { page, members, totalPages, handlePageChange, handleDelete } =
     useMember(dashboardId);
-  console.log(members);
+
   return (
     <div className={styles.container}>
       <ListHeader
@@ -26,7 +26,6 @@ export default function Members() {
           <ListItem
             key={member.id}
             user={member}
-            type="member"
             onDelete={() => handleDelete(member.id)}
           />
         ))}

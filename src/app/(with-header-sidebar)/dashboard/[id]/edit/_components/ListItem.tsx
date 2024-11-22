@@ -3,18 +3,17 @@ import Button from '@/components/Button';
 import { Member } from '@/types/member';
 import { Invitee } from '@/types/invitation';
 import styles from './ListItem.module.css';
-import Avatar from './Avatar';
+import Avatar from '@/components/Avatar';
 
 interface ListItemProps {
   user: Member | Invitee;
-  type: 'member' | 'invitee';
   onDelete: MouseEventHandler<HTMLButtonElement>;
 }
 
-export default function ListItem({ user, type, onDelete }: ListItemProps) {
+export default function ListItem({ user, onDelete }: ListItemProps) {
   return (
     <li className={styles.item}>
-      {type == 'member' && (
+      {'profileImageUrl' in user ? (
         <>
           <div className={styles.user}>
             <Avatar name={user.nickname} />
@@ -24,8 +23,7 @@ export default function ListItem({ user, type, onDelete }: ListItemProps) {
             삭제
           </Button>
         </>
-      )}
-      {type === 'invitee' && (
+      ) : (
         <>
           <span className={styles.content}>{user.email}</span>
           <Button className={styles.button} onClick={onDelete}>

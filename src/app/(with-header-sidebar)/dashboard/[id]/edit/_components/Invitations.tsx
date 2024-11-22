@@ -41,7 +41,6 @@ export default function Invitations() {
             <ListItem
               key={id}
               user={invitee}
-              type="invitee"
               onDelete={() => handleCancel(id)}
             />
           ))}

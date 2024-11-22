@@ -1,13 +1,15 @@
 import axiosInstance from '@/lib/axiosInstance';
 import { GetInvitationsResponse } from '@/types/invitation';
 
+const PAGE_SIZE = 5;
+
 export const getInvitations = async (
   dashboardId: string,
   page: number = 1
 ): Promise<GetInvitationsResponse> => {
   try {
     const response = await axiosInstance.get(
-      `/dashboards/${dashboardId}/invitations?page=${page}&size=5`
+      `/dashboards/${dashboardId}/invitations?page=${page}&size=${PAGE_SIZE}`
     );
     return response.data;
   } catch (error) {
