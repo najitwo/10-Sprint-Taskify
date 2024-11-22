@@ -1,6 +1,7 @@
-import type { NextConfig } from 'next';
+import { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
+  reactStrictMode: false, // Strict 모드 끄기
   images: {
     remotePatterns: [
       {
@@ -9,7 +10,7 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  webpack(config, { isServer }) {
+  webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,
       use: ['@svgr/webpack'],
