@@ -1,4 +1,4 @@
-name: Lint
+name: Lint and Build Test
 
 on:
   pull_request:
@@ -28,3 +28,6 @@ jobs:
 
       - name: Run Next.js Lint
         run: npm run lint
+
+      - name: Run Build Test
+        run: npm run build
