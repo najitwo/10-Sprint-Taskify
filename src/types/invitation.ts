@@ -38,3 +38,7 @@ export interface GetMyInvitationsResponse {
   invitations: Invitation[];
   cursorId: number | null;
 }
+
+export interface AcceptMyInvitationRequestBody {
+  inviteAccepted: boolean;
+}
