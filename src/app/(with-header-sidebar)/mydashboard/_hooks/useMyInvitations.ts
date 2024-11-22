@@ -4,7 +4,7 @@ import type { Invitation } from '@/types/invitation';
 
 const PAGE_SIZE = 10;
 
-export const useMyInvitations = (title?: string) => {
+export const useMyInvitations = (title?: string | null) => {
   const [myInvitations, setMyInvitations] = useState<Invitation[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
