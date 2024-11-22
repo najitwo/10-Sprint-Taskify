@@ -5,6 +5,12 @@
   padding: 9px 20px 13px;
 }
 
+.user {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .content {
   font-size: 14px;
   font-weight: 400;
@@ -27,6 +33,10 @@
 @media screen and (min-width: 768px) {
   .item {
     padding: 19px 28px;
+  }
+
+  .user {
+    gap: 12px;
   }
 
   .content {

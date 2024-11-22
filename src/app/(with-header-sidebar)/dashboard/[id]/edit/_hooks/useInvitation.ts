@@ -7,7 +7,7 @@ import {
 import useApi from './useApi';
 import { GetInvitationsResponse, Invitation } from '@/types/invitation';
 
-export interface InvitationState {
+interface InvitationState {
   page: number;
   totalPages: number;
   invitations: Invitation[];
@@ -23,7 +23,11 @@ const useInvitation = (dashboardId: string, pageSize = 5) => {
   const [invitationState, setInvitationState] = useState<InvitationState>(
     DEFAULT_INVITATION_STATE
   );
-  const [isLoading, error, getInvitationsAsync] = useApi(getInvitations);
+  const {
+    isLoading,
+    error,
+    wrappedFunction: getInvitationsAsync,
+  } = useApi(getInvitations);
 
   const handleLoad = useCallback(
     async (page: number) => {
