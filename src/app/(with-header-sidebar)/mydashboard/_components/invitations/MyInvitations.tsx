@@ -24,6 +24,7 @@ export default function MyInvitations() {
       <div>
         <div>searchbar</div>
         <div className={styles.invitationWrapper}>
+          <div className={styles.header}></div>
           {myInvitations.map((invitation) => (
             <div key={invitation.id} className={styles.myInvitation}>
               <MyInvitationCard {...invitation} />

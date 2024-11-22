@@ -14,24 +14,17 @@
 .infoWrapper {
   display: flex;
   gap: 24px;
+  font-size: 14px;
+  font-weight: 400;
 }
 
 .label {
   color: var(--gray-400);
-  font-size: 14px;
-  font-weight: 400;
   min-width: 38px;
 }
 
 .info {
   color: var(--black-100);
-  font-size: 14px;
-  font-weight: 400;
-}
-
-.infoWrapper {
-  display: flex;
-  gap: 24px;
 }
 
 .buttonWrapper {
@@ -50,7 +43,30 @@
 .btnDecline.btnDecline {
   border: 1px solid var(--gray-300);
   background: var(--white);
-  color: var(--violets);
-  font-size: 12px;
-  font-weight: 500;
+  color: var(--violet);
+}
+
+@media screen and (min-width: 768px) {
+  .myInvitationContainer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .infoWrapper {
+    font-size: 16px;
+  }
+
+  .label {
+    display: none;
+  }
+
+  .buttonWrapper {
+    min-width: 180px;
+  }
+
+  .btnAccept.btnAccept,
+  .btnDecline.btnDecline {
+    font-size: 14px;
+  }
 }

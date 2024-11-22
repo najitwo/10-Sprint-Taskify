@@ -14,10 +14,10 @@ export default function MyInvitationCard({ dashboard, inviter }: Invitation) {
           <span className={styles.label}>초대자</span>
           <span className={styles.info}>{inviter.nickname}</span>
         </div>
-      </div>
-      <div className={styles.buttonWrapper}>
-        <Button className={styles.btnAccept}>수락</Button>
-        <Button className={styles.btnDecline}>거절</Button>
+        <div className={styles.buttonWrapper}>
+          <Button className={styles.btnAccept}>수락</Button>
+          <Button className={styles.btnDecline}>거절</Button>
+        </div>
       </div>
     </div>
   );
