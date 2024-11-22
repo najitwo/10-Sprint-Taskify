@@ -1,7 +1,10 @@
 import Button from '@/components/Button';
-import type { Invitation } from '@/types/invitation';
+import type {
+  Invitation,
+  AcceptMyInvitationRequestBody,
+} from '@/types/invitation';
 import styles from './MyInvitationCard.module.css';
-import { acceptMyInvitation } from '../../_lib/myInvitationService';
+import { updateMyInvitation } from '../../_lib/myInvitationService';
 
 interface MyInvitationCardProps extends Invitation {
   onActionComplete: () => void;
@@ -13,8 +16,9 @@ export default function MyInvitationCard({
   inviter,
   onActionComplete,
 }: MyInvitationCardProps) {
-  const handleAcceptOnClick = async (id: number) => {
-    await acceptMyInvitation(id);
+  const handleOnClick = async (id: number, inviteAccepted: boolean) => {
+    const requestBody: AcceptMyInvitationRequestBody = { inviteAccepted };
+    await updateMyInvitation({ invitationId: id, requestBody });
     onActionComplete();
   };
 
@@ -32,11 +36,16 @@ export default function MyInvitationCard({
         <div className={styles.buttonWrapper}>
           <Button
             className={styles.btnAccept}
-            onClick={() => handleAcceptOnClick(id)}
+            onClick={() => handleOnClick(id, true)}
           >
             수락
           </Button>
-          <Button className={styles.btnDecline}>거절</Button>
+          <Button
+            className={styles.btnDecline}
+            onClick={() => handleOnClick(id, false)}
+          >
+            거절
+          </Button>
         </div>
       </div>
     </div>

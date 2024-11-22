@@ -32,12 +32,14 @@ export const getMyInvitations = async ({
   }
 };
 
-export const acceptMyInvitation = async (
-  invitationId: number
-): Promise<Invitation> => {
+export const updateMyInvitation = async ({
+  invitationId,
+  requestBody,
+}: {
+  invitationId: number;
+  requestBody: AcceptMyInvitationRequestBody;
+}): Promise<Invitation> => {
   try {
-    const requestBody: AcceptMyInvitationRequestBody = { inviteAccepted: true };
-
     const response = await axiosInstance.put(
       `/invitations/${invitationId}`,
       requestBody
