@@ -1,8 +1,27 @@
 import Button from '@/components/Button';
-import type { Invitation } from '@/types/invitation';
+import type {
+  Invitation,
+  AcceptMyInvitationRequestBody,
+} from '@/types/invitation';
 import styles from './MyInvitationCard.module.css';
+import { updateMyInvitation } from '../../_lib/myInvitationService';
 
-export default function MyInvitationCard({ dashboard, inviter }: Invitation) {
+interface MyInvitationCardProps extends Invitation {
+  onActionComplete: () => void;
+}
+
+export default function MyInvitationCard({
+  id,
+  dashboard,
+  inviter,
+  onActionComplete,
+}: MyInvitationCardProps) {
+  const handleOnClick = async (id: number, inviteAccepted: boolean) => {
+    const requestBody: AcceptMyInvitationRequestBody = { inviteAccepted };
+    await updateMyInvitation({ invitationId: id, requestBody });
+    onActionComplete();
+  };
+
   return (
     <div className={styles.myInvitationCard}>
       <div className={styles.myInvitationContainer}>
@@ -15,8 +34,18 @@ export default function MyInvitationCard({ dashboard, inviter }: Invitation) {
           <span className={styles.info}>{inviter.nickname}</span>
         </div>
         <div className={styles.buttonWrapper}>
-          <Button className={styles.btnAccept}>수락</Button>
-          <Button className={styles.btnDecline}>거절</Button>
+          <Button
+            className={styles.btnAccept}
+            onClick={() => handleOnClick(id, true)}
+          >
+            수락
+          </Button>
+          <Button
+            className={styles.btnDecline}
+            onClick={() => handleOnClick(id, false)}
+          >
+            거절
+          </Button>
         </div>
       </div>
     </div>

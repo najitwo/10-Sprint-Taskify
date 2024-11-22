@@ -4,7 +4,7 @@ import type { Invitation } from '@/types/invitation';
 
 const PAGE_SIZE = 10;
 
-export const useMyInvitations = (title?: string | null) => {
+export const useMyInvitations = (title?: string | null, reloadKey?: number) => {
   const [myInvitations, setMyInvitations] = useState<Invitation[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -42,7 +42,7 @@ export const useMyInvitations = (title?: string | null) => {
     setCursorId(null);
     setIsLoading(true);
     fetchMyInvitations();
-  }, [title]);
+  }, [title, reloadKey]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(

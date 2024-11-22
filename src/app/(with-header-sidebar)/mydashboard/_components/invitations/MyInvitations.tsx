@@ -11,8 +11,11 @@ import styles from './MyInvitations.module.css';
 
 export default function MyInvitations() {
   const [title, setTitle] = useState<string | null>(null);
-  const { myInvitations, isLoading, error, observerRef } =
-    useMyInvitations(title);
+  const [reloadKey, setReloadKey] = useState(0);
+  const { myInvitations, isLoading, error, observerRef } = useMyInvitations(
+    title,
+    reloadKey
+  );
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value);
@@ -21,6 +24,10 @@ export default function MyInvitations() {
   if (error) {
     return <div>공습경보🚨</div>;
   }
+
+  const triggerReload = () => {
+    setReloadKey((prevKey) => prevKey + 1);
+  };
 
   return (
     <section className={styles.invitations}>
@@ -34,7 +41,10 @@ export default function MyInvitations() {
             {myInvitations.map((invitation, index) => (
               <li key={invitation.id} className={styles.myInvitation}>
                 {index === 0 && <MyInvitationHeader />}
-                <MyInvitationCard {...invitation} />
+                <MyInvitationCard
+                  {...invitation}
+                  onActionComplete={triggerReload}
+                />
               </li>
             ))}
           </ul>

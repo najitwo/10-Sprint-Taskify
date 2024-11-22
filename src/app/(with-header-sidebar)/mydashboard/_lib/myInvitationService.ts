@@ -2,6 +2,8 @@ import axiosInstance from '@/lib/axiosInstance';
 import {
   GetMyInvitationsRequestParam,
   GetMyInvitationsResponse,
+  Invitation,
+  AcceptMyInvitationRequestBody,
 } from '@/types/invitation';
 
 export const getMyInvitations = async ({
@@ -23,6 +25,26 @@ export const getMyInvitations = async ({
     const response = await axiosInstance.get(
       `/invitations?${params.toString()}`
     );
+
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const updateMyInvitation = async ({
+  invitationId,
+  requestBody,
+}: {
+  invitationId: number;
+  requestBody: AcceptMyInvitationRequestBody;
+}): Promise<Invitation> => {
+  try {
+    const response = await axiosInstance.put(
+      `/invitations/${invitationId}`,
+      requestBody
+    );
+
     return response.data;
   } catch (error) {
     throw error;
