@@ -24,7 +24,11 @@ export default function MyInvitations() {
       <div>
         <div>searchbar</div>
         <div className={styles.invitationWrapper}>
-          <div className={styles.header}></div>
+          <div className={styles.header}>
+            <span>이름</span>
+            <span>초대자</span>
+            <span>수락여부</span>
+          </div>
           {myInvitations.map((invitation) => (
             <div key={invitation.id} className={styles.myInvitation}>
               <MyInvitationCard {...invitation} />

@@ -51,10 +51,20 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    gap: 20px;
   }
 
   .infoWrapper {
     font-size: 16px;
+  }
+
+  .title {
+    flex: 1;
+  }
+
+  .nickname {
+    flex: 2;
+    word-break: break-word;
   }
 
   .label {

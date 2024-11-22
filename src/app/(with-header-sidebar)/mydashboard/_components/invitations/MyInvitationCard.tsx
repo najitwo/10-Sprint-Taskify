@@ -6,11 +6,11 @@ export default function MyInvitationCard({ dashboard, inviter }: Invitation) {
   return (
     <div className={styles.myInvitationCard}>
       <div className={styles.myInvitationContainer}>
-        <div className={styles.infoWrapper}>
+        <div className={`${styles.infoWrapper} ${styles.title}`}>
           <span className={styles.label}>이름</span>
           <span className={styles.info}>{dashboard.title}</span>
         </div>
-        <div className={styles.infoWrapper}>
+        <div className={`${styles.infoWrapper} ${styles.nickname}`}>
           <span className={styles.label}>초대자</span>
           <span className={styles.info}>{inviter.nickname}</span>
         </div>
