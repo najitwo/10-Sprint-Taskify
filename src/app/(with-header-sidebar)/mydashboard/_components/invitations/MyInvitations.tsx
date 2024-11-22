@@ -1,48 +1,56 @@
 'use client';
 
 import Image from 'next/image';
-import styles from './MyInvitations.module.css';
+import { ChangeEvent } from 'react';
 import { useMyInvitations } from '../../_hooks/useMyInvitations';
-import Button from '@/components/Button';
+import MyInvitationCard from './MyInvitationCard';
+import MyInvitationHeader from './MyInvitationHeader';
+import { useState } from 'react';
+import SearchBar from './SearchBar';
+import styles from './MyInvitations.module.css';
 
 export default function MyInvitations() {
-  const { myInvitations, isLoading, error, observerRef } = useMyInvitations();
+  const [title, setTitle] = useState<string | null>(null);
+  const { myInvitations, isLoading, error, observerRef } =
+    useMyInvitations(title);
+
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setTitle(event.target.value);
+  };
+
+  if (error) {
+    return <div>공습경보🚨</div>;
+  }
 
   return (
     <section className={styles.invitations}>
       <h2 className={styles.title}>초대받은 대시보드</h2>
-      {/* <div className={styles.descriptionWrapper}>
-        <Image
-          src="/images/unsubscribe.svg"
-          alt="메일없음 이미지"
-          width={100}
-          height={100}
-        />
-        <p className={styles.description}>아직 초대받은 대시보드가 없어요</p>
-      </div> */}
-      <div>
-        <div>searchbar</div>
+      {myInvitations.length > 0 || title != null ? (
         <div>
-          {myInvitations.map((invitation) => (
-            <div key={invitation.id}>
-              <div style={{ height: '100px' }}>{invitation.id}</div>
-              <div style={{ height: '100px' }}>
-                {invitation.dashboard.title}
-              </div>
-              <div style={{ height: '100px' }}>
-                {invitation.inviter.nickname}
-              </div>
-              <div style={{ height: '100px' }}>
-                <Button>수락</Button>
-              </div>
-              <div style={{ height: '100px' }}>
-                <Button>거절</Button>
-              </div>
-            </div>
-          ))}
+          <div className={styles.searchBarWrapper}>
+            <SearchBar title={title || ''} onChange={handleInputChange} />
+          </div>
+          <ul>
+            {myInvitations.map((invitation, index) => (
+              <li key={invitation.id} className={styles.myInvitation}>
+                {index === 0 && <MyInvitationHeader />}
+                <MyInvitationCard {...invitation} />
+              </li>
+            ))}
+          </ul>
+          <div ref={observerRef} style={{ height: '1px' }}></div>
         </div>
-        <div ref={observerRef} style={{ height: '1px' }}></div>
-      </div>
+      ) : (
+        <div className={styles.descriptionWrapper}>
+          <Image
+            src="/images/unsubscribe.svg"
+            alt="메일없음 이미지"
+            width={100}
+            height={100}
+          />
+          <p className={styles.description}>아직 초대받은 대시보드가 없어요</p>
+        </div>
+      )}
     </section>
   );
 }

@@ -5,11 +5,18 @@ import Button from '../Button';
 import useWindowSize from '@/app/(with-header-sidebar)/mydashboard/_hooks/useWindowSize';
 import Dashboards from './Dashboards';
 import { useRouter } from 'next/navigation';
+import { useModal } from '@/app/(with-header-sidebar)/mydashboard/_hooks/useModal';
+import Modal from '@/app/(with-header-sidebar)/mydashboard/_components/modal/Modal';
+import CreateDashboardForm from '@/app/(with-header-sidebar)/mydashboard/_components/dashboards/CreateDashboardForm';
 import styles from './SideBar.module.css';
+
+const TITLE = '대시보드 추가하기';
 
 export default function SideBar() {
   const { isMobile } = useWindowSize();
   const router = useRouter();
+
+  const { isOpen, openModal, isClosing, closeModal } = useModal();
 
   return (
     <div className={styles.sideBar}>
@@ -38,14 +45,18 @@ export default function SideBar() {
       </Button>
       <div className={styles.createDashboardContainer}>
         <span className={styles.createDashboardTitle}>Dash Boards</span>
-        <Button aria-label="대시보드 추가하기" className={styles.addButton}>
-          <Image
-            src="/icons/add_box.svg"
-            alt="대시보드 추가하기"
-            width={20}
-            height={20}
-          />
+        <Button
+          aria-label={TITLE}
+          className={styles.addButton}
+          onClick={openModal}
+        >
+          <Image src="/icons/add_box.svg" alt={TITLE} width={20} height={20} />
         </Button>
+        {isOpen && (
+          <Modal isClosing={isClosing} onClose={closeModal} title={TITLE}>
+            <CreateDashboardForm closeModal={closeModal} />
+          </Modal>
+        )}
       </div>
       <Dashboards />
     </div>

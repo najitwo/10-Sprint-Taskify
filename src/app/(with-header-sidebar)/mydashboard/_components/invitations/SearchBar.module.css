@@ -1,0 +1,33 @@
+.searchBar {
+  border-radius: 6px;
+  border: 1px solid var(--gray-300);
+  background: var(--white);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  margin-top: -15px;
+}
+
+.input {
+  flex: 1;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.input:focus {
+  outline: none;
+}
+
+.input::placeholder {
+  color: var(--gray-400);
+}
+
+@media screen and (min-width: 768px) {
+  .searchBar {
+    margin-top: -30px;
+  }
+  .input {
+    font-size: 16px;
+  }
+}
