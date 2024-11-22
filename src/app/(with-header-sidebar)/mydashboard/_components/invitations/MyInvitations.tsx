@@ -4,6 +4,7 @@ import Image from 'next/image';
 import styles from './MyInvitations.module.css';
 import { useMyInvitations } from '../../_hooks/useMyInvitations';
 import Button from '@/components/Button';
+import MyInvitationCard from './MyInvitationCard';
 
 export default function MyInvitations() {
   const { myInvitations, isLoading, error, observerRef } = useMyInvitations();
@@ -22,22 +23,10 @@ export default function MyInvitations() {
       </div> */}
       <div>
         <div>searchbar</div>
-        <div>
+        <div className={styles.invitationWrapper}>
           {myInvitations.map((invitation) => (
-            <div key={invitation.id}>
-              <div style={{ height: '100px' }}>{invitation.id}</div>
-              <div style={{ height: '100px' }}>
-                {invitation.dashboard.title}
-              </div>
-              <div style={{ height: '100px' }}>
-                {invitation.inviter.nickname}
-              </div>
-              <div style={{ height: '100px' }}>
-                <Button>수락</Button>
-              </div>
-              <div style={{ height: '100px' }}>
-                <Button>거절</Button>
-              </div>
+            <div key={invitation.id} className={styles.myInvitation}>
+              <MyInvitationCard {...invitation} />
             </div>
           ))}
         </div>

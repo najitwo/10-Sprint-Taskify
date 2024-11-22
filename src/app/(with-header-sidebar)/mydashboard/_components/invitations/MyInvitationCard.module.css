@@ -1,0 +1,56 @@
+.myInvitationCard {
+  padding: 14px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.myInvitationContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.infoWrapper {
+  display: flex;
+  gap: 24px;
+}
+
+.label {
+  color: var(--gray-400);
+  font-size: 14px;
+  font-weight: 400;
+  min-width: 38px;
+}
+
+.info {
+  color: var(--black-100);
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.infoWrapper {
+  display: flex;
+  gap: 24px;
+}
+
+.buttonWrapper {
+  display: flex;
+  gap: 10px;
+  height: 32px;
+}
+
+.btnAccept.btnAccept,
+.btnDecline.btnDecline {
+  color: var(--white);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.btnDecline.btnDecline {
+  border: 1px solid var(--gray-300);
+  background: var(--white);
+  color: var(--violets);
+  font-size: 12px;
+  font-weight: 500;
+}
