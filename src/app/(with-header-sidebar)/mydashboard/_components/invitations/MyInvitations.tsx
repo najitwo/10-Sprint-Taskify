@@ -4,6 +4,7 @@ import Image from 'next/image';
 import styles from './MyInvitations.module.css';
 import { useMyInvitations } from '../../_hooks/useMyInvitations';
 import MyInvitationCard from './MyInvitationCard';
+import MyInvitationHeader from './MyInvitationHeader';
 
 export default function MyInvitations() {
   const { myInvitations, isLoading, error, observerRef } = useMyInvitations();
@@ -18,9 +19,10 @@ export default function MyInvitations() {
       {myInvitations.length > 0 ? (
         <div>
           <div>searchbar</div>
-          <div className={styles.invitationWrapper}>
-            {myInvitations.map((invitation) => (
+          <div>
+            {myInvitations.map((invitation, index) => (
               <div key={invitation.id} className={styles.myInvitation}>
+                {index === 0 && <MyInvitationHeader />}
                 <MyInvitationCard {...invitation} />
               </div>
             ))}
