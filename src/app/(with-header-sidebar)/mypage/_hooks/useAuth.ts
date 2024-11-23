@@ -1,5 +1,5 @@
-import useAuthStore from '../_store/authStore';
-import axios from '../_lib/axios';
+import useAuthStore from '@/store/authStore';
+import axiosInstance from '@/lib/axiosInstance';
 
 const useAuth = () => {
   const { user, accessToken, setUser, setAccessToken } = useAuthStore();
@@ -7,7 +7,7 @@ const useAuth = () => {
 
   const getMe = async () => {
     try {
-      const response = await axios.get('/users/me');
+      const response = await axiosInstance.get('/users/me');
       setUser(response.data);
     } catch (error) {
       throw error;
@@ -16,7 +16,7 @@ const useAuth = () => {
 
   const login = async () => {
     try {
-      const response = await axios.post('/auth/login', {
+      const response = await axiosInstance.post('/auth/login', {
         email: 'bono@example.com',
         password: '12341234',
       });

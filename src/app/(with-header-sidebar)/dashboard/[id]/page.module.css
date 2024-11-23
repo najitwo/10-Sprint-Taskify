@@ -1,0 +1,56 @@
+.dashboardView {
+  display: flex;
+  height: 100%;
+  background-color: var(--gray-100);
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  height: 100%;
+}
+
+.context {
+  width: 354px;
+  height: 100%;
+  border-right: 1px solid var(--gray-200);
+}
+
+.card {
+  padding: 16px;
+  border-radius: 6px;
+  border: 1px solid var(--gray-300);
+  background: var(--white);
+  margin-bottom: 20px;
+}
+
+.card.dragging {
+  margin: 0;
+}
+
+/* .createColumn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 354px;
+  height: 70px;
+  border: 1px solid var(--gray-300);
+  background: var(--white);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--black-100);
+  line-height: 26px;
+  gap: 12px;
+  border-radius: 8px;
+}
+
+.createColumnIcon {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  padding: 3px;
+  border-radius: 4px;
+  background: var(--violet-light);
+} */

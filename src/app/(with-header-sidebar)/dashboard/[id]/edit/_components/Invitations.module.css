@@ -1,0 +1,24 @@
+.container {
+  background-color: var(--white);
+  border-radius: 8px;
+}
+
+.list {
+  margin-top: 2px;
+}
+
+.list li:not(:last-child) {
+  border-bottom: 1px solid var(--gray-200);
+}
+
+@media screen and (min-width: 768px) {
+  .list {
+    margin-top: 1px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .container {
+    max-width: 620px;
+  }
+}

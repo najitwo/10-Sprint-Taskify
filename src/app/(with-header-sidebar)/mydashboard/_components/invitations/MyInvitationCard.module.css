@@ -1,0 +1,82 @@
+.myInvitationCard {
+  padding: 14px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.myInvitationContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.infoWrapper {
+  display: flex;
+  gap: 24px;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.label {
+  color: var(--gray-400);
+  min-width: 38px;
+}
+
+.info {
+  color: var(--black-100);
+}
+
+.buttonWrapper {
+  display: flex;
+  gap: 10px;
+  height: 32px;
+}
+
+.btnAccept.btnAccept,
+.btnDecline.btnDecline {
+  color: var(--white);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.btnDecline.btnDecline {
+  border: 1px solid var(--gray-300);
+  background: var(--white);
+  color: var(--violet);
+}
+
+@media screen and (min-width: 768px) {
+  .myInvitationContainer {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .infoWrapper {
+    font-size: 16px;
+  }
+
+  .title {
+    flex: 1;
+  }
+
+  .nickname {
+    flex: 2;
+    word-break: break-word;
+  }
+
+  .label {
+    display: none;
+  }
+
+  .buttonWrapper {
+    min-width: 180px;
+  }
+
+  .btnAccept.btnAccept,
+  .btnDecline.btnDecline {
+    font-size: 14px;
+  }
+}

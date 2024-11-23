@@ -1,9 +1,9 @@
-import axios from './axios';
 import { UseFormSetError } from 'react-hook-form';
-import useAuthStore from '../_store/authStore';
-import { ERROR_MESSAGES } from '../_constants/message';
+import useAuthStore from '@/store/authStore';
+import { ERROR_MESSAGES } from '@/constants/message';
 import { ProfileFormValues } from '../_components/ProfileForm';
 import { PasswordFormValues } from '../_components/PasswordForm';
+import axiosInstance from '@/lib/axiosInstance';
 
 export const updateProfile = async (data: ProfileFormValues) => {
   const { image, nickname } = data;
@@ -14,14 +14,14 @@ export const updateProfile = async (data: ProfileFormValues) => {
     if (image) {
       const formData = new FormData();
       formData.append('image', image);
-      const response = await axios.post('/users/me/image', formData, {
+      const response = await axiosInstance.post('/users/me/image', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
       url = response.data.profileImageUrl;
     }
-    const response = await axios.put('/users/me', {
+    const response = await axiosInstance.put('/users/me', {
       nickname,
       ...(url && { profileImageUrl: url }),
     });
@@ -38,7 +38,7 @@ export const updatePassword = async (
   setError: UseFormSetError<PasswordFormValues>
 ) => {
   try {
-    await axios.put('/auth/password', {
+    await axiosInstance.put('/auth/password', {
       password: data.currentPassword,
       newPassword: data.newPassword,
     });

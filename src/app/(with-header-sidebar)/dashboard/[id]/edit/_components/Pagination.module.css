@@ -1,0 +1,40 @@
+.arrowWrapper {
+  display: flex;
+}
+
+.arrowLeft.arrowLeft,
+.arrowRight.arrowRight {
+  border: 1px solid var(--gray-300);
+  border-radius: 0;
+  width: 36px;
+  height: 36px;
+  background: var(--white);
+  transition: background-color 0.3s ease;
+}
+
+.arrowLeft.arrowLeft {
+  border-right: none;
+  border-radius: 4px 0px 0px 4px;
+}
+
+.arrowRight.arrowRight {
+  border-radius: 0px 4px 4px 0px;
+}
+
+.arrowLeft.arrowLeft:hover,
+.arrowRight.arrowRight:hover {
+  background-color: var(--violet-light);
+}
+
+.arrowLeft.arrowLeft:disabled,
+.arrowRight.arrowRight:disabled {
+  background: var(--white);
+}
+
+@media screen and (min-width: 768px) {
+  .arrowLeft.arrowLeft,
+  .arrowRight.arrowRight {
+    width: 40px;
+    height: 40px;
+  }
+}

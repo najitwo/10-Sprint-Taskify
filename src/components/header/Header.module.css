@@ -5,12 +5,13 @@
   justify-content: space-around;
   align-items: center;
   gap: 16px;
+  flex: 0 0 auto;
 }
 
 .title {
   flex: 1;
   color: var(--black-100);
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
 }
 

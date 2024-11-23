@@ -1,0 +1,18 @@
+.avatar {
+  background-color: blue;
+  width: 34px;
+  height: 34px;
+  border: 2px solid var(--white);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--white);
+}
+
+@media screen and (min-width: 768px) {
+  .avatar {
+    width: 38px;
+    height: 38px;
+  }
+}

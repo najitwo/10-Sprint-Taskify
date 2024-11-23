@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import useApi from '@/app/(with-header-sidebar)/mydashboard/_hooks/useApi';
-import type { GetDashboardsResponse } from '@/app/(with-header-sidebar)/mydashboard/_types/dashboards';
+import type { GetDashboardsResponse } from '@/types/dashboards';
 
 interface UseDashboardsParams {
   pageSize: number;
