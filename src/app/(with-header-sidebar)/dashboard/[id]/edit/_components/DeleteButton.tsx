@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation';
 import useIdStore from '@/store/idStore';
 import Button from '@/components/Button';
-import { deleteDashboard } from '../_lib/boardService';
+import { deleteDashboard } from '@/lib/boardService';
 import styles from './DeleteButton.module.css';
 
 export default function DeleteButton() {
