@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import styles from './UserInfo.module.css';
 import UserInfoSkeleton from './skeleton/UserInfoSkeleton';
+import Avatar from '../Avatar';
 
 // TODO 로그인 로직 완료 후 user정보 가져오기
 const user: User = {
@@ -12,25 +13,15 @@ const user: User = {
   email: 'heejin@gmail.com',
   nickname: 'heejin',
   profileImageUrl:
-    'https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/taskify/profile_image/10-1_4804_1731757528194.jpeg',
-  // profileImageUrl: null,
+    // 'https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/taskify/profile_image/10-1_4804_1731757528194.jpeg',
+    null,
   createdAt: '2024-11-15T14:29:07.482Z',
 };
 
 export default function UserInfo() {
-  const { email, nickname, profileImageUrl } = user;
+  const { nickname, profileImageUrl } = user;
 
-  const [colors, setColors] = useState<{
-    randomColor: string;
-    invertedColor: string;
-  } | null>(null);
-
-  useEffect(() => {
-    const { randomColor, invertedColor } = getRandomColor();
-    setColors({ randomColor, invertedColor });
-  }, []);
-
-  if (!colors) {
+  if (!nickname) {
     return <UserInfoSkeleton />;
   }
 
@@ -46,30 +37,10 @@ export default function UserInfo() {
             className={styles.image}
           />
         ) : (
-          <div
-            style={{
-              backgroundColor: colors.randomColor,
-              color: colors.invertedColor,
-            }}
-            className={styles.userIcon}
-          >
-            <span>{email[0].toUpperCase()}</span>
-          </div>
+          <Avatar name={nickname} profileImageUrl={profileImageUrl} />
         )}
         <span className={styles.nickname}>{nickname}</span>
       </div>
     </>
   );
-}
-
-function getRandomColor() {
-  const randomColor = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
-
-  const r = parseInt(randomColor.slice(1, 3), 16);
-  const g = parseInt(randomColor.slice(3, 5), 16);
-  const b = parseInt(randomColor.slice(5, 7), 16);
-
-  const invertedColor = `rgb(${255 - r}, ${255 - g}, ${255 - b})`;
-
-  return { randomColor, invertedColor };
 }
