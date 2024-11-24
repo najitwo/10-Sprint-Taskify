@@ -3,8 +3,8 @@ import { usePathname } from 'next/navigation';
 import type { Dashboard } from '@/types/dashboards';
 import Image from 'next/image';
 import Button from '../Button';
-import styles from './Dashboards.module.css';
 import useDashboards from '@/app/(with-header-sidebar)/mydashboard/_hooks/useDashboards';
+import styles from './Dashboards.module.css';
 
 const PAGE_SIZE = 12;
 

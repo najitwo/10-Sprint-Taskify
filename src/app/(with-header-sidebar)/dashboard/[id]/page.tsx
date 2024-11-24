@@ -11,6 +11,7 @@ import {
   Draggable,
   DropResult,
 } from 'react-beautiful-dnd';
+import useDashboardStore from '@/store/dashboardStore';
 import styles from './page.module.css';
 
 interface Column {
@@ -50,10 +51,19 @@ interface Card {
 
 export default function DashBoardView() {
   const { id } = useParams();
+  const dashboard = useDashboardStore((state) => state.dashboard);
+  const setDashboard = useDashboardStore((state) => state.setDashboard);
+
   const [columns, setColumns] = useState<Column[]>([]);
   // const [cards, setCards] = useState<Card[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (dashboard?.id !== Number(id)) {
+      setDashboard(Number(id));
+    }
+  }, [id, dashboard?.id]);
 
   useEffect(() => {
     if (!id || Array.isArray(id)) return;

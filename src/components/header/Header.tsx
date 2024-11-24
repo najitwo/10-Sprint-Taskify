@@ -1,20 +1,19 @@
 'use client';
 
 import { usePathname, useRouter } from 'next/navigation';
+import { useState } from 'react';
 import Image from 'next/image';
 import Button from '../Button';
 import UserInfo from './UserInfo';
+import Title from './Title';
 import styles from './Header.module.css';
-import { useState } from 'react';
 
 interface HeaderProps {
   component?: React.ComponentType;
 }
 
 export default function Header({ component: Component }: HeaderProps) {
-  const pathname = usePathname();
   const router = useRouter();
-
   const [isMenuVisible, setIsMenuVisible] = useState(false);
 
   const handleUserInfoClick = () => {
@@ -28,7 +27,7 @@ export default function Header({ component: Component }: HeaderProps) {
 
   return (
     <header className={styles.header}>
-      <h2 className={styles.title}>내 대시보드</h2>
+      <Title pathname={usePathname()} />
       <div className={styles.buttonContainer}>
         <Button className={styles.button}>
           <Image
