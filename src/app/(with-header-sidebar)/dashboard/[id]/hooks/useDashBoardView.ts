@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import debounce from 'lodash/debounce';
 import axiosInstance from '@/lib/axiosInstance';
 import { DropResult } from 'react-beautiful-dnd';
-import { ColumnData } from '@/types/dashboardView';
+import { ColumnData, CardData } from '@/types/dashboardView';
 import { COLUMN_URL, CARD_URL } from '@/constants/urls';
 
 export default function useDashBoardView(dashboardId: string | undefined) {
@@ -63,13 +63,13 @@ export default function useDashBoardView(dashboardId: string | undefined) {
   //체크
 
   const sendCardUpdateRequest = useCallback(
-    debounce(async (cardId: string, updatedCardData: object) => {
+    debounce(async (cardId: string, updatedCardData: CardData) => {
       try {
         const response = await axiosInstance.put(
           `${CARD_URL}/${cardId}`,
           updatedCardData
         );
-        console.log('응답:', response);
+        console.log('업뎃카드데이터', updatedCardData);
         if (response.status === 200 || response.status === 204) {
           console.log('카드가 성공적으로 업데이트되었습니다.');
         }
