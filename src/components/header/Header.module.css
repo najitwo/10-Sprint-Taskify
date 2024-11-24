@@ -59,10 +59,7 @@
   margin-left: 16px;
   display: flex;
   align-items: center;
-}
-
-.userInfoWrapper:hover {
-  cursor: pointer;
+  background-color: transparent;
 }
 
 .myMenu {

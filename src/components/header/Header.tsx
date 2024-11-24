@@ -56,9 +56,12 @@ export default function Header({ component: Component }: HeaderProps) {
         </div>
       )}
       <div className={styles.userInfoContainer}>
-        <div className={styles.userInfoWrapper} onClick={handleUserInfoClick}>
+        <Button
+          className={styles.userInfoWrapper}
+          onClick={handleUserInfoClick}
+        >
           <UserInfo />
-        </div>
+        </Button>
         {isMenuVisible && (
           <div className={styles.myMenu}>
             <div onClick={() => navigateTo('/mydashboard')}>내 대시보드</div>
