@@ -1,0 +1,18 @@
+.button.button {
+  background-color: transparent;
+  border: 1px solid var(--gray-300);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 26px;
+  color: var(--black-100);
+  margin-top: 24px;
+  padding: 13px 0;
+}
+
+@media screen and (min-width: 768px) {
+  .button.button {
+    width: fit-content;
+    font-size: 18px;
+    padding: 18px 95.5px;
+  }
+}

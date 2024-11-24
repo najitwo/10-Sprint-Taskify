@@ -42,3 +42,11 @@ export const createDashboard = async ({
     throw error;
   }
 };
+
+export const deleteDashboard = async (dashboardId: string) => {
+  try {
+    await axiosInstance.delete(`/dashboards/${dashboardId}`);
+  } catch (error) {
+    throw error;
+  }
+};
