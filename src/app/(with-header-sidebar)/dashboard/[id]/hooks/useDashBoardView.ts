@@ -54,7 +54,7 @@ export default function useDashBoardView(dashboardId: string | undefined) {
 
       setColumns(updatedColumns);
       setCursors(initialCursors);
-    } catch (err: unknown) {
+    } catch (err) {
       if (err instanceof Error) setError(err.message);
     } finally {
       setLoading(false);
@@ -73,9 +73,6 @@ export default function useDashBoardView(dashboardId: string | undefined) {
           `${CARD_URL}/${cardId}`,
           updatedCardData
         );
-        if (response.status === 200 || response.status === 204) {
-          console.log('카드가 성공적으로 업데이트되었습니다.');
-        }
       } catch (err) {
         if (err instanceof Error) setError(err.message);
       }
@@ -133,7 +130,7 @@ export default function useDashBoardView(dashboardId: string | undefined) {
             ...removed,
             columnId: removed.columnId,
           });
-        } catch (err: unknown) {
+        } catch (err) {
           if (err instanceof Error) setError(err.message);
         }
       }
