@@ -1,3 +1,5 @@
+import { DebouncedFunc } from 'lodash';
+
 export interface Assignee {
   profileImageUrl: string;
   nickname: string;
@@ -30,4 +32,5 @@ export interface ColumnData {
   totalCount: number;
   id: number;
   items: CardData[];
+  loadMoreData: DebouncedFunc<(columnId: number) => Promise<void>>;
 }

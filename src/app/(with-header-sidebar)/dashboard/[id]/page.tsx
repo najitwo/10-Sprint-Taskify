@@ -15,9 +15,8 @@ export default function DashBoardView() {
 
   const searchParams = useSearchParams();
   const color = searchParams.get('color') || 'var(--violet)';
-  const { columns, loading, error, handleOnDragEnd } = useDashBoardView(
-    id as string
-  );
+  const { columns, loading, error, handleOnDragEnd, loadMoreData } =
+    useDashBoardView(`${id}`);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
@@ -33,6 +32,7 @@ export default function DashBoardView() {
             totalCount={column.totalCount}
             id={column.id}
             items={column.items}
+            loadMoreData={loadMoreData}
           />
         ))}
         <div className={styles.createColumnSection}>

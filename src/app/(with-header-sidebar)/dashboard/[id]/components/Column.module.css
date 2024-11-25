@@ -91,7 +91,17 @@
   background: var(--violet-light);
 }
 
+.scrollContext {
+  overflow-x: hidden;
+  overflow-y: auto;
+  min-height: 100%;
+  height: auto;
+}
+
+.scrollContext::-webkit-scrollbar {
+  width: 0;
+}
+
 .dropContext {
   height: 100%;
-  overflow: hidden;
 }

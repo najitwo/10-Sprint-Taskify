@@ -22,7 +22,7 @@ function Card({ item, index }: Props) {
           {...provided.dragHandleProps}
           className={`${styles.card} ${snapshot.isDragging ? styles.dragging : ''}`}
         >
-          <div>{item.title}</div>
+          <div>{item.id}</div>
         </div>
       )}
     </Draggable>

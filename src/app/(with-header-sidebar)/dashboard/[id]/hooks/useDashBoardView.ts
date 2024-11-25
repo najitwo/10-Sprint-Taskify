@@ -9,7 +9,7 @@ export default function useDashBoardView(dashboardId: string | undefined) {
   const [columns, setColumns] = useState<ColumnData[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-  const [cursor, setCursor] = useState<string | null>(null);
+  const [cursors, setCursors] = useState<Record<number, number | null>>({});
 
   const fetchData = useCallback(async () => {
     setLoading(true);
@@ -19,24 +19,22 @@ export default function useDashBoardView(dashboardId: string | undefined) {
       );
 
       const columns = columnData.data;
-
       const columnIds: number[] = columns.map(
         (column: ColumnData) => column.id
       );
 
       const cardRequests = columnIds.map((columnId) =>
-        axiosInstance.get(
-          `${CARD_URL}?size=10&columnId=${columnId}&cursor=${cursor || ''}`
-        )
+        axiosInstance.get(`${CARD_URL}?size=10&columnId=${columnId}`)
       );
 
       const cardResponses = await Promise.all(cardRequests);
-      console.log(cardResponses[0].data.totalCount);
 
       const updatedColumns = columns.map(
         (column: ColumnData, index: number) => {
           const cardData = cardResponses[index].data.cards;
+          const cursorId = cardResponses[index].data.cursorId;
           const totalCount = cardResponses[index].data.totalCount;
+
           return {
             ...column,
             items: cardData || [],
@@ -44,23 +42,29 @@ export default function useDashBoardView(dashboardId: string | undefined) {
           };
         }
       );
+
+      const initialCursors = updatedColumns.reduce(
+        (acc: Record<number, number | null>, column: ColumnData) => {
+          const lastCard = column.items[column.items.length - 1];
+          acc[column.id] = lastCard ? lastCard.id : null;
+          return acc;
+        },
+        {} as Record<number, number | null>
+      );
+
       setColumns(updatedColumns);
-      setCursor(cardResponses[0].data.cursor);
+      setCursors(initialCursors);
     } catch (err: unknown) {
       if (err instanceof Error) setError(err.message);
     } finally {
       setLoading(false);
     }
-  }, [dashboardId, cursor]);
-  //체크
+  }, [dashboardId]);
 
   useEffect(() => {
-    console.log('렌더링 체크');
     if (!dashboardId) return;
-
     fetchData();
-  }, [fetchData, dashboardId, cursor]);
-  //체크
+  }, [fetchData, dashboardId]);
 
   const sendCardUpdateRequest = useCallback(
     debounce(async (cardId: string, updatedCardData: CardData) => {
@@ -69,17 +73,15 @@ export default function useDashBoardView(dashboardId: string | undefined) {
           `${CARD_URL}/${cardId}`,
           updatedCardData
         );
-        console.log('업뎃카드데이터', updatedCardData);
         if (response.status === 200 || response.status === 204) {
           console.log('카드가 성공적으로 업데이트되었습니다.');
         }
-      } catch (err: unknown) {
+      } catch (err) {
         if (err instanceof Error) setError(err.message);
       }
     }, 200),
     []
   );
-  //체크
 
   const handleOnDragEnd = useCallback(
     async (result: DropResult) => {
@@ -126,24 +128,74 @@ export default function useDashBoardView(dashboardId: string | undefined) {
         updatedColumns[sourceColumnIndex].totalCount -= 1;
         updatedColumns[destinationColumnIndex].totalCount += 1;
 
-        console.log(updatedColumns[sourceColumnIndex].totalCount);
+        try {
+          await sendCardUpdateRequest(`${removed.id}`, {
+            ...removed,
+            columnId: removed.columnId,
+          });
+        } catch (err: unknown) {
+          if (err instanceof Error) setError(err.message);
+        }
       }
+
+      const updatedCursors = updatedColumns.reduce(
+        (acc, column) => {
+          const lastCard = column.items[column.items.length - 1];
+          acc[column.id] = lastCard ? lastCard.id : null;
+          return acc;
+        },
+        {} as Record<number, number | null>
+      );
 
       setColumns(updatedColumns);
-
-      try {
-        await sendCardUpdateRequest(`${removed.id}`, {
-          ...removed,
-          columnId: removed.columnId,
-        });
-      } catch (err: unknown) {
-        if (err instanceof Error) setError(err.message);
-      }
+      setCursors(updatedCursors);
     },
     [columns, sendCardUpdateRequest]
   );
 
-  //체크
+  const loadMoreData = useCallback(
+    debounce(async (columnId: number) => {
+      try {
+        const currentCursor = cursors[columnId];
 
-  return { columns, loading, error, handleOnDragEnd };
+        if (currentCursor === null) return;
+
+        const { data: cardResponses } = await axiosInstance.get(
+          `${CARD_URL}?size=10&cursorId=${currentCursor}&columnId=${columnId}`
+        );
+
+        const newCards = cardResponses.cards;
+        const newCursorId = cardResponses.cursorId;
+
+        setColumns((prevColumns) =>
+          prevColumns.map((column) =>
+            column.id === columnId
+              ? {
+                  ...column,
+                  items: [
+                    ...column.items,
+                    ...newCards.filter(
+                      (newCard: CardData) =>
+                        !column.items.some(
+                          (prevCard) => prevCard.id === newCard.id
+                        )
+                    ),
+                  ],
+                }
+              : column
+          )
+        );
+
+        setCursors((prevCursors) => ({
+          ...prevCursors,
+          [columnId]: newCursorId || null,
+        }));
+      } catch (err) {
+        if (err instanceof Error) setError(err.message);
+      }
+    }, 200),
+    [cursors]
+  );
+
+  return { columns, loading, error, handleOnDragEnd, loadMoreData };
 }
