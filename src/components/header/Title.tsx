@@ -19,7 +19,7 @@ export default function Title({ pathname }: TitleProps) {
       return <h2 className={styles.title}>내 대시보드</h2>;
     case 'dashboard':
       if (dashboard == null) {
-        return null;
+        return <h2 className={styles.title}>TITLE</h2>;
       }
 
       const { title, createdByMe } = dashboard;
