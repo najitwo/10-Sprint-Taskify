@@ -4,6 +4,7 @@ import Button from '@/components/Button';
 import Input from '@/components/Input';
 import styles from './CreateTaskModal.module.css';
 import SearchDropdown from './SearchDropdown';
+import DatePicker from './DatePicker';
 
 export interface ManagerOption {
   id: number;
@@ -19,7 +20,7 @@ export default function CreateTaskModal() {
   } = useForm<{ email: string }>({ mode: 'onChange' });
 
   const onSubmit = () => {
-    closeModal();
+    // closeModal();
   };
 
   const options = [
@@ -37,6 +38,7 @@ export default function CreateTaskModal() {
       <h2>할일 생성</h2>
       <SearchDropdown options={options} onSelect={handleSelect} />
       <Input name="title" label="제목" placeholder="제목을 입력해주세요" />
+      <DatePicker />
       <div className={styles.footer}>
         <Button onClick={closeModal} className={styles.cancel}>
           취소
