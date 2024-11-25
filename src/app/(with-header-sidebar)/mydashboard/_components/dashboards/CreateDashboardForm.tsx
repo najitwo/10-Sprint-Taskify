@@ -4,6 +4,7 @@ import DashboardInput from '@/components/DashboardInput';
 import styles from './CreateDashboardForm.module.css';
 import { CreateDashboardRequestBody } from '@/types/dashboards';
 import { createDashboard } from '@/lib/boardService';
+import { useRouter } from 'next/navigation';
 
 interface CreateDashboardFormProps {
   closeModal: () => void;
@@ -17,10 +18,12 @@ export default function CreateDashboardForm({
     handleSubmit,
     formState: { errors, isValid },
   } = useForm<CreateDashboardRequestBody>({ mode: 'onChange' });
+  const router = useRouter();
 
   const onSubmit = async (newDashboard: CreateDashboardRequestBody) => {
-    await createDashboard(newDashboard);
+    const response = await createDashboard(newDashboard);
     closeModal();
+    router.push(`/dashboard/${response.id}`);
   };
 
   return (
