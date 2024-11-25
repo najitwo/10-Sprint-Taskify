@@ -14,7 +14,10 @@ const MEMBERS_VIEW_COUNT = {
 export default function DashboardMembers() {
   const dashboard = useDashboardStore((state) => state.dashboard);
 
-  const { members, totalPages } = useMember(dashboard!.id.toString(), 5);
+  const { members, totalPages } = useMember(
+    dashboard?.id.toString() || '-1',
+    5
+  );
 
   const { isMobile } = useWindowSize();
   const maxViewCount = isMobile
