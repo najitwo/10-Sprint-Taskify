@@ -23,7 +23,7 @@ const useModalStore = create<ModalState>((set) => ({
       set((state) => ({
         modals: state.modals.slice(0, -1),
       }));
-    }, 300);
+    }, 250);
   },
   closeAllModal: () =>
     set(() => ({

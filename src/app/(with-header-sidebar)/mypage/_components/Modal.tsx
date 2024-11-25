@@ -4,7 +4,7 @@ import { MouseEvent, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { usePathname } from 'next/navigation';
 import useModalStore from '@/store/modalStore';
-import FocusTrap from '../../mydashboard/_components/modal/FocusTrap';
+import FocusTrap from './FocusTrap';
 import styles from './Modal.module.css';
 
 export default function Modal() {
@@ -13,22 +13,13 @@ export default function Modal() {
   const currentPath = usePathname();
 
   useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        closeModal();
-      }
-    };
-
     if (modals.length > 0) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = '';
     }
 
-    window.addEventListener('keydown', handleKeyDown);
-
     return () => {
-      window.removeEventListener('keydown', handleKeyDown);
       document.body.style.overflow = '';
     };
   }, [closeModal, modals]);
