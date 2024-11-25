@@ -1,42 +1,51 @@
 'use client';
 
-import useIdStore from '@/store/idStore';
-import { getMembers } from '@/app/(with-header-sidebar)/dashboard/[id]/edit/_lib/memberService';
-import { useEffect, useState } from 'react';
-import { Member } from '@/types/member';
-import { useParams } from 'next/navigation';
 import useDashboardStore from '@/store/dashboardStore';
+import Avatar from '../Avatar';
+import useWindowSize from '@/app/(with-header-sidebar)/mydashboard/_hooks/useWindowSize';
+import useMember from '@/app/(with-header-sidebar)/dashboard/[id]/edit/_hooks/useMember';
 import styles from './DashboardMembers.module.css';
 
+const MEMBERS_VIEW_COUNT = {
+  mobile: 3,
+  desktop: 5,
+};
+
 export default function DashboardMembers() {
-  // const dashboard = useDashboardStore((state) => state.dashboard);
-  // const [members, setMembers] = useState<Member[]>([]);
-  // const [totalPages, setTotalPages] = useState(0);
+  const dashboard = useDashboardStore((state) => state.dashboard);
+  const { isMobile } = useWindowSize();
 
-  // useEffect(() => {
-  //   if (!dashboard) return;
+  const { members, totalPages } = useMember(
+    dashboard?.id.toString() || '0',
+    MEMBERS_VIEW_COUNT.desktop
+  );
 
-  //   async function fetchMembers() {
-  //     try {
-  //       const response = await getMembers(dashboard!.id.toString());
-  //       setMembers(response.members);
-  //       setTotalPages(response.totalCount);
-  //     } catch (error) {
-  //       console.error('Error fetching members:', error);
-  //     }
-  //   }
+  if (totalPages === 0) {
+    return null;
+  }
 
-  //   fetchMembers();
-  //   console.log({ members });
-  // }, [dashboard]);
+  const maxViewCount = isMobile
+    ? MEMBERS_VIEW_COUNT.mobile
+    : MEMBERS_VIEW_COUNT.desktop;
 
   return (
-    <>
-      {/* <div>토탈</div>
-      {members.map((member) => (
-        <div key={member.id}>{member.nickname}</div>
-      ))}
-      <div></div> */}
-    </>
+    <div className={styles.avatarWrapper}>
+      {members
+        .slice(0, totalPages > maxViewCount ? maxViewCount - 1 : maxViewCount)
+        .map(({ id, nickname, profileImageUrl }) => (
+          <Avatar
+            key={id}
+            name={nickname}
+            profileImageUrl={profileImageUrl}
+            className={styles.avatar}
+          />
+        ))}
+      {totalPages > maxViewCount && (
+        <Avatar
+          name={totalPages - maxViewCount + 1}
+          className={styles.avatarNumber}
+        />
+      )}
+    </div>
   );
 }

@@ -55,7 +55,7 @@
   height: 34px;
 }
 
-.userInfoWrapper {
+.userInfoButton.userInfoButton {
   margin-left: 16px;
   display: flex;
   align-items: center;
