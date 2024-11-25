@@ -32,6 +32,10 @@
   font-weight: 500;
 }
 
+.title {
+  white-space: nowrap;
+}
+
 .arrowLeft.arrowLeft,
 .arrowRight.arrowRight {
   border: 1px solid var(--gray-300);
