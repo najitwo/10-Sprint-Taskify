@@ -39,7 +39,10 @@ function DashboardItem({ id, color, title, createdByMe }: Dashboard) {
   return (
     <li>
       <Link
-        href={`/dashboard/${id}`}
+        href={{
+          pathname: `/dashboard/${id}`,
+          query: { color: color },
+        }}
         className={`link ${isActive ? styles.active : ''}`}
       >
         <div className={styles.titleContainer}>

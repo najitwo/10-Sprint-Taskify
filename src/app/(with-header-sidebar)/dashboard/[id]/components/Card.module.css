@@ -1,0 +1,12 @@
+.card {
+  padding: 16px;
+  border-radius: 6px;
+  border: 1px solid var(--gray-300);
+  background: var(--white);
+  margin-bottom: 20px;
+  height: 150px;
+}
+
+.card.dragging {
+  margin: 0;
+}
