@@ -10,10 +10,12 @@ interface AssignmentProps {
 export default function Assignment({ card }: AssignmentProps) {
   if (!card) return null;
 
-  const { assignee, dueDate } = {
-    dueDate: '2024-11-30 12:00',
-    assignee: { profileImageUrl: null, nickname: 'manta', id: 1 },
-  };
+  // const { assignee, dueDate } = {
+  //   dueDate: '2024-11-30 12:00',
+  //   assignee: { profileImageUrl: null, nickname: 'manta', id: 1 },
+  // };
+
+  const { assignee, dueDate } = card;
 
   return (
     <section className={styles.assignment}>
