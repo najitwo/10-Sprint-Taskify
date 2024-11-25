@@ -7,6 +7,7 @@ import Button from '../Button';
 import UserInfo from './UserInfo';
 import Title from './Title';
 import styles from './Header.module.css';
+import useDashboardStore from '@/store/dashboardStore';
 
 interface HeaderProps {
   component?: React.ComponentType;
@@ -14,10 +15,15 @@ interface HeaderProps {
 
 export default function Header({ component: Component }: HeaderProps) {
   const router = useRouter();
+  const dashboard = useDashboardStore((state) => state.dashboard);
   const [isMenuVisible, setIsMenuVisible] = useState(false);
 
   const handleUserInfoClick = () => {
     setIsMenuVisible(!isMenuVisible);
+  };
+
+  const handleSettingsClick = () => {
+    router.push(`/dashboard/${dashboard?.id}/edit`);
   };
 
   const navigateTo = (href: string) => {
@@ -29,16 +35,18 @@ export default function Header({ component: Component }: HeaderProps) {
     <header className={styles.header}>
       <Title pathname={usePathname()} />
       <div className={styles.buttonContainer}>
-        <Button className={styles.button}>
-          <Image
-            src="/icons/settings.svg"
-            alt="관리"
-            width={20}
-            height={20}
-            className={styles.icon}
-          />
-          관리
-        </Button>
+        {dashboard?.createdByMe && (
+          <Button className={styles.button} onClick={handleSettingsClick}>
+            <Image
+              src="/icons/settings.svg"
+              alt="관리"
+              width={20}
+              height={20}
+              className={styles.icon}
+            />
+            관리
+          </Button>
+        )}
         <Button className={styles.button}>
           <Image
             src="/icons/add_box.svg"
