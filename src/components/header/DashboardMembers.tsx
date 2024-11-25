@@ -13,18 +13,22 @@ const MEMBERS_VIEW_COUNT = {
 
 export default function DashboardMembers() {
   const dashboard = useDashboardStore((state) => state.dashboard);
+  const { isMobile } = useWindowSize();
 
   const { members, totalPages } = useMember(
-    dashboard?.id.toString() || '-1',
-    5
+    dashboard?.id.toString() || '0',
+    MEMBERS_VIEW_COUNT.desktop
   );
 
-  const { isMobile } = useWindowSize();
+  if (totalPages === 0) {
+    return null;
+  }
+
   const maxViewCount = isMobile
     ? MEMBERS_VIEW_COUNT.mobile
     : MEMBERS_VIEW_COUNT.desktop;
 
-  return totalPages > 0 ? (
+  return (
     <div className={styles.avatarWrapper}>
       {members
         .slice(0, totalPages > maxViewCount ? maxViewCount - 1 : maxViewCount)
@@ -43,5 +47,5 @@ export default function DashboardMembers() {
         />
       )}
     </div>
-  ) : null;
+  );
 }
