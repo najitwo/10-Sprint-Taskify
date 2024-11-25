@@ -24,7 +24,7 @@ export default function DashboardMembers() {
   return totalPages > 0 ? (
     <div className={styles.avatarWrapper}>
       {members
-        .slice(0, totalPages === maxViewCount ? maxViewCount : maxViewCount - 1)
+        .slice(0, totalPages > maxViewCount ? maxViewCount - 1 : maxViewCount)
         .map(({ id, nickname, profileImageUrl }) => (
           <Avatar
             key={id}
