@@ -56,10 +56,7 @@ export default function Header({ component: Component }: HeaderProps) {
         </div>
       )}
       <div className={styles.userInfoContainer}>
-        <Button
-          className={styles.userInfoWrapper}
-          onClick={handleUserInfoClick}
-        >
+        <Button className={styles.userInfoButton} onClick={handleUserInfoClick}>
           <UserInfo />
         </Button>
         {isMenuVisible && (

@@ -1,0 +1,15 @@
+.avatarWrapper {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.avatar,
+.avatarNumber {
+  margin-left: -12px;
+}
+
+.avatarNumber.avatarNumber {
+  color: #d25b68;
+  background: #f4d7da;
+}
