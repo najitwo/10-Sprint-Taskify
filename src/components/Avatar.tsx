@@ -2,7 +2,7 @@ import Image from 'next/image';
 import styles from './Avatar.module.css';
 
 interface AvatarProps {
-  name: string;
+  name: string | number;
   profileImageUrl?: string | null;
   className?: string;
 }
@@ -12,18 +12,10 @@ export default function Avatar({
   profileImageUrl = null,
   className = '',
 }: AvatarProps) {
-  const getRandomColor = (name: string) => {
-    const hash = [...name].reduce(
-      (acc, char) => acc + char.charCodeAt(0) * 31,
-      0
-    );
-    const getValue = (offset: number) => (((hash >> offset) % 0xff) % 76) + 180;
-    const red = getValue(0);
-    const green = getValue(8);
-    const blue = getValue(16);
-
-    return `rgb(${red}, ${green}, ${blue})`;
-  };
+  const avatarStyle =
+    typeof name === 'number'
+      ? undefined
+      : { backgroundColor: getRandomColor(name) };
 
   return (
     <>
@@ -37,13 +29,23 @@ export default function Avatar({
           />
         </div>
       ) : (
-        <div
-          className={`${styles.avatar} ${className}`}
-          style={{ backgroundColor: `${getRandomColor(name)}` }}
-        >
-          {name[0].toUpperCase()}
+        <div className={`${styles.avatar} ${className}`} style={avatarStyle}>
+          {typeof name === 'number' ? `+${name}` : name[0].toUpperCase()}
         </div>
       )}
     </>
   );
 }
+
+const getRandomColor = (name: string) => {
+  const hash = [...name].reduce(
+    (acc, char) => acc + char.charCodeAt(0) * 31,
+    0
+  );
+  const getValue = (offset: number) => (((hash >> offset) % 0xff) % 76) + 180;
+  const red = getValue(0);
+  const green = getValue(8);
+  const blue = getValue(16);
+
+  return `rgb(${red}, ${green}, ${blue})`;
+};
