@@ -94,8 +94,10 @@
 .scrollContext {
   overflow-x: hidden;
   overflow-y: auto;
-  min-height: 100%;
+  max-height: calc(100vh - 124px);
   height: auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .scrollContext::-webkit-scrollbar {
@@ -103,5 +105,8 @@
 }
 
 .dropContext {
-  height: 100%;
+  min-height: auto;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 }

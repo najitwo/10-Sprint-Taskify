@@ -17,6 +17,7 @@ function Column({
   const observerRef = useRef<IntersectionObserver | null>(null);
   const loadMoreRef = useRef<HTMLDivElement | null>(null);
   const columnRef = useRef<HTMLDivElement | null>(null);
+  const [minHeight, setMinHeight] = useState<string>('auto');
 
   useEffect(() => {
     observerRef.current = new IntersectionObserver(
@@ -46,6 +47,14 @@ function Column({
       }
     };
   }, [id, loadMoreData]);
+
+  useEffect(() => {
+    if (items.length === 0 || items.length <= 5) {
+      setMinHeight('866px');
+    } else {
+      setMinHeight('auto');
+    }
+  }, [items]);
 
   return (
     <div className={styles.column} ref={columnRef}>
@@ -96,10 +105,12 @@ function Column({
               className={styles.dropContext}
               ref={provided.innerRef}
               {...provided.droppableProps}
+              style={{ minHeight }}
             >
               {items.map((item, index) =>
                 item ? <Card key={item.id} item={item} index={index} /> : null
               )}
+
               {provided.placeholder}
 
               <div ref={loadMoreRef} style={{ height: '1px' }} />
