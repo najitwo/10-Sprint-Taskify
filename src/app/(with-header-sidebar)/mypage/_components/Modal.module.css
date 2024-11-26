@@ -15,3 +15,33 @@
   background: var(--white);
   border-radius: 16px;
 }
+
+@keyframes fadeIn {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+}
+
+.visible {
+  animation: fadeIn 0.3s;
+}
+
+.hidden {
+  animation: fadeOut 0.3s;
+}
