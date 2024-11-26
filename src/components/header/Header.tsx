@@ -8,6 +8,8 @@ import UserInfo from './UserInfo';
 import Title from './Title';
 import styles from './Header.module.css';
 import useDashboardStore from '@/store/dashboardStore';
+import { Menu } from '@/types/menu';
+import MenuDropdown from '../MenuDropdown';
 
 interface HeaderProps {
   component?: React.ComponentType;
@@ -30,6 +32,21 @@ export default function Header({ component: Component }: HeaderProps) {
     router.push(href);
     handleUserInfoClick();
   };
+
+  const myInfoMenus: Menu[] = [
+    {
+      name: '내 대시보드',
+      handleOnClick: () => navigateTo('/mydashboard'),
+    },
+    {
+      name: '내 정보',
+      handleOnClick: () => navigateTo('/mypage'),
+    },
+    {
+      name: '로그아웃',
+      handleOnClick: () => navigateTo('/'),
+    },
+  ];
 
   return (
     <header className={styles.header}>
@@ -69,9 +86,7 @@ export default function Header({ component: Component }: HeaderProps) {
         </Button>
         {isMenuVisible && (
           <div className={styles.myMenu}>
-            <div onClick={() => navigateTo('/mydashboard')}>내 대시보드</div>
-            <div onClick={() => navigateTo('/mypage')}>내 정보</div>
-            <div onClick={() => navigateTo('/')}>로그아웃</div>
+            <MenuDropdown menus={myInfoMenus} />
           </div>
         )}
       </div>
