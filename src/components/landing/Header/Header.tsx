@@ -5,9 +5,11 @@ import styles from './Header.module.css';
 export default function Header() {
   return (
     <header className={styles.header}>
-      <Link href="/" aria-label="홈으로 이동">
-        <CustomLogo className={styles.logo} />
-      </Link>
+      <div>
+        <Link href="/" aria-label="홈으로 이동">
+          <CustomLogo className={styles.logo} />
+        </Link>
+      </div>
       <nav className={styles.nav}>
         <Link href="/login" className={styles.navLink}>
           로그인

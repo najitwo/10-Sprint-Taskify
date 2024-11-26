@@ -14,14 +14,12 @@ export default function DashBoardView() {
   const params = useParams();
   const id = params.id;
 
-  const dashboard = useDashboardStore((state) => state.dashboard);
-  const setDashboard = useDashboardStore((state) => state.setDashboard);
-
   const searchParams = useSearchParams();
   const color = searchParams.get('color') || 'var(--violet)';
-  const { columns, loading, error, handleOnDragEnd } = useDashBoardView(
-    id as string
-  );
+  const { columns, loading, error, handleOnDragEnd, loadMoreData } =
+    useDashBoardView(`${id}`);
+  const dashboard = useDashboardStore((state) => state.dashboard);
+  const setDashboard = useDashboardStore((state) => state.setDashboard);
 
   useEffect(() => {
     if (dashboard?.id !== Number(id)) {
@@ -43,6 +41,7 @@ export default function DashBoardView() {
             totalCount={column.totalCount}
             id={column.id}
             items={column.items}
+            loadMoreData={loadMoreData}
           />
         ))}
         <div className={styles.createColumnSection}>

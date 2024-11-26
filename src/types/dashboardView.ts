@@ -1,16 +1,18 @@
-export interface Assignee {
+import { DebouncedFunc } from 'lodash';
+
+export interface CardAssignee {
   profileImageUrl: string | null;
   nickname: string;
   id: number;
 }
 
-export interface CardData {
+export interface Cards {
   id: number;
   title: string;
   description: string;
   tags: string[];
   dueDate: string;
-  assignee?: Assignee;
+  assignee: CardAssignee;
   imageUrl: string;
   teamId: string;
   columnId: number;
@@ -18,16 +20,17 @@ export interface CardData {
   updatedAt: string;
 }
 
-export interface CardResponse {
+export interface GetCardsResponse {
   cursorId: number;
   totalCount: number;
-  cards: CardData[];
+  cards: Cards[];
 }
 
-export interface ColumnData {
+export interface Columns {
   title: string;
   color: string;
   totalCount: number;
   id: number;
-  items: CardData[];
+  items: Cards[];
+  loadMoreData: DebouncedFunc<(columnId: number) => Promise<void>>;
 }
