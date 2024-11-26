@@ -6,7 +6,12 @@ import { formatDateFormat } from '@/utils/dateUtils';
 import CalendarIcon from '/public/icons/calendar.svg';
 import styles from './DatePicker.module.css';
 
-export default function DatePicker() {
+interface DatePickerProps {
+  name: 'dueDate';
+  setValue: (name: 'dueDate', value: string) => void;
+}
+
+export default function DatePicker({ name, setValue }: DatePickerProps) {
   const [selectedDate, setSelectedDate] = useState<string>('');
   const [selectedTime, setSelectedTime] = useState<string>('');
 
@@ -46,10 +51,12 @@ export default function DatePicker() {
   const handleDateClick = (date: Date) => {
     setSelectedDate(formatDateFormat(date));
     setSelectedTime('23:30');
+    setValue(name, `${formatDateFormat(date)} 23:30`);
   };
 
   const handleTimeClick = (date: string) => {
     setSelectedTime(date);
+    setValue(name, `${selectedDate} ${date}`);
     setIsCalendarVisible(false);
   };
 
@@ -79,6 +86,7 @@ export default function DatePicker() {
       <label className={styles.label}>마감일</label>
       <div className={styles.inputWrapper} ref={datePickerRef}>
         <input
+          name={name}
           type="text"
           className={styles.input}
           value={
@@ -95,7 +103,7 @@ export default function DatePicker() {
           <div className={styles.calendarWrapper}>
             <div className={styles.calendar}>
               <div className={styles.calendarHeader}>
-                <button onClick={() => handleMonthChange('prev')}>
+                <button type="button" onClick={() => handleMonthChange('prev')}>
                   <Image
                     src="/icons/arrow_left.svg"
                     width={16}
@@ -107,7 +115,7 @@ export default function DatePicker() {
                 <span>
                   {currentMonth.getFullYear()}년 {currentMonth.getMonth() + 1}월
                 </span>
-                <button onClick={() => handleMonthChange('next')}>
+                <button type="button" onClick={() => handleMonthChange('next')}>
                   <Image
                     src="/icons/arrow_right.svg"
                     width={16}
@@ -136,6 +144,7 @@ export default function DatePicker() {
                   return (
                     <button
                       key={index}
+                      type="button"
                       className={`${styles.dayButton} ${
                         date &&
                         selectedDate === formatDateFormat(date) &&

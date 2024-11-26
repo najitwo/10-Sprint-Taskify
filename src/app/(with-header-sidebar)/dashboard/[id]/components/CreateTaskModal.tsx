@@ -7,16 +7,17 @@ import SearchDropdown from './SearchDropdown';
 import DatePicker from './DatePicker';
 import Textarea from '@/components/Textarea';
 import FileInput from '@/components/FileInput';
-
-export interface ManagerOption {
-  id: number;
-  name: string;
-}
+import TagsInput from '@/components/TagsInput';
+import useMember from '../edit/_hooks/useMember';
+import useDashboardStore from '@/store/dashboardStore';
 
 export interface TaskFormValues {
+  assigneeUserId: number;
   image: File | null;
   title: string;
   description: string;
+  dueDate: string;
+  tags: string[];
 }
 
 export default function CreateTaskModal() {
@@ -27,29 +28,26 @@ export default function CreateTaskModal() {
     formState: { errors, isValid },
     setValue,
   } = useForm<TaskFormValues>({ mode: 'onChange' });
+  const dashboard = useDashboardStore((state) => state.dashboard);
+  const { members } = useMember(dashboard?.id.toString() || null, 10);
 
-  const onSubmit = () => {
+  const onSubmit = (data: TaskFormValues) => {
+    console.log(data);
     // closeModal();
-  };
-
-  const options = [
-    { id: 1, name: '김김김' },
-    { id: 2, name: '이이이' },
-    { id: 3, name: '최최최' },
-  ];
-
-  const handleSelect = (selected: ManagerOption) => {
-    console.log('선택된 담당자:', selected);
   };
 
   return (
     <form className={styles.modal} onSubmit={handleSubmit(onSubmit)}>
       <h2>할일 생성</h2>
-      <SearchDropdown options={options} onSelect={handleSelect} />
+      <SearchDropdown
+        name="assigneeUserId"
+        options={members}
+        setValue={setValue}
+      />
       <Input name="title" label="제목" placeholder="제목을 입력해주세요" />
       <Textarea name="description" label="내용" />
-
-      <DatePicker />
+      <DatePicker name="dueDate" setValue={setValue} />
+      <TagsInput name="tags" setValue={setValue} />
       <FileInput
         id="image"
         name="image"

@@ -69,19 +69,21 @@
   padding: 10px;
   background: var(--violet-light);
   border-bottom: 1px solid var(--gray-200);
+  color: var(--black-100);
+  font-weight: 500;
 }
 
 .daysOfWeek {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  background: var(--violet-light);
   text-align: center;
-  padding: 5px 0;
+  padding: 7px 0;
 }
 
 .day {
-  font-weight: 800;
-  color: var(--black-100);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--violet);
 }
 
 .days {
@@ -95,7 +97,7 @@
   padding: 7px;
 }
 
-.dayButton:hover:not(.disabled):not(.selected) {
+.dayButton:hover:not(.selected):not(:disabled) {
   background: var(--violet-light);
   color: var(--violet);
 }
@@ -122,6 +124,7 @@
   font-size: 16px;
   font-weight: 500;
   line-height: 18px;
+  color: var(--black-100);
 }
 
 .timeSelect {
@@ -182,7 +185,11 @@
   }
 
   .calendarWrapper {
-    max-height: 290px;
+    max-height: 295px;
+  }
+
+  .daysOfWeek {
+    padding: 10px 0;
   }
 
   .dayButton {
@@ -190,7 +197,7 @@
   }
 
   .timeSelect {
-    max-height: 250px;
+    max-height: 255px;
   }
 
   .timeList {
