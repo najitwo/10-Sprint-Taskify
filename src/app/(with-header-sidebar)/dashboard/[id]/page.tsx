@@ -7,6 +7,7 @@ import useDashBoardView from './hooks/useDashBoardView';
 import Column from './components/Column';
 import Button from '@/components/Button';
 import Image from 'next/image';
+import useDashboardStore from '@/store/dashboardStore';
 import styles from './page.module.css';
 
 export default function DashBoardView() {
@@ -17,6 +18,20 @@ export default function DashBoardView() {
   const color = searchParams.get('color') || 'var(--violet)';
   const { columns, loading, error, handleOnDragEnd, loadMoreData } =
     useDashBoardView(`${id}`);
+  const dashboard = useDashboardStore((state) => state.dashboard);
+  const setDashboard = useDashboardStore((state) => state.setDashboard);
+
+  const searchParams = useSearchParams();
+  const color = searchParams.get('color') || 'var(--violet)';
+  const { columns, loading, error, handleOnDragEnd } = useDashBoardView(
+    id as string
+  );
+
+  useEffect(() => {
+    if (dashboard?.id !== Number(id)) {
+      setDashboard(Number(id));
+    }
+  }, [id, dashboard?.id]);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;

@@ -3,7 +3,7 @@ import Button from '@/components/Button';
 import DashboardInput from '@/components/DashboardInput';
 import styles from './CreateDashboardForm.module.css';
 import { CreateDashboardRequestBody } from '@/types/dashboards';
-import { createDashboard } from '@/app/(with-header-sidebar)/dashboard/[id]/edit/_lib/boardService';
+import { createDashboard } from '@/lib/boardService';
 
 interface CreateDashboardFormProps {
   closeModal: () => void;

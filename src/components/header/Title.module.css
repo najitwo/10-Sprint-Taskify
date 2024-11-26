@@ -1,0 +1,29 @@
+.title,
+.dashboardTitle {
+  color: var(--black-100);
+  font-size: 15px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.title {
+  flex: 1;
+}
+
+.dashboardTitleContainer {
+  display: none;
+}
+
+@media screen and (min-width: 768px) {
+  .title,
+  .dashboardTitle {
+    font-size: 20px;
+  }
+
+  .dashboardTitleContainer {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+}

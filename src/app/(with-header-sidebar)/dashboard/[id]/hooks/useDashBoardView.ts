@@ -19,6 +19,7 @@ export default function useDashBoardView(dashboardId: string | undefined) {
       );
 
       const columns = columnData.data;
+
       const columnIds: number[] = columns.map(
         (column: ColumnData) => column.id
       );
@@ -28,6 +29,7 @@ export default function useDashBoardView(dashboardId: string | undefined) {
       );
 
       const cardResponses = await Promise.all(cardRequests);
+
 
       const updatedColumns = columns.map(
         (column: ColumnData, index: number) => {

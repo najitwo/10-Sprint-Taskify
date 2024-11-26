@@ -1,5 +1,4 @@
 .avatar {
-  background-color: blue;
   width: 34px;
   height: 34px;
   border: 2px solid var(--white);
@@ -8,6 +7,11 @@
   justify-content: center;
   align-items: center;
   color: var(--white);
+  position: relative;
+}
+
+.image {
+  border-radius: 50%;
 }
 
 @media screen and (min-width: 768px) {
