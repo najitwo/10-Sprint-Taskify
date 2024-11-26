@@ -1,15 +1,15 @@
 'use client';
 
 import { usePathname, useRouter } from 'next/navigation';
-import { useState } from 'react';
 import Image from 'next/image';
 import Button from '../Button';
 import UserInfo from './UserInfo';
 import Title from './Title';
-import styles from './Header.module.css';
 import useDashboardStore from '@/store/dashboardStore';
-import { Menu } from '@/types/menu';
+import type { Menu } from '@/types/menu';
 import MenuDropdown from '../MenuDropdown';
+import { useMenu } from '@/hooks/useMenu';
+import styles from './Header.module.css';
 
 interface HeaderProps {
   component?: React.ComponentType;
@@ -18,11 +18,7 @@ interface HeaderProps {
 export default function Header({ component: Component }: HeaderProps) {
   const router = useRouter();
   const dashboard = useDashboardStore((state) => state.dashboard);
-  const [isMenuVisible, setIsMenuVisible] = useState(false);
-
-  const handleUserInfoClick = () => {
-    setIsMenuVisible(!isMenuVisible);
-  };
+  const { isMenuVisible, toggleMenu, closeMenu } = useMenu();
 
   const handleSettingsClick = () => {
     router.push(`/dashboard/${dashboard?.id}/edit`);
@@ -30,22 +26,13 @@ export default function Header({ component: Component }: HeaderProps) {
 
   const navigateTo = (href: string) => {
     router.push(href);
-    handleUserInfoClick();
+    closeMenu();
   };
 
   const myInfoMenus: Menu[] = [
-    {
-      name: '내 대시보드',
-      handleOnClick: () => navigateTo('/mydashboard'),
-    },
-    {
-      name: '내 정보',
-      handleOnClick: () => navigateTo('/mypage'),
-    },
-    {
-      name: '로그아웃',
-      handleOnClick: () => navigateTo('/'),
-    },
+    { name: '내 대시보드', handleOnClick: () => navigateTo('/mydashboard') },
+    { name: '내 정보', handleOnClick: () => navigateTo('/mypage') },
+    { name: '로그아웃', handleOnClick: () => navigateTo('/') },
   ];
 
   return (
@@ -81,7 +68,7 @@ export default function Header({ component: Component }: HeaderProps) {
         </div>
       )}
       <div className={styles.userInfoContainer}>
-        <Button className={styles.userInfoButton} onClick={handleUserInfoClick}>
+        <Button className={styles.userInfoButton} onClick={toggleMenu}>
           <UserInfo />
         </Button>
         {isMenuVisible && (

@@ -62,8 +62,9 @@ export default function Modal({
               <div className={styles.closeButtonWrapper}>
                 <button
                   onClick={onClose}
-                  className={styles.close}
                   aria-label="Close modal"
+                  type="button"
+                  className={styles.closeButton}
                 >
                   <Image src="/icons/x_lg.svg" alt="Close icon" fill />
                 </button>

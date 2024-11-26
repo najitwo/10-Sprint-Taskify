@@ -50,15 +50,9 @@
   height: 24px;
 }
 
-.close {
-  width: 24px;
-  height: 24px;
-  transition: 200ms;
-}
-
-.close:hover {
-  filter: brightness(2);
-  transform: rotate(90deg);
+.closeButton {
+  display: inline-flex;
+  align-items: center;
 }
 
 @keyframes fadeIn {

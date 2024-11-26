@@ -5,6 +5,11 @@
   position: relative;
 }
 
+.moreButton {
+  display: inline-flex;
+  align-items: center;
+}
+
 .menuContainer {
   position: absolute;
   z-index: 999;
