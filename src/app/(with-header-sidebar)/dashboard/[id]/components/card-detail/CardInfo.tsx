@@ -1,15 +1,17 @@
-import { CardData, ColumnData } from '@/types/dashboardView';
+import type { CardData } from '@/types/dashboardView';
 import Assignment from './Assignment';
-import styles from './CardInfo.module.css';
 import Tag from '@/components/card/Tag';
 import ColumnLabel from '@/components/card/ColumnLabel';
+import Pipe from '@/components/Pipe';
+import Image from 'next/image';
+import styles from './CardInfo.module.css';
 
 const sample = {
   id: 1,
   title: '카드타이틀',
   description:
     'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex molestias enim beatae in accusantium cumque necessitatibus quia, dolorem laboriosam soluta maxime error minima. Dolores quis culpa aut hic, cum dolorem?',
-  tags: ['마늘', '귀여어', '마늘아아아아'],
+  tags: ['마늘', '기여어', '세젤귀', '맨날자'],
   dueDate: '2024-11-11 11:00',
   assignee: {
     profileImageUrl: null,
@@ -18,6 +20,7 @@ const sample = {
   },
   imageUrl:
     'https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/taskify/profile_image/10-1_4804_1731757528194.jpeg',
+  // null,
   teamId: '1',
   columnId: 1234,
   createdAt: '2024',
@@ -37,19 +40,24 @@ export default function CardInfo({ card, columnTitle }: CardInfoProps) {
       <div className={styles.assignmentContainer}>
         <Assignment card={card} />
       </div>
-
       <div className={styles.infoContainer}>
-        <div>
-          <ColumnLabel name={columnTitle} />
+        <div className={styles.labelArea}>
+          <div>
+            <ColumnLabel name={columnTitle} />
+          </div>
+          <Pipe />
+          <div className={styles.tagContainer}>
+            {tags.map((tag, index) => (
+              <Tag key={index} name={tag} />
+            ))}
+          </div>
         </div>
-        <div>
-          <Tag name="하하호호" />
-          <Tag name="김" />
-          <Tag name="마" />
-          <Tag name="늘" />
-          <Tag name="귀여워" />
-          <Tag name="마느리" />
-        </div>
+        <p className={styles.description}>{description}</p>
+        {imageUrl && (
+          <div className={styles.imageWrapper}>
+            <Image src={imageUrl} alt="할일 이미지" fill />
+          </div>
+        )}
       </div>
     </div>
   );

@@ -9,7 +9,7 @@ export default function ColumnLabel({ name }: ColumnLabelProps) {
   return (
     <div className={styles.columnLabel}>
       <div>
-        <Dot width="6px" height="6px" />
+        <Dot width="6" height="6" />
       </div>
       <span>{name}</span>
     </div>
