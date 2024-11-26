@@ -1,0 +1,26 @@
+.cardInfo {
+  margin-top: 20px;
+}
+
+@media screen and (min-width: 768px) {
+  .cardInfo {
+    display: flex;
+    justify-content: space-between;
+    gap: 14px;
+  }
+
+  .assignmentContainer {
+    order: 1;
+    flex: 3;
+  }
+
+  .infoContainer {
+    flex: 7;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .cardInfo {
+    gap: 39px;
+  }
+}
