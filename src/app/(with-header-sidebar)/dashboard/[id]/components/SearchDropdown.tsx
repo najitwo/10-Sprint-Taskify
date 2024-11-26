@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, KeyboardEvent } from 'react';
 import Image from 'next/image';
 import Avatar from '@/components/Avatar';
 import { Member } from '@/types/member';
@@ -38,7 +38,7 @@ export default function SearchDropdown({
     setFocusedIndex(-1);
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+  const handleKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
     if (!isDropdownVisible && (e.key === 'ArrowDown' || e.key === 'ArrowUp')) {
       setIsDropdownVisible(true);
       return;

@@ -11,9 +11,69 @@
   color: var(--black-100);
 }
 
+.inputContainer {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  width: 295px;
+  border: 1px solid var(--gray-300);
+  border-radius: 6px;
+  padding: 10px 16px;
+  overflow: hidden;
+}
+
+.inputContainer:focus-within {
+  outline: 2px solid var(--violet);
+}
+
+.input {
+  flex: 1;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 24px;
+  color: var(--black-100);
+}
+
+.input::placeholder {
+  color: var(--gray-400);
+}
+
+.input:focus {
+  outline: none;
+}
+
+.tag {
+  padding: 4px 6px;
+  transition:
+    filter 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.tag:hover {
+  filter: brightness(0.7);
+  opacity: 0.8;
+  cursor: pointer;
+}
+
 @media screen and (min-width: 768px) {
   .container label {
     font-size: 18px;
     line-height: 26px;
+  }
+
+  .inputContainer {
+    width: 520px;
+  }
+
+  .input {
+    font-size: 16px;
+    line-height: 26px;
+  }
+
+  .tag {
+    font-size: 14px;
+    line-height: 24px;
+    padding: 2px 6px;
   }
 }

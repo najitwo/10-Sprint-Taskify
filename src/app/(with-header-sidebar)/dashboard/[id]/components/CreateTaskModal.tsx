@@ -33,6 +33,7 @@ export default function CreateTaskModal() {
 
   const onSubmit = (data: TaskFormValues) => {
     console.log(data);
+
     // closeModal();
   };
 
