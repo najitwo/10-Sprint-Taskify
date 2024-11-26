@@ -2,11 +2,11 @@ import { useState, useEffect, useCallback } from 'react';
 import debounce from 'lodash/debounce';
 import axiosInstance from '@/lib/axiosInstance';
 import { DropResult } from 'react-beautiful-dnd';
-import { ColumnData, CardData } from '@/types/dashboardView';
+import { Columns, Cards } from '@/types/dashboardView';
 import { COLUMN_URL, CARD_URL } from '@/constants/urls';
 
 export default function useDashBoardView(dashboardId: string | undefined) {
-  const [columns, setColumns] = useState<ColumnData[]>([]);
+  const [columns, setColumns] = useState<Columns[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [cursors, setCursors] = useState<Record<number, number | null>>({});
@@ -19,9 +19,7 @@ export default function useDashBoardView(dashboardId: string | undefined) {
       );
 
       const columns = columnData.data;
-      const columnIds: number[] = columns.map(
-        (column: ColumnData) => column.id
-      );
+      const columnIds: number[] = columns.map((column: Columns) => column.id);
 
       const cardRequests = columnIds.map((columnId) =>
         axiosInstance.get(`${CARD_URL}?size=10&columnId=${columnId}`)
@@ -29,22 +27,19 @@ export default function useDashBoardView(dashboardId: string | undefined) {
 
       const cardResponses = await Promise.all(cardRequests);
 
-      const updatedColumns = columns.map(
-        (column: ColumnData, index: number) => {
-          const cardData = cardResponses[index].data.cards;
-          const cursorId = cardResponses[index].data.cursorId;
-          const totalCount = cardResponses[index].data.totalCount;
+      const updatedColumns = columns.map((column: Columns, index: number) => {
+        const cardData = cardResponses[index].data.cards;
+        const totalCount = cardResponses[index].data.totalCount;
 
-          return {
-            ...column,
-            items: cardData || [],
-            totalCount: totalCount || 0,
-          };
-        }
-      );
+        return {
+          ...column,
+          items: cardData || [],
+          totalCount: totalCount || 0,
+        };
+      });
 
       const initialCursors = updatedColumns.reduce(
-        (acc: Record<number, number | null>, column: ColumnData) => {
+        (acc: Record<number, number | null>, column: Columns) => {
           const lastCard = column.items[column.items.length - 1];
           acc[column.id] = lastCard ? lastCard.id : null;
           return acc;
@@ -67,12 +62,9 @@ export default function useDashBoardView(dashboardId: string | undefined) {
   }, [fetchData, dashboardId]);
 
   const sendCardUpdateRequest = useCallback(
-    debounce(async (cardId: string, updatedCardData: CardData) => {
+    debounce(async (cardId: string, updatedCardData: Cards) => {
       try {
-        const response = await axiosInstance.put(
-          `${CARD_URL}/${cardId}`,
-          updatedCardData
-        );
+        await axiosInstance.put(`${CARD_URL}/${cardId}`, updatedCardData);
       } catch (err) {
         if (err instanceof Error) setError(err.message);
       }
@@ -172,7 +164,7 @@ export default function useDashBoardView(dashboardId: string | undefined) {
                   items: [
                     ...column.items,
                     ...newCards.filter(
-                      (newCard: CardData) =>
+                      (newCard: Cards) =>
                         !column.items.some(
                           (prevCard) => prevCard.id === newCard.id
                         )

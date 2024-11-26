@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { Droppable } from 'react-beautiful-dnd';
-import { ColumnData } from '@/types/dashboardView';
+import { Columns } from '@/types/dashboardView';
 import Button from '@/components/Button';
 import Image from 'next/image';
 import Card from './Card';
@@ -13,7 +13,7 @@ function Column({
   id,
   items,
   loadMoreData,
-}: ColumnData) {
+}: Columns) {
   const observerRef = useRef<IntersectionObserver | null>(null);
   const loadMoreRef = useRef<HTMLDivElement | null>(null);
   const columnRef = useRef<HTMLDivElement | null>(null);

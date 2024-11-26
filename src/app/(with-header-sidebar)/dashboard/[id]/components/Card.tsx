@@ -1,10 +1,10 @@
 import React from 'react';
 import { Draggable } from 'react-beautiful-dnd';
-import { CardData } from '@/types/dashboardView';
+import { Cards } from '@/types/dashboardView';
 import styles from './Card.module.css';
 
 interface Props {
-  item: CardData;
+  item: Cards;
   index: number;
 }
 
