@@ -99,7 +99,6 @@ function Column({
           />
         </Button>
       </div>
-
       <div className={styles.scrollContext}>
         <Droppable
           droppableId={`${id}`}
@@ -116,11 +115,16 @@ function Column({
               style={{ minHeight }}
             >
               {items.map((item, index) =>
-                item ? <Card key={item.id} item={item} index={index} /> : null
+                item ? (
+                  <Card
+                    key={item.id}
+                    item={item}
+                    index={index}
+                    columnTitle={title}
+                  />
+                ) : null
               )}
-
               {provided.placeholder}
-
               <div ref={loadMoreRef} style={{ height: '1px' }} />
             </div>
           )}

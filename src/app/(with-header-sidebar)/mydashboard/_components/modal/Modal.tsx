@@ -12,7 +12,7 @@ interface ModalProps {
   allowDimClose?: boolean;
   title?: string;
   hasCloseButton?: boolean;
-  headerComponent?: React.ComponentType;
+  headerComponent?: React.ComponentType<unknown>;
   children: ReactNode;
 }
 
@@ -59,18 +59,16 @@ export default function Modal({
             {title && <h3 className={styles.title}>{title}</h3>}
             {Component && <Component />}
             {hasCloseButton && (
-              <button
-                onClick={onClose}
-                className={styles.close}
-                aria-label="Close modal"
-              >
-                <Image
-                  src="/icons/x_lg.svg"
-                  alt="Close icon"
-                  width={24}
-                  height={24}
-                />
-              </button>
+              <div className={styles.closeButtonWrapper}>
+                <button
+                  onClick={onClose}
+                  aria-label="Close modal"
+                  type="button"
+                  className={styles.closeButton}
+                >
+                  <Image src="/icons/x_lg.svg" alt="Close icon" fill />
+                </button>
+              </div>
             )}
           </div>
           {children}

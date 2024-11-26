@@ -1,13 +1,12 @@
 'use client';
 
 import { usePathname, useRouter } from 'next/navigation';
-import { useState } from 'react';
 import Image from 'next/image';
 import Button from '../Button';
-import UserInfo from './UserInfo';
 import Title from './Title';
-import styles from './Header.module.css';
 import useDashboardStore from '@/store/dashboardStore';
+import UserSection from './UserSection';
+import styles from './Header.module.css';
 
 interface HeaderProps {
   component?: React.ComponentType;
@@ -16,19 +15,9 @@ interface HeaderProps {
 export default function Header({ component: Component }: HeaderProps) {
   const router = useRouter();
   const dashboard = useDashboardStore((state) => state.dashboard);
-  const [isMenuVisible, setIsMenuVisible] = useState(false);
-
-  const handleUserInfoClick = () => {
-    setIsMenuVisible(!isMenuVisible);
-  };
 
   const handleSettingsClick = () => {
     router.push(`/dashboard/${dashboard?.id}/edit`);
-  };
-
-  const navigateTo = (href: string) => {
-    router.push(href);
-    handleUserInfoClick();
   };
 
   return (
@@ -63,18 +52,7 @@ export default function Header({ component: Component }: HeaderProps) {
           <Component />
         </div>
       )}
-      <div className={styles.userInfoContainer}>
-        <Button className={styles.userInfoButton} onClick={handleUserInfoClick}>
-          <UserInfo />
-        </Button>
-        {isMenuVisible && (
-          <div className={styles.myMenu}>
-            <div onClick={() => navigateTo('/mydashboard')}>내 대시보드</div>
-            <div onClick={() => navigateTo('/mypage')}>내 정보</div>
-            <div onClick={() => navigateTo('/')}>로그아웃</div>
-          </div>
-        )}
-      </div>
+      <UserSection />
     </header>
   );
 }

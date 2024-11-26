@@ -16,7 +16,7 @@ export default function DashboardMembers() {
   const { isMobile } = useWindowSize();
 
   const { members, totalPages } = useMember(
-    dashboard?.id.toString() || '0',
+    dashboard?.id.toString() || null,
     MEMBERS_VIEW_COUNT.desktop
   );
 
