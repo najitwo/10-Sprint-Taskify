@@ -6,7 +6,7 @@ export interface CardAssignee {
   id: number;
 }
 
-export interface Card {
+export interface Cards {
   id: number;
   title: string;
   description: string;
@@ -23,7 +23,7 @@ export interface Card {
 export interface GetCardsResponse {
   cursorId: number;
   totalCount: number;
-  cards: Card[];
+  cards: Cards[];
 }
 
 export interface Columns {
@@ -31,6 +31,6 @@ export interface Columns {
   color: string;
   totalCount: number;
   id: number;
-  items: Card[];
+  items: Cards[];
   loadMoreData: DebouncedFunc<(columnId: number) => Promise<void>>;
 }
