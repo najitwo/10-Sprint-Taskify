@@ -10,7 +10,7 @@ export interface CardData {
   description: string;
   tags: string[];
   dueDate: string;
-  assignee: Assignee;
+  assignee?: Assignee;
   imageUrl: string;
   teamId: string;
   columnId: number;
