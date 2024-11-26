@@ -34,7 +34,7 @@ export default function SearchDropdown({
     setQuery(option.nickname);
     setSelectedOption(option);
     setIsDropdownVisible(false);
-    setValue(name, option.id);
+    setValue(name, option.userId);
     setFocusedIndex(-1);
   };
 
@@ -104,7 +104,7 @@ export default function SearchDropdown({
     option: Member;
     index: number;
   }) => {
-    const isSelected = selectedOption?.id === option.id;
+    const isSelected = selectedOption?.userId === option.userId;
     const isFocused = index === focusedIndex;
 
     return (
@@ -117,7 +117,11 @@ export default function SearchDropdown({
         aria-selected={isSelected}
       >
         {isSelected && <CheckIcon className={styles.check} />}
-        <Avatar name={option.nickname} className={styles.avatar} />
+        <Avatar
+          name={option.nickname}
+          className={styles.avatar}
+          profileImageUrl={option.profileImageUrl}
+        />
         {option.nickname}
       </li>
     );
@@ -146,7 +150,11 @@ export default function SearchDropdown({
         />
         {selectedOption?.nickname === query && (
           <div className={styles.avatarContainer}>
-            <Avatar name={selectedOption.nickname} className={styles.avatar} />
+            <Avatar
+              name={selectedOption.nickname}
+              className={styles.avatar}
+              profileImageUrl={selectedOption.profileImageUrl}
+            />
           </div>
         )}
         <Image
@@ -161,7 +169,7 @@ export default function SearchDropdown({
         <ul className={styles.dropdown} ref={dropdownRef}>
           {filteredOptions.length > 0 ? (
             filteredOptions.map((option, index) => (
-              <DropdownItem key={option.id} option={option} index={index} />
+              <DropdownItem key={option.userId} option={option} index={index} />
             ))
           ) : (
             <li className={styles.noResult}>검색 결과가 없습니다</li>

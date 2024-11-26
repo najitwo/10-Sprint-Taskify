@@ -17,6 +17,26 @@
   height: 76px;
 }
 
+.input input {
+  width: 295px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 24px;
+  padding: 13px 16px;
+}
+
+.input textarea {
+  width: 295px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 24px;
+  padding: 15px 16px;
+}
+
+.input label {
+  font-weight: 500;
+}
+
 .footer {
   display: flex;
   align-items: center;
@@ -40,6 +60,24 @@
   .modal {
     gap: 32px;
     padding: 32px;
+  }
+
+  .input input {
+    width: 520px;
+    font-size: 16px;
+    line-height: 26px;
+    padding: 12px 16px;
+  }
+
+  .input textarea {
+    width: 520px;
+    font-size: 16px;
+    line-height: 26px;
+  }
+
+  .input label {
+    font-size: 18px;
+    line-height: 26px;
   }
 
   .footer {

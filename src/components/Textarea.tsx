@@ -15,6 +15,7 @@ interface TextareaProps {
   register?: UseFormRegisterReturn;
   error?: FieldError;
   readOnly?: boolean;
+  required?: boolean;
 }
 
 export default function Textarea({
@@ -26,13 +27,17 @@ export default function Textarea({
   register,
   error,
   readOnly = false,
+  required,
 }: TextareaProps) {
   return (
     <div className={`${styles.container} ${className}`}>
-      <Label htmlFor={name}>{label}</Label>
-      <div className={styles.inputWrapper}>
+      <Label htmlFor={name}>
+        {label}
+        {required && <span className={styles.required}>*</span>}
+      </Label>
+      <div className={styles.textareaWrapper}>
         <textarea
-          className={`${styles.input} ${error ? styles.errorFocus : ''}`}
+          className={`${styles.textarea} ${error ? styles.errorFocus : ''}`}
           placeholder={placeholder}
           readOnly={readOnly}
           {...register}

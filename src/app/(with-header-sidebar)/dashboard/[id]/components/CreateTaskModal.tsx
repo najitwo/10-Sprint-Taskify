@@ -2,7 +2,6 @@ import useModalStore from '@/store/modalStore';
 import { useForm } from 'react-hook-form';
 import Button from '@/components/Button';
 import Input from '@/components/Input';
-import styles from './CreateTaskModal.module.css';
 import SearchDropdown from './SearchDropdown';
 import DatePicker from './DatePicker';
 import Textarea from '@/components/Textarea';
@@ -10,6 +9,9 @@ import FileInput from '@/components/FileInput';
 import TagsInput from '@/components/TagsInput';
 import useMember from '../edit/_hooks/useMember';
 import useDashboardStore from '@/store/dashboardStore';
+import { ERROR_MESSAGES } from '@/constants/message';
+import { createCard } from '@/lib/cardService';
+import styles from './CreateTaskModal.module.css';
 
 export interface TaskFormValues {
   assigneeUserId: number;
@@ -20,7 +22,7 @@ export interface TaskFormValues {
   tags: string[];
 }
 
-export default function CreateTaskModal() {
+export default function CreateTaskModal({ columnId }: { columnId: number }) {
   const { closeModal } = useModalStore();
   const {
     register,
@@ -31,10 +33,11 @@ export default function CreateTaskModal() {
   const dashboard = useDashboardStore((state) => state.dashboard);
   const { members } = useMember(dashboard?.id.toString() || null, 10);
 
-  const onSubmit = (data: TaskFormValues) => {
-    console.log(data);
-
-    // closeModal();
+  const onSubmit = async (data: TaskFormValues) => {
+    if (dashboard) {
+      const response = await createCard(data, columnId, dashboard.id);
+      closeModal();
+    }
   };
 
   return (
@@ -45,8 +48,28 @@ export default function CreateTaskModal() {
         options={members}
         setValue={setValue}
       />
-      <Input name="title" label="제목" placeholder="제목을 입력해주세요" />
-      <Textarea name="description" label="내용" />
+      <Input
+        name="title"
+        label="제목"
+        placeholder="제목을 입력해주세요"
+        className={styles.input}
+        register={register('title', {
+          required: ERROR_MESSAGES.TITLE_REQUIRE,
+        })}
+        error={errors.title}
+        required={true}
+      />
+      <Textarea
+        name="description"
+        label="설명"
+        placeholder="설명을 입력해주세요"
+        className={styles.input}
+        register={register('description', {
+          required: ERROR_MESSAGES.DESCRIPTION_REQUIRE,
+        })}
+        error={errors.description}
+        required={true}
+      />
       <DatePicker name="dueDate" setValue={setValue} />
       <TagsInput name="tags" setValue={setValue} />
       <FileInput

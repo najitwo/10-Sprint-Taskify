@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react';
 import Image from 'next/image';
-import { formatDateFormat } from '@/utils/dateUtils';
+import { formatDateFormat, formatDateTimeFormat } from '@/utils/dateUtils';
 import CalendarIcon from '/public/icons/calendar.svg';
 import styles from './DatePicker.module.css';
 
@@ -51,12 +51,12 @@ export default function DatePicker({ name, setValue }: DatePickerProps) {
   const handleDateClick = (date: Date) => {
     setSelectedDate(formatDateFormat(date));
     setSelectedTime('23:30');
-    setValue(name, `${formatDateFormat(date)} 23:30`);
+    setValue(name, formatDateTimeFormat(`${formatDateFormat(date)} 23:30`));
   };
 
   const handleTimeClick = (date: string) => {
     setSelectedTime(date);
-    setValue(name, `${selectedDate} ${date}`);
+    setValue(name, formatDateTimeFormat(`${selectedDate} ${date}`));
     setIsCalendarVisible(false);
   };
 
