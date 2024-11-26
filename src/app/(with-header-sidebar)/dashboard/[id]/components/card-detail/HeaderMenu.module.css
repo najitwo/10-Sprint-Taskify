@@ -1,0 +1,13 @@
+.headerMenu {
+  display: flex;
+  align-items: center;
+  margin-right: 16px;
+  position: relative;
+}
+
+.menuContainer {
+  position: absolute;
+  z-index: 999;
+  top: 40px;
+  right: 0;
+}

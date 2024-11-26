@@ -44,6 +44,12 @@
   color: var(--black-100);
 }
 
+.closeButtonWrapper {
+  position: relative;
+  width: 24px;
+  height: 24px;
+}
+
 .close {
   width: 24px;
   height: 24px;
@@ -106,5 +112,10 @@
     font-weight: 700;
     flex: 1;
     color: var(--black-100);
+  }
+
+  .closeButtonWrapper {
+    width: 32px;
+    height: 32px;
   }
 }
