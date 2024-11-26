@@ -31,7 +31,6 @@ export default function useApi<
   const [error, setError] = useState<AxiosError | null>(null);
 
   const fetchData = useCallback(async () => {
-    // TODO if (loading) return; add?
     setIsLoading(true);
     setError(null);
 

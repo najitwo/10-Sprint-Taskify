@@ -15,7 +15,7 @@ const DEFAULT_MEMBERS_STATE: MemberState = {
   members: [],
 };
 
-const useMember = (dashboardId: string, pageSize = 4) => {
+const useMember = (dashboardId: string | null, pageSize = 4) => {
   const [memberState, setMemberState] = useState<MemberState>(
     DEFAULT_MEMBERS_STATE
   );

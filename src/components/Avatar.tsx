@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import styles from './Avatar.module.css';
+import { getRandomColor } from '@/utils/colorUtils';
 
 interface AvatarProps {
   name: string | number;
@@ -36,20 +37,3 @@ export default function Avatar({
     </>
   );
 }
-
-const getRandomColor = (name: string) => {
-  const hash = [...name].reduce(
-    (acc, char) => acc + char.charCodeAt(0) * 31,
-    0
-  );
-  const getValue = (offset: number) => {
-    const baseValue = (((hash >> offset) % 0xff) % 76) + 180;
-    const maxValue = 225;
-    return Math.min(baseValue, maxValue);
-  };
-  const red = getValue(0);
-  const green = getValue(8);
-  const blue = getValue(16);
-
-  return `rgb(${red}, ${green}, ${blue})`;
-};

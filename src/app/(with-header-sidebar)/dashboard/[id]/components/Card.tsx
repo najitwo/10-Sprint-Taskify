@@ -1,6 +1,6 @@
 import React from 'react';
 import { Draggable } from 'react-beautiful-dnd';
-import { CardData } from '@/types/dashboardView';
+import { CardData, ColumnData } from '@/types/dashboardView';
 import { useModal } from '@/app/(with-header-sidebar)/mydashboard/_hooks/useModal';
 import Modal from '@/app/(with-header-sidebar)/mydashboard/_components/modal/Modal';
 import CardInfo from './card-detail/CardInfo';
@@ -9,9 +9,10 @@ import styles from './Card.module.css';
 interface Props {
   item: CardData;
   index: number;
+  columnTitle: Pick<ColumnData, 'title'>;
 }
 
-function Card({ item, index }: Props) {
+function Card({ item, index, columnTitle }: Props) {
   const { isOpen, openModal, isClosing, closeModal } = useModal();
 
   if (!item || !item.id) {
@@ -40,7 +41,7 @@ function Card({ item, index }: Props) {
           title={item.title}
           hasCloseButton={true}
         >
-          <CardInfo card={item} />
+          <CardInfo card={item} columnTitle={columnTitle} />
         </Modal>
       )}
     </>

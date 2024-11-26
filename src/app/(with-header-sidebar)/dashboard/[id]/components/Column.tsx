@@ -66,7 +66,14 @@ function Column({ color, title, totalCount, id, items }: ColumnData) {
             className={styles.dropContext}
           >
             {items.map((item, index) =>
-              item ? <Card key={item.id} item={item} index={index} /> : null
+              item ? (
+                <Card
+                  key={item.id}
+                  item={item}
+                  index={index}
+                  columnTitle={{ title }}
+                />
+              ) : null
             )}
             {provided.placeholder}
           </div>
