@@ -41,7 +41,9 @@ function Card({ item, index, columnTitle }: Props) {
           onClose={closeModal}
           title={item.title}
           hasCloseButton={true}
-          headerComponent={HeaderMenu}
+          headerComponent={() => (
+            <HeaderMenu closeModal={closeModal} cardId={item.id} />
+          )}
         >
           <CardInfo card={item} columnTitle={columnTitle} />
         </Modal>
