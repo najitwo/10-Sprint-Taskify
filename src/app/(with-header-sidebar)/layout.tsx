@@ -1,7 +1,8 @@
 import { ReactNode } from 'react';
 import SideBar from '@/components/sidebar/SideBar';
-import styles from './layout.module.css';
 import MainContainer from '@/components/MainContainer';
+import Modal from '@/app/(with-header-sidebar)/mypage/_components/Modal';
+import styles from './layout.module.css';
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
@@ -12,6 +13,7 @@ export default function Layout({ children }: { children: ReactNode }) {
       <div className={styles.mainWrapper}>
         <MainContainer>{children}</MainContainer>
       </div>
+      <Modal />
     </div>
   );
 }

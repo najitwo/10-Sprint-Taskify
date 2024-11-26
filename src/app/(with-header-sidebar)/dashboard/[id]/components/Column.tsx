@@ -4,6 +4,8 @@ import { ColumnData } from '@/types/dashboardView';
 import Button from '@/components/Button';
 import Image from 'next/image';
 import Card from './Card';
+import useModalStore from '@/store/modalStore';
+import CreateTaskModal from './CreateTaskModal';
 import styles from './Column.module.css';
 
 function Column({
@@ -56,6 +58,14 @@ function Column({
     }
   }, [items]);
 
+function Column({ color, title, totalCount, id, items }: ColumnData) {
+  const { openModal } = useModalStore();
+
+  const handleCreateTask = () => {
+    openModal(<CreateTaskModal />);
+  };
+
+
   return (
     <div className={styles.column} ref={columnRef}>
       <div className={styles.header}>
@@ -81,6 +91,7 @@ function Column({
           type="button"
           className={styles.createCard}
           aria-label="컬럼 생성 버튼"
+          onClick={handleCreateTask}
         >
           <Image
             src="/icons/add.svg"
