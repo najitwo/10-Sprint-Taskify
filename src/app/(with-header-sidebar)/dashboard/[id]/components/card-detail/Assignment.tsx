@@ -10,11 +10,6 @@ interface AssignmentProps {
 export default function Assignment({ card }: AssignmentProps) {
   if (!card) return null;
 
-  // const { assignee, dueDate } = {
-  //   dueDate: '2024-11-30 12:00',
-  //   assignee: { profileImageUrl: null, nickname: 'manta', id: 1 },
-  // };
-
   const { assignee, dueDate } = card;
 
   return (
@@ -23,7 +18,7 @@ export default function Assignment({ card }: AssignmentProps) {
         {assignee && (
           <div className={styles.assignee}>
             <dt className={styles.label}>담당자</dt>
-            <dd className={styles.description}>
+            <dd className={styles.avatarContainer}>
               <Avatar
                 name={assignee.nickname}
                 profileImageUrl={assignee.profileImageUrl}

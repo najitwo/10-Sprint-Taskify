@@ -17,6 +17,7 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  gap: 2px;
 }
 
 .label {
@@ -26,13 +27,14 @@
   line-height: 20px;
 }
 
-.description {
+.description,
+.avatarContainer {
   color: var(--black-100);
   font-size: 12px;
   font-weight: 400;
 }
 
-.assignee .description {
+.avatarContainer {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -43,7 +45,7 @@
   height: 26px;
 }
 
-.dueDate .description {
+.description {
   margin-top: 8px;
 }
 
@@ -55,6 +57,10 @@
   .wrapper {
     flex-direction: column;
     gap: 16px;
+  }
+
+  .assignee {
+    gap: 5px;
   }
 
   .avatar {
