@@ -32,6 +32,10 @@ export default function Modal({
     onClose();
   };
 
+  const handleOnClose = () => {
+    onClose();
+  };
+
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
@@ -61,7 +65,7 @@ export default function Modal({
             {hasCloseButton && (
               <div className={styles.closeButtonWrapper}>
                 <button
-                  onClick={onClose}
+                  onClick={handleOnClose}
                   aria-label="Close modal"
                   type="button"
                   className={styles.closeButton}
