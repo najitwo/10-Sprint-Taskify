@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import styles from './AuthLayout.module.css';
+import styles from './layout.module.css';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 

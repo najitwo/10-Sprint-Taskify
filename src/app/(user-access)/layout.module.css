@@ -7,19 +7,16 @@
   width: 100%;
   background-color: var(--white);
 }
-
 .authContent {
   width: 100%;
   max-width: 400px;
   box-sizing: border-box;
   display: flex;
-
   justify-content: center;
   background-color: var(--white);
   border-radius: 8px;
   padding: 20px;
 }
-
 .logoContainer {
   display: flex;
   flex-direction: column;
@@ -27,16 +24,9 @@
   align-items: center;
   margin: 16px 0;
 }
-
 .logo {
   width: 100%;
   height: auto;
-}
-
-.greeting {
-  margin-top: 16px;
-  font-size: 20px;
-  text-align: center;
 }
 @media screen and (min-width: 768px) {
   .authContent {
