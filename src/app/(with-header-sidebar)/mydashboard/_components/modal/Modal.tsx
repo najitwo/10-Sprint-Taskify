@@ -12,7 +12,7 @@ interface ModalProps {
   allowDimClose?: boolean;
   title?: string;
   hasCloseButton?: boolean;
-  headerComponent?: React.ComponentType<{}>;
+  headerComponent?: React.ComponentType<unknown>;
   children: ReactNode;
 }
 
