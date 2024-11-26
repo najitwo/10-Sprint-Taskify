@@ -5,6 +5,7 @@ import ColumnLabel from '@/components/card/ColumnLabel';
 import Pipe from '@/components/svg/Pipe';
 import Image from 'next/image';
 import styles from './CardInfo.module.css';
+import MenuDropdown from '@/components/MenuDropdown';
 
 const sample = {
   id: 1,
@@ -59,6 +60,22 @@ export default function CardInfo({ card, columnTitle }: CardInfoProps) {
           </div>
         )}
       </div>
+      <MenuDropdown menus={sampleMenu} />
     </div>
   );
 }
+
+const sampleMenu = [
+  {
+    name: 'login',
+    handleOnClick: () => {
+      console.log('Login clicked');
+    },
+  },
+  {
+    name: 'register',
+    handleOnClick: () => {
+      console.log('Register clicked');
+    },
+  },
+];
