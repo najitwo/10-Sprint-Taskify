@@ -2,7 +2,7 @@ import type { CardData } from '@/types/dashboardView';
 import Assignment from './Assignment';
 import Tag from '@/components/card/Tag';
 import ColumnLabel from '@/components/card/ColumnLabel';
-import Pipe from '@/components/Pipe';
+import Pipe from '@/components/svg/Pipe';
 import Image from 'next/image';
 import styles from './CardInfo.module.css';
 

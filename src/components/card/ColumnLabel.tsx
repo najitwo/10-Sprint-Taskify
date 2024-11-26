@@ -1,5 +1,5 @@
 import styles from './ColumnLabel.module.css';
-import Dot from '../Dot';
+import Dot from '../svg/Dot';
 
 interface ColumnLabelProps {
   name: string;
