@@ -3,12 +3,9 @@
 import { usePathname, useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Button from '../Button';
-import UserInfo from './UserInfo';
 import Title from './Title';
 import useDashboardStore from '@/store/dashboardStore';
-import type { Menu } from '@/types/menu';
-import MenuDropdown from '../MenuDropdown';
-import { useMenu } from '@/hooks/useMenu';
+import UserSection from './UserSection';
 import styles from './Header.module.css';
 
 interface HeaderProps {
@@ -18,22 +15,10 @@ interface HeaderProps {
 export default function Header({ component: Component }: HeaderProps) {
   const router = useRouter();
   const dashboard = useDashboardStore((state) => state.dashboard);
-  const { isMenuVisible, toggleMenu, closeMenu } = useMenu();
 
   const handleSettingsClick = () => {
     router.push(`/dashboard/${dashboard?.id}/edit`);
   };
-
-  const navigateTo = (href: string) => {
-    router.push(href);
-    closeMenu();
-  };
-
-  const myInfoMenus: Menu[] = [
-    { name: '내 대시보드', handleOnClick: () => navigateTo('/mydashboard') },
-    { name: '내 정보', handleOnClick: () => navigateTo('/mypage') },
-    { name: '로그아웃', handleOnClick: () => navigateTo('/') },
-  ];
 
   return (
     <header className={styles.header}>
@@ -67,16 +52,7 @@ export default function Header({ component: Component }: HeaderProps) {
           <Component />
         </div>
       )}
-      <div className={styles.userInfoContainer}>
-        <Button className={styles.userInfoButton} onClick={toggleMenu}>
-          <UserInfo />
-        </Button>
-        {isMenuVisible && (
-          <div className={styles.myMenu}>
-            <MenuDropdown menus={myInfoMenus} />
-          </div>
-        )}
-      </div>
+      <UserSection />
     </header>
   );
 }

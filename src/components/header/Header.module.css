@@ -44,31 +44,6 @@
   display: none;
 }
 
-.userInfoContainer {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
-.userInfoContainer::before {
-  content: '';
-  border: 0.5px solid var(--gray-300);
-  height: 34px;
-}
-
-.userInfoButton.userInfoButton {
-  margin-left: 16px;
-  display: flex;
-  align-items: center;
-  background-color: transparent;
-}
-
-.myMenu {
-  position: absolute;
-  top: 75px;
-  right: 0;
-}
-
 @media screen and (min-width: 768px) {
   .header {
     padding-left: 40px;
@@ -91,14 +66,6 @@
 
   .icon {
     display: block;
-  }
-
-  .userInfoWrapper {
-    margin-left: 36px;
-  }
-
-  .myMenu {
-    top: 60px;
   }
 }
 
