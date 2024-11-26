@@ -1,8 +1,8 @@
-import { CardData } from '@/types/dashboardView';
+import { Cards } from '@/types/dashboardView';
 import Assignment from './Assignment';
 import styles from './CardInfo.module.css';
 
-export default function CardInfo({ card }: { card: CardData }) {
+export default function CardInfo({ card }: { card: Cards }) {
   return (
     <div className={styles.cardInfo}>
       <div className={styles.assignmentContainer}>

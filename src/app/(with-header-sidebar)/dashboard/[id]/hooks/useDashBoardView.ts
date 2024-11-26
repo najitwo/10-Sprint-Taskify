@@ -2,14 +2,14 @@ import { useState, useEffect, useCallback } from 'react';
 import debounce from 'lodash/debounce';
 import axiosInstance from '@/lib/axiosInstance';
 import { DropResult } from 'react-beautiful-dnd';
-import { ColumnData, CardData } from '@/types/dashboardView';
+import { Columns, Cards } from '@/types/dashboardView';
 import { COLUMN_URL, CARD_URL } from '@/constants/urls';
 
 export default function useDashBoardView(dashboardId: string | undefined) {
-  const [columns, setColumns] = useState<ColumnData[]>([]);
+  const [columns, setColumns] = useState<Columns[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-  const [cursor, setCursor] = useState<string | null>(null);
+  const [cursors, setCursors] = useState<Record<number, number | null>>({});
 
   const fetchData = useCallback(async () => {
     setLoading(true);
@@ -19,67 +19,58 @@ export default function useDashBoardView(dashboardId: string | undefined) {
       );
 
       const columns = columnData.data;
-
-      const columnIds: number[] = columns.map(
-        (column: ColumnData) => column.id
-      );
+      const columnIds: number[] = columns.map((column: Columns) => column.id);
 
       const cardRequests = columnIds.map((columnId) =>
-        axiosInstance.get(
-          `${CARD_URL}?size=10&columnId=${columnId}&cursor=${cursor || ''}`
-        )
+        axiosInstance.get(`${CARD_URL}?size=10&columnId=${columnId}`)
       );
 
       const cardResponses = await Promise.all(cardRequests);
-      console.log(cardResponses[0].data.totalCount);
 
-      const updatedColumns = columns.map(
-        (column: ColumnData, index: number) => {
-          const cardData = cardResponses[index].data.cards;
-          const totalCount = cardResponses[index].data.totalCount;
-          return {
-            ...column,
-            items: cardData || [],
-            totalCount: totalCount || 0,
-          };
-        }
+      const updatedColumns = columns.map((column: Columns, index: number) => {
+        const cardData = cardResponses[index].data.cards;
+        const totalCount = cardResponses[index].data.totalCount;
+
+        return {
+          ...column,
+          items: cardData || [],
+          totalCount: totalCount || 0,
+        };
+      });
+
+      const initialCursors = updatedColumns.reduce(
+        (acc: Record<number, number | null>, column: Columns) => {
+          const lastCard = column.items[column.items.length - 1];
+          acc[column.id] = lastCard ? lastCard.id : null;
+          return acc;
+        },
+        {} as Record<number, number | null>
       );
+
       setColumns(updatedColumns);
-      setCursor(cardResponses[0].data.cursor);
-    } catch (err: unknown) {
+      setCursors(initialCursors);
+    } catch (err) {
       if (err instanceof Error) setError(err.message);
     } finally {
       setLoading(false);
     }
-  }, [dashboardId, cursor]);
-  //체크
+  }, [dashboardId]);
 
   useEffect(() => {
-    console.log('렌더링 체크');
     if (!dashboardId) return;
-
     fetchData();
-  }, [fetchData, dashboardId, cursor]);
-  //체크
+  }, [fetchData, dashboardId]);
 
   const sendCardUpdateRequest = useCallback(
-    debounce(async (cardId: string, updatedCardData: CardData) => {
+    debounce(async (cardId: string, updatedCardData: Cards) => {
       try {
-        const response = await axiosInstance.put(
-          `${CARD_URL}/${cardId}`,
-          updatedCardData
-        );
-        console.log('업뎃카드데이터', updatedCardData);
-        if (response.status === 200 || response.status === 204) {
-          console.log('카드가 성공적으로 업데이트되었습니다.');
-        }
-      } catch (err: unknown) {
+        await axiosInstance.put(`${CARD_URL}/${cardId}`, updatedCardData);
+      } catch (err) {
         if (err instanceof Error) setError(err.message);
       }
     }, 200),
     []
   );
-  //체크
 
   const handleOnDragEnd = useCallback(
     async (result: DropResult) => {
@@ -126,24 +117,74 @@ export default function useDashBoardView(dashboardId: string | undefined) {
         updatedColumns[sourceColumnIndex].totalCount -= 1;
         updatedColumns[destinationColumnIndex].totalCount += 1;
 
-        console.log(updatedColumns[sourceColumnIndex].totalCount);
+        try {
+          await sendCardUpdateRequest(`${removed.id}`, {
+            ...removed,
+            columnId: removed.columnId,
+          });
+        } catch (err) {
+          if (err instanceof Error) setError(err.message);
+        }
       }
+
+      const updatedCursors = updatedColumns.reduce(
+        (acc, column) => {
+          const lastCard = column.items[column.items.length - 1];
+          acc[column.id] = lastCard ? lastCard.id : null;
+          return acc;
+        },
+        {} as Record<number, number | null>
+      );
 
       setColumns(updatedColumns);
-
-      try {
-        await sendCardUpdateRequest(`${removed.id}`, {
-          ...removed,
-          columnId: removed.columnId,
-        });
-      } catch (err: unknown) {
-        if (err instanceof Error) setError(err.message);
-      }
+      setCursors(updatedCursors);
     },
     [columns, sendCardUpdateRequest]
   );
 
-  //체크
+  const loadMoreData = useCallback(
+    debounce(async (columnId: number) => {
+      try {
+        const currentCursor = cursors[columnId];
 
-  return { columns, loading, error, handleOnDragEnd };
+        if (currentCursor === null) return;
+
+        const { data: cardResponses } = await axiosInstance.get(
+          `${CARD_URL}?size=10&cursorId=${currentCursor}&columnId=${columnId}`
+        );
+
+        const newCards = cardResponses.cards;
+        const newCursorId = cardResponses.cursorId;
+
+        setColumns((prevColumns) =>
+          prevColumns.map((column) =>
+            column.id === columnId
+              ? {
+                  ...column,
+                  items: [
+                    ...column.items,
+                    ...newCards.filter(
+                      (newCard: Cards) =>
+                        !column.items.some(
+                          (prevCard) => prevCard.id === newCard.id
+                        )
+                    ),
+                  ],
+                }
+              : column
+          )
+        );
+
+        setCursors((prevCursors) => ({
+          ...prevCursors,
+          [columnId]: newCursorId || null,
+        }));
+      } catch (err) {
+        if (err instanceof Error) setError(err.message);
+      }
+    }, 200),
+    [cursors]
+  );
+
+  return { columns, loading, error, handleOnDragEnd, loadMoreData };
 }
