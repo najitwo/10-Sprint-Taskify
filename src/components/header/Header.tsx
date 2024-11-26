@@ -1,24 +1,29 @@
 'use client';
 
 import { usePathname, useRouter } from 'next/navigation';
+import { useState } from 'react';
 import Image from 'next/image';
 import Button from '../Button';
 import UserInfo from './UserInfo';
+import Title from './Title';
 import styles from './Header.module.css';
-import { useState } from 'react';
+import useDashboardStore from '@/store/dashboardStore';
 
 interface HeaderProps {
   component?: React.ComponentType;
 }
 
 export default function Header({ component: Component }: HeaderProps) {
-  const pathname = usePathname();
   const router = useRouter();
-
+  const dashboard = useDashboardStore((state) => state.dashboard);
   const [isMenuVisible, setIsMenuVisible] = useState(false);
 
   const handleUserInfoClick = () => {
     setIsMenuVisible(!isMenuVisible);
+  };
+
+  const handleSettingsClick = () => {
+    router.push(`/dashboard/${dashboard?.id}/edit`);
   };
 
   const navigateTo = (href: string) => {
@@ -28,18 +33,20 @@ export default function Header({ component: Component }: HeaderProps) {
 
   return (
     <header className={styles.header}>
-      <h2 className={styles.title}>내 대시보드</h2>
+      <Title pathname={usePathname()} />
       <div className={styles.buttonContainer}>
-        <Button className={styles.button}>
-          <Image
-            src="/icons/settings.svg"
-            alt="관리"
-            width={20}
-            height={20}
-            className={styles.icon}
-          />
-          관리
-        </Button>
+        {dashboard?.createdByMe && (
+          <Button className={styles.button} onClick={handleSettingsClick}>
+            <Image
+              src="/icons/settings.svg"
+              alt="관리"
+              width={20}
+              height={20}
+              className={styles.icon}
+            />
+            관리
+          </Button>
+        )}
         <Button className={styles.button}>
           <Image
             src="/icons/add_box.svg"
@@ -57,9 +64,9 @@ export default function Header({ component: Component }: HeaderProps) {
         </div>
       )}
       <div className={styles.userInfoContainer}>
-        <div className={styles.userInfoWrapper} onClick={handleUserInfoClick}>
+        <Button className={styles.userInfoButton} onClick={handleUserInfoClick}>
           <UserInfo />
-        </div>
+        </Button>
         {isMenuVisible && (
           <div className={styles.myMenu}>
             <div onClick={() => navigateTo('/mydashboard')}>내 대시보드</div>

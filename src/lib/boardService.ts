@@ -2,6 +2,7 @@ import axiosInstance from '@/lib/axiosInstance';
 import {
   UpdateDashboardRequestParams,
   CreateDashboardRequestBody,
+  Dashboard,
 } from '@/types/dashboards';
 
 export const getBoard = async (id: string) => {
@@ -31,13 +32,21 @@ export const updateBoard = async (
 export const createDashboard = async ({
   title,
   color,
-}: CreateDashboardRequestBody) => {
+}: CreateDashboardRequestBody): Promise<Dashboard> => {
   try {
     const response = await axiosInstance.post(`/dashboards`, {
       title,
       color,
     });
     return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const deleteDashboard = async (dashboardId: string) => {
+  try {
+    await axiosInstance.delete(`/dashboards/${dashboardId}`);
   } catch (error) {
     throw error;
   }

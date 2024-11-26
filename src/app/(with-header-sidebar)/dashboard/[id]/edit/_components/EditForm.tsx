@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import useIdStore from '@/store/idStore';
-import { getBoard, updateBoard } from '../_lib/boardService';
+import { getBoard, updateBoard } from '@/lib/boardService';
 import { Dashboard, UpdateDashboardRequestParams } from '@/types/dashboards';
 import Button from '@/components/Button';
 import DashboardInput from '@/components/DashboardInput';

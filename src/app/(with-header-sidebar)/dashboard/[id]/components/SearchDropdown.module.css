@@ -1,0 +1,140 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+  width: 287px;
+}
+
+.label {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 24px;
+  color: var(--black-100);
+}
+
+.inputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input {
+  width: 100%;
+  border: 1px solid var(--gray-300);
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 24px;
+  padding: 11px 14px;
+}
+
+.input.withAvatar {
+  padding-left: 46px;
+}
+
+.avatarContainer {
+  position: absolute;
+  top: 50%;
+  left: 14px;
+  transform: translateY(-50%);
+}
+
+.input:focus {
+  outline-color: var(--violet);
+}
+
+.input::placeholder {
+  color: var(--gray-400);
+}
+
+.dropdownIcon {
+  position: absolute;
+  right: 14px;
+  pointer-events: none;
+}
+
+.dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  width: 100%;
+  background: var(--white);
+  border: 1px solid var(--gray-300);
+  border-radius: 6px;
+  max-height: 150px;
+  overflow-y: auto;
+  scrollbar-width: none;
+  z-index: 1000;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.avatar.avatar {
+  width: 26px;
+  height: 26px;
+  font-size: 12px;
+}
+
+.dropdownItem {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 11px 46px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 26px;
+  color: var(--black-100);
+  position: relative;
+}
+
+.dropdownItem:hover,
+.focus {
+  background: var(--violet-light);
+  color: var(--violet);
+}
+
+.noResult {
+  padding: 11px 0;
+  font-size: 16px;
+  color: var(--gray-400);
+  text-align: center;
+}
+
+.check {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  top: 50%;
+  left: 16px;
+  transform: translateY(-50%);
+}
+
+.check path {
+  fill: var(--gray-500);
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+    width: 520px;
+    gap: 8px;
+  }
+
+  .label {
+    font-size: 18px;
+    line-height: 26px;
+  }
+
+  .input {
+    font-size: 16px;
+    line-height: 26px;
+    padding: 11px 16px;
+  }
+
+  .input.withAvatar {
+    padding-left: 48px;
+  }
+
+  .avatarContainer {
+    left: 16px;
+  }
+}

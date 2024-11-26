@@ -4,6 +4,8 @@ import { Columns } from '@/types/dashboardView';
 import Button from '@/components/Button';
 import Image from 'next/image';
 import Card from './Card';
+import useModalStore from '@/store/modalStore';
+import CreateTaskModal from './CreateTaskModal';
 import styles from './Column.module.css';
 
 function Column({
@@ -18,6 +20,7 @@ function Column({
   const loadMoreRef = useRef<HTMLDivElement | null>(null);
   const columnRef = useRef<HTMLDivElement | null>(null);
   const [minHeight, setMinHeight] = useState<string>('auto');
+  const { openModal } = useModalStore();
 
   useEffect(() => {
     observerRef.current = new IntersectionObserver(
@@ -56,6 +59,10 @@ function Column({
     }
   }, [items]);
 
+  const handleCreateTask = () => {
+    openModal(<CreateTaskModal />);
+  };
+
   return (
     <div className={styles.column} ref={columnRef}>
       <div className={styles.header}>
@@ -81,6 +88,7 @@ function Column({
           type="button"
           className={styles.createCard}
           aria-label="컬럼 생성 버튼"
+          onClick={handleCreateTask}
         >
           <Image
             src="/icons/add.svg"
