@@ -12,6 +12,11 @@
   color: var(--black-100);
 }
 
+.image.image {
+  width: 76px;
+  height: 76px;
+}
+
 .footer {
   display: flex;
   align-items: center;

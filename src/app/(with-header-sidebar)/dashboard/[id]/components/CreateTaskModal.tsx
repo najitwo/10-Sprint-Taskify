@@ -5,10 +5,18 @@ import Input from '@/components/Input';
 import styles from './CreateTaskModal.module.css';
 import SearchDropdown from './SearchDropdown';
 import DatePicker from './DatePicker';
+import Textarea from '@/components/Textarea';
+import FileInput from '@/components/FileInput';
 
 export interface ManagerOption {
   id: number;
   name: string;
+}
+
+export interface TaskFormValues {
+  image: File | null;
+  title: string;
+  description: string;
 }
 
 export default function CreateTaskModal() {
@@ -17,7 +25,8 @@ export default function CreateTaskModal() {
     register,
     handleSubmit,
     formState: { errors, isValid },
-  } = useForm<{ email: string }>({ mode: 'onChange' });
+    setValue,
+  } = useForm<TaskFormValues>({ mode: 'onChange' });
 
   const onSubmit = () => {
     // closeModal();
@@ -38,7 +47,16 @@ export default function CreateTaskModal() {
       <h2>할일 생성</h2>
       <SearchDropdown options={options} onSelect={handleSelect} />
       <Input name="title" label="제목" placeholder="제목을 입력해주세요" />
+      <Textarea name="description" label="내용" />
+
       <DatePicker />
+      <FileInput
+        id="image"
+        name="image"
+        label="이미지"
+        setValue={setValue}
+        className={styles.image}
+      />
       <div className={styles.footer}>
         <Button onClick={closeModal} className={styles.cancel}>
           취소
