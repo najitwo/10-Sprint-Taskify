@@ -71,7 +71,7 @@ function Column({ color, title, totalCount, id, items }: ColumnData) {
                   key={item.id}
                   item={item}
                   index={index}
-                  columnTitle={{ title }}
+                  columnTitle={title}
                 />
               ) : null
             )}

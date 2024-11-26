@@ -2,6 +2,7 @@ import { CardData, ColumnData } from '@/types/dashboardView';
 import Assignment from './Assignment';
 import styles from './CardInfo.module.css';
 import Tag from '@/components/card/Tag';
+import ColumnLabel from '@/components/card/ColumnLabel';
 
 const sample = {
   id: 1,
@@ -25,7 +26,7 @@ const sample = {
 
 interface CardInfoProps {
   card: CardData;
-  columnTitle: Pick<ColumnData, 'title'>;
+  columnTitle: string;
 }
 
 export default function CardInfo({ card, columnTitle }: CardInfoProps) {
@@ -38,6 +39,9 @@ export default function CardInfo({ card, columnTitle }: CardInfoProps) {
       </div>
 
       <div className={styles.infoContainer}>
+        <div>
+          <ColumnLabel name={columnTitle} />
+        </div>
         <div>
           <Tag name="하하호호" />
           <Tag name="김" />

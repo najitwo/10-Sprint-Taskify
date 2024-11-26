@@ -9,7 +9,7 @@ import styles from './Card.module.css';
 interface Props {
   item: CardData;
   index: number;
-  columnTitle: Pick<ColumnData, 'title'>;
+  columnTitle: string;
 }
 
 function Card({ item, index, columnTitle }: Props) {
