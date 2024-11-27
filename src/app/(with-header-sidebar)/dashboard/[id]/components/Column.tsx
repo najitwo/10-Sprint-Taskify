@@ -21,13 +21,11 @@ function Column({
   const columnRef = useRef<HTMLDivElement | null>(null);
   const { openModal } = useModalStore();
 
-  console.log(color, '컬러');
   useEffect(() => {
     observerRef.current = new IntersectionObserver(
       (entries) => {
         const entry = entries[0];
         if (entry.isIntersecting && items.length < totalCount) {
-          console.log(id, '스크롤 작동');
           loadMoreData(id);
         }
       },

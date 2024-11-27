@@ -138,6 +138,9 @@
     max-width: 354px;
     height: 1010px;
     border-right: 1px solid var(--gray-200);
+  }
+
+  .columnContent {
     border-bottom: none;
   }
 
