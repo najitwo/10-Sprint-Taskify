@@ -1,9 +1,44 @@
+.section {
+  max-width: 1200px;
+  width: 100%;
+  padding: 16px;
+  margin-bottom: 90px;
+}
+
 .cardLg1 {
-  width: 594px;
-  height: 498px;
+  width: 297px;
+  height: 248px;
 }
 
 .cardLg2 {
-  width: 436px;
-  height: 502px;
+  width: 217px;
+  height: 250px;
+}
+
+@media screen and (min-width: 768px) {
+  .section {
+    padding: 40px;
+  }
+
+  .cardLg1 {
+    width: 519px;
+    height: 435px;
+  }
+
+  .cardLg2 {
+    width: 360px;
+    height: 415px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .cardLg1 {
+    width: 594px;
+    height: 498px;
+  }
+
+  .cardLg2 {
+    width: 436px;
+    height: 502px;
+  }
 }

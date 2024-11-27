@@ -1,26 +1,39 @@
 .card {
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
-  width: 100%;
-  height: 600px;
-  margin-bottom: 90px;
-  border-radius: 8px;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
   background: var(--black-200);
+  height: 686px;
+  min-width: 343px;
+  text-align: center;
+  margin-bottom: 60px;
+  border-radius: 8px;
+}
+
+.card:not(.imgFirst) .img {
+  align-self: flex-end;
+}
+
+.imgFirst {
+  flex-direction: column-reverse;
+  align-items: center;
+}
+
+.imgFirst .img {
+  align-self: center;
+}
+
+.textLast {
+  align-self: center;
 }
 
 .titleWrapper {
   display: flex;
   flex-direction: column;
-  margin-bottom: 223px;
-  margin-left: 60px;
-  margin-right: 244px;
-  gap: 100px;
-}
-
-.imgFirst .titleWrapper {
-  margin-left: 100px;
-  margin-right: 326px;
+  align-items: center;
+  gap: 60px;
+  padding-top: 60px;
 }
 
 .subTitle {
@@ -30,12 +43,74 @@
 }
 
 .title {
-  width: 302px;
-  font-size: 48px;
+  width: 227px;
+  font-size: 36px;
   font-weight: 700;
-  line-height: 64px;
+  line-height: 50px;
 }
 
 .imgFirst .title {
-  width: 230px;
+  width: 173px;
+}
+
+@media screen and (min-width: 768px) {
+  .card {
+    height: 974px;
+    align-items: flex-end;
+  }
+
+  .titleWrapper {
+    align-self: flex-start;
+    align-items: flex-start;
+    text-align: left;
+    padding-left: 60px;
+  }
+
+  .imgFirst .title {
+    width: 230px;
+  }
+
+  .subTitle {
+    font-size: 18px;
+  }
+
+  .title {
+    width: 302px;
+    font-size: 48px;
+    line-height: 64px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .card {
+    flex-direction: row;
+    height: 600px;
+    margin-bottom: 90px;
+  }
+
+  .textLast {
+    align-self: auto;
+  }
+
+  .titleWrapper {
+    gap: 100px;
+    padding: 125px 0 0 0;
+    align-items: flex-start;
+  }
+
+  .card:not(.imgFirst) .titleWrapper {
+    padding-left: 60px;
+  }
+
+  .imgFirst .img {
+    align-self: flex-end;
+  }
+
+  .imgFirst .titleWrapper {
+    padding-right: 325px;
+  }
+
+  .imgFirst .title {
+    width: 230px;
+  }
 }
