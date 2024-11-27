@@ -14,6 +14,7 @@
   position: relative;
   width: 260px;
   height: 150px;
+  margin-bottom: 4px;
 }
 
 .imageWrapper img {
@@ -21,12 +22,65 @@
   object-fit: cover;
 }
 
+.cardInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
 .title {
   font-size: 14px;
   font-weight: 500;
+  line-height: 24px;
+}
+
+.contentContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tagContainer {
+  display: flex;
+  gap: 6px;
+}
+
+.optionalInfo {
+  display: flex;
+  justify-content: space-between;
+}
+
+.dueDateWrapper {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.icon path {
+  fill: var(--gray-500);
+}
+
+.dueDate {
+  color: var(--gray-500);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.avatar.avatar {
+  width: 22px;
+  height: 22px;
+  font-size: 12px;
 }
 
 @media screen and (min-width: 768px) {
+  .cardInfo {
+    gap: 10px;
+  }
+
+  .contentContainer {
+    gap: 12px;
+  }
+
   .imageWrapper {
     width: 90px;
     height: 55px;
@@ -34,6 +88,7 @@
 
   .title {
     font-size: 16px;
+    line-height: 26px;
   }
 }
 
@@ -41,5 +96,9 @@
   .imageWrapper {
     width: 274px;
     height: 160px;
+  }
+
+  .imageWrapper {
+    margin-bottom: 15px;
   }
 }
