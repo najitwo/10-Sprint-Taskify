@@ -5,9 +5,11 @@ import { useMenu } from '@/hooks/useMenu';
 import { useRouter } from 'next/navigation';
 import MenuDropdown from '../MenuDropdown';
 import styles from './UserSection.module.css';
+import useMe from '@/hooks/useMe';
 
 export default function UserSection() {
   const router = useRouter();
+  const { clearUser } = useMe();
   const { isMenuVisible, toggleMenu, closeMenu } = useMenu();
 
   const navigateTo = (href: string) => {
@@ -15,10 +17,15 @@ export default function UserSection() {
     closeMenu();
   };
 
+  const handleLogout = () => {
+    clearUser();
+    router.replace('/');
+  };
+
   const myInfoMenus: Menu[] = [
     { name: '내 대시보드', handleOnClick: () => navigateTo('/mydashboard') },
     { name: '내 정보', handleOnClick: () => navigateTo('/mypage') },
-    { name: '로그아웃', handleOnClick: () => navigateTo('/') },
+    { name: '로그아웃', handleOnClick: handleLogout },
   ];
 
   return (

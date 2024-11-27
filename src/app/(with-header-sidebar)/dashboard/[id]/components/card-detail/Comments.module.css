@@ -20,6 +20,10 @@
   line-height: 15px;
 }
 
+.info {
+  flex: 9;
+}
+
 .user {
   display: flex;
   align-items: center;
