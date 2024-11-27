@@ -11,6 +11,7 @@
   padding: 12px;
   position: relative;
   margin-top: 4px;
+  height: 70px;
 }
 
 .textareaWrapper:focus-within {
@@ -59,6 +60,7 @@
   }
 
   .textareaWrapper {
+    height: 110px;
     padding: 16px;
   }
 

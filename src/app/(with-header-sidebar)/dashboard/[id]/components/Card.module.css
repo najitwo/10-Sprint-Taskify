@@ -10,3 +10,15 @@
 .card.dragging {
   margin: 0;
 }
+
+@media screen and (min-width: 768px) {
+  .modal {
+    width: 680px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .modal {
+    width: 730px;
+  }
+}
