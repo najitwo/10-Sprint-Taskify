@@ -1,4 +1,5 @@
 .page {
+  min-width: 375px;
   background-color: black;
   color: white;
 }
@@ -7,5 +8,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 164px;
+  padding-top: 102px;
+}
+
+@media screen and (min-width: 768px) {
+  .main {
+    padding-top: 164px;
+  }
 }

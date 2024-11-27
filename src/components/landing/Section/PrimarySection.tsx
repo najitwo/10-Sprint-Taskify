@@ -3,7 +3,7 @@ import styles from './PrimarySection.module.css';
 
 export default function PrimarySection() {
   return (
-    <section>
+    <section className={styles.section}>
       <MainCard
         title="일의 우선순위를 관리하세요"
         subTitle="Point 1"
