@@ -12,17 +12,28 @@ interface TagsInputProps {
 export default function TagsInput({ name, setValue }: TagsInputProps) {
   const [tags, setTags] = useState<string[]>([]);
 
-  const handleKeyUp = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    const { value } = e.currentTarget;
+
+    if (e.key === 'Enter' && e.nativeEvent.isComposing === false) {
       e.preventDefault();
       e.stopPropagation();
 
-      const { value } = e.currentTarget;
       e.currentTarget.value = '';
 
       if (tags.includes(value) || value.trim() === '') return;
       setTags([...tags, value]);
       setValue(name, [...tags, value]);
+    }
+
+    if (e.key === 'Backspace' && value === '') {
+      e.preventDefault();
+
+      if (tags.length > 0) {
+        const nextValue = tags.slice(0, -1);
+        setValue(name, nextValue);
+        setTags(nextValue);
+      }
     }
   };
 
@@ -46,7 +57,7 @@ export default function TagsInput({ name, setValue }: TagsInputProps) {
         ))}
         <input
           className={styles.input}
-          onKeyDown={handleKeyUp}
+          onKeyDown={handleKeyDown}
           placeholder="입력 후 Enter"
         />
       </div>
