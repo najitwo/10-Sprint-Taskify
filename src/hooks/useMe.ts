@@ -30,7 +30,7 @@ const useMe = () => {
 
       fetchUser();
     }
-  }, [user]);
+  }, []);
 
   const clearUser = () => {
     setUser(null);
