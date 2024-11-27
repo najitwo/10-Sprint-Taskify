@@ -1,16 +1,19 @@
 .column {
   display: flex;
   flex-direction: column;
-  width: 354px;
-  height: 1010px;
-  padding: 20px;
-  border-right: 1px solid var(--gray-200);
+  min-width: 308px;
+  min-height: 385px;
+  padding: 16px 12px;
+  gap: 24px;
+  flex-grow: 1;
 }
 
 .header {
   display: flex;
-  justify-content: space-between;
+  flex-grow: 1;
   align-items: center;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .status {
@@ -54,23 +57,28 @@
   height: 24px;
 }
 
-.settings {
+.settings.settings {
   background-color: transparent;
   width: 100%;
   height: 100%;
 }
 
-.createCardSection {
-  margin-top: 25px;
-  margin-bottom: 16px;
+.columnContent {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  border-bottom: 1px solid var(--gray-200);
 }
 
-.createCard {
+.createCard.createCard {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 314px;
-  height: 40px;
+  width: 100%;
+  height: 32px;
   border: 1px solid var(--gray-300);
   background: var(--white);
   font-size: 18px;
@@ -91,22 +99,53 @@
   background: var(--violet-light);
 }
 
+.scrollContext::-webkit-scrollbar {
+  width: 0;
+}
+
 .scrollContext {
   overflow-x: hidden;
   overflow-y: auto;
-  max-height: calc(100vh - 124px);
+  height: 281px;
+}
+
+.dropContext {
   height: auto;
   display: flex;
   flex-direction: column;
 }
 
-.scrollContext::-webkit-scrollbar {
-  width: 0;
+.dragOver {
+  margin: 0;
 }
 
-.dropContext {
-  min-height: auto;
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
+@media screen and (min-width: 768px) {
+  .column {
+    padding: 20px;
+    height: 346px;
+  }
+
+  .createCard {
+    height: 40px;
+  }
+
+  .scrollContext {
+    max-height: 215px;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .column {
+    max-width: 354px;
+    height: 1010px;
+    border-right: 1px solid var(--gray-200);
+    border-bottom: none;
+  }
+
+  .scrollContext {
+    min-height: 881px;
+  }
+
+  .dropContext {
+    min-height: 881px;
+  }
 }
