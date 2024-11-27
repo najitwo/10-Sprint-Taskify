@@ -28,7 +28,6 @@ export default function CreateCommentForm({
   });
 
   const onSubmit = async (data: CreateCommentRequestBody) => {
-    // TODO 댓글 입력 완료되면 하위 조회에 데이터 덧붙이기
     const response = await createComment({
       ...data,
       cardId,
