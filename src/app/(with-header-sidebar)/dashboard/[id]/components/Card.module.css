@@ -5,25 +5,13 @@
   background: var(--white);
   margin-bottom: 24px;
   height: 257px;
-/*   margin-bottom: 20px; */
+  /*   margin-bottom: 20px; */
 }
 
 .card.dragging {
   margin: 0;
 }
 
-
-@media screen and (min-width: 768px) {
-  .card {
-    padding: 16px 20px;
-    margin-bottom: 16px;
-    height: 93px;
-  }
-}
-/* @media screen and (min-width: 1200px) {
-  .card {
-    max-height: 128px;
-=======
 .cardContainer {
   display: flex;
   flex-direction: column;
@@ -96,6 +84,12 @@
 }
 
 @media screen and (min-width: 768px) {
+  .card {
+    padding: 16px 20px;
+    margin-bottom: 16px;
+    height: 93px;
+  }
+
   .modal {
     width: 680px;
   }
@@ -129,9 +123,41 @@
   .optionalInfo {
     flex: 1;
   }
-}
 
-@media screen and (min-width: 1200px) {
+  .modal {
+    width: 680px;
+  }
+
+  .cardContainer {
+    flex-direction: row;
+    gap: 22px;
+  }
+
+  .cardInfo {
+    flex: 1;
+    gap: 10px;
+  }
+
+  .contentContainer {
+    flex-direction: row;
+    gap: 12px;
+  }
+
+  .imageWrapper {
+    width: 90px;
+    height: 57px;
+    margin-bottom: 0;
+  }
+
+  .title {
+    font-size: 16px;
+    line-height: 26px;
+  }
+
+  .optionalInfo {
+    flex: 1;
+  }
+
   .modal {
     width: 730px;
   }
@@ -152,5 +178,33 @@
 
   .contentContainer {
     flex-direction: column;
-  } 
-} */
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .card {
+    max-height: 128px;
+  }
+
+  .modal {
+    width: 730px;
+  }
+
+  .cardContainer {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .imageWrapper {
+    width: 280px;
+    height: 160px;
+  }
+
+  .imageWrapper {
+    margin-bottom: 15px;
+  }
+
+  .contentContainer {
+    flex-direction: column;
+  }
+}
