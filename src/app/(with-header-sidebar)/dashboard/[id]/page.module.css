@@ -1,18 +1,21 @@
 .dashboardView {
   display: flex;
-  min-height: 100%;
+  flex-direction: column;
+  flex-grow: 1;
+  width: 100%;
+  min-height: 100vh;
   background-color: var(--gray-100);
 }
 
 .createColumnSection {
-  padding: 20px;
+  padding: 16px 12px;
 }
 
-.createColumn {
+.createColumn.createColumn {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 354px;
+  min-width: 354px;
   height: 70px;
   border: 1px solid var(--gray-300);
   background: var(--white);
@@ -33,4 +36,19 @@
   padding: 3px;
   border-radius: 4px;
   background: var(--violet-light);
+}
+
+@media screen and (min-width: 768px) {
+  .dashboardView {
+    width: 100%;
+  }
+
+  .createColumnSection {
+    padding: 20px;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .dashboardView {
+    flex-direction: row;
+  }
 }

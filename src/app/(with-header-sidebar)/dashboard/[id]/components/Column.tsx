@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { Droppable } from 'react-beautiful-dnd';
 import { Columns } from '@/types/dashboardView';
 import Button from '@/components/Button';
@@ -19,14 +19,13 @@ function Column({
   const observerRef = useRef<IntersectionObserver | null>(null);
   const loadMoreRef = useRef<HTMLDivElement | null>(null);
   const columnRef = useRef<HTMLDivElement | null>(null);
-  const [minHeight, setMinHeight] = useState<string>('auto');
   const { openModal } = useModalStore();
 
   useEffect(() => {
     observerRef.current = new IntersectionObserver(
       (entries) => {
         const entry = entries[0];
-        if (entry.isIntersecting) {
+        if (entry.isIntersecting && items.length < totalCount) {
           loadMoreData(id);
         }
       },
@@ -49,15 +48,7 @@ function Column({
         observerRef.current.unobserve(loadMoreElement);
       }
     };
-  }, [id, loadMoreData]);
-
-  useEffect(() => {
-    if (items.length === 0 || items.length <= 5) {
-      setMinHeight('866px');
-    } else {
-      setMinHeight('auto');
-    }
-  }, [items]);
+  }, [id, loadMoreData, totalCount]);
 
   const handleCreateTask = () => {
     openModal(<CreateTaskModal columnId={id} />);
@@ -83,52 +74,55 @@ function Column({
         </div>
       </div>
 
-      <div className={styles.createCardSection}>
-        <Button
-          type="button"
-          className={styles.createCard}
-          aria-label="컬럼 생성 버튼"
-          onClick={handleCreateTask}
-        >
-          <Image
-            src="/icons/add.svg"
-            width={22}
-            height={22}
-            alt=""
-            className={styles.createCardIcon}
-          />
-        </Button>
-      </div>
-      <div className={styles.scrollContext}>
-        <Droppable
-          droppableId={`${id}`}
-          isDropDisabled={false}
-          isCombineEnabled={false}
-          ignoreContainerClipping={true}
-          direction="vertical"
-        >
-          {(provided) => (
-            <div
-              className={styles.dropContext}
-              ref={provided.innerRef}
-              {...provided.droppableProps}
-              style={{ minHeight }}
-            >
-              {items.map((item, index) =>
-                item ? (
-                  <Card
-                    key={item.id}
-                    item={item}
-                    index={index}
-                    columnTitle={title}
-                  />
-                ) : null
-              )}
-              {provided.placeholder}
-              <div ref={loadMoreRef} style={{ height: '1px' }} />
-            </div>
-          )}
-        </Droppable>
+      <div className={`${styles.columnContent}${styles.createCardSection}`}>
+        <div className={styles.createCardSection}>
+          <Button
+            type="button"
+            className={styles.createCard}
+            aria-label="컬럼 생성 버튼"
+            onClick={handleCreateTask}
+          >
+            <Image
+              src="/icons/add.svg"
+              width={22}
+              height={22}
+              alt=""
+              className={styles.createCardIcon}
+            />
+          </Button>
+        </div>
+        <div className={styles.scrollContext}>
+          <Droppable
+            droppableId={`${id}`}
+            isDropDisabled={false}
+            isCombineEnabled={false}
+            ignoreContainerClipping={true}
+            direction="vertical"
+          >
+            {(provided, snapshot) => (
+              <div
+                className={`${styles.dropContext} ${
+                  snapshot.isDraggingOver ? styles.dragOver : ''
+                }`}
+                ref={provided.innerRef}
+                {...provided.droppableProps}
+              >
+                {items.map((item, index) =>
+                  item ? (
+                    <Card
+                      key={item.id}
+                      item={item}
+                      index={index}
+                      columnTitle={title}
+                    />
+                  ) : null
+                )}
+                <div ref={loadMoreRef} style={{ height: '1px' }} />
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
+        </div>
       </div>
     </div>
   );

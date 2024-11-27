@@ -1,15 +1,29 @@
 .card {
-  padding: 16px;
+  padding: 12px 12px 5px 12px;
   border-radius: 6px;
   border: 1px solid var(--gray-300);
   background: var(--white);
-  margin-bottom: 20px;
+  margin-bottom: 24px;
+  height: 257px;
+/*   margin-bottom: 20px; */
 }
 
 .card.dragging {
   margin: 0;
 }
 
+
+@media screen and (min-width: 768px) {
+  .card {
+    padding: 16px 20px;
+    margin-bottom: 16px;
+    height: 93px;
+  }
+}
+/* @media screen and (min-width: 1200px) {
+  .card {
+    max-height: 128px;
+=======
 .cardContainer {
   display: flex;
   flex-direction: column;
@@ -138,5 +152,5 @@
 
   .contentContainer {
     flex-direction: column;
-  }
-}
+  } 
+} */

@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect } from 'react';
-import { useParams, useSearchParams } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import { DragDropContext } from 'react-beautiful-dnd';
 import useDashBoardView from './hooks/useDashBoardView';
 import Column from './components/Column';
@@ -14,12 +14,11 @@ export default function DashBoardView() {
   const params = useParams();
   const id = params.id;
 
-  const searchParams = useSearchParams();
-  const color = searchParams.get('color') || 'var(--violet)';
   const { columns, loading, error, handleOnDragEnd, loadMoreData } =
     useDashBoardView(`${id}`);
   const dashboard = useDashboardStore((state) => state.dashboard);
   const setDashboard = useDashboardStore((state) => state.setDashboard);
+  const color = useDashboardStore((state) => state.color);
 
   useEffect(() => {
     if (dashboard?.id !== Number(id)) {
