@@ -1,30 +1,77 @@
+.section {
+  max-width: 1200px;
+  width: 100%;
+  margin-bottom: 120px;
+  padding: 16px;
+}
+
 .title {
-  margin-bottom: 36px;
-  font-size: 28px;
+  margin-bottom: 42px;
+  font-size: 22px;
   font-weight: 700;
+  text-align: center;
 }
 
 .cards {
   display: flex;
-  gap: 33px;
+  flex-direction: column;
+  gap: 40px;
 }
 
 .cardSm1,
 .cardSm2,
 .cardSm3 {
-  width: 300px;
+  width: 260px;
 }
 
 .cardSm1 {
-  height: 124px;
+  height: 108px;
 }
 
 .cardSm2 {
-  width: 300px;
-  height: 231px;
+  height: 200px;
 }
 
 .cardSm3 {
-  width: 300px;
-  height: 195px;
+  height: 170px;
+}
+
+@media screen and (min-width: 768px) {
+  .seciton {
+    margin-bottom: 160px;
+  }
+
+  .title {
+    margin-bottom: 36px;
+    font-size: 28px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .title {
+    text-align: left;
+  }
+
+  .cards {
+    flex-direction: row;
+    gap: 33px;
+  }
+
+  .cardSm1,
+  .cardSm2,
+  .cardSm3 {
+    width: 300px;
+  }
+
+  .cardSm1 {
+    height: 124px;
+  }
+
+  .cardSm2 {
+    height: 231px;
+  }
+
+  .cardSm3 {
+    height: 195px;
+  }
 }

@@ -18,15 +18,20 @@ export default function MainCard({
   className,
   imgFirst = false,
 }: Props) {
+  const destopFor = imgFirst ? styles.imgFirst : '';
   return (
-    <div
-      className={`${styles.card} ${imgFirst ? styles.imgFirst : styles.textFirst}`}
-    >
-      {imgFirst && <ImageWrapper src={src} alt={alt} className={className} />}
+    <div className={`${styles.card} ${destopFor}`}>
+      {imgFirst && (
+        <ImageWrapper
+          src={src}
+          alt={alt}
+          className={`${className} ${styles.img}`}
+        />
+      )}
 
       <div className={styles.titleWrapper}>
         <div className={styles.subTitle}>{subTitle}</div>
-        <div className={styles.title}>{title}</div>
+        <div className={`${styles.title} ${styles.textLast}`}>{title}</div>
       </div>
 
       {!imgFirst && <ImageWrapper src={src} alt={alt} className={className} />}
