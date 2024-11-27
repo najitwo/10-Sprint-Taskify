@@ -1,4 +1,13 @@
 .label {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 24px;
+  color: var(--black-100);
+  margin-bottom: 5px;
+}
+
+.wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -10,7 +19,7 @@
   position: relative;
 }
 
-.iconContainer {
+.iconContainer.iconContainer {
   position: relative;
   width: 20px;
   height: 20px;
@@ -29,12 +38,12 @@
   transition: opacity 0.3s ease-in-out;
 }
 
-.label:hover .image {
+.wrapper:hover .image {
   filter: brightness(50%);
   transition: filter 0.3s ease-in-out;
 }
 
-.label:hover .hoverContent {
+.wrapper:hover .hoverContent {
   opacity: 1;
   transition: opacity 0.3s ease-in-out;
   z-index: 1;
@@ -42,9 +51,15 @@
 
 @media screen and (min-width: 768px) {
   .label {
+    font-size: 18px;
+    line-height: 26px;
+  }
+
+  .wrapper {
     width: 182px;
     height: 182px;
   }
+
   .imageContainer {
     width: 30px;
     height: 30px;

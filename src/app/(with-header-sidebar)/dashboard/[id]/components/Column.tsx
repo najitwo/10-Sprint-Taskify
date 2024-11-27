@@ -60,7 +60,7 @@ function Column({
   }, [items]);
 
   const handleCreateTask = () => {
-    openModal(<CreateTaskModal />);
+    openModal(<CreateTaskModal columnId={id} />);
   };
 
   return (

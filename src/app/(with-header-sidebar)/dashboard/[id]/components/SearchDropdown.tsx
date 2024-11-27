@@ -1,44 +1,44 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
-import styles from './SearchDropdown.module.css';
+import { useState, useRef, useEffect, KeyboardEvent } from 'react';
 import Image from 'next/image';
-import { ManagerOption } from './CreateTaskModal';
-import CheckIcon from '/public/icons/done.svg';
 import Avatar from '@/components/Avatar';
+import { Member } from '@/types/member';
+import styles from './SearchDropdown.module.css';
+import CheckIcon from '/public/icons/done.svg';
 
 interface SearchDropdownProps {
-  options: ManagerOption[];
+  options: Member[];
+  name: 'assigneeUserId';
+  setValue: (name: 'assigneeUserId', value: number) => void;
   placeholder?: string;
-  onSelect: (selected: ManagerOption) => void;
 }
 
 export default function SearchDropdown({
   options,
+  name,
+  setValue,
   placeholder = '이름을 입력해 주세요',
-  onSelect,
 }: SearchDropdownProps) {
   const [query, setQuery] = useState('');
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
   const [focusedIndex, setFocusedIndex] = useState(-1);
-  const [selectedOption, setSelectedOption] = useState<ManagerOption | null>(
-    null
-  );
+  const [selectedOption, setSelectedOption] = useState<Member | null>(null);
   const dropdownRef = useRef<HTMLUListElement | null>(null);
 
   const filteredOptions = options.filter((option) =>
-    option.name.toLowerCase().includes(query.toLowerCase())
+    option.nickname.toLowerCase().includes(query.toLowerCase())
   );
 
-  const handleSelect = (option: ManagerOption) => {
-    setQuery(option.name);
+  const handleSelect = (option: Member) => {
+    setQuery(option.nickname);
     setSelectedOption(option);
     setIsDropdownVisible(false);
-    onSelect(option);
+    setValue(name, option.userId);
     setFocusedIndex(-1);
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+  const handleKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
     if (!isDropdownVisible && (e.key === 'ArrowDown' || e.key === 'ArrowUp')) {
       setIsDropdownVisible(true);
       return;
@@ -84,7 +84,7 @@ export default function SearchDropdown({
     if (!dropdownRef.current?.contains(e.relatedTarget as Node)) {
       setIsDropdownVisible(false);
       setFocusedIndex(-1);
-      setQuery(selectedOption?.name || '');
+      setQuery(selectedOption?.nickname || '');
     }
   };
 
@@ -101,10 +101,10 @@ export default function SearchDropdown({
     option,
     index,
   }: {
-    option: ManagerOption;
+    option: Member;
     index: number;
   }) => {
-    const isSelected = selectedOption?.id === option.id;
+    const isSelected = selectedOption?.userId === option.userId;
     const isFocused = index === focusedIndex;
 
     return (
@@ -117,8 +117,12 @@ export default function SearchDropdown({
         aria-selected={isSelected}
       >
         {isSelected && <CheckIcon className={styles.check} />}
-        <Avatar name={option.name} className={styles.avatar} />
-        {option.name}
+        <Avatar
+          name={option.nickname}
+          className={styles.avatar}
+          profileImageUrl={option.profileImageUrl}
+        />
+        {option.nickname}
       </li>
     );
   };
@@ -132,8 +136,9 @@ export default function SearchDropdown({
       <label className={styles.label}>담당자</label>
       <div className={styles.inputWrapper}>
         <input
+          name={name}
           type="text"
-          className={`${styles.input} ${selectedOption?.name === query ? styles.withAvatar : ''}`}
+          className={`${styles.input} ${selectedOption?.nickname === query ? styles.withAvatar : ''}`}
           placeholder={placeholder}
           value={query}
           onChange={(e) => {
@@ -141,10 +146,15 @@ export default function SearchDropdown({
             setIsDropdownVisible(true);
           }}
           onFocus={() => setIsDropdownVisible(true)}
+          autoComplete="off"
         />
-        {selectedOption?.name === query && (
+        {selectedOption?.nickname === query && (
           <div className={styles.avatarContainer}>
-            <Avatar name={selectedOption.name} className={styles.avatar} />
+            <Avatar
+              name={selectedOption.nickname}
+              className={styles.avatar}
+              profileImageUrl={selectedOption.profileImageUrl}
+            />
           </div>
         )}
         <Image
@@ -159,7 +169,7 @@ export default function SearchDropdown({
         <ul className={styles.dropdown} ref={dropdownRef}>
           {filteredOptions.length > 0 ? (
             filteredOptions.map((option, index) => (
-              <DropdownItem key={option.id} option={option} index={index} />
+              <DropdownItem key={option.userId} option={option} index={index} />
             ))
           ) : (
             <li className={styles.noResult}>검색 결과가 없습니다</li>

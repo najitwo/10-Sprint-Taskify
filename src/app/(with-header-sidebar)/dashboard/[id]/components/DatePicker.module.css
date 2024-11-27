@@ -3,7 +3,7 @@
   flex-direction: column;
   gap: 8px;
   position: relative;
-  width: 287px;
+  width: 295px;
 }
 
 .label {
@@ -24,7 +24,8 @@
   font-size: 14px;
   font-weight: 400;
   line-height: 24px;
-  padding: 11px 14px;
+  padding: 12px 0 12px 46px;
+  color: var(--black-100);
   cursor: pointer;
 }
 
@@ -36,11 +37,24 @@
   color: var(--gray-400);
 }
 
-.calendarWrapper {
+.icon {
   position: absolute;
-  top: 50px;
+  top: 50%;
+  left: 16px;
+  transform: translateY(-50%);
+}
+
+.icon path {
+  fill: var(--black-100);
+}
+
+.calendarWrapper {
+  display: flex;
+  position: absolute;
+  top: calc(100% + 4px);
   left: 0;
-  width: 100%;
+  width: auto;
+  max-height: 250px;
   background: var(--white);
   border: 1px solid var(--gray-200);
   border-radius: 4px;
@@ -53,21 +67,23 @@
   justify-content: space-between;
   align-items: center;
   padding: 10px;
-  background: var(--gray-200);
+  background: var(--violet-light);
   border-bottom: 1px solid var(--gray-200);
+  color: var(--black-100);
+  font-weight: 500;
 }
 
 .daysOfWeek {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  background: var(--gray-300);
   text-align: center;
-  padding: 5px 0;
+  padding: 7px 0;
 }
 
 .day {
-  font-weight: bold;
-  color: var(--black-100);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--violet);
 }
 
 .days {
@@ -77,11 +93,13 @@
 }
 
 .dayButton {
-  padding: 10px;
+  font-size: 14px;
+  padding: 7px;
 }
 
-.dayButton:hover {
+.dayButton:hover:not(.selected):not(:disabled) {
   background: var(--violet-light);
+  color: var(--violet);
 }
 
 .dayButton.selected {
@@ -91,19 +109,60 @@
 }
 
 .dayButton:disabled {
-  cursor: default;
+  color: var(--gray-300);
+  cursor: not-allowed;
 }
 
 .timePicker {
-  padding: 10px;
   border-top: 1px solid var(--gray-200);
+}
+
+.timePicker h4 {
+  background-color: var(--violet-light);
+  text-align: center;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 18px;
+  color: var(--black-100);
 }
 
 .timeSelect {
   width: 100%;
-  padding: 8px;
+  max-height: 210px;
   border: 1px solid var(--gray-200);
   border-radius: 4px;
+  overflow-y: scroll;
+}
+
+.timeSelect::-webkit-scrollbar {
+  width: 4px;
+}
+
+.timeSelect::-webkit-scrollbar-thumb {
+  background: var(--purple);
+  border-radius: 5px;
+}
+
+.timeList {
+  font-size: 14px;
+  padding: 7px;
+  cursor: pointer;
+}
+
+.timeList:hover:not(.disabled):not(.selected) {
+  background-color: var(--violet-light);
+  color: var(--violet);
+}
+
+.timeList.selected {
+  background: var(--violet);
+  color: var(--white);
+}
+
+.timeList.disabled {
+  color: var(--gray-300);
+  cursor: not-allowed;
 }
 
 .image {
@@ -118,5 +177,30 @@
   .label {
     font-size: 18px;
     line-height: 26px;
+  }
+
+  .input {
+    font-size: 16px;
+    line-height: 26px;
+  }
+
+  .calendarWrapper {
+    max-height: 295px;
+  }
+
+  .daysOfWeek {
+    padding: 10px 0;
+  }
+
+  .dayButton {
+    padding: 10px;
+  }
+
+  .timeSelect {
+    max-height: 255px;
+  }
+
+  .timeList {
+    padding: 10px;
   }
 }
