@@ -82,6 +82,10 @@
 }
 
 @media screen and (min-width: 768px) {
+  .modal {
+    width: 680px;
+  }
+
   .cardContainer {
     flex-direction: row;
     gap: 22px;
@@ -114,6 +118,10 @@
 }
 
 @media screen and (min-width: 1200px) {
+  .modal {
+    width: 730px;
+  }
+
   .cardContainer {
     flex-direction: column;
     gap: 0;

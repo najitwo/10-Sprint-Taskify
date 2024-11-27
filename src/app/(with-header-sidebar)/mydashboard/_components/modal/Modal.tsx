@@ -13,6 +13,7 @@ interface ModalProps {
   title?: string;
   hasCloseButton?: boolean;
   headerComponent?: React.ComponentType<unknown>;
+  className?: string;
   children: ReactNode;
 }
 
@@ -23,12 +24,17 @@ export default function Modal({
   title,
   hasCloseButton = false,
   headerComponent: Component,
+  className = '',
   children,
 }: ModalProps) {
   const handleOnClickBackground = (e: MouseEvent<HTMLDivElement>) => {
     if (!allowDimClose || !(e.target === e.currentTarget)) {
       return;
     }
+    onClose();
+  };
+
+  const handleOnClose = () => {
     onClose();
   };
 
@@ -52,7 +58,7 @@ export default function Modal({
       onClick={handleOnClickBackground}
     >
       <div
-        className={`${styles.container} ${isClosing ? styles.slideOut : ''}`}
+        className={`${styles.container} ${isClosing ? styles.slideOut : ''} ${className}`}
       >
         <FocusTrap>
           <div className={styles.titleContainer}>
@@ -61,7 +67,7 @@ export default function Modal({
             {hasCloseButton && (
               <div className={styles.closeButtonWrapper}>
                 <button
-                  onClick={onClose}
+                  onClick={handleOnClose}
                   aria-label="Close modal"
                   type="button"
                   className={styles.closeButton}

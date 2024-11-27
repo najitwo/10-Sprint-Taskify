@@ -88,6 +88,7 @@ function Card({ item, index, columnTitle }: Props) {
           headerComponent={() => (
             <HeaderMenu closeModal={closeModal} cardId={id} />
           )}
+          className={styles.modal}
         >
           <CardInfo card={item} columnTitle={columnTitle} />
         </Modal>

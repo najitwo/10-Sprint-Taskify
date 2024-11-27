@@ -1,5 +1,17 @@
 import axiosInstance from '@/lib/axiosInstance';
-import { GetCommentsRequestParams } from '@/types/comment';
+import type {
+  CreateCommentRequestBody,
+  Comment,
+  GetCommentsRequestParams,
+} from '@/types/comment';
+
+export const deleteCard = async (cardId: number) => {
+  try {
+    await axiosInstance.delete(`/cards/${cardId}`);
+  } catch (error) {
+    throw error;
+  }
+};
 
 export const getComments = async ({
   cardId,
@@ -17,6 +29,17 @@ export const getComments = async ({
     }
 
     const response = await axiosInstance.get(`/comments?${params.toString()}`);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const createComment = async (
+  data: CreateCommentRequestBody
+): Promise<Comment> => {
+  try {
+    const response = await axiosInstance.post(`/comments`, { ...data });
     return response.data;
   } catch (error) {
     throw error;

@@ -19,10 +19,11 @@ const DEFAULT_INVITATION_STATE: InvitationState = {
   invitations: [],
 };
 
-const useInvitation = (dashboardId: string, pageSize = 5) => {
+const useInvitation = (dashboardId: string | null, pageSize = 5) => {
   const [invitationState, setInvitationState] = useState<InvitationState>(
     DEFAULT_INVITATION_STATE
   );
+
   const {
     isLoading,
     error,
@@ -52,6 +53,10 @@ const useInvitation = (dashboardId: string, pageSize = 5) => {
     [getInvitationsAsync, dashboardId, pageSize]
   );
 
+  useEffect(() => {
+    handleLoad(invitationState.page);
+  }, [handleLoad, invitationState.page]);
+
   const handlePageChange = (direction: 'next' | 'prev') => {
     setInvitationState((prevState) => {
       if (direction === 'next' && prevState.page < prevState.totalPages) {
@@ -66,7 +71,7 @@ const useInvitation = (dashboardId: string, pageSize = 5) => {
 
   const handleCancel = async (invitationId: number) => {
     try {
-      await deleteInvitation(dashboardId, invitationId);
+      await deleteInvitation(dashboardId!, invitationId);
       handleLoad(invitationState.page);
     } catch (error) {
       throw error;
@@ -75,16 +80,12 @@ const useInvitation = (dashboardId: string, pageSize = 5) => {
 
   const handleInvite = async (email: string) => {
     try {
-      await createInvitation(dashboardId, email);
+      await createInvitation(dashboardId!, email);
       handleLoad(invitationState.page);
     } catch (error) {
       throw error;
     }
   };
-
-  useEffect(() => {
-    handleLoad(invitationState.page);
-  }, [handleLoad, invitationState.page]);
 
   return {
     page: invitationState.page,

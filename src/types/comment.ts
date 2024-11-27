@@ -8,9 +8,15 @@ export interface Comment {
   id: number;
   content: string;
   createdAt: string;
-  updatedAt?: string;
+  updatedAt: string;
   cardId: number;
   author: Author;
+}
+
+export interface GetCommentsRequestParams {
+  cardId: number;
+  size: number;
+  cursorId?: number;
 }
 
 export interface GetCommentsResponse {
@@ -18,8 +24,9 @@ export interface GetCommentsResponse {
   cursorId: number;
 }
 
-export interface GetCommentsRequestParams {
+export interface CreateCommentRequestBody {
+  content: string;
   cardId: number;
-  size: number;
-  cursorId?: number;
+  columnId: number;
+  dashboardId: number;
 }
