@@ -22,7 +22,6 @@ const useComment = (cardId: number, pageSize: number = 3) => {
     };
 
     try {
-      getComments;
       const response = await getComments(params);
       setComments((prev) => [...prev, ...response.comments]);
       setCursorId(response.cursorId || null);

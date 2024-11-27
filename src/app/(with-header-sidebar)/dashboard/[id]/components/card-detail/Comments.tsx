@@ -12,8 +12,8 @@ export default function Comments({ cardId }: { cardId: number }) {
       {comments.length > 0 ? (
         <>
           <ul className={styles.comments}>
-            {comments.map(({ content, createdAt, author }) => (
-              <li className={styles.comment}>
+            {comments.map(({ id, content, createdAt, author }) => (
+              <li key={id} className={styles.comment}>
                 <Avatar name={author.nickname} className={styles.avatar} />
                 <div className={styles.info}>
                   <div className={styles.user}>
