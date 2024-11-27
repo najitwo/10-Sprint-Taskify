@@ -15,7 +15,7 @@ export default function HeroSection() {
         <div className={styles.homeTitle}>새로운 일정관리</div>
         <div className={styles.homeBrand}>Taskify</div>
       </div>
-      <Link href="/login" className={styles.homeLoginBtn}>
+      <Link role="button" href="/login" className={styles.homeLoginBtn}>
         로그인하기
       </Link>
     </section>

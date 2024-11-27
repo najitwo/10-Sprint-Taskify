@@ -1,0 +1,70 @@
+.assignment {
+  padding: 6px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 8px;
+  border: 1px solid var(--gray-300);
+  background: var(--white);
+}
+
+.wrapper {
+  display: flex;
+  gap: 62px;
+}
+
+.assignee {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 2px;
+}
+
+.label {
+  color: var(--black);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 20px;
+}
+
+.description,
+.avatarContainer {
+  color: var(--black-100);
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.avatarContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.avatar {
+  width: 26px;
+  height: 26px;
+}
+
+.description {
+  margin-top: 8px;
+}
+
+@media screen and (min-width: 768px) {
+  .assignment {
+    padding: 13px;
+  }
+
+  .wrapper {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .assignee {
+    gap: 5px;
+  }
+
+  .avatar {
+    width: 34px;
+    height: 34px;
+  }
+}

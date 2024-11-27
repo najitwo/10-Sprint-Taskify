@@ -91,7 +91,22 @@
   background: var(--violet-light);
 }
 
+.scrollContext {
+  overflow-x: hidden;
+  overflow-y: auto;
+  max-height: calc(100vh - 124px);
+  height: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.scrollContext::-webkit-scrollbar {
+  width: 0;
+}
+
 .dropContext {
-  height: 100%;
-  overflow: hidden;
+  min-height: auto;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 }

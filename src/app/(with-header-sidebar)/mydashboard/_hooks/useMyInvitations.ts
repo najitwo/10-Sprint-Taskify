@@ -1,5 +1,6 @@
-import { useEffect, useRef, useState } from 'react';
+import { useState, useEffect } from 'react';
 import { getMyInvitations } from '../_lib/myInvitationService';
+import { useIntersectionObserver } from './useIntersectionObserver';
 import type { Invitation } from '@/types/invitation';
 
 const PAGE_SIZE = 10;
@@ -9,7 +10,6 @@ export const useMyInvitations = (title?: string | null, reloadKey?: number) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [cursorId, setCursorId] = useState<number | null>(null);
-  const observerRef = useRef<HTMLDivElement | null>(null);
 
   const fetchMyInvitations = async () => {
     if (isLoading) return;
@@ -25,7 +25,6 @@ export const useMyInvitations = (title?: string | null, reloadKey?: number) => {
 
     try {
       const response = await getMyInvitations(params);
-
       setMyInvitations((prev) => [...prev, ...response.invitations]);
       setCursorId(response.cursorId || null);
     } catch (err) {
@@ -33,34 +32,20 @@ export const useMyInvitations = (title?: string | null, reloadKey?: number) => {
       setError('Failed to fetch invitations');
     } finally {
       setIsLoading(false);
-      setIsLoading(false);
     }
   };
 
   useEffect(() => {
     setMyInvitations([]);
     setCursorId(null);
-    setIsLoading(true);
     fetchMyInvitations();
   }, [title, reloadKey]);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && cursorId != null && !isLoading) {
-          fetchMyInvitations();
-        }
-      },
-      { threshold: 0.5 }
-    );
-
-    const current = observerRef.current;
-    if (current) observer.observe(current);
-
-    return () => {
-      if (current) observer.unobserve(current);
-    };
-  }, [isLoading]);
+  const observerRef = useIntersectionObserver(
+    fetchMyInvitations,
+    isLoading,
+    cursorId
+  );
 
   return {
     myInvitations,

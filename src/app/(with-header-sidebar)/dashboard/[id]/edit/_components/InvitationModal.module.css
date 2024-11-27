@@ -23,6 +23,10 @@
   background-color: transparent;
 }
 
+.image {
+  display: block;
+}
+
 .input input {
   width: 295px;
   font-size: 14px;
