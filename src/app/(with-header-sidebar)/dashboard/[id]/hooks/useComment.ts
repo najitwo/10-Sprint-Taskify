@@ -47,6 +47,7 @@ const useComment = (cardId: number, pageSize: number = 3) => {
 
   return {
     comments,
+    setComments,
     isLoading,
     error,
     observerRef,
