@@ -27,7 +27,7 @@ const useComment = (cardId: number, pageSize: number = 3) => {
       setCursorId(response.cursorId || null);
     } catch (err) {
       console.error(err);
-      setError('Failed to fetch invitations');
+      setError('Failed to fetch comments');
     } finally {
       setIsLoading(false);
     }
