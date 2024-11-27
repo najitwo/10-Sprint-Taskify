@@ -7,6 +7,7 @@ import Image from 'next/image';
 import styles from './CardInfo.module.css';
 import CreateCommentForm from './comments/CreateCommentForm';
 import useDashboardStore from '@/store/dashboardStore';
+import Comments from './Comments';
 
 interface CardInfoProps {
   card: Cards;
@@ -47,6 +48,8 @@ export default function CardInfo({ card, columnTitle }: CardInfoProps) {
           columnId={42967}
           dashboardId={12706}
         />
+        <Comments cardId={11050} />
+        {/* <Comments cardId={card.id} /> */}
       </div>
       {/* <CreateCommentForm
         cardId={card.id}
