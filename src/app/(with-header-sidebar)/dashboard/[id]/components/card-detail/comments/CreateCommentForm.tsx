@@ -1,14 +1,23 @@
+import { Dispatch, SetStateAction } from 'react';
 import { useForm } from 'react-hook-form';
-import type { CreateCommentRequestBody } from '@/types/comment';
+import type { CreateCommentRequestBody, Comment } from '@/types/comment';
 import Button from '@/components/Button';
 import { createComment } from '@/lib/commentService';
 import styles from './CreateCommentForm.module.css';
+
+interface CreateCommentFormProps {
+  cardId: number;
+  columnId: number;
+  dashboardId: number;
+  setNewComment: Dispatch<SetStateAction<Comment | null>>;
+}
 
 export default function CreateCommentForm({
   cardId,
   columnId,
   dashboardId,
-}: Omit<CreateCommentRequestBody, 'content'>) {
+  setNewComment,
+}: CreateCommentFormProps) {
   const {
     register,
     handleSubmit,
@@ -20,7 +29,13 @@ export default function CreateCommentForm({
 
   const onSubmit = async (data: CreateCommentRequestBody) => {
     // TODO 댓글 입력 완료되면 하위 조회에 데이터 덧붙이기
-    await createComment({ ...data, cardId, columnId, dashboardId });
+    const response = await createComment({
+      ...data,
+      cardId,
+      columnId,
+      dashboardId,
+    });
+    setNewComment(response);
     reset();
   };
 
