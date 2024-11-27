@@ -116,6 +116,7 @@
 @media screen and (min-width: 1200px) {
   .cardContainer {
     flex-direction: column;
+    gap: 0;
   }
 
   .imageWrapper {
