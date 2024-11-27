@@ -1,7 +1,7 @@
 .modal {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 32px;
   padding: 28px 20px 20px;
 }
 
@@ -10,6 +10,12 @@
   font-weight: 700;
   line-height: 24px;
   color: var(--black-100);
+}
+
+.dropdownContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
 }
 
 .image.image {
@@ -60,6 +66,14 @@
   .modal {
     gap: 32px;
     padding: 32px;
+  }
+
+  .dropdownContainer {
+    flex-direction: row;
+  }
+
+  .dropdown {
+    width: 217px;
   }
 
   .input input {

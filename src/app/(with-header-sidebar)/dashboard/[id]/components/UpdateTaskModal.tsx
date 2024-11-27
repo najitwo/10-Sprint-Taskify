@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import useModalStore from '@/store/modalStore';
 import { useForm } from 'react-hook-form';
 import Button from '@/components/Button';
@@ -13,8 +14,13 @@ import { ERROR_MESSAGES } from '@/constants/message';
 import { updateCard } from '@/lib/cardService';
 import { TaskFormValues } from './CreateTaskModal';
 import useCardStore from '@/store/cardStore';
+import StateDropdown from './StateDropdown';
+import useColumn from '../hooks/useColumn';
 import styles from './UpdateTaskModal.module.css';
-import { useEffect } from 'react';
+
+interface TaskUpdateFormValues extends TaskFormValues {
+  columnId: number;
+}
 
 export default function UpdateTaskModal() {
   const { closeModal } = useModalStore();
@@ -24,12 +30,13 @@ export default function UpdateTaskModal() {
     formState: { errors, isValid },
     setValue,
     reset,
-  } = useForm<TaskFormValues>({ mode: 'onChange' });
+  } = useForm<TaskUpdateFormValues>({ mode: 'onChange' });
   const dashboard = useDashboardStore((state) => state.dashboard);
   const { members } = useMember(dashboard?.id.toString() || null, 10);
+  const { columns } = useColumn(dashboard?.id || null);
   const { card, setCard } = useCardStore();
 
-  const onSubmit = async (data: TaskFormValues) => {
+  const onSubmit = async (data: TaskUpdateFormValues) => {
     if (card) {
       const response = await updateCard(data, card.columnId, card.id);
       setCard(response);
@@ -47,19 +54,29 @@ export default function UpdateTaskModal() {
     }
   }, [reset, card]);
 
-  console.log(card);
-
   return (
     <form className={styles.modal} onSubmit={handleSubmit(onSubmit)}>
       <h2>할일 수정</h2>
-      <SearchDropdown
-        name="assigneeUserId"
-        options={members}
-        setValue={setValue}
-        defaultAssignee={
-          members?.filter((member) => member.userId == card?.assignee.id)[0]
-        }
-      />
+      <div className={styles.dropdownContainer}>
+        <StateDropdown
+          name="columnId"
+          options={columns}
+          setValue={setValue}
+          defaultColumn={
+            columns?.filter((column) => column.id === card?.columnId)[0]
+          }
+          className={styles.dropdown}
+        />
+        <SearchDropdown
+          name="assigneeUserId"
+          options={members}
+          setValue={setValue}
+          defaultAssignee={
+            members?.filter((member) => member.userId == card?.assignee.id)[0]
+          }
+          className={styles.dropdown}
+        />
+      </div>
       <Input
         name="title"
         label="제목"
