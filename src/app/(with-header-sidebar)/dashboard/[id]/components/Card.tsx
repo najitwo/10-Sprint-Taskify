@@ -5,6 +5,7 @@ import { useModal } from '@/app/(with-header-sidebar)/mydashboard/_hooks/useModa
 import Modal from '@/app/(with-header-sidebar)/mydashboard/_components/modal/Modal';
 import CardInfo from './card-detail/CardInfo';
 import HeaderMenu from './card-detail/HeaderMenu';
+import Image from 'next/image';
 import styles from './Card.module.css';
 
 interface Props {
@@ -20,9 +21,10 @@ function Card({ item, index, columnTitle }: Props) {
     return null;
   }
 
+  const { id, title, imageUrl } = item;
   return (
     <>
-      <Draggable draggableId={`${item.id}`} index={index}>
+      <Draggable draggableId={`${id}`} index={index}>
         {(provided, snapshot) => (
           <div
             ref={provided.innerRef}
@@ -31,7 +33,17 @@ function Card({ item, index, columnTitle }: Props) {
             className={`${styles.card} ${snapshot.isDragging ? styles.dragging : ''}`}
             onClick={openModal}
           >
-            <div>{item.title}</div>
+            {imageUrl && (
+              <div className={styles.imageWrapper}>
+                <Image
+                  src={imageUrl}
+                  alt="할일카드 첨부이미지"
+                  fill
+                  className={styles.image}
+                />
+              </div>
+            )}
+            <div className={styles.title}>{title}</div>
           </div>
         )}
       </Draggable>
@@ -39,10 +51,10 @@ function Card({ item, index, columnTitle }: Props) {
         <Modal
           isClosing={isClosing}
           onClose={closeModal}
-          title={item.title}
+          title={title}
           hasCloseButton={true}
           headerComponent={() => (
-            <HeaderMenu closeModal={closeModal} cardId={item.id} />
+            <HeaderMenu closeModal={closeModal} cardId={id} />
           )}
         >
           <CardInfo card={item} columnTitle={columnTitle} />

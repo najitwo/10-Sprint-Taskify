@@ -4,9 +4,42 @@
   border: 1px solid var(--gray-300);
   background: var(--white);
   margin-bottom: 20px;
-  height: 150px;
 }
 
 .card.dragging {
   margin: 0;
+}
+
+.imageWrapper {
+  position: relative;
+  width: 260px;
+  height: 150px;
+}
+
+.imageWrapper img {
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+.title {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+@media screen and (min-width: 768px) {
+  .imageWrapper {
+    width: 90px;
+    height: 55px;
+  }
+
+  .title {
+    font-size: 16px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .imageWrapper {
+    width: 274px;
+    height: 160px;
+  }
 }

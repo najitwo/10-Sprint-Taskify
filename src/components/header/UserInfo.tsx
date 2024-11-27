@@ -2,10 +2,9 @@
 
 import type { User } from '@/types/user';
 import Image from 'next/image';
-import { useState, useEffect } from 'react';
-import styles from './UserInfo.module.css';
 import UserInfoSkeleton from './skeleton/UserInfoSkeleton';
 import Avatar from '../Avatar';
+import styles from './UserInfo.module.css';
 
 // TODO 로그인 로직 완료 후 user정보 가져오기
 const user: User = {
