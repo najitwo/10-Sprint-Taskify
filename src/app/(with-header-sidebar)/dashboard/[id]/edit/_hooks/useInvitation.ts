@@ -23,6 +23,7 @@ const useInvitation = (dashboardId: string | null, pageSize = 5) => {
   const [invitationState, setInvitationState] = useState<InvitationState>(
     DEFAULT_INVITATION_STATE
   );
+
   const {
     isLoading,
     error,
@@ -51,6 +52,12 @@ const useInvitation = (dashboardId: string | null, pageSize = 5) => {
     },
     [getInvitationsAsync, dashboardId, pageSize]
   );
+
+  useEffect(() => {
+    handleLoad(invitationState.page);
+  }, [handleLoad, invitationState.page]);
+
+  if (!dashboardId) return;
 
   const handlePageChange = (direction: 'next' | 'prev') => {
     setInvitationState((prevState) => {
@@ -81,10 +88,6 @@ const useInvitation = (dashboardId: string | null, pageSize = 5) => {
       throw error;
     }
   };
-
-  useEffect(() => {
-    handleLoad(invitationState.page);
-  }, [handleLoad, invitationState.page]);
 
   return {
     page: invitationState.page,
