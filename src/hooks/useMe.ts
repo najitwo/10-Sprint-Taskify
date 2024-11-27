@@ -1,10 +1,12 @@
 import { useEffect } from 'react';
 import useAuthStore from '@/store/authStore';
 import axiosInstance from '@/lib/axiosInstance';
+import Cookies from 'js-cookie';
 import type { User } from '@/types/user';
+import { TOKEN_KEY } from '@/constants/cookies';
 
 const useMe = () => {
-  const { user, setUser } = useAuthStore();
+  const { user, setUser, setAccessToken } = useAuthStore();
 
   const getMe = async (): Promise<User> => {
     try {
@@ -30,8 +32,16 @@ const useMe = () => {
     }
   }, [user]);
 
+  const clearUser = () => {
+    setUser(null);
+    setAccessToken(null);
+    Cookies.remove(TOKEN_KEY);
+  };
+
   return {
     user,
+    setUser,
+    clearUser,
   };
 };
 

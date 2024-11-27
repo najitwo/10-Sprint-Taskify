@@ -9,6 +9,7 @@ import axiosInstance from '@/lib/axiosInstance';
 import { ERROR_MESSAGES } from '@/constants/message';
 import type { User } from '@/types/user';
 import Cookies from 'js-cookie';
+import { TOKEN_KEY, TOKEN_OPTIONS } from '@/constants/cookies';
 import styles from './loginPage.module.css';
 
 type LoginFormInputs = {
@@ -40,7 +41,7 @@ export default function LoginPage() {
       const response = await axiosInstance.post('/auth/login', data);
       const { accessToken, user } = response.data;
 
-      Cookies.set('accessToken', accessToken, { expires: 7, secure: true });
+      Cookies.set(TOKEN_KEY, accessToken, TOKEN_OPTIONS);
 
       setAccessToken(accessToken);
       setUser(user as User);
