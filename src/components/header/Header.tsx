@@ -24,22 +24,24 @@ export default function Header({ component: Component }: HeaderProps) {
   return (
     <header className={styles.header}>
       <Title pathname={usePathname()} />
-      <div className={styles.buttonContainer}>
-        {dashboard?.createdByMe && (
-          <Button className={styles.button} onClick={handleSettingsClick}>
-            <Image
-              src="/icons/settings.svg"
-              alt="관리"
-              width={20}
-              height={20}
-              className={styles.icon}
-            />
-            관리
-          </Button>
-        )}
-        {dashboard && <InvitationButton dashboardId={dashboard.id} />}
-      </div>
-      {Component && (
+      {dashboard && (
+        <div className={styles.buttonContainer}>
+          {dashboard.createdByMe && (
+            <Button className={styles.button} onClick={handleSettingsClick}>
+              <Image
+                src="/icons/settings.svg"
+                alt="관리"
+                width={20}
+                height={20}
+                className={styles.icon}
+              />
+              관리
+            </Button>
+          )}
+          <InvitationButton dashboardId={dashboard.id} />
+        </div>
+      )}
+      {Component && dashboard && (
         <div>
           <Component />
         </div>
