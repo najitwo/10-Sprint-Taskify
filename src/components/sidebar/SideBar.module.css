@@ -39,9 +39,6 @@
   }
 
   .createDashboardContainer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     width: 100%;
     padding: 0;
   }
@@ -51,6 +48,13 @@
     color: var(--gray-500);
     font-size: 12px;
     font-weight: 600;
+  }
+
+  .addButton.addButton {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 }
 
