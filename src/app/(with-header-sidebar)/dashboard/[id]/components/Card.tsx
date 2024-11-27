@@ -36,39 +36,43 @@ function Card({ item, index, columnTitle }: Props) {
             className={`${styles.card} ${snapshot.isDragging ? styles.dragging : ''}`}
             onClick={openModal}
           >
-            {imageUrl && (
-              <div className={styles.imageWrapper}>
-                <Image
-                  src={imageUrl}
-                  alt="할일카드 첨부이미지"
-                  fill
-                  className={styles.image}
-                />
+            <div className={styles.cardContainer}>
+              <div className={styles.imageContainer}>
+                {imageUrl && (
+                  <div className={styles.imageWrapper}>
+                    <Image
+                      src={imageUrl}
+                      alt="할일카드 첨부이미지"
+                      fill
+                      className={styles.image}
+                    />
+                  </div>
+                )}
               </div>
-            )}
-            <div className={styles.cardInfo}>
-              <h3 className={styles.title}>{title}</h3>
-              <div className={styles.contentContainer}>
-                <div className={styles.tagContainer}>
-                  {tags.map((tag, index) => (
-                    <Tag key={index} name={tag} />
-                  ))}
-                </div>
-                <div className={styles.optionalInfo}>
-                  <div className={styles.dueDateWrapper}>
-                    {dueDate && (
-                      <>
-                        <CalendarIcon className={styles.icon} />
-                        <span className={styles.dueDate}>{dueDate}</span>
-                      </>
+              <div className={styles.cardInfo}>
+                <h3 className={styles.title}>{title}</h3>
+                <div className={styles.contentContainer}>
+                  <div className={styles.tagContainer}>
+                    {tags.map((tag, index) => (
+                      <Tag key={index} name={tag} />
+                    ))}
+                  </div>
+                  <div className={styles.optionalInfo}>
+                    <div className={styles.dueDateWrapper}>
+                      {dueDate && (
+                        <>
+                          <CalendarIcon className={styles.icon} />
+                          <span className={styles.dueDate}>{dueDate}</span>
+                        </>
+                      )}
+                    </div>
+                    {assignee && (
+                      <Avatar
+                        name={assignee.nickname}
+                        className={styles.avatar}
+                      />
                     )}
                   </div>
-                  {assignee && (
-                    <Avatar
-                      name={assignee.nickname}
-                      className={styles.avatar}
-                    />
-                  )}
                 </div>
               </div>
             </div>

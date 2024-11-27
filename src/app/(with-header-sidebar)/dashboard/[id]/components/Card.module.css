@@ -10,9 +10,18 @@
   margin: 0;
 }
 
+.cardContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.imageContainer {
+  margin: auto;
+}
+
 .imageWrapper {
   position: relative;
-  width: 260px;
+  width: 280px;
   height: 150px;
   margin-bottom: 4px;
 }
@@ -73,32 +82,52 @@
 }
 
 @media screen and (min-width: 768px) {
+  .cardContainer {
+    flex-direction: row;
+    gap: 22px;
+  }
+
   .cardInfo {
+    flex: 1;
     gap: 10px;
   }
 
   .contentContainer {
+    flex-direction: row;
     gap: 12px;
   }
 
   .imageWrapper {
     width: 90px;
-    height: 55px;
+    height: 57px;
+    margin-bottom: 0;
   }
 
   .title {
     font-size: 16px;
     line-height: 26px;
   }
+
+  .optionalInfo {
+    flex: 1;
+  }
 }
 
 @media screen and (min-width: 1200px) {
+  .cardContainer {
+    flex-direction: column;
+  }
+
   .imageWrapper {
-    width: 274px;
+    width: 280px;
     height: 160px;
   }
 
   .imageWrapper {
     margin-bottom: 15px;
+  }
+
+  .contentContainer {
+    flex-direction: column;
   }
 }
