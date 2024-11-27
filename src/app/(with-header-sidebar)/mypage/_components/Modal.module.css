@@ -12,6 +12,9 @@
 }
 
 .modal {
+  max-height: 95%;
+  overflow-y: auto;
+  scrollbar-width: none;
   background: var(--white);
   border-radius: 16px;
 }

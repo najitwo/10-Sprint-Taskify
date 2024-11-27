@@ -1,7 +1,7 @@
 import { DebouncedFunc } from 'lodash';
 
 export interface CardAssignee {
-  profileImageUrl: string;
+  profileImageUrl: string | null;
   nickname: string;
   id: number;
 }

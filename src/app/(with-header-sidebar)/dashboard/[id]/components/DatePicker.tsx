@@ -1,14 +1,23 @@
 'use client';
 
-import React, { useState, ChangeEvent } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import Image from 'next/image';
+import { formatDateFormat, formatDateTimeFormat } from '@/utils/dateUtils';
+import CalendarIcon from '/public/icons/calendar.svg';
 import styles from './DatePicker.module.css';
 
-const DatePicker = () => {
+interface DatePickerProps {
+  name: 'dueDate';
+  setValue: (name: 'dueDate', value: string) => void;
+}
+
+export default function DatePicker({ name, setValue }: DatePickerProps) {
   const [selectedDate, setSelectedDate] = useState<string>('');
   const [selectedTime, setSelectedTime] = useState<string>('');
+
   const [isCalendarVisible, setIsCalendarVisible] = useState(false);
   const [currentMonth, setCurrentMonth] = useState(new Date());
+  const datePickerRef = useRef<HTMLDivElement | null>(null);
 
   const daysOfWeek = ['일', '월', '화', '수', '목', '금', '토'];
 
@@ -28,10 +37,6 @@ const DatePicker = () => {
     return days;
   };
 
-  const handleDateClick = (date: Date) => {
-    setSelectedDate(date.toISOString().split('T')[0]);
-  };
-
   const handleMonthChange = (direction: 'prev' | 'next') => {
     setCurrentMonth(
       (prev) =>
@@ -43,29 +48,62 @@ const DatePicker = () => {
     );
   };
 
-  const handleTimeChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    setSelectedTime(event.target.value);
+  const handleDateClick = (date: Date) => {
+    setSelectedDate(formatDateFormat(date));
+    setSelectedTime('23:30');
+    setValue(name, formatDateTimeFormat(`${formatDateFormat(date)} 23:30`));
   };
 
-  const daysInMonth = getDaysInMonth(currentMonth);
+  const handleTimeClick = (date: string) => {
+    setSelectedTime(date);
+    setValue(name, formatDateTimeFormat(`${selectedDate} ${date}`));
+    setIsCalendarVisible(false);
+  };
+
+  useEffect(() => {
+    const handleOutsideClick = (event: MouseEvent) => {
+      if (
+        datePickerRef.current &&
+        !datePickerRef.current.contains(event.target as Node)
+      ) {
+        setIsCalendarVisible(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleOutsideClick);
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick);
+    };
+  }, []);
+
+  const daysInMonth = useMemo(
+    () => getDaysInMonth(currentMonth),
+    [currentMonth]
+  );
 
   return (
     <div className={styles.container}>
       <label className={styles.label}>마감일</label>
-      <div className={styles.inputWrapper}>
+      <div className={styles.inputWrapper} ref={datePickerRef}>
         <input
+          name={name}
           type="text"
           className={styles.input}
-          value={`${selectedDate} ${selectedTime}`}
+          value={
+            selectedDate || selectedTime
+              ? `${selectedDate} ${selectedTime}`
+              : ''
+          }
           placeholder="날짜를 입력해주세요"
           readOnly
           onClick={() => setIsCalendarVisible((prev) => !prev)}
         />
+        <CalendarIcon className={styles.icon} />
         {isCalendarVisible && (
           <div className={styles.calendarWrapper}>
             <div className={styles.calendar}>
               <div className={styles.calendarHeader}>
-                <button onClick={() => handleMonthChange('prev')}>
+                <button type="button" onClick={() => handleMonthChange('prev')}>
                   <Image
                     src="/icons/arrow_left.svg"
                     width={16}
@@ -77,7 +115,7 @@ const DatePicker = () => {
                 <span>
                   {currentMonth.getFullYear()}년 {currentMonth.getMonth() + 1}월
                 </span>
-                <button onClick={() => handleMonthChange('next')}>
+                <button type="button" onClick={() => handleMonthChange('next')}>
                   <Image
                     src="/icons/arrow_right.svg"
                     width={16}
@@ -95,45 +133,65 @@ const DatePicker = () => {
                 ))}
               </div>
               <div className={styles.days}>
-                {daysInMonth.map((date, index) => (
-                  <button
-                    key={index}
-                    className={`${styles.dayButton} ${
-                      date &&
-                      selectedDate === date.toISOString().split('T')[0] &&
-                      styles.selected
-                    }`}
-                    onClick={() => date && handleDateClick(date)}
-                    disabled={!date}
-                  >
-                    {date?.getDate() || ''}
-                  </button>
-                ))}
+                {daysInMonth.map((date, index) => {
+                  const now = new Date();
+                  const todayStart = new Date(now.setHours(0, 0, 0, 0));
+                  const isToday = date?.getTime() === todayStart.getTime();
+                  const isPastDate =
+                    (date?.getTime() ?? Infinity) < todayStart.getTime() ||
+                    (isToday && now.getHours() >= 23 && now.getMinutes() >= 30);
+
+                  return (
+                    <button
+                      key={index}
+                      type="button"
+                      className={`${styles.dayButton} ${
+                        date &&
+                        selectedDate === formatDateFormat(date) &&
+                        styles.selected
+                      } ${isPastDate && styles.disabled}`}
+                      onClick={() => date && handleDateClick(date)}
+                      disabled={!date || isPastDate}
+                    >
+                      {date?.getDate() || ''}
+                    </button>
+                  );
+                })}
               </div>
             </div>
             <div className={styles.timePicker}>
-              <select
-                className={styles.timeSelect}
-                value={selectedTime}
-                onChange={handleTimeChange}
-              >
+              <h4>시간</h4>
+              <ul className={styles.timeSelect}>
                 {Array.from({ length: 24 }, (_, hour) =>
                   ['00', '30'].map((minute) => {
+                    const now = new Date();
                     const time = `${hour.toString().padStart(2, '0')}:${minute}`;
+                    const [hourInt, minuteInt] = time.split(':').map(Number);
+                    const timeDate = new Date(
+                      selectedDate || now.toISOString().split('T')[0]
+                    );
+                    timeDate.setHours(hourInt, minuteInt, 0, 0);
+                    const isPastTime = timeDate.getTime() < now.getTime();
+
                     return (
-                      <option key={time} value={time}>
+                      <li
+                        key={time}
+                        onClick={() => !isPastTime && handleTimeClick(time)}
+                        className={`${styles.timeList} ${
+                          selectedTime === time ? styles.selected : ''
+                        } ${isPastTime && styles.disabled}`}
+                        tabIndex={0}
+                      >
                         {time}
-                      </option>
+                      </li>
                     );
                   })
                 )}
-              </select>
+              </ul>
             </div>
           </div>
         )}
       </div>
     </div>
   );
-};
-
-export default DatePicker;
+}

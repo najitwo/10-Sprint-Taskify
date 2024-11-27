@@ -51,7 +51,7 @@ function Column({
   }, [id, loadMoreData, totalCount]);
 
   const handleCreateTask = () => {
-    openModal(<CreateTaskModal />);
+    openModal(<CreateTaskModal columnId={id} />);
   };
 
   return (
@@ -74,7 +74,7 @@ function Column({
         </div>
       </div>
 
-      <div className={styles.columnContent}>
+      <div className={`${styles.columnContent}${styles.createCardSection}`}> //
         <div className={styles.createCardSection}>
           <Button
             type="button"
@@ -109,7 +109,7 @@ function Column({
                 {...provided.droppableProps}
               >
                 {items.map((item, index) =>
-                  item ? <Card key={item.id} item={item} index={index} /> : null
+                  item ? <Card key={item.id} item={item} index={index} columnTitle={title}/> : null
                 )}
                 <div ref={loadMoreRef} style={{ height: '1px' }} />
                 {provided.placeholder}

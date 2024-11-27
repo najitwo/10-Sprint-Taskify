@@ -7,7 +7,6 @@ import useAuthStore from '@/store/authStore';
 import Button from '@/components/Button';
 import styles from './loginPage.module.css';
 import axiosInstance from '@/lib/axiosInstance';
-import Image from 'next/image';
 import { ERROR_MESSAGES } from '@/constants/message';
 
 type LoginFormInputs = {
@@ -21,6 +20,7 @@ type CustomUseFormReturn<TFieldValues extends FieldValues = FieldValues> =
       isValid: boolean;
     };
   };
+
 export default function LoginPage() {
   const {
     register,
@@ -35,7 +35,7 @@ export default function LoginPage() {
 
   const onSubmit = async (data: LoginFormInputs) => {
     try {
-      const response = await axiosInstance.post('/login', data);
+      const response = await axiosInstance.post('/auth/login', data);
       const { accessToken } = response.data;
 
       setAccessToken(accessToken);
@@ -49,19 +49,7 @@ export default function LoginPage() {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
       <div className={styles.inputWrapper}>
-        <div className={styles.logoContainer}>
-          <Image
-            src="/images/logo_main.svg"
-            alt="로고"
-            width={100}
-            height={100}
-            className={styles.logo}
-            onClick={() => router.push('/')}
-            style={{ cursor: 'pointer' }}
-          />
-          <p className={styles.greeting}>오늘도 만나서 반가워요!</p>
-        </div>
-
+        <p className={styles.greeting}>오늘도 만나서 반가워요!</p>
         <label htmlFor="email" className={styles.label}>
           이메일
         </label>
@@ -102,7 +90,6 @@ export default function LoginPage() {
           <p className={styles.errorMessage}>{errors.password.message}</p>
         )}
       </div>
-
       <Button
         type="submit"
         disabled={!isValid}

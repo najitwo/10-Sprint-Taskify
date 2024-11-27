@@ -1,12 +1,12 @@
 'use client';
 
 import { ReactNode } from 'react';
-import { FieldError, UseFormRegisterReturn } from 'react-hook-form';
 import Label from './Label';
-import styles from './Input.module.css';
+import styles from './Textarea.module.css';
+import { FieldError, UseFormRegisterReturn } from 'react-hook-form';
 
-interface InputProps {
-  type: string;
+interface TextareaProps {
+  type?: string;
   name: string;
   className?: string;
   label?: string;
@@ -15,10 +15,10 @@ interface InputProps {
   register?: UseFormRegisterReturn;
   error?: FieldError;
   readOnly?: boolean;
+  required?: boolean;
 }
 
-export default function Input({
-  type,
+export default function Textarea({
   name,
   className = '',
   label = '',
@@ -27,14 +27,17 @@ export default function Input({
   register,
   error,
   readOnly = false,
-}: InputProps) {
+  required,
+}: TextareaProps) {
   return (
     <div className={`${styles.container} ${className}`}>
-      <Label htmlFor={name}>{label}</Label>
-      <div className={styles.inputWrapper}>
-        <input
-          className={`${styles.input} ${error ? styles.errorFocus : ''}`}
-          type={type}
+      <Label htmlFor={name}>
+        {label}
+        {required && <span className={styles.required}>*</span>}
+      </Label>
+      <div className={styles.textareaWrapper}>
+        <textarea
+          className={`${styles.textarea} ${error ? styles.errorFocus : ''}`}
           placeholder={placeholder}
           readOnly={readOnly}
           {...register}
