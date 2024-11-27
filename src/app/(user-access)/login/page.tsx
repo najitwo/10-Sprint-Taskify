@@ -5,9 +5,11 @@ import { useForm, FieldValues, UseFormReturn } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import useAuthStore from '@/store/authStore';
 import Button from '@/components/Button';
-import styles from './loginPage.module.css';
 import axiosInstance from '@/lib/axiosInstance';
 import { ERROR_MESSAGES } from '@/constants/message';
+import type { User } from '@/types/user';
+import Cookies from 'js-cookie';
+import styles from './loginPage.module.css';
 
 type LoginFormInputs = {
   email: string;
@@ -31,14 +33,18 @@ export default function LoginPage() {
   }) as CustomUseFormReturn<LoginFormInputs>;
 
   const router = useRouter();
-  const { setAccessToken } = useAuthStore();
+  const { setAccessToken, setUser } = useAuthStore();
 
   const onSubmit = async (data: LoginFormInputs) => {
     try {
       const response = await axiosInstance.post('/auth/login', data);
-      const { accessToken } = response.data;
+      const { accessToken, user } = response.data;
+
+      Cookies.set('accessToken', accessToken, { expires: 7, secure: true });
 
       setAccessToken(accessToken);
+      setUser(user as User);
+
       router.push('/mydashboard');
     } catch (error) {
       console.error('로그인 실패:', error);
