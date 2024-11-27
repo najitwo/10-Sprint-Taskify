@@ -12,6 +12,7 @@ interface SearchDropdownProps {
   name: 'assigneeUserId';
   setValue: (name: 'assigneeUserId', value: number) => void;
   placeholder?: string;
+  defaultAssignee?: Member;
 }
 
 export default function SearchDropdown({
@@ -19,6 +20,7 @@ export default function SearchDropdown({
   name,
   setValue,
   placeholder = '이름을 입력해 주세요',
+  defaultAssignee,
 }: SearchDropdownProps) {
   const [query, setQuery] = useState('');
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
@@ -96,6 +98,13 @@ export default function SearchDropdown({
       focusedItem?.scrollIntoView({ block: 'nearest' });
     }
   }, [focusedIndex]);
+
+  useEffect(() => {
+    if (defaultAssignee) {
+      setQuery(defaultAssignee.nickname);
+      setSelectedOption(defaultAssignee);
+    }
+  }, [defaultAssignee]);
 
   const DropdownItem = ({
     option,

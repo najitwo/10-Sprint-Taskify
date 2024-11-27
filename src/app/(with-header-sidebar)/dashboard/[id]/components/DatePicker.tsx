@@ -9,11 +9,20 @@ import styles from './DatePicker.module.css';
 interface DatePickerProps {
   name: 'dueDate';
   setValue: (name: 'dueDate', value: string) => void;
+  defaultDate?: string;
 }
 
-export default function DatePicker({ name, setValue }: DatePickerProps) {
-  const [selectedDate, setSelectedDate] = useState<string>('');
-  const [selectedTime, setSelectedTime] = useState<string>('');
+export default function DatePicker({
+  name,
+  setValue,
+  defaultDate,
+}: DatePickerProps) {
+  const [selectedDate, setSelectedDate] = useState<string>(
+    (defaultDate && formatDateFormat(defaultDate.split(' ')[0])) || ''
+  );
+  const [selectedTime, setSelectedTime] = useState<string>(
+    (defaultDate && defaultDate.split(' ')[1]) || ''
+  );
   const [isCalendarVisible, setIsCalendarVisible] = useState(false);
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [shouldOpenUp, setShouldOpenUp] = useState(false);
