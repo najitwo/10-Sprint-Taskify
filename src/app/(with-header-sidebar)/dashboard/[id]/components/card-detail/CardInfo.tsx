@@ -17,6 +17,7 @@ interface CardInfoProps {
 }
 
 export default function CardInfo({ card, columnTitle }: CardInfoProps) {
+  card = sample;
   const { description, tags, imageUrl } = card;
 
   const { dashboard } = useDashboardStore();
@@ -57,3 +58,24 @@ export default function CardInfo({ card, columnTitle }: CardInfoProps) {
     </div>
   );
 }
+
+const sample = {
+  id: 1,
+  title: '카드타이틀',
+  description:
+    'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex molestias enim beatae in accusantium cumque necessitatibus quia, dolorem laboriosam soluta maxime error minima. Dolores quis culpa aut hic, cum dolorem?',
+  tags: ['마늘', '기여어', '세젤귀', '맨날자'],
+  dueDate: '2024-11-11 11:00',
+  assignee: {
+    profileImageUrl: null,
+    nickname: '김희진',
+    id: 1,
+  },
+  imageUrl:
+    'https://sprint-fe-project.s3.ap-northeast-2.amazonaws.com/taskify/profile_image/10-1_4804_1731757528194.jpeg',
+  // null,
+  teamId: '1',
+  columnId: 1234,
+  createdAt: '2024',
+  updatedAt: '2024',
+};
