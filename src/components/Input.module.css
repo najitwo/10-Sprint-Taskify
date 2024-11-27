@@ -43,3 +43,8 @@
   line-height: 24px;
   color: var(--red);
 }
+
+.required {
+  color: var(--violet);
+  padding-left: 2px;
+}

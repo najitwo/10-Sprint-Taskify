@@ -15,6 +15,7 @@ interface InputProps {
   register?: UseFormRegisterReturn;
   error?: FieldError;
   readOnly?: boolean;
+  required?: boolean;
 }
 
 export default function Input({
@@ -27,10 +28,14 @@ export default function Input({
   register,
   error,
   readOnly = false,
+  required,
 }: InputProps) {
   return (
     <div className={`${styles.container} ${className}`}>
-      <Label htmlFor={name}>{label}</Label>
+      <Label htmlFor={name}>
+        {label}
+        {required && <span className={styles.required}>*</span>}
+      </Label>
       <div className={styles.inputWrapper}>
         <input
           className={`${styles.input} ${error ? styles.errorFocus : ''}`}

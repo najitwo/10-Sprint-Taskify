@@ -4,12 +4,13 @@
   gap: 8px;
 }
 
-.inputWrapper {
+.textareaWrapper {
   position: relative;
 }
 
-.input {
+.textarea {
   width: 100%;
+  height: 126px;
   border: 1px solid var(--gray-300);
   border-radius: 8px;
   font-size: 16px;
@@ -17,18 +18,19 @@
   line-height: 26px;
   color: var(--black-100);
   padding: 12px 16px;
+  resize: none;
 }
 
-.input:read-only {
+.textarea:read-only {
   color: var(--gray-400);
   outline: none;
 }
 
-.input:focus:not(:read-only) {
+.textarea:focus:not(:read-only) {
   outline-color: var(--violet);
 }
 
-.input::placeholder {
+.textarea::placeholder {
   color: var(--gray-400);
 }
 
@@ -42,4 +44,9 @@
   font-weight: 400;
   line-height: 24px;
   color: var(--red);
+}
+
+.required {
+  color: var(--violet);
+  padding-left: 2px;
 }

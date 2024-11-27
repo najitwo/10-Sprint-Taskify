@@ -7,6 +7,8 @@ export const ERROR_MESSAGES = {
   NICKNAME_REQUIRE: '닉네임을 입력해주세요.',
   PASSWORD_REQUIRE: '비밀번호를 입력해주세요.',
   DASHBOARD_TITLE_REQUIRE: '대시보드 이름은 필수입니다.',
+  TITLE_REQUIRE: '제목은 필수입니다.',
+  DESCRIPTION_REQUIRE: '설명은 필수입니다.',
   REQUIRED_EMAIL: '이메일을 입력해 주세요.',
   INVALID_EMAIL: '이메일 형식으로 작성해 주세요.',
 };

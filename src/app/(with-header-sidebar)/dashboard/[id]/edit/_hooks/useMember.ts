@@ -31,7 +31,8 @@ const useMember = (dashboardId: string | null, pageSize = 4) => {
       try {
         const response: GetMembersResponse | undefined = await getMembersAsync(
           dashboardId,
-          page
+          page,
+          pageSize
         );
 
         const members = response?.members ?? [];
