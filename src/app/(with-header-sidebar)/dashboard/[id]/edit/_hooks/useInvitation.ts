@@ -19,7 +19,7 @@ const DEFAULT_INVITATION_STATE: InvitationState = {
   invitations: [],
 };
 
-const useInvitation = (dashboardId: string, pageSize = 5) => {
+const useInvitation = (dashboardId: string | null, pageSize = 5) => {
   const [invitationState, setInvitationState] = useState<InvitationState>(
     DEFAULT_INVITATION_STATE
   );
