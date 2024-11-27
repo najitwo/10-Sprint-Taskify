@@ -1,0 +1,68 @@
+.label {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+.textareaWrapper {
+  border-radius: 6px;
+  border: 1px solid var(--gray-300);
+  background: var(--white);
+  padding: 12px;
+  position: relative;
+  margin-top: 4px;
+}
+
+.textareaWrapper:focus-within {
+  outline: 2px solid var(--violet);
+}
+
+.textarea {
+  resize: none;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 24px;
+  width: 75%;
+}
+
+.textarea::placeholder {
+  color: var(--gray-400);
+}
+
+.textarea:focus {
+  outline: none;
+}
+
+.buttonWrapper {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  width: 20%;
+}
+
+.button.button {
+  font-size: 12px;
+  font-weight: 500;
+  border-radius: 4px;
+  height: 28px;
+}
+
+.button.button:disabled {
+  background: transparent;
+  color: var(--violet);
+  border: 1px solid var(--gray-300);
+}
+
+@media screen and (min-width: 768px) {
+  .label {
+    font-size: 16px;
+  }
+
+  .textareaWrapper {
+    padding: 16px;
+  }
+
+  .button.button {
+    height: 32px;
+  }
+}

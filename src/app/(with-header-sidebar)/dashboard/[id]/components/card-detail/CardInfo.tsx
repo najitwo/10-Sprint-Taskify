@@ -6,6 +6,7 @@ import Pipe from '@/components/svg/Pipe';
 import Image from 'next/image';
 import styles from './CardInfo.module.css';
 import CreateCommentForm from './comments/CreateCommentForm';
+import useDashboardStore from '@/store/dashboardStore';
 
 interface CardInfoProps {
   card: Cards;
@@ -15,6 +16,8 @@ interface CardInfoProps {
 export default function CardInfo({ card, columnTitle }: CardInfoProps) {
   card = sample;
   const { description, tags, imageUrl } = card;
+
+  const { dashboard } = useDashboardStore();
 
   return (
     <div className={styles.cardInfo}>
@@ -39,8 +42,17 @@ export default function CardInfo({ card, columnTitle }: CardInfoProps) {
             <Image src={imageUrl} alt="할일 이미지" fill />
           </div>
         )}
+        <CreateCommentForm
+          cardId={11050}
+          columnId={42967}
+          dashboardId={12706}
+        />
       </div>
-      <CreateCommentForm cardId={11050} columnId={42967} dashboardId={12706} />
+      {/* <CreateCommentForm
+        cardId={card.id}
+        columnId={card.columnId}
+        dashboardId={dashboard!.id}
+      /> */}
     </div>
   );
 }
