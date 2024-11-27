@@ -14,9 +14,10 @@ interface DatePickerProps {
 export default function DatePicker({ name, setValue }: DatePickerProps) {
   const [selectedDate, setSelectedDate] = useState<string>('');
   const [selectedTime, setSelectedTime] = useState<string>('');
-
   const [isCalendarVisible, setIsCalendarVisible] = useState(false);
   const [currentMonth, setCurrentMonth] = useState(new Date());
+  const [shouldOpenUp, setShouldOpenUp] = useState(false);
+
   const datePickerRef = useRef<HTMLDivElement | null>(null);
 
   const daysOfWeek = ['일', '월', '화', '수', '목', '금', '토'];
@@ -55,8 +56,13 @@ export default function DatePicker({ name, setValue }: DatePickerProps) {
   };
 
   const handleTimeClick = (date: string) => {
+    const now = new Date();
+    const defaultDate = formatDateFormat(now);
+    const newSelectedDate = selectedDate || defaultDate;
+
+    setSelectedDate(newSelectedDate);
     setSelectedTime(date);
-    setValue(name, formatDateTimeFormat(`${selectedDate} ${date}`));
+    setValue(name, formatDateTimeFormat(`${newSelectedDate} ${date}`));
     setIsCalendarVisible(false);
   };
 
@@ -81,6 +87,32 @@ export default function DatePicker({ name, setValue }: DatePickerProps) {
     [currentMonth]
   );
 
+  const updateCalendarPosition = () => {
+    if (datePickerRef.current) {
+      const rect = datePickerRef.current.getBoundingClientRect();
+      const availableSpaceBelow = window.innerHeight - rect.bottom;
+      const calendarHeight = 300;
+      setShouldOpenUp(availableSpaceBelow < calendarHeight);
+    }
+  };
+
+  const toggleCalendarVisibility = () => {
+    updateCalendarPosition();
+    setIsCalendarVisible((prev) => !prev);
+  };
+
+  useEffect(() => {
+    if (isCalendarVisible) {
+      window.addEventListener('scroll', updateCalendarPosition, true);
+      window.addEventListener('resize', updateCalendarPosition);
+    }
+
+    return () => {
+      window.removeEventListener('scroll', updateCalendarPosition, true);
+      window.removeEventListener('resize', updateCalendarPosition);
+    };
+  }, [isCalendarVisible]);
+
   return (
     <div className={styles.container}>
       <label className={styles.label}>마감일</label>
@@ -96,11 +128,15 @@ export default function DatePicker({ name, setValue }: DatePickerProps) {
           }
           placeholder="날짜를 입력해주세요"
           readOnly
-          onClick={() => setIsCalendarVisible((prev) => !prev)}
+          onClick={toggleCalendarVisibility}
         />
         <CalendarIcon className={styles.icon} />
         {isCalendarVisible && (
-          <div className={styles.calendarWrapper}>
+          <div
+            className={`${styles.calendarWrapper} ${
+              shouldOpenUp ? styles.above : ''
+            }`}
+          >
             <div className={styles.calendar}>
               <div className={styles.calendarHeader}>
                 <button type="button" onClick={() => handleMonthChange('prev')}>
@@ -135,11 +171,16 @@ export default function DatePicker({ name, setValue }: DatePickerProps) {
               <div className={styles.days}>
                 {daysInMonth.map((date, index) => {
                   const now = new Date();
-                  const todayStart = new Date(now.setHours(0, 0, 0, 0));
+                  const todayStart = new Date(now);
+                  todayStart.setHours(0, 0, 0, 0);
+
+                  const cutoffTime = new Date(todayStart);
+                  cutoffTime.setHours(23, 30, 0, 0);
+
                   const isToday = date?.getTime() === todayStart.getTime();
                   const isPastDate =
                     (date?.getTime() ?? Infinity) < todayStart.getTime() ||
-                    (isToday && now.getHours() >= 23 && now.getMinutes() >= 30);
+                    (isToday && now.getTime() > cutoffTime.getTime());
 
                   return (
                     <button
@@ -167,9 +208,11 @@ export default function DatePicker({ name, setValue }: DatePickerProps) {
                     const now = new Date();
                     const time = `${hour.toString().padStart(2, '0')}:${minute}`;
                     const [hourInt, minuteInt] = time.split(':').map(Number);
-                    const timeDate = new Date(
-                      selectedDate || now.toISOString().split('T')[0]
-                    );
+
+                    const kstNow = new Date(now.getTime() + 9 * 60 * 60 * 1000);
+                    const koreanDate = kstNow.toISOString().split('T')[0];
+
+                    const timeDate = new Date(selectedDate || koreanDate);
                     timeDate.setHours(hourInt, minuteInt, 0, 0);
                     const isPastTime = timeDate.getTime() < now.getTime();
 
