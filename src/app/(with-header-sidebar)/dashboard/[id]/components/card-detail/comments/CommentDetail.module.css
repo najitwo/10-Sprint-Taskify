@@ -55,6 +55,7 @@
 }
 
 .content:read-only {
+  cursor: e-resize;
 }
 
 .content:focus {

@@ -1,4 +1,10 @@
-import { useState, ChangeEvent, KeyboardEvent, useRef } from 'react';
+import {
+  useState,
+  ChangeEvent,
+  KeyboardEvent,
+  MouseEvent,
+  useRef,
+} from 'react';
 import Avatar from '@/components/Avatar';
 import Button from '@/components/Button';
 import { formatDateToCustomFormat } from '@/utils/dateUtils';
@@ -77,6 +83,12 @@ export default function CommentDetail({
     // todo: 삭제성공시 토스트 박스
   };
 
+  const handleInputOnClick = (e: MouseEvent<HTMLInputElement>) => {
+    if (!isEditing) {
+      e.preventDefault();
+    }
+  };
+
   return (
     <li className={styles.comment}>
       <Avatar name={author.nickname} className={styles.avatar} />
@@ -92,6 +104,7 @@ export default function CommentDetail({
           className={styles.content}
           value={content}
           readOnly={!isEditing}
+          onClick={handleInputOnClick}
           onChange={handleOnChange}
           onBlur={() => {}}
           onKeyDown={handleOnKeyDown}
