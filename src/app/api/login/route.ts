@@ -1,10 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import axiosInstance from '@/lib/axiosInstance';
 import { cookies } from 'next/headers';
-import { AxiosError } from 'axios';
 import { TOKEN_KEY } from '@/constants/cookies';
 
-export const POST = async (request: NextRequest): Promise<NextResponse> => {
+export const POST = async (request: NextRequest) => {
   try {
     const body = await request.json();
     const response = await axiosInstance.post('/auth/login', body);
@@ -21,15 +20,12 @@ export const POST = async (request: NextRequest): Promise<NextResponse> => {
     }
 
     return NextResponse.json(
-      { message: 'Invalid credentials' },
-      { status: 401 }
+      { message: response.data.message },
+      { status: response.status }
     );
   } catch (error) {
-    if (error instanceof AxiosError) {
-      return NextResponse.json(
-        { message: error.response?.data?.message },
-        { status: error.response?.status }
-      );
+    if (error instanceof Error) {
+      return NextResponse.json({ message: error.message }, { status: 400 });
     }
     return NextResponse.json(
       { message: 'Internal Server Error' },
