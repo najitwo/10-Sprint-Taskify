@@ -160,19 +160,15 @@ export default function SignupPage() {
         >
           가입하기
         </Button>
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <div className={styles.linkContainer}>
           <p>
             이미 회원이신가요?{' '}
             <span
-              style={{
-                color: 'var(--violet)',
-                textDecoration: 'underline',
-                cursor: 'pointer',
-              }}
+              className={styles.linkText}
               onClick={() => router.push('/login')}
             >
               로그인하기
-            </span>{' '}
+            </span>
           </p>
         </div>
       </form>
