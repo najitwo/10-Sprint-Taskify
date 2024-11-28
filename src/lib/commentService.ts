@@ -39,10 +39,13 @@ export const createComment = async (
   }
 };
 
-export const updateComment = async (
-  commentId: number,
-  data: UpdateCommentRequestBody
-): Promise<Comment> => {
+export const updateComment = async ({
+  commentId,
+  data,
+}: {
+  commentId: number;
+  data: UpdateCommentRequestBody;
+}): Promise<Comment> => {
   try {
     const response = await axiosInstance.put(`/comments/${commentId}`, {
       ...data,
