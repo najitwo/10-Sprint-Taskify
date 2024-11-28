@@ -1,9 +1,7 @@
 import { useEffect } from 'react';
 import useAuthStore from '@/store/authStore';
 import axiosInstance from '@/lib/axiosInstance';
-import Cookies from 'js-cookie';
 import type { User } from '@/types/user';
-import { TOKEN_KEY } from '@/constants/cookies';
 import axios from 'axios';
 
 const useMe = () => {
