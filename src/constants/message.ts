@@ -9,4 +9,8 @@ export const ERROR_MESSAGES = {
   DASHBOARD_TITLE_REQUIRE: '대시보드 이름은 필수입니다.',
   REQUIRED_EMAIL: '이메일을 입력해 주세요.',
   INVALID_EMAIL: '이메일 형식으로 작성해 주세요.',
+  EMAIL_DUPLICATE: '이미 사용중인 이메일입니다.',
+  NICKNAME_REQUIRED: '닉네임을 입력해주세요.',
+  NICKNAME_TOO_LONG: '닉네임은 10자 이하로 입력해주세요.',
+  PASSWORD_CONFIRM_MISMATCH: '비밀번호가 일치하지 않습니다',
 };
