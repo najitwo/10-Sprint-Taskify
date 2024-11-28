@@ -7,6 +7,10 @@
   overflow-y: auto;
 }
 
+.sideBar::-webkit-scrollbar {
+  width: 0;
+}
+
 .logo.logo {
   background-color: transparent;
   padding-top: 22px;

@@ -2,10 +2,11 @@
   display: flex;
   flex-direction: column;
   min-width: 308px;
+  width: auto;
   max-height: 385px;
+  height: auto;
   padding: 16px 12px;
   gap: 24px;
-  flex-grow: 1;
 }
 
 .header {
@@ -98,14 +99,14 @@
   background: var(--violet-light);
 }
 
-.scrollContext::-webkit-scrollbar {
-  width: 0;
-}
-
 .scrollContext {
   overflow-x: hidden;
   overflow-y: auto;
   max-height: 281px;
+}
+
+.scrollContext::-webkit-scrollbar {
+  width: 0;
 }
 
 .dropContext {
@@ -140,7 +141,7 @@
 }
 @media screen and (min-width: 1200px) {
   .column {
-    max-width: 354px;
+    width: 354px;
     max-height: 100%;
     border-right: 1px solid var(--gray-200);
     border-bottom: none;

@@ -1,13 +1,13 @@
 .dashboardView {
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
-  width: 100%;
   min-height: 100vh;
   background-color: var(--gray-100);
 }
 
 .createColumnSection {
+  min-width: 284px;
+  width: auto;
   padding: 16px 12px;
 }
 
@@ -15,7 +15,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-width: 354px;
+  width: 100%;
   height: 70px;
   border: 1px solid var(--gray-300);
   background: var(--white);
@@ -39,10 +39,6 @@
 }
 
 @media screen and (min-width: 768px) {
-  .dashboardView {
-    width: 100%;
-  }
-
   .createColumnSection {
     padding: 20px;
   }
@@ -50,5 +46,9 @@
 @media screen and (min-width: 1200px) {
   .dashboardView {
     flex-direction: row;
+  }
+
+  .createColumn.createColumn {
+    width: 354px;
   }
 }
