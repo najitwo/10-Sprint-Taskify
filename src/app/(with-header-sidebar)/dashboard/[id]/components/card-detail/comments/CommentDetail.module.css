@@ -64,6 +64,11 @@
   outline: 2px solid var(--violet);
 }
 
+.content:focus:read-only {
+  padding: 0;
+  outline: none;
+}
+
 .buttonContainer {
   display: flex;
   gap: 8px;
