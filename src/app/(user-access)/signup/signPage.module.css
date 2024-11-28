@@ -67,6 +67,16 @@
   align-items: center;
   gap: 8px;
 }
+.linkContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.linkText {
+  color: var(--violet);
+  text-decoration: underline;
+  cursor: pointer;
+}
 
 .input[type='checkbox'] {
   width: 16px;
@@ -81,7 +91,6 @@
 
 .input[type='checkbox']:checked {
   background-color: var(--white);
-  border-color: var(--gray-300);
 }
 
 .input[type='checkbox']:checked::before {
