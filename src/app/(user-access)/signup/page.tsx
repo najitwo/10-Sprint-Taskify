@@ -6,7 +6,8 @@ import Button from '@/components/Button';
 import styles from './signPage.module.css';
 import axiosInstance from '@/lib/axiosInstance';
 import { ERROR_MESSAGES } from '@/constants/message';
-import { AxiosError } from 'axios';
+import ModalContainer from '../components/modal/ModalContainer';
+import useModalStore from '../modalStore/modalStore';
 
 type SignupFormInputs = {
   email: string;
@@ -22,11 +23,12 @@ export default function SignupPage() {
     handleSubmit,
     formState: { errors, isValid },
     watch,
-    setError,
   } = useForm<SignupFormInputs>({ mode: 'onChange' });
   const router = useRouter();
 
   const watchPassword = watch('password');
+  const { openModal } = useModalStore();
+
   const onSubmit = async (data: SignupFormInputs) => {
     try {
       await axiosInstance.post('/users', {
@@ -34,26 +36,16 @@ export default function SignupPage() {
         nickname: data.nickname,
         password: data.password,
       });
-      alert('회원가입이 완료되었습니다.');
-      router.push('/login');
+      const successMessage = '가입이 완료되었습니다!';
+      openModal(successMessage, 'success');
     } catch (error) {
-      if (error instanceof AxiosError) {
-        if (error.response?.status === 409) {
-          setError('email', {
-            type: 'manual',
-            message: ERROR_MESSAGES.EMAIL_DUPLICATE,
-          });
-        } else if (error.response?.status === 400) {
-          alert(error.response.data.message);
-        } else {
-          alert('회원가입 중 오류가 발생했습니다.');
-        }
-      }
+      openModal('이미 사용 중인 이메일입니다.', 'error');
     }
   };
 
   return (
     <div className={styles.signupContainer}>
+      <ModalContainer />
       <form onSubmit={handleSubmit(onSubmit)} className={styles.signupForm}>
         <div className={styles.inputWrapper}>
           <p className={styles.greeting}>첫 방문을 환영합니다!</p>
