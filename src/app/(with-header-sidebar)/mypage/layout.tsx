@@ -4,7 +4,6 @@ import { ReactNode } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Button from '@/components/Button';
-import Modal from './_components/Modal';
 import styles from './layout.module.css';
 
 export default function Layout({ children }: { children: ReactNode }) {
@@ -26,7 +25,6 @@ export default function Layout({ children }: { children: ReactNode }) {
         돌아가기
       </Button>
       {children}
-      <Modal />
     </section>
   );
 }

@@ -20,6 +20,7 @@ type CustomUseFormReturn<TFieldValues extends FieldValues = FieldValues> =
       isValid: boolean;
     };
   };
+
 export default function LoginPage() {
   const {
     register,
@@ -89,7 +90,6 @@ export default function LoginPage() {
           <p className={styles.errorMessage}>{errors.password.message}</p>
         )}
       </div>
-
       <Button
         type="submit"
         disabled={!isValid}

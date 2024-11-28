@@ -10,14 +10,25 @@ interface FileInputProps {
   name: 'image';
   setValue: (name: 'image', value: File | null) => void;
   url?: string | null;
+  className?: string;
+  label?: string;
 }
 
-export default function FileInput({ name, setValue, url, id }: FileInputProps) {
+export default function FileInput({
+  name,
+  setValue,
+  url,
+  id,
+  className,
+  label,
+}: FileInputProps) {
   const [preview, setPreview] = useState<string | null>(null);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
+      const allowedTypes = ['image/png', 'image/jpeg'];
+      if (!allowedTypes.includes(file.type)) return;
       setPreview(URL.createObjectURL(file));
       setValue(name, file);
     }
@@ -30,8 +41,9 @@ export default function FileInput({ name, setValue, url, id }: FileInputProps) {
   }, [url]);
 
   return (
-    <>
-      <label className={styles.label} htmlFor={id}>
+    <div>
+      {label && <span className={styles.label}>{label}</span>}
+      <label className={`${styles.wrapper} ${className}`} htmlFor={id}>
         {preview ? (
           <>
             <Image src={preview} alt="미리보기" fill className={styles.image} />
@@ -57,6 +69,6 @@ export default function FileInput({ name, setValue, url, id }: FileInputProps) {
         accept="image/png, image/jpeg"
         onChange={handleChange}
       />
-    </>
+    </div>
   );
 }

@@ -28,7 +28,13 @@ export default function InvitationModal({
       <div className={styles.header}>
         <h2>초대하기</h2>
         <Button onClick={closeModal} className={styles.xButton}>
-          <Image src="/icons/x_sm.svg" alt="모달 종료" width={24} height={24} />
+          <Image
+            src="/icons/x_sm.svg"
+            alt="모달 종료"
+            width={24}
+            height={24}
+            className={styles.image}
+          />
         </Button>
       </div>
       <Input

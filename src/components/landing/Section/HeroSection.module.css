@@ -29,7 +29,6 @@
 }
 
 .homeBrand {
-  font-family: var(--font-montserrat);
   font-size: 90px;
   font-weight: 700;
   color: var(--violet);
@@ -38,9 +37,9 @@
 }
 
 .homeLoginBtn {
-  display: inline-flex;
-  flex-shrink: 0;
+  display: flex;
   align-items: center;
+  width: 280px;
   height: 54px;
   padding: 9px 101px;
   border-radius: 8px;

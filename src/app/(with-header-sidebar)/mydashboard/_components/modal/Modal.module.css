@@ -44,15 +44,15 @@
   color: var(--black-100);
 }
 
-.close {
+.closeButtonWrapper {
+  position: relative;
   width: 24px;
   height: 24px;
-  transition: 200ms;
 }
 
-.close:hover {
-  filter: brightness(2);
-  transform: rotate(90deg);
+.closeButton {
+  display: inline-flex;
+  align-items: center;
 }
 
 @keyframes fadeIn {
@@ -106,5 +106,10 @@
     font-weight: 700;
     flex: 1;
     color: var(--black-100);
+  }
+
+  .closeButtonWrapper {
+    width: 32px;
+    height: 32px;
   }
 }
