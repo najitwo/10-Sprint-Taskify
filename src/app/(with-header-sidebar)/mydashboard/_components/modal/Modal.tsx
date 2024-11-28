@@ -11,6 +11,9 @@ interface ModalProps {
   onClose: () => void;
   allowDimClose?: boolean;
   title?: string;
+  hasCloseButton?: boolean;
+  headerComponent?: React.ComponentType<unknown>;
+  className?: string;
   children: ReactNode;
 }
 
@@ -19,12 +22,19 @@ export default function Modal({
   onClose,
   allowDimClose = true,
   title,
+  hasCloseButton = false,
+  headerComponent: Component,
+  className = '',
   children,
 }: ModalProps) {
   const handleOnClickBackground = (e: MouseEvent<HTMLDivElement>) => {
     if (!allowDimClose || !(e.target === e.currentTarget)) {
       return;
     }
+    onClose();
+  };
+
+  const handleOnClose = () => {
     onClose();
   };
 
@@ -48,23 +58,24 @@ export default function Modal({
       onClick={handleOnClickBackground}
     >
       <div
-        className={`${styles.container} ${isClosing ? styles.slideOut : ''}`}
+        className={`${styles.container} ${isClosing ? styles.slideOut : ''} ${className}`}
       >
         <FocusTrap>
           <div className={styles.titleContainer}>
             {title && <h3 className={styles.title}>{title}</h3>}
-            {/* <button
-              onClick={onClose}
-              className={styles.close}
-              aria-label="Close modal"
-            >
-              <Image
-                src="/icons/x_sm.svg"
-                alt="Close icon"
-                width={10}
-                height={10}
-              />
-            </button> */}
+            {Component && <Component />}
+            {hasCloseButton && (
+              <div className={styles.closeButtonWrapper}>
+                <button
+                  onClick={handleOnClose}
+                  aria-label="Close modal"
+                  type="button"
+                  className={styles.closeButton}
+                >
+                  <Image src="/icons/x_lg.svg" alt="Close icon" fill />
+                </button>
+              </div>
+            )}
           </div>
           {children}
         </FocusTrap>

@@ -3,7 +3,7 @@ import styles from './SecondarySection.module.css';
 
 export default function SecondarySection() {
   return (
-    <section>
+    <section className={styles.section}>
       <div className={styles.title}>생산성을 높이는 다양한 설정 ⚡</div>
       <div className={styles.cards}>
         <MiniCard

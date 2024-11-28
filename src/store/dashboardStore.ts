@@ -5,7 +5,9 @@ import { getBoard } from '@/lib/boardService';
 
 interface dashboardState {
   dashboard: Dashboard | null;
-  setDashboard: (dashboardId: number) => void;
+  setDashboard: (dashboardId: number | null) => void;
+  color: string;
+  setColor: (newColor: string) => void;
 }
 
 const useDashboardStore = create(
@@ -13,14 +15,22 @@ const useDashboardStore = create(
     (set, get) => ({
       dashboard: null,
       setDashboard: async (dashboardId) => {
+        if (dashboardId === null) {
+          set({
+            dashboard: null,
+          });
+          return;
+        }
+
         if (get().dashboard?.id === dashboardId) return;
 
-        // TODO error handling
         const response = await getBoard(dashboardId.toString());
         set({
           dashboard: { ...response },
         });
       },
+      color: 'var(--violet)',
+      setColor: (newColor) => set({ color: newColor }),
     }),
     {
       name: 'dashboardStorage',

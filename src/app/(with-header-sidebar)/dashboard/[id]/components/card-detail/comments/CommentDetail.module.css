@@ -1,0 +1,111 @@
+.comment {
+  display: flex;
+  gap: 15px;
+}
+
+.avatar.avatar {
+  width: 34px;
+  height: 34px;
+  font-size: 16px;
+  line-height: 19px;
+}
+
+.avatar.avatar {
+  width: 26px;
+  height: 26px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 15px;
+}
+
+.info {
+  flex: 9;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.name {
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 14px;
+  color: var(--black-100);
+}
+
+.date {
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 12px;
+  color: var(--gray-400);
+}
+
+.content {
+  max-width: 290px;
+  width: 98%;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+  color: var(--black-100);
+  margin: 5px 0;
+  overflow: hidden;
+  overflow-x: auto;
+}
+
+.content:read-only {
+  cursor: e-resize;
+}
+
+.content:focus {
+  padding: 5px;
+  border-radius: 4px;
+  outline: 2px solid var(--violet);
+}
+
+.content:focus:read-only {
+  padding: 0;
+  outline: none;
+}
+
+.buttonContainer {
+  display: flex;
+  gap: 8px;
+}
+
+.button.button {
+  width: auto;
+  background-color: transparent;
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 12px;
+  text-decoration-line: underline;
+  color: var(--gray-400);
+}
+
+@media screen and (min-width: 768px) {
+  .comment {
+    gap: 12px;
+  }
+
+  .name {
+    font-size: 14px;
+    line-height: 24px;
+  }
+
+  .date {
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .content {
+    max-width: 530px;
+    font-size: 14px;
+    line-height: 24px;
+  }
+
+  .buttonContainer {
+    margin-top: 5px;
+  }
+}

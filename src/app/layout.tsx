@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
-// import { Montserrat } from 'next/font/google';
 import './variables.css';
 import './reset.css';
 
@@ -11,15 +10,23 @@ const pretendard = localFont({
   variable: '--font-pretendard',
 });
 
-// export const montserrat = Montserrat({
-//   display: 'swap',
-//   subsets: ['latin'],
-//   variable: '--font-montserrat',
-// });
-
 export const metadata: Metadata = {
   title: 'Taskify',
   description: 'Task management application',
+  openGraph: {
+    title: 'Taskify',
+    description: 'Task management application',
+    url: 'https://taskify10.vercel.app/',
+    images: [
+      {
+        url: '/images/home.png',
+        width: 1200,
+        height: 730,
+        alt: 'Taskify - Task management application',
+      },
+    ],
+    siteName: 'Taskify',
+  },
 };
 
 export default function RootLayout({

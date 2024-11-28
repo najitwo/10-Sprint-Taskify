@@ -44,12 +44,12 @@ export default function SideBar() {
         )}
       </Button>
       <div className={styles.createDashboardContainer}>
-        <span className={styles.createDashboardTitle}>Dash Boards</span>
         <Button
           aria-label={TITLE}
           className={styles.addButton}
           onClick={openModal}
         >
+          <span className={styles.createDashboardTitle}>Dash Boards</span>
           <Image src="/icons/add_box.svg" alt={TITLE} width={20} height={20} />
         </Button>
         {isOpen && (
