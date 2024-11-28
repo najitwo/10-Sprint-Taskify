@@ -34,3 +34,7 @@ export interface Columns {
   items: Cards[];
   loadMoreData: DebouncedFunc<(columnId: number) => Promise<void>>;
 }
+
+export interface PostColumnRequest {
+  title: string;
+}

@@ -8,9 +8,13 @@ import Column from './components/Column';
 import Button from '@/components/Button';
 import Image from 'next/image';
 import useDashboardStore from '@/store/dashboardStore';
+import { useModal } from '../../mydashboard/_hooks/useModal';
+import Modal from '@/app/(with-header-sidebar)/mydashboard/_components/modal/Modal';
+import CreateColumnModal from './components/CreateColumnModal';
 import styles from './page.module.css';
 
 export default function DashBoardView() {
+  const { isOpen, openModal, isClosing, closeModal } = useModal();
   const params = useParams();
   const id = params.id;
 
@@ -43,19 +47,28 @@ export default function DashBoardView() {
             loadMoreData={loadMoreData}
           />
         ))}
-        <div className={styles.createColumnSection}>
-          <Button type="button" className={styles.createColumn}>
-            <span>새로운 칼럼 추가하기</span>
-            <Image
-              src="/icons/add.svg"
-              width={22}
-              height={22}
-              alt=""
-              className={styles.createColumnIcon}
-            />
-          </Button>
-        </div>
       </DragDropContext>
+      <div className={styles.createColumnSection}>
+        <Button
+          type="button"
+          className={styles.createColumn}
+          onClick={openModal}
+        >
+          <span>새로운 칼럼 추가하기</span>
+          <Image
+            src="/icons/add.svg"
+            width={22}
+            height={22}
+            alt=""
+            className={styles.createColumnIcon}
+          />
+        </Button>
+      </div>
+      {isOpen && (
+        <Modal isClosing={isClosing} onClose={closeModal} hasCloseButton={true}>
+          <CreateColumnModal />
+        </Modal>
+      )}
     </div>
   );
 }
