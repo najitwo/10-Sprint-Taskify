@@ -1,7 +1,7 @@
 .comments {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 15px;
   max-height: 216px;
   overflow-y: auto;
   scrollbar-width: none;
