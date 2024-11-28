@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import axiosInstance from '@/lib/axiosInstance';
 import { cookies } from 'next/headers';
 import { AxiosError } from 'axios';
+import { TOKEN_KEY } from '@/constants/cookies';
 
 export const POST = async (request: NextRequest): Promise<NextResponse> => {
   try {
@@ -10,7 +11,7 @@ export const POST = async (request: NextRequest): Promise<NextResponse> => {
 
     if (response.status === 201) {
       const { accessToken, user } = response.data;
-      (await cookies()).set('accessToken', accessToken, {
+      (await cookies()).set(TOKEN_KEY, accessToken, {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
         maxAge: 60 * 60 * 24 * 7,
