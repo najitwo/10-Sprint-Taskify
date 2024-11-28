@@ -6,6 +6,7 @@ import Button from '@/components/Button';
 import styles from './signPage.module.css';
 import axiosInstance from '@/lib/axiosInstance';
 import { ERROR_MESSAGES } from '@/constants/message';
+import { AxiosError } from 'axios';
 
 type SignupFormInputs = {
   email: string;
@@ -35,16 +36,18 @@ export default function SignupPage() {
       });
       alert('회원가입이 완료되었습니다.');
       router.push('/login');
-    } catch (error: any) {
-      if (error.response?.status === 409) {
-        setError('email', {
-          type: 'manual',
-          message: ERROR_MESSAGES.EMAIL_DUPLICATE,
-        });
-      } else if (error.response?.status === 400) {
-        alert(error.response.data.message);
-      } else {
-        alert('회원가입 중 오류가 발생했습니다.');
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        if (error.response?.status === 409) {
+          setError('email', {
+            type: 'manual',
+            message: ERROR_MESSAGES.EMAIL_DUPLICATE,
+          });
+        } else if (error.response?.status === 400) {
+          alert(error.response.data.message);
+        } else {
+          alert('회원가입 중 오류가 발생했습니다.');
+        }
       }
     }
   };
