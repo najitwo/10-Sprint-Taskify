@@ -4,6 +4,7 @@ import axiosInstance from '@/lib/axiosInstance';
 import Cookies from 'js-cookie';
 import type { User } from '@/types/user';
 import { TOKEN_KEY } from '@/constants/cookies';
+import axios from 'axios';
 
 const useMe = () => {
   const { user, setUser, setAccessToken } = useAuthStore();
@@ -32,10 +33,14 @@ const useMe = () => {
     }
   }, []);
 
+  const removeCookie = async () => {
+    await axios.delete('api/accessToken');
+  };
+
   const clearUser = () => {
     setUser(null);
     setAccessToken(null);
-    Cookies.remove(TOKEN_KEY);
+    removeCookie();
   };
 
   return {
