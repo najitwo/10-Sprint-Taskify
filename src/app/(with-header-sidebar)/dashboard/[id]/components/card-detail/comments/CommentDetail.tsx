@@ -6,7 +6,15 @@ import type { Comment } from '@/types/comment';
 import { deleteComment, updateComment } from '@/lib/commentService';
 import styles from './CommentDetail.module.css';
 
-export default function CommentDetail({ comment }: { comment: Comment }) {
+interface CommentDetailProps {
+  comment: Comment;
+  onDelete: (commentId: number) => void;
+}
+
+export default function CommentDetail({
+  comment,
+  onDelete,
+}: CommentDetailProps) {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const { id, author } = comment;
@@ -25,7 +33,7 @@ export default function CommentDetail({ comment }: { comment: Comment }) {
     setIsEditing(!isEditing);
   };
 
-  const handleOnClick = () => {
+  const handleEditOnClick = () => {
     try {
       if (isEditing) {
         handleSave();
@@ -39,10 +47,10 @@ export default function CommentDetail({ comment }: { comment: Comment }) {
     setContent(e.target.value);
   };
 
-  const handleOnKeyDown = async (e: KeyboardEvent<HTMLInputElement>) => {
+  const handleOnKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       e.preventDefault();
-      await handleSave();
+      handleSave();
       toggleEditing();
       // todo: 수정성공시 토스트 박스
     }
@@ -63,8 +71,10 @@ export default function CommentDetail({ comment }: { comment: Comment }) {
     }
   };
 
-  const handleDelete = async () => {
+  const handleDeleteOnClick = async () => {
     await deleteComment(id);
+    onDelete(id);
+    // todo: 삭제성공시 토스트 박스
   };
 
   return (
@@ -90,11 +100,11 @@ export default function CommentDetail({ comment }: { comment: Comment }) {
           <Button
             className={styles.button}
             type="button"
-            onClick={handleOnClick}
+            onClick={handleEditOnClick}
           >
             {isEditing ? '저장' : '수정'}
           </Button>
-          <Button className={styles.button} onClick={handleDelete}>
+          <Button className={styles.button} onClick={handleDeleteOnClick}>
             삭제
           </Button>
         </div>
