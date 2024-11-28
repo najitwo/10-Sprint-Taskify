@@ -9,6 +9,7 @@ import Image from 'next/image';
 import Tag from '@/components/card/Tag';
 import CalendarIcon from '/public/icons/calendar.svg';
 import Avatar from '@/components/Avatar';
+import useCardStore from '@/store/cardStore';
 import styles from './Card.module.css';
 
 interface Props {
@@ -24,7 +25,9 @@ function Card({ item, index, columnTitle }: Props) {
     return null;
   }
 
+  useCardStore.getState().setCard(item);
   const { id, title, imageUrl, tags, dueDate, assignee } = item;
+
   return (
     <>
       <Draggable draggableId={`${id}`} index={index}>

@@ -62,6 +62,12 @@
   z-index: 1000;
 }
 
+.calendarWrapper.above {
+  top: auto;
+  bottom: calc(100% + 4px);
+  transform-origin: bottom;
+}
+
 .calendarHeader {
   display: flex;
   justify-content: space-between;

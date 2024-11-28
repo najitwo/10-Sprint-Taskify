@@ -34,3 +34,12 @@ export interface Columns {
   items: Cards[];
   loadMoreData: DebouncedFunc<(columnId: number) => Promise<void>>;
 }
+
+export interface Column {
+  id: number;
+  title: string;
+  teamId: string;
+  dashboardId: number;
+  createdAt: string;
+  updatedAt: string;
+}
