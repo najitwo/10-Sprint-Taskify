@@ -55,3 +55,11 @@ export const updateComment = async ({
     throw error;
   }
 };
+
+export const deleteComment = async (commentId: number) => {
+  try {
+    await axiosInstance.delete(`/comments/${commentId}`);
+  } catch (error) {
+    throw error;
+  }
+};

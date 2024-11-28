@@ -3,7 +3,7 @@ import Avatar from '@/components/Avatar';
 import Button from '@/components/Button';
 import { formatDateToCustomFormat } from '@/utils/dateUtils';
 import type { Comment } from '@/types/comment';
-import { updateComment } from '@/lib/commentService';
+import { deleteComment, updateComment } from '@/lib/commentService';
 import styles from './CommentDetail.module.css';
 
 export default function CommentDetail({ comment }: { comment: Comment }) {
@@ -63,6 +63,10 @@ export default function CommentDetail({ comment }: { comment: Comment }) {
     }
   };
 
+  const handleDelete = async () => {
+    await deleteComment(id);
+  };
+
   return (
     <li className={styles.comment}>
       <Avatar name={author.nickname} className={styles.avatar} />
@@ -90,7 +94,9 @@ export default function CommentDetail({ comment }: { comment: Comment }) {
           >
             {isEditing ? '저장' : '수정'}
           </Button>
-          <Button className={styles.button}>삭제</Button>
+          <Button className={styles.button} onClick={handleDelete}>
+            삭제
+          </Button>
         </div>
       </div>
     </li>
