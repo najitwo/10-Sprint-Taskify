@@ -17,8 +17,8 @@ export default function MyInvitations() {
     reloadKey
   );
 
-  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setTitle(event.target.value);
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setTitle(e.target.value);
   };
 
   if (error) {

@@ -24,7 +24,7 @@ export default function Comments({ cardId, newComment }: CommentsProps) {
         <>
           <ul className={styles.comments}>
             {comments.map((comment) => (
-              <CommentDetail key={comment.id} {...comment} />
+              <CommentDetail key={comment.id} comment={comment} />
             ))}
             <div ref={observerRef} style={{ height: '1px' }}></div>
           </ul>
