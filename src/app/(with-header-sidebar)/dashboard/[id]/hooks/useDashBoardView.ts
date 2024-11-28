@@ -2,11 +2,11 @@ import { useState, useEffect, useCallback } from 'react';
 import debounce from 'lodash/debounce';
 import axiosInstance from '@/lib/axiosInstance';
 import { DropResult } from 'react-beautiful-dnd';
-import { Columns, Cards } from '@/types/dashboardView';
+import { DashboardColumn, Cards } from '@/types/dashboardView';
 import { COLUMN_URL, CARD_URL } from '@/constants/urls';
 
 export default function useDashBoardView(dashboardId: string | undefined) {
-  const [columns, setColumns] = useState<Columns[]>([]);
+  const [columns, setColumns] = useState<DashboardColumn[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [cursors, setCursors] = useState<Record<number, number | null>>({});
@@ -19,7 +19,9 @@ export default function useDashBoardView(dashboardId: string | undefined) {
       );
 
       const columns = columnData.data;
-      const columnIds: number[] = columns.map((column: Columns) => column.id);
+      const columnIds: number[] = columns.map(
+        (column: DashboardColumn) => column.id
+      );
 
       const cardRequests = columnIds.map((columnId) =>
         axiosInstance.get(`${CARD_URL}?size=10&columnId=${columnId}`)
@@ -27,19 +29,21 @@ export default function useDashBoardView(dashboardId: string | undefined) {
 
       const cardResponses = await Promise.all(cardRequests);
 
-      const updatedColumns = columns.map((column: Columns, index: number) => {
-        const cardData = cardResponses[index].data.cards;
-        const totalCount = cardResponses[index].data.totalCount;
+      const updatedColumns = columns.map(
+        (column: DashboardColumn, index: number) => {
+          const cardData = cardResponses[index].data.cards;
+          const totalCount = cardResponses[index].data.totalCount;
 
-        return {
-          ...column,
-          items: cardData || [],
-          totalCount: totalCount || 0,
-        };
-      });
+          return {
+            ...column,
+            items: cardData || [],
+            totalCount: totalCount || 0,
+          };
+        }
+      );
 
       const initialCursors = updatedColumns.reduce(
-        (acc: Record<number, number | null>, column: Columns) => {
+        (acc: Record<number, number | null>, column: DashboardColumn) => {
           const lastCard = column.items[column.items.length - 1];
           acc[column.id] = lastCard ? lastCard.id : null;
           return acc;

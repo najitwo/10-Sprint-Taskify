@@ -28,10 +28,12 @@ export default function DashBoardView() {
     if (dashboard?.id !== Number(id)) {
       setDashboard(Number(id));
     }
-  }, [id, dashboard?.id]);
+  }, [id, dashboard?.id, columns]);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
+
+  const COLCOUNT = columns.length === 10;
 
   return (
     <div className={styles.dashboardView}>
@@ -48,22 +50,24 @@ export default function DashBoardView() {
           />
         ))}
       </DragDropContext>
-      <div className={styles.createColumnSection}>
-        <Button
-          type="button"
-          className={styles.createColumn}
-          onClick={openModal}
-        >
-          <span>새로운 칼럼 추가하기</span>
-          <Image
-            src="/icons/add.svg"
-            width={22}
-            height={22}
-            alt=""
-            className={styles.createColumnIcon}
-          />
-        </Button>
-      </div>
+      {!COLCOUNT && (
+        <div className={styles.createColumnSection}>
+          <Button
+            type="button"
+            className={styles.createColumn}
+            onClick={openModal}
+          >
+            <span>새로운 칼럼 추가하기</span>
+            <Image
+              src="/icons/add.svg"
+              width={22}
+              height={22}
+              alt=""
+              className={styles.createColumnIcon}
+            />
+          </Button>
+        </div>
+      )}
       {isOpen && (
         <Modal isClosing={isClosing} onClose={closeModal} hasCloseButton={true}>
           <CreateColumnModal />

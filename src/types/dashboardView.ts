@@ -27,12 +27,15 @@ export interface GetCardsResponse {
 }
 
 export interface Columns {
-  title: string;
-  color: string;
-  totalCount: number;
   id: number;
+  title: 'string';
+}
+
+export interface DashboardColumn extends Columns {
   items: Cards[];
   loadMoreData: DebouncedFunc<(columnId: number) => Promise<void>>;
+  color: string;
+  totalCount: number;
 }
 
 export interface PostColumnRequest {
