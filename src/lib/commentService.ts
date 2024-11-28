@@ -3,15 +3,8 @@ import type {
   CreateCommentRequestBody,
   Comment,
   GetCommentsRequestParams,
+  UpdateCommentRequestBody,
 } from '@/types/comment';
-
-export const deleteCard = async (cardId: number) => {
-  try {
-    await axiosInstance.delete(`/cards/${cardId}`);
-  } catch (error) {
-    throw error;
-  }
-};
 
 export const getComments = async ({
   cardId,
@@ -40,6 +33,20 @@ export const createComment = async (
 ): Promise<Comment> => {
   try {
     const response = await axiosInstance.post(`/comments`, { ...data });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const updateComment = async (
+  commentId: number,
+  data: UpdateCommentRequestBody
+): Promise<Comment> => {
+  try {
+    const response = await axiosInstance.put(`/comments/${commentId}`, {
+      ...data,
+    });
     return response.data;
   } catch (error) {
     throw error;

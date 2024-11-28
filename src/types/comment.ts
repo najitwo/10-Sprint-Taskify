@@ -30,3 +30,7 @@ export interface CreateCommentRequestBody {
   columnId: number;
   dashboardId: number;
 }
+
+export interface UpdateCommentRequestBody {
+  content: string;
+}
