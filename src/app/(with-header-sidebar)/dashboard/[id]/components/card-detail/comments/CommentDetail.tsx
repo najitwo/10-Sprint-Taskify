@@ -10,14 +10,12 @@ export default function CommentDetail({ comment }: { comment: Comment }) {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const { id, author } = comment;
-  const [modifiableValues, setModifiableValues] = useState({
-    content: comment.content,
-    updatedAt: comment.updatedAt,
-  });
+  const [content, setContent] = useState(comment.content);
+  const [updatedAt, setUpdatedAt] = useState(comment.updatedAt);
 
   const [isEditing, setIsEditing] = useState(false);
 
-  const handleEditing = () => {
+  const toggleEditing = () => {
     if (!isEditing) {
       inputRef.current?.focus();
     } else {
@@ -33,22 +31,19 @@ export default function CommentDetail({ comment }: { comment: Comment }) {
         handleSave();
       }
     } finally {
-      handleEditing();
+      toggleEditing();
     }
   };
 
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setModifiableValues({
-      ...modifiableValues,
-      content: e.target.value,
-    });
+    setContent(e.target.value);
   };
 
   const handleOnKeyDown = async (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       e.preventDefault();
       await handleSave();
-      handleEditing();
+      toggleEditing();
       // todo: 수정성공시 토스트 박스
     }
   };
@@ -57,15 +52,12 @@ export default function CommentDetail({ comment }: { comment: Comment }) {
     try {
       const response = await updateComment({
         commentId: id,
-        data: { content: modifiableValues.content },
+        data: { content },
       });
 
       setIsEditing(false);
-      setModifiableValues({
-        ...modifiableValues,
-        content: response.content,
-        updatedAt: response.updatedAt,
-      });
+      setContent(response.content);
+      setUpdatedAt(response.updatedAt);
     } catch (error) {
       console.error('댓글 저장 중 오류 발생:', error);
     }
@@ -78,13 +70,13 @@ export default function CommentDetail({ comment }: { comment: Comment }) {
         <div className={styles.user}>
           <div className={styles.name}>{author.nickname}</div>
           <span className={styles.date}>
-            {formatDateToCustomFormat(modifiableValues.updatedAt)}
+            {formatDateToCustomFormat(updatedAt)}
           </span>
         </div>
         <input
           ref={inputRef}
           className={styles.content}
-          value={modifiableValues.content}
+          value={content}
           readOnly={!isEditing}
           onChange={handleOnChange}
           onBlur={() => {}}
