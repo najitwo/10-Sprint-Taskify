@@ -1,6 +1,6 @@
 .comment {
   display: flex;
-  gap: 8px;
+  gap: 15px;
 }
 
 .avatar.avatar {
@@ -49,7 +49,18 @@
   font-weight: 400;
   line-height: 18px;
   color: var(--black-100);
-  padding: 2px 0 8px;
+  margin: 5px 0;
+  overflow: hidden;
+  overflow-x: auto;
+}
+
+.content:read-only {
+}
+
+.content:focus {
+  padding: 5px;
+  border-radius: 4px;
+  outline: 2px solid var(--violet);
 }
 
 .buttonContainer {
@@ -86,17 +97,6 @@
     max-width: 530px;
     font-size: 14px;
     line-height: 24px;
-    margin: 5px 0;
-  }
-
-  .content:read-only {
-    pointer-events: none;
-  }
-
-  .content:focus {
-    padding: 5px;
-    border-radius: 4px;
-    outline: 2px solid var(--violet);
   }
 
   .buttonContainer {
