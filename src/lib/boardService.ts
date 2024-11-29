@@ -1,4 +1,5 @@
 import axiosInstance from '@/lib/axiosInstance';
+import { toast } from '@/store/toastStore';
 import {
   UpdateDashboardRequestParams,
   CreateDashboardRequestBody,
@@ -23,9 +24,12 @@ export const updateBoard = async (
       title,
       color,
     });
+    toast.success({ message: '변경되었습니다.' });
     return response.data;
   } catch (error) {
-    throw error;
+    if (error instanceof Error) {
+      toast.error({ message: error.message });
+    }
   }
 };
 
@@ -47,7 +51,10 @@ export const createDashboard = async ({
 export const deleteDashboard = async (dashboardId: string) => {
   try {
     await axiosInstance.delete(`/dashboards/${dashboardId}`);
+    toast.success({ message: '대시보드가 삭제되었습니다.' });
   } catch (error) {
-    throw error;
+    if (error instanceof Error) {
+      toast.error({ message: 'error.message' });
+    }
   }
 };

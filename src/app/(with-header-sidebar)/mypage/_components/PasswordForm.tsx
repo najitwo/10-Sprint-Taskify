@@ -9,6 +9,7 @@ import Button from '@/components/Button';
 import Input from '@/components/Input';
 import AlertModal from './AlertModal';
 import styles from './Form.module.css';
+import { toast } from '@/store/toastStore';
 
 export interface PasswordFormValues {
   currentPassword: string;
@@ -37,6 +38,7 @@ export default function PasswordForm() {
         password: data.currentPassword,
         newPassword: data.newPassword,
       });
+      toast.success({ message: '변경되었습니다.' });
       reset();
     } catch (error) {
       if (error instanceof Error) {
