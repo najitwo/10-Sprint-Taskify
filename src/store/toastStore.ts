@@ -20,7 +20,7 @@ interface ToastsState {
     type: ToastState['type'],
     duration: number,
     showButton: boolean,
-    theme: 'dark' | 'light'
+    theme: ToastState['theme']
   ) => void;
   removeToast: (id: number) => void;
   pauseToast: (id: number) => void;
@@ -149,7 +149,7 @@ interface CreateToastProps {
   message: string;
   duration?: number;
   showButton?: boolean;
-  theme?: 'dark' | 'light';
+  theme?: ToastState['theme'];
 }
 
 const createToast =

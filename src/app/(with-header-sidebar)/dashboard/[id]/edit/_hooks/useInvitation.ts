@@ -7,6 +7,7 @@ import {
 import useApi from './useApi';
 import { GetInvitationsResponse, Invitation } from '@/types/invitation';
 import { toast } from '@/store/toastStore';
+import useModalStore from '@/store/modalStore';
 
 interface InvitationState {
   page: number;
@@ -24,6 +25,7 @@ const useInvitation = (dashboardId: string | null, pageSize = 5) => {
   const [invitationState, setInvitationState] = useState<InvitationState>(
     DEFAULT_INVITATION_STATE
   );
+  const closeModal = useModalStore((state) => state.closeModal);
 
   const {
     isLoading,
@@ -86,6 +88,7 @@ const useInvitation = (dashboardId: string | null, pageSize = 5) => {
     try {
       await createInvitation(dashboardId!, email);
       toast.success({ message: '초대되었습니다.' });
+      closeModal();
       handleLoad(invitationState.page);
     } catch (error) {
       if (error instanceof Error) {
