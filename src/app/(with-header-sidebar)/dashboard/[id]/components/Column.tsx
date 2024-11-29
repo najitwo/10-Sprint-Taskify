@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import { Droppable } from 'react-beautiful-dnd';
-import { Columns } from '@/types/dashboardView';
+import { DashboardColumn } from '@/types/dashboardView';
 import Button from '@/components/Button';
 import Image from 'next/image';
 import Card from './Card';
@@ -15,7 +15,7 @@ function Column({
   id,
   items,
   loadMoreData,
-}: Columns) {
+}: DashboardColumn) {
   const observerRef = useRef<IntersectionObserver | null>(null);
   const loadMoreRef = useRef<HTMLDivElement | null>(null);
   const columnRef = useRef<HTMLDivElement | null>(null);
@@ -75,22 +75,20 @@ function Column({
       </div>
 
       <div className={`${styles.columnContent}${styles.createCardSection}`}>
-        <div className={styles.createCardSection}>
-          <Button
-            type="button"
-            className={styles.createCard}
-            aria-label="컬럼 생성 버튼"
-            onClick={handleCreateTask}
-          >
-            <Image
-              src="/icons/add.svg"
-              width={22}
-              height={22}
-              alt=""
-              className={styles.createCardIcon}
-            />
-          </Button>
-        </div>
+        <Button
+          type="button"
+          className={styles.createCard}
+          aria-label="컬럼 생성 버튼"
+          onClick={handleCreateTask}
+        >
+          <Image
+            src="/icons/add.svg"
+            width={22}
+            height={22}
+            alt=""
+            className={styles.createCardIcon}
+          />
+        </Button>
         <div className={styles.scrollContext}>
           <Droppable
             droppableId={`${id}`}
