@@ -35,9 +35,7 @@ function ToastItem({
     if (toast.isPaused) return;
 
     const startTime = Date.now();
-    let interval: NodeJS.Timeout;
-
-    const updateProgress = () => {
+    const interval = setInterval(() => {
       const now = Date.now();
       const elapsedTime = now - startTime;
       const updatedRemainingTime = toast.remainingTime - elapsedTime;
@@ -60,9 +58,7 @@ function ToastItem({
             : t
         ),
       }));
-    };
-
-    interval = setInterval(updateProgress, 50);
+    }, 50);
 
     return () => clearInterval(interval);
   }, [toast.remainingTime, toast.isPaused]);
