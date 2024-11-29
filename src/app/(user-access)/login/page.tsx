@@ -6,11 +6,13 @@ import { useRouter } from 'next/navigation';
 import useAuthStore from '@/store/authStore';
 import Button from '@/components/Button';
 import { ERROR_MESSAGES } from '@/constants/message';
-import type { User } from '@/types/user';
-import styles from './loginPage.module.css';
 import ModalContainer from '../components/modal/ModalContainer';
 import useModalStore from '../modalStore/modalStore';
-import axios, { AxiosError, isAxiosError } from 'axios';
+import type { User } from '@/types/user';
+import Cookies from 'js-cookie';
+import { TOKEN_KEY, TOKEN_OPTIONS } from '@/constants/cookies';
+import styles from './loginPage.module.css';
+import axios from 'axios';
 
 type LoginFormInputs = {
   email: string;
