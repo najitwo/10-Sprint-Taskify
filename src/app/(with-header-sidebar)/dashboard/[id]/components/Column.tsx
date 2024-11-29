@@ -5,7 +5,7 @@ import Button from '@/components/Button';
 import Image from 'next/image';
 import Card from './Card';
 import useModalStore from '@/store/modalStore';
-import CreateTaskModal from './CreateTaskModal';
+import CreateTaskModal from './CreateCardModal';
 import styles from './Column.module.css';
 
 function Column({

@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { getMembers, deleteMember } from '../_lib/memberService';
 import useApi from './useApi';
 import { GetMembersResponse, Member } from '@/types/member';
+import useToastStore from '@/store/toastStore';
 
 interface MemberState {
   page: number;
@@ -24,6 +25,7 @@ const useMember = (dashboardId: string | null, pageSize = 4) => {
     error,
     wrappedFunction: getMembersAsync,
   } = useApi(getMembers);
+  const addToast = useToastStore((state) => state.addToast);
 
   const handleLoad = useCallback(
     async (page: number) => {
@@ -66,9 +68,12 @@ const useMember = (dashboardId: string | null, pageSize = 4) => {
   const handleDelete = async (memberId: number) => {
     try {
       await deleteMember(memberId);
+      addToast('삭제되었습니다', 'success');
       handleLoad(memberState.page);
     } catch (error) {
-      throw error;
+      if (error instanceof Error) {
+        addToast(error.message, 'error');
+      }
     }
   };
 

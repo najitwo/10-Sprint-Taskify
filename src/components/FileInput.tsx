@@ -31,7 +31,7 @@ export default function FileInput({
     if (file) {
       const allowedTypes = ['image/png', 'image/jpeg'];
       if (!allowedTypes.includes(file.type)) {
-        addToast('지원하지 않는 파일 형식입니다', 'error');
+        addToast('지원하지 않는 파일 형식입니다.', 'error');
         return;
       }
       setPreview(URL.createObjectURL(file));

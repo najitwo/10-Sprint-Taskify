@@ -28,9 +28,10 @@ export const updateProfile = async (data: ProfileFormValues) => {
       ...(url && { profileImageUrl: url }),
     });
     setUser(response.data);
-    addToast('수정되었습니다', 'success');
+    addToast('수정되었습니다.', 'success');
   } catch (error) {
     if (error instanceof Error) {
+      addToast(error.message, 'error');
     }
   }
 };
