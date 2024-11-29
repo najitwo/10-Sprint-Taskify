@@ -4,7 +4,7 @@ import Button from '@/components/Button';
 import Input from '@/components/Input';
 import useDashboardStore from '@/store/dashboardStore';
 import { ERROR_MESSAGES } from '@/constants/message';
-import { ColumnModal } from '@/types/dashboardView';
+import { ColumnFormValue } from '@/types/dashboardView';
 import useDashBoardView from '../hooks/useDashBoardView';
 import { deleteColumn, updateColumn } from '@/lib/columnServie';
 import CloseButton from './CloseButton';
@@ -13,12 +13,10 @@ import styles from './CommonColumnModal.module.css';
 export default function SettingsColumnModal({
   title: prevTitle,
   id,
-}: ColumnModal) {
+}: ColumnFormValue) {
   const { closeModal } = useModalStore();
   const dashboard = useDashboardStore((state) => state.dashboard);
-  const { columns } = dashboard
-    ? useDashBoardView(`${dashboard.id}`)
-    : { columns: [] };
+  const { columns } = useDashBoardView(dashboard ? `${dashboard.id}` : '');
 
   const {
     register,
@@ -26,7 +24,7 @@ export default function SettingsColumnModal({
     setError,
     watch,
     formState: { errors },
-  } = useForm<ColumnModal>({ mode: 'onChange' });
+  } = useForm<ColumnFormValue>({ mode: 'onChange' });
 
   const handleError = (message: string) => {
     setError('title', {
@@ -59,7 +57,7 @@ export default function SettingsColumnModal({
     closeModal();
   };
 
-  const onUpdate = async (data: ColumnModal) => {
+  const onUpdate = async (data: ColumnFormValue) => {
     const { title } = data;
 
     if (title === prevTitle) {

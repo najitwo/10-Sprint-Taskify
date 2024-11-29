@@ -4,7 +4,7 @@ import Button from '@/components/Button';
 import Input from '@/components/Input';
 import useDashboardStore from '@/store/dashboardStore';
 import { ERROR_MESSAGES } from '@/constants/message';
-import { ColumnModal } from '@/types/dashboardView';
+import { ColumnFormValue } from '@/types/dashboardView';
 import useDashBoardView from '../hooks/useDashBoardView';
 import { createColumn } from '@/lib/columnServie';
 import styles from './CommonColumnModal.module.css';
@@ -12,17 +12,15 @@ import styles from './CommonColumnModal.module.css';
 export default function CreateColumnModal() {
   const { closeModal } = useModalStore();
   const dashboard = useDashboardStore((state) => state.dashboard);
-  const { columns } = dashboard
-    ? useDashBoardView(`${dashboard.id}`)
-    : { columns: [] };
+  const { columns } = useDashBoardView(dashboard ? `${dashboard.id}` : '');
 
   const {
     register,
     handleSubmit,
     formState: { errors, isValid },
-  } = useForm<ColumnModal>({ mode: 'onChange' });
+  } = useForm<ColumnFormValue>({ mode: 'onChange' });
 
-  const onSubmit = async (data: ColumnModal) => {
+  const onSubmit = async (data: ColumnFormValue) => {
     if (dashboard) {
       await createColumn(dashboard.id, data.title);
     }

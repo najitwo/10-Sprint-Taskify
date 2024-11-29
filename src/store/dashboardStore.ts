@@ -2,11 +2,11 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import type { Dashboard } from '@/types/dashboards';
 import { getBoard, getColumns } from '@/lib/boardService';
-import { Columns } from '@/types/dashboardView';
+import { ColumnFormValue } from '@/types/dashboardView';
 
 interface dashboardState {
   dashboard: Dashboard | null;
-  columns: Columns[];
+  columns: ColumnFormValue[];
   setDashboard: (dashboardId: number) => void;
   setColumns: (dashboardId: number) => void;
 

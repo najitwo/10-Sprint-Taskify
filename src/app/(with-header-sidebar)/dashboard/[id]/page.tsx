@@ -44,12 +44,12 @@ export default function DashBoardView() {
         {columns.map((column) => (
           <Column
             key={column.id}
-            color={color}
+            color={column.color}
             title={column.title}
             totalCount={column.totalCount}
             id={column.id}
             items={column.items}
-            loadMoreData={loadMoreData}
+            loadMoreData={column.loadMoreData}
           />
         ))}
       </DragDropContext>

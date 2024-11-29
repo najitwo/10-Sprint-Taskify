@@ -26,21 +26,16 @@ export interface GetCardsResponse {
   cards: Cards[];
 }
 
-export interface Columns {
+export interface ColumnFormValue {
   id: number;
-  title: 'string';
+  title: string;
 }
 
-export interface DashboardColumn extends Columns {
+export interface DashboardColumn extends ColumnFormValue {
   items: Cards[];
   loadMoreData: DebouncedFunc<(columnId: number) => Promise<void>>;
   color: string;
   totalCount: number;
-}
-
-export interface ColumnModal {
-  id: number;
-  title: string;
 }
 
 export interface Column {

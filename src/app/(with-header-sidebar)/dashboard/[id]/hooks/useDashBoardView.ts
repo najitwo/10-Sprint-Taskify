@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import debounce from 'lodash/debounce';
 import axiosInstance from '@/lib/axiosInstance';
 import { DropResult } from 'react-beautiful-dnd';
-import { DashboardColumn, Cards } from '@/types/dashboardView';
+import { DashboardColumn, Cards, Column } from '@/types/dashboardView';
 import { COLUMN_URL, CARD_URL } from '@/constants/urls';
 
 export default function useDashBoardView(dashboardId: string | undefined) {
@@ -19,9 +19,7 @@ export default function useDashBoardView(dashboardId: string | undefined) {
       );
 
       const columns = columnData.data;
-      const columnIds: number[] = columns.map(
-        (column: DashboardColumn) => column.id
-      );
+      const columnIds: number[] = columns.map((column: Column) => column.id);
 
       const cardRequests = columnIds.map((columnId) =>
         axiosInstance.get(`${CARD_URL}?size=10&columnId=${columnId}`)
