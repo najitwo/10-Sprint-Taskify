@@ -13,6 +13,20 @@ const pretendard = localFont({
 export const metadata: Metadata = {
   title: 'Taskify',
   description: 'Task management application',
+  openGraph: {
+    title: 'Taskify',
+    description: 'Task management application',
+    url: 'https://taskify10.vercel.app/',
+    images: [
+      {
+        url: '/images/home.png',
+        width: 1200,
+        height: 730,
+        alt: 'Taskify - Task management application',
+      },
+    ],
+    siteName: 'Taskify',
+  },
 };
 
 export default function RootLayout({

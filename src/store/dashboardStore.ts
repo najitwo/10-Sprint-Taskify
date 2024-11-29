@@ -20,9 +20,15 @@ const useDashboardStore = create(
       dashboard: null,
 
       setDashboard: async (dashboardId) => {
+        if (dashboardId === null) {
+          set({
+            dashboard: null,
+          });
+          return;
+        }
+
         if (get().dashboard?.id === dashboardId) return;
 
-        // TODO error handling
         const response = await getBoard(dashboardId.toString());
         set({
           dashboard: { ...response },

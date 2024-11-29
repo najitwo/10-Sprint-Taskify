@@ -12,6 +12,12 @@
   color: var(--black-100);
 }
 
+.dropdownContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
 .image.image {
   width: 76px;
   height: 76px;
@@ -58,7 +64,16 @@
 
 @media screen and (min-width: 768px) {
   .modal {
+    gap: 32px;
     padding: 32px;
+  }
+
+  .dropdownContainer {
+    flex-direction: row;
+  }
+
+  .dropdown {
+    width: 217px;
   }
 
   .input input {
