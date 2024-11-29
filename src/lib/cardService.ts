@@ -1,6 +1,6 @@
 import { TaskFormValues } from '@/app/(with-header-sidebar)/dashboard/[id]/components/CreateCardModal';
 import axiosInstance from '@/lib/axiosInstance';
-import useToastStore from '@/store/toastStore';
+import { toast } from '@/store/toastStore';
 
 export const deleteCard = async (cardId: number) => {
   try {
@@ -16,7 +16,6 @@ export const createCard = async (
   dashboardId: number
 ) => {
   const { image, ...body } = data;
-  const addToast = useToastStore.getState().addToast;
   let url = null;
 
   try {
@@ -40,11 +39,11 @@ export const createCard = async (
       ...body,
       ...(url && { imageUrl: url }),
     });
-    addToast('카드가 생성되었습니다.', 'success');
+    toast.success({ message: '카드가 생성되었습니다.' });
     return response.data;
   } catch (error) {
     if (error instanceof Error) {
-      addToast(error.message, 'error');
+      toast.error({ message: error.message });
     }
   }
 };
@@ -55,7 +54,6 @@ export const updateCard = async (
   cardId: number
 ) => {
   const { image, ...body } = data;
-  const addToast = useToastStore.getState().addToast;
   let url = null;
 
   try {
@@ -78,11 +76,11 @@ export const updateCard = async (
       ...body,
       ...(url && { imageUrl: url }),
     });
-    addToast('카드가 수정되었습니다.', 'success');
+    toast.success({ message: '카드가 수정되었습니다.' });
     return response.data;
   } catch (error) {
     if (error instanceof Error) {
-      addToast(error.message, 'error');
+      toast.error({ message: error.message });
     }
   }
 };

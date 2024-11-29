@@ -3,18 +3,25 @@ import { create } from 'zustand';
 export interface ToastState {
   id: number;
   message: string;
-  type: string;
-  isFading?: boolean;
+  type: 'success' | 'error' | 'warning' | 'info';
   duration: number;
   remainingTime: number;
-  isPaused?: boolean;
+  showButton: boolean;
+  theme: 'dark' | 'light';
+  isFading?: boolean;
   timeoutId?: NodeJS.Timeout | null;
   lastUpdateTime?: number;
 }
 
 interface ToastsState {
   toasts: ToastState[];
-  addToast: (message: string, type?: string, duration?: number) => void;
+  addToast: (
+    message: string,
+    type: ToastState['type'],
+    duration: number,
+    showButton: boolean,
+    theme: 'dark' | 'light'
+  ) => void;
   removeToast: (id: number) => void;
   pauseToast: (id: number) => void;
   resumeToast: (id: number) => void;
@@ -22,7 +29,13 @@ interface ToastsState {
 
 const useToastStore = create<ToastsState>((set) => ({
   toasts: [],
-  addToast: (message: string, type = 'info', duration = 2000) => {
+  addToast: (
+    message: string,
+    type: ToastState['type'],
+    duration = 2000,
+    showButton = true,
+    theme = 'dark'
+  ) => {
     const id = Date.now();
 
     const startToastTimer = (remainingTime: number) => {
@@ -55,8 +68,10 @@ const useToastStore = create<ToastsState>((set) => ({
           isFading: false,
           duration,
           remainingTime: duration,
-          isPaused: false,
           timeoutId,
+          lastUpdateTime: id,
+          showButton,
+          theme,
         },
       ],
     }));
@@ -81,12 +96,11 @@ const useToastStore = create<ToastsState>((set) => ({
   pauseToast: (id: number) => {
     set((state) => ({
       toasts: state.toasts.map((toast) => {
-        if (toast.id === id && !toast.isPaused) {
-          if (toast.timeoutId) clearTimeout(toast.timeoutId);
+        if (toast.id === id && toast.timeoutId) {
+          clearTimeout(toast.timeoutId);
           const now = Date.now();
           return {
             ...toast,
-            isPaused: true,
             remainingTime:
               toast.remainingTime - (now - (toast.lastUpdateTime || now)),
             lastUpdateTime: now,
@@ -99,13 +113,13 @@ const useToastStore = create<ToastsState>((set) => ({
   },
   resumeToast: (id: number) => {
     set((state) => {
-      const toast = state.toasts.find((t) => t.id === id);
-      if (!toast || !toast.isPaused) return state;
+      const toast = state.toasts.find((toast) => toast.id === id);
+      if (!toast) return state;
 
       const timeoutId = setTimeout(() => {
         set((state) => ({
-          toasts: state.toasts.map((t) =>
-            t.id === id ? { ...t, isFading: true } : t
+          toasts: state.toasts.map((toast) =>
+            toast.id === id ? { ...toast, isFading: true } : toast
           ),
         }));
 
@@ -121,7 +135,6 @@ const useToastStore = create<ToastsState>((set) => ({
           toast.id === id
             ? {
                 ...toast,
-                isPaused: false,
                 lastUpdateTime: Date.now(),
                 timeoutId,
               }
@@ -131,5 +144,31 @@ const useToastStore = create<ToastsState>((set) => ({
     });
   },
 }));
+
+interface CreateToastProps {
+  message: string;
+  duration?: number;
+  showButton?: boolean;
+  theme?: 'dark' | 'light';
+}
+
+const createToast =
+  (type: ToastState['type']) =>
+  ({
+    message,
+    duration = 2000,
+    showButton = true,
+    theme = 'dark',
+  }: CreateToastProps) =>
+    useToastStore
+      .getState()
+      .addToast(message, type, duration, showButton, theme);
+
+export const toast = {
+  success: createToast('success'),
+  error: createToast('error'),
+  warning: createToast('warning'),
+  info: createToast('info'),
+};
 
 export default useToastStore;

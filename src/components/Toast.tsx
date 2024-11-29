@@ -29,54 +29,45 @@ function ToastItem({
   onClose: (id: number) => void;
 }) {
   const { pauseToast, resumeToast } = useToastStore();
-  const [progress, setProgress] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
-    if (toast.isPaused) return;
+    if (isPaused) return;
 
-    const startTime = Date.now();
-    const interval = setInterval(() => {
-      const now = Date.now();
-      const elapsedTime = now - startTime;
-      const updatedRemainingTime = toast.remainingTime - elapsedTime;
+    const timer = setTimeout(() => {
+      onClose(toast.id);
+    }, toast.remainingTime);
 
-      if (updatedRemainingTime <= 0) {
-        setProgress(100);
-        clearInterval(interval);
-        onClose(toast.id);
-        return;
-      }
-
-      setProgress(
-        ((toast.duration - updatedRemainingTime) / toast.duration) * 100
-      );
-
-      useToastStore.setState((state) => ({
-        toasts: state.toasts.map((t) =>
-          t.id === toast.id
-            ? { ...t, remainingTime: updatedRemainingTime, lastUpdateTime: now }
-            : t
-        ),
-      }));
-    }, 50);
-
-    return () => clearInterval(interval);
-  }, [toast.remainingTime, toast.isPaused]);
-
+    return () => clearTimeout(timer);
+  }, [isPaused, toast.remainingTime, onClose, toast.id]);
   return (
     <div
       className={`${styles.toast} ${styles[toast.type]} ${
         toast.isFading ? styles.fadeOut : styles.fadeIn
-      }`}
-      onMouseEnter={() => pauseToast(toast.id)}
-      onMouseLeave={() => resumeToast(toast.id)}
+      } ${toast.theme === 'dark' ? styles.dark : styles.light}`}
+      onMouseEnter={() => {
+        pauseToast(toast.id);
+        setIsPaused(true);
+      }}
+      onMouseLeave={() => {
+        resumeToast(toast.id);
+        setIsPaused(false);
+      }}
     >
       <span>{getIcon(toast.type)}</span>
       <p>{toast.message}</p>
-      <Button onClick={() => onClose(toast.id)} className={styles.button}>
-        <XIcon className={styles.icon} />
-      </Button>
-      <div className={styles.progressBar} style={{ width: `${progress}%` }} />
+      {toast.showButton && (
+        <Button onClick={() => onClose(toast.id)} className={styles.button}>
+          <XIcon className={styles.icon} />
+        </Button>
+      )}
+      <div
+        className={`${styles.progressBar} ${styles.animate}`}
+        style={{
+          animationDuration: `${toast.duration}ms`,
+          animationPlayState: isPaused ? 'paused' : 'running',
+        }}
+      />
     </div>
   );
 }

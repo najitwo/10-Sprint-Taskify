@@ -9,7 +9,7 @@ import Button from '@/components/Button';
 import Input from '@/components/Input';
 import AlertModal from './AlertModal';
 import styles from './Form.module.css';
-import useToastStore from '@/store/toastStore';
+import { toast } from '@/store/toastStore';
 
 export interface PasswordFormValues {
   currentPassword: string;
@@ -28,7 +28,6 @@ export default function PasswordForm() {
     reset,
   } = useForm<PasswordFormValues>({ mode: 'onChange' });
   const { openModal } = useModalStore();
-  const { addToast } = useToastStore();
 
   const customIsValid = Object.keys(errors).length === 0;
   const watchedPassword = watch('newPassword');
@@ -39,7 +38,7 @@ export default function PasswordForm() {
         password: data.currentPassword,
         newPassword: data.newPassword,
       });
-      addToast('변경되었습니다.', 'success');
+      toast.success({ message: '변경되었습니다.' });
       reset();
     } catch (error) {
       if (error instanceof Error) {
