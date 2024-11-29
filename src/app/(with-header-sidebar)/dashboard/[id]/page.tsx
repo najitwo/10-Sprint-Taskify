@@ -8,13 +8,12 @@ import Column from './components/Column';
 import Button from '@/components/Button';
 import Image from 'next/image';
 import useDashboardStore from '@/store/dashboardStore';
-import { useModal } from '../../mydashboard/_hooks/useModal';
-import Modal from '@/app/(with-header-sidebar)/mydashboard/_components/modal/Modal';
+import useModalStore from '@/store/modalStore';
 import CreateColumnModal from './components/CreateColumnModal';
 import styles from './page.module.css';
 
 export default function DashBoardView() {
-  const { isOpen, openModal, isClosing, closeModal } = useModal();
+  const { openModal } = useModalStore();
   const params = useParams();
   const id = params.id;
 
@@ -33,7 +32,11 @@ export default function DashBoardView() {
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
 
-  const COLCOUNT = columns.length === 10;
+  const COLCOUNT = columns.length >= 9;
+
+  const handleCreateColumn = () => {
+    openModal(<CreateColumnModal />);
+  };
 
   return (
     <div className={styles.dashboardView}>
@@ -55,9 +58,9 @@ export default function DashBoardView() {
           <Button
             type="button"
             className={styles.createColumn}
-            onClick={openModal}
+            onClick={handleCreateColumn}
           >
-            <span>새로운 칼럼 추가하기</span>
+            <span>새로운 컬럼 추가하기</span>
             <Image
               src="/icons/add.svg"
               width={22}
@@ -67,11 +70,6 @@ export default function DashBoardView() {
             />
           </Button>
         </div>
-      )}
-      {isOpen && (
-        <Modal isClosing={isClosing} onClose={closeModal} hasCloseButton={true}>
-          <CreateColumnModal />
-        </Modal>
       )}
     </div>
   );

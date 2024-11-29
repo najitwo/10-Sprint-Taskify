@@ -38,7 +38,8 @@ export interface DashboardColumn extends Columns {
   totalCount: number;
 }
 
-export interface PostColumnRequest {
+export interface ColumnModal {
+  id: number;
   title: string;
 }
 

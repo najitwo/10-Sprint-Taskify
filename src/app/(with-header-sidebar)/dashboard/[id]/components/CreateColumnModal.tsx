@@ -4,9 +4,10 @@ import Button from '@/components/Button';
 import Input from '@/components/Input';
 import useDashboardStore from '@/store/dashboardStore';
 import { ERROR_MESSAGES } from '@/constants/message';
-import { PostColumnRequest } from '@/types/dashboardView';
+import { ColumnModal } from '@/types/dashboardView';
 import useDashBoardView from '../hooks/useDashBoardView';
 import { createColumn } from '@/lib/columnServie';
+import styles from './CommonColumnModal.module.css';
 
 export default function CreateColumnModal() {
   const { closeModal } = useModalStore();
@@ -19,19 +20,19 @@ export default function CreateColumnModal() {
     register,
     handleSubmit,
     formState: { errors, isValid },
-  } = useForm<PostColumnRequest>({ mode: 'onChange' });
+  } = useForm<ColumnModal>({ mode: 'onChange' });
 
-  const onSubmit = async (data: PostColumnRequest) => {
+  const onSubmit = async (data: ColumnModal) => {
     if (dashboard) {
       await createColumn(dashboard.id, data.title);
-      closeModal();
     }
+    closeModal();
   };
 
   return (
-    <div>
-      <h2>새 컬럼 생성</h2>
-      <form onSubmit={handleSubmit(onSubmit)}>
+    <div className={styles.modal}>
+      <h2 className={styles.title}>새 컬럼 생성</h2>
+      <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
         <Input
           name="title"
           label="이름"
@@ -42,17 +43,18 @@ export default function CreateColumnModal() {
               const isDuplicate = columns.some(
                 (column) => column.title === value
               );
-              return isDuplicate ? '이미 존재하는 컬럼 이름입니다.' : true;
+              return isDuplicate ? '이미 존재하는 컬럼입니다.' : true;
             },
           })}
           error={errors.title}
         />
 
-        <div>
+        <div className={styles.footer}>
           <Button
             onClick={() => {
               closeModal();
             }}
+            className={styles.negativeButton}
           >
             취소
           </Button>

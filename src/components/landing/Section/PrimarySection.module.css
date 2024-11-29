@@ -5,6 +5,11 @@
   margin-bottom: 90px;
 }
 
+.cardLg1 img,
+.cardLg2 img {
+  border-radius: 8px;
+}
+
 .cardLg1 {
   width: 297px;
   height: 248px;

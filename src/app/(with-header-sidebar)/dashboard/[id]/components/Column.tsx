@@ -6,6 +6,7 @@ import Image from 'next/image';
 import Card from './Card';
 import useModalStore from '@/store/modalStore';
 import CreateTaskModal from './CreateTaskModal';
+import SettingsColumnModal from './SettingsColumnModal';
 import styles from './Column.module.css';
 
 function Column({
@@ -54,6 +55,10 @@ function Column({
     openModal(<CreateTaskModal columnId={id} />);
   };
 
+  const handleSettingsColumn = () => {
+    openModal(<SettingsColumnModal title={title} id={id} />);
+  };
+
   return (
     <div className={styles.column} ref={columnRef}>
       <div className={styles.header}>
@@ -68,17 +73,18 @@ function Column({
             type="button"
             aria-label="컬럼 설정 버튼"
             className={styles.settings}
+            onClick={handleSettingsColumn}
           >
             <Image src="/icons/settings.svg" width={24} height={24} alt="" />
           </Button>
         </div>
       </div>
 
-      <div className={`${styles.columnContent}${styles.createCardSection}`}>
+      <div className={`${styles.columnContent}`}>
         <Button
           type="button"
           className={styles.createCard}
-          aria-label="컬럼 생성 버튼"
+          aria-label="카드 생성 버튼"
           onClick={handleCreateTask}
         >
           <Image
