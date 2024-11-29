@@ -6,7 +6,7 @@ import Pipe from '@/components/svg/Pipe';
 import Image from 'next/image';
 import CreateCommentForm from './comments/CreateCommentForm';
 import useDashboardStore from '@/store/dashboardStore';
-import Comments from './Comments';
+import Comments from './comments/Comments';
 import { useState } from 'react';
 import type { Comment } from '@/types/comment';
 import styles from './CardInfo.module.css';

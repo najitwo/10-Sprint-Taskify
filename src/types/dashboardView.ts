@@ -41,3 +41,12 @@ export interface DashboardColumn extends Columns {
 export interface PostColumnRequest {
   title: string;
 }
+
+export interface Column {
+  id: number;
+  title: string;
+  teamId: string;
+  dashboardId: number;
+  createdAt: string;
+  updatedAt: string;
+}

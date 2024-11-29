@@ -1,13 +1,14 @@
 'use client';
 
 import React from 'react';
+import axios from 'axios';
 import { useForm, FieldValues, UseFormReturn } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import useAuthStore from '@/store/authStore';
 import Button from '@/components/Button';
-import styles from './loginPage.module.css';
-import axiosInstance from '@/lib/axiosInstance';
 import { ERROR_MESSAGES } from '@/constants/message';
+import type { User } from '@/types/user';
+import styles from './loginPage.module.css';
 
 type LoginFormInputs = {
   email: string;
@@ -31,15 +32,16 @@ export default function LoginPage() {
   }) as CustomUseFormReturn<LoginFormInputs>;
 
   const router = useRouter();
-  const { setAccessToken } = useAuthStore();
+  const { setUser } = useAuthStore();
 
   const onSubmit = async (data: LoginFormInputs) => {
     try {
-      const response = await axiosInstance.post('/auth/login', data);
-      const { accessToken } = response.data;
+      const response = await axios.post('/api/login', data);
+      const { user } = response.data;
 
-      setAccessToken(accessToken);
-      router.push('/mydashboard');
+      setUser(user as User);
+
+      router.replace('/mydashboard');
     } catch (error) {
       console.error('로그인 실패:', error);
       alert('비밀번호가 일치하지 않습니다.');

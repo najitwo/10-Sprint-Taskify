@@ -1,5 +1,4 @@
 import axios from 'axios';
-import useAuthStore from '@/store/authStore';
 import { BASE_URL } from '@/constants/urls';
 
 const axiosInstance = axios.create({
@@ -11,14 +10,19 @@ const axiosInstance = axios.create({
 });
 
 axiosInstance.interceptors.request.use(
-  (config) => {
-    // const accessToken = useAuthStore.getState().accessToken;
-    const accessToken =
-      // 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDgwNCwidGVhbUlkIjoiMTAtMSIsImlhdCI6MTczMTcyMzkwNywiaXNzIjoic3AtdGFza2lmeSJ9.k8FqEAl7DbhwxhJNAkkMq8lYrgStN-9I3xrsR0cYm2c'; // TODO: Add token
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDgwNywidGVhbUlkIjoiMTAtMSIsImlhdCI6MTczMTc2OTIwNywiaXNzIjoic3AtdGFza2lmeSJ9.yhISPAxnBlD28SkCY0mUxcIM5YuwAAib2k7j15fmlvA'; // TODO: Add token
+  async (config) => {
+    let accessToken;
+    if (config.url === '/auth/login') {
+      accessToken = null;
+    } else {
+      const response = await axios.get('/api/accessToken');
+      accessToken = response.data.accessToken;
+    }
+
     if (accessToken) {
       config.headers.Authorization = `Bearer ${accessToken}`;
     }
+
     return config;
   },
   (error) => Promise.reject(error)

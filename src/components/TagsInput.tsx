@@ -7,10 +7,15 @@ import Tag from './card/Tag';
 interface TagsInputProps {
   name: 'tags';
   setValue: (name: 'tags', value: string[]) => void;
+  defaultTags?: string[];
 }
 
-export default function TagsInput({ name, setValue }: TagsInputProps) {
-  const [tags, setTags] = useState<string[]>([]);
+export default function TagsInput({
+  name,
+  setValue,
+  defaultTags = [],
+}: TagsInputProps) {
+  const [tags, setTags] = useState<string[]>(defaultTags);
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
