@@ -7,7 +7,7 @@ import { ColumnFormValue } from '@/types/dashboardView';
 interface dashboardState {
   dashboard: Dashboard | null;
   columns: ColumnFormValue[];
-  setDashboard: (dashboardId: number) => void;
+  setDashboard: (ddashboard: number | null) => void;
   setColumns: (dashboardId: number) => void;
 
   color: string;
