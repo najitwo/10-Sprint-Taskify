@@ -65,15 +65,17 @@
 }
 
 .optionalInfo {
+  flex: 1;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
 }
 
 .dueDateWrapper {
+  flex: 1;
   display: flex;
-  gap: 4px;
   align-items: center;
+  gap: 4px;
   width: 125px;
 }
 
@@ -116,13 +118,9 @@
 
   .contentContainer {
     flex-direction: row;
-    align-items: flex-end;
+    align-items: center;
     justify-content: space-between;
     gap: 0;
-  }
-
-  .tagContainer {
-    max-width: 50%;
   }
 
   .imageWrapper {
@@ -138,6 +136,10 @@
 
   .optionalInfo {
     gap: 16px;
+  }
+
+  .dueDateWrapper {
+    justify-content: flex-end;
   }
 
   .modal {
@@ -180,5 +182,9 @@
     width: 100%;
     justify-content: space-between;
     gap: 0;
+  }
+
+  .dueDateWrapper {
+    justify-content: flex-start;
   }
 }
