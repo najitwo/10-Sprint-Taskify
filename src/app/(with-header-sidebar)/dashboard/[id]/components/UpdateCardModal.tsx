@@ -72,7 +72,7 @@ export default function UpdateTaskModal() {
           options={members}
           setValue={setValue}
           defaultAssignee={
-            members?.filter((member) => member.userId == card?.assignee.id)[0]
+            members?.filter((member) => member.userId == card?.assignee?.id)[0]
           }
           className={styles.dropdown}
         />
