@@ -25,9 +25,11 @@ export default function CardInfo({ card, columnTitle }: CardInfoProps) {
 
   return (
     <div className={styles.cardInfo}>
-      <div className={styles.assignmentContainer}>
-        <Assignment card={card} />
-      </div>
+      {card.assignee && (
+        <div className={styles.assignmentContainer}>
+          <Assignment card={card} />
+        </div>
+      )}
       <div className={styles.infoContainer}>
         <div className={styles.labelArea}>
           <div>

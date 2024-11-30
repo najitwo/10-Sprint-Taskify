@@ -1,10 +1,4 @@
-import {
-  useState,
-  ChangeEvent,
-  KeyboardEvent,
-  MouseEvent,
-  useRef,
-} from 'react';
+import { useState, ChangeEvent, KeyboardEvent, useRef } from 'react';
 import Avatar from '@/components/Avatar';
 import Button from '@/components/Button';
 import { formatDateToCustomFormat } from '@/utils/dateUtils';
@@ -58,7 +52,6 @@ export default function CommentDetail({
       e.preventDefault();
       handleSave();
       toggleEditing();
-      // todo: 수정성공시 토스트 박스
     }
   };
 
@@ -80,7 +73,6 @@ export default function CommentDetail({
   const handleDeleteOnClick = async () => {
     await deleteComment(id);
     onDelete(id);
-    // todo: 삭제성공시 토스트 박스
   };
 
   return (

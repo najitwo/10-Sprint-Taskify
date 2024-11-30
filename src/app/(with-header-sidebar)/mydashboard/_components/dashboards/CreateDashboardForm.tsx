@@ -1,10 +1,11 @@
 import { useForm } from 'react-hook-form';
 import Button from '@/components/Button';
 import DashboardInput from '@/components/DashboardInput';
-import styles from './CreateDashboardForm.module.css';
-import { CreateDashboardRequestBody } from '@/types/dashboards';
+import type { CreateDashboardRequestBody } from '@/types/dashboards';
 import { createDashboard } from '@/lib/boardService';
 import { useRouter } from 'next/navigation';
+import useDashboardTriggerStore from '@/store/dashboardTriggerStore';
+import styles from './CreateDashboardForm.module.css';
 
 interface CreateDashboardFormProps {
   closeModal: () => void;
@@ -13,6 +14,8 @@ interface CreateDashboardFormProps {
 export default function CreateDashboardForm({
   closeModal,
 }: CreateDashboardFormProps) {
+  const { updateTrigger } = useDashboardTriggerStore();
+
   const {
     register,
     handleSubmit,
@@ -23,6 +26,7 @@ export default function CreateDashboardForm({
   const onSubmit = async (newDashboard: CreateDashboardRequestBody) => {
     const response = await createDashboard(newDashboard);
     closeModal();
+    updateTrigger();
     router.push(`/dashboard/${response.id}`);
   };
 

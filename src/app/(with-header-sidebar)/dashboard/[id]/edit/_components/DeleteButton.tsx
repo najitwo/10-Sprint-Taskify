@@ -1,17 +1,21 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import useIdStore from '@/store/idStore';
 import Button from '@/components/Button';
 import { deleteDashboard } from '@/lib/boardService';
 import styles from './DeleteButton.module.css';
+import useDashboardStore from '@/store/dashboardStore';
+import useDashboardTriggerStore from '@/store/dashboardTriggerStore';
 
 export default function DeleteButton() {
-  const id = useIdStore((state) => state.id);
+  const { dashboard, setDashboard } = useDashboardStore();
+  const { updateTrigger } = useDashboardTriggerStore();
   const router = useRouter();
 
   const handleClick = async () => {
-    await deleteDashboard(id);
+    await deleteDashboard(dashboard!.id.toString());
+    setDashboard(null);
+    updateTrigger();
     router.replace('/mydashboard');
   };
 

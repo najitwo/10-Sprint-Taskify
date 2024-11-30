@@ -10,6 +10,10 @@
   align-items: center;
 }
 
+.moreButton:focus {
+  outline: none;
+}
+
 .menuContainer {
   position: absolute;
   z-index: 999;
