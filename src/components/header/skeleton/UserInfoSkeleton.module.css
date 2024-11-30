@@ -8,6 +8,34 @@
   background-color: var(--gray-300);
 }
 
+.userIcon::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.2) 0%,
+    rgba(255, 255, 255, 0.6) 50%,
+    rgba(255, 255, 255, 0.2) 100%
+  );
+  animation: shine 1.5s infinite;
+}
+
+@keyframes shine {
+  0% {
+    left: -100%;
+  }
+  50% {
+    left: 100%;
+  }
+  100% {
+    left: -100%;
+  }
+}
+
 @media screen and (min-width: 768px) {
   .userInfo {
     display: flex;
