@@ -4,7 +4,7 @@ import DashboardInput from '@/components/DashboardInput';
 import type { CreateDashboardRequestBody } from '@/types/dashboards';
 import { createDashboard } from '@/lib/boardService';
 import { useRouter } from 'next/navigation';
-import { toast } from '@/store/toastStore';
+import useDashboardTriggerStore from '@/store/dashboardTriggerStore';
 import styles from './CreateDashboardForm.module.css';
 
 interface CreateDashboardFormProps {
@@ -14,6 +14,8 @@ interface CreateDashboardFormProps {
 export default function CreateDashboardForm({
   closeModal,
 }: CreateDashboardFormProps) {
+  const { updateTrigger } = useDashboardTriggerStore();
+
   const {
     register,
     handleSubmit,
@@ -24,7 +26,7 @@ export default function CreateDashboardForm({
   const onSubmit = async (newDashboard: CreateDashboardRequestBody) => {
     const response = await createDashboard(newDashboard);
     closeModal();
-    toast.success({ message: '대시보드생성 성공!' });
+    updateTrigger();
     router.push(`/dashboard/${response.id}`);
   };
 

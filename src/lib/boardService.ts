@@ -24,7 +24,7 @@ export const updateBoard = async (
       title,
       color,
     });
-    toast.success({ message: '변경되었습니다.' });
+    toast.success({ message: '대시보드가 수정되었습니다.' });
     return response.data;
   } catch (error) {
     if (error instanceof Error) {
@@ -42,6 +42,7 @@ export const createDashboard = async ({
       title,
       color,
     });
+    toast.success({ message: '대시보드가 생성되었습니다.' });
     return response.data;
   } catch (error) {
     throw error;

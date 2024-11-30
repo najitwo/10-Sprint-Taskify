@@ -6,13 +6,22 @@ import Button from '../Button';
 import useDashboards from '@/app/(with-header-sidebar)/mydashboard/_hooks/useDashboards';
 import useDashboardStore from '@/store/dashboardStore';
 import styles from './Dashboards.module.css';
+import { useEffect } from 'react';
+import useDashboardTriggerStore from '@/store/dashboardTriggerStore';
 
 const PAGE_SIZE = 12;
 
 export default function Dashboards() {
-  const { page, dashboards, totalPages, handlePageChange } = useDashboards({
-    pageSize: PAGE_SIZE,
-  });
+  const { trigger } = useDashboardTriggerStore();
+
+  const { page, dashboards, totalPages, handlePageChange, refetch } =
+    useDashboards({
+      pageSize: PAGE_SIZE,
+    });
+
+  useEffect(() => {
+    refetch();
+  }, [trigger]);
 
   if (dashboards.length === 0) {
     return null;

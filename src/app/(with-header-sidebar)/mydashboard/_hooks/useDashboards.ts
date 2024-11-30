@@ -8,7 +8,7 @@ interface UseDashboardsParams {
 
 export default function useDashboards({ pageSize }: UseDashboardsParams) {
   const [page, setPage] = useState(1);
-  const { data } = useApi<GetDashboardsResponse>('/dashboards', {
+  const { data, refetch } = useApi<GetDashboardsResponse>('/dashboards', {
     method: 'GET',
     params: { navigationMethod: 'pagination', page, size: pageSize },
   });
@@ -25,5 +25,5 @@ export default function useDashboards({ pageSize }: UseDashboardsParams) {
     });
   };
 
-  return { page, dashboards, totalPages, handlePageChange };
+  return { page, dashboards, totalPages, handlePageChange, refetch };
 }

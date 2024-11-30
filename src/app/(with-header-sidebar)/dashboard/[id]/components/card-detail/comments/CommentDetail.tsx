@@ -53,7 +53,6 @@ export default function CommentDetail({
       e.preventDefault();
       handleSave();
       toggleEditing();
-      toast.success({ message: '수정성공!' });
     }
   };
 
@@ -75,7 +74,6 @@ export default function CommentDetail({
   const handleDeleteOnClick = async () => {
     await deleteComment(id);
     onDelete(id);
-    toast.success({ message: '삭제성공!' });
   };
 
   return (

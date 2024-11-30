@@ -4,7 +4,6 @@ import type {
   AcceptMyInvitationRequestBody,
 } from '@/types/invitation';
 import { updateMyInvitation } from '../../_lib/myInvitationService';
-import { toast } from '@/store/toastStore';
 import styles from './MyInvitationCard.module.css';
 
 interface MyInvitationCardProps extends Invitation {
@@ -20,7 +19,6 @@ export default function MyInvitationCard({
   const handleOnClick = async (id: number, inviteAccepted: boolean) => {
     const requestBody: AcceptMyInvitationRequestBody = { inviteAccepted };
     await updateMyInvitation({ invitationId: id, requestBody });
-    toast.success({ message: `${inviteAccepted ? '수락' : '거절'} 완료!` });
     onActionComplete();
   };
 
