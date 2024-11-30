@@ -1,16 +1,21 @@
+import { useRef, useEffect } from 'react';
 import UserInfo from './UserInfo';
 import Button from '../Button';
 import type { Menu } from '@/types/menu';
 import { useMenu } from '@/hooks/useMenu';
 import { useRouter } from 'next/navigation';
 import MenuDropdown from '../MenuDropdown';
-import styles from './UserSection.module.css';
 import useMe from '@/hooks/useMe';
+import useClickOutside from '@/hooks/useClickOutside';
+import styles from './UserSection.module.css';
 
 export default function UserSection() {
   const router = useRouter();
   const { clearUser } = useMe();
   const { isMenuVisible, toggleMenu, closeMenu } = useMenu();
+
+  const containerRef = useRef<HTMLDivElement>(null);
+  useClickOutside(containerRef, closeMenu);
 
   const navigateTo = (href: string) => {
     router.push(href);
@@ -29,7 +34,7 @@ export default function UserSection() {
   ];
 
   return (
-    <div className={styles.userInfoContainer}>
+    <div className={styles.userInfoContainer} ref={containerRef}>
       <Button className={styles.userInfoButton} onClick={toggleMenu}>
         <UserInfo />
       </Button>
