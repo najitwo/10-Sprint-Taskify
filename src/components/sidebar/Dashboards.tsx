@@ -1,18 +1,17 @@
+import { useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import type { Dashboard } from '@/types/dashboards';
 import Image from 'next/image';
 import Button from '../Button';
 import useDashboards from '@/app/(with-header-sidebar)/mydashboard/_hooks/useDashboards';
-import useDashboardStore from '@/store/dashboardStore';
+import useTriggerStore from '@/store/triggerStore';
 import styles from './Dashboards.module.css';
-import { useEffect } from 'react';
-import useDashboardTriggerStore from '@/store/dashboardTriggerStore';
 
 const PAGE_SIZE = 12;
 
 export default function Dashboards() {
-  const { trigger } = useDashboardTriggerStore();
+  const { trigger } = useTriggerStore();
 
   const { page, dashboards, totalPages, handlePageChange, refetch } =
     useDashboards({
@@ -21,7 +20,7 @@ export default function Dashboards() {
 
   useEffect(() => {
     refetch();
-  }, [trigger]);
+  }, [trigger.dashboard]);
 
   if (dashboards.length === 0) {
     return null;
@@ -45,18 +44,12 @@ export default function Dashboards() {
 
 function DashboardItem({ id, color, title, createdByMe }: Dashboard) {
   const isActive = usePathname() === `/dashboard/${id}`;
-  const setColor = useDashboardStore((state) => state.setColor);
-
-  const handleViewClick = () => {
-    setColor(color);
-  };
 
   return (
     <li>
       <Link
         href={`/dashboard/${id}`}
         className={`link ${isActive ? styles.active : ''}`}
-        onClick={handleViewClick}
       >
         <div className={styles.titleContainer}>
           <div style={{ background: color }} className={styles.dot}></div>

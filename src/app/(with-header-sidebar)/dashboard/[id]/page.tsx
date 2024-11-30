@@ -10,24 +10,31 @@ import Image from 'next/image';
 import useDashboardStore from '@/store/dashboardStore';
 import useModalStore from '@/store/modalStore';
 import CreateColumnModal from './components/CreateColumnModal';
+import useTriggerStore from '@/store/triggerStore';
 import styles from './page.module.css';
+
+const DEFAULT_COLOR = 'var(--violet)';
 
 export default function DashBoardView() {
   const { openModal } = useModalStore();
+  const { trigger } = useTriggerStore();
   const params = useParams();
   const id = params.id;
 
-  const { columns, loading, error, handleOnDragEnd, loadMoreData } =
+  const { columns, loading, error, handleOnDragEnd, loadMoreData, fetchData } =
     useDashBoardView(`${id}`);
-  const dashboard = useDashboardStore((state) => state.dashboard);
-  const setDashboard = useDashboardStore((state) => state.setDashboard);
-  const color = useDashboardStore((state) => state.color);
+  const { dashboard, setDashboard } = useDashboardStore();
 
   useEffect(() => {
     if (dashboard?.id !== Number(id)) {
       setDashboard(Number(id));
     }
   }, [id, dashboard?.id]);
+
+  useEffect(() => {
+    if (!dashboard) return;
+    fetchData();
+  }, [dashboard, trigger]);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
@@ -44,7 +51,7 @@ export default function DashBoardView() {
         {columns.map((column) => (
           <Column
             key={column.id}
-            color={color}
+            color={dashboard?.color || DEFAULT_COLOR}
             title={column.title}
             totalCount={column.totalCount}
             id={column.id}

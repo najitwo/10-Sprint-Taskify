@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 import { Card as CardType } from '@/types/dashboardView';
 import { useModal } from '@/app/(with-header-sidebar)/mydashboard/_hooks/useModal';
@@ -20,13 +20,17 @@ interface Props {
 
 function Card({ item, index, columnTitle }: Props) {
   const { isOpen, openModal, isClosing, closeModal } = useModal();
+  const card = useCardStore((state) => state.card);
+
+  useEffect(() => {
+    useCardStore.getState().setCard(item);
+  }, [item]);
 
   if (!item || !item.id) {
     return null;
   }
 
-  useCardStore.getState().setCard(item);
-  const { id, title, imageUrl, tags, dueDate, assignee } = item;
+  const { id, title, imageUrl, tags, dueDate, assignee } = card || item;
 
   return (
     <>
@@ -93,7 +97,7 @@ function Card({ item, index, columnTitle }: Props) {
           )}
           className={styles.modal}
         >
-          <CardInfo card={item} columnTitle={columnTitle} />
+          <CardInfo card={card || item} columnTitle={columnTitle} />
         </Modal>
       )}
     </>

@@ -7,7 +7,7 @@ import Image from 'next/image';
 import CreateCommentForm from './comments/CreateCommentForm';
 import useDashboardStore from '@/store/dashboardStore';
 import Comments from './comments/Comments';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { Comment } from '@/types/comment';
 import styles from './CardInfo.module.css';
 
@@ -22,6 +22,8 @@ export default function CardInfo({ card, columnTitle }: CardInfoProps) {
   const { dashboard } = useDashboardStore();
 
   const [newComment, setNewComment] = useState<Comment | null>(null);
+
+  useEffect(() => {}, [card]);
 
   return (
     <div className={styles.cardInfo}>

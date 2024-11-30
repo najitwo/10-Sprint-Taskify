@@ -8,6 +8,7 @@ import useDashboardStore from '@/store/dashboardStore';
 import useModalStore from '@/store/modalStore';
 import UpdateTaskModal from '../UpdateCardModal';
 import styles from './HeaderMenu.module.css';
+import useTriggerStore from '@/store/triggerStore';
 
 interface HeaderMenuProps {
   cardId: number;
@@ -16,6 +17,7 @@ interface HeaderMenuProps {
 
 export default function HeaderMenu({ cardId, closeModal }: HeaderMenuProps) {
   const router = useRouter();
+  const { updateTrigger } = useTriggerStore();
   const { dashboard } = useDashboardStore();
   const { isMenuVisible, toggleMenu } = useMenu();
   const { openModal } = useModalStore();
@@ -23,6 +25,7 @@ export default function HeaderMenu({ cardId, closeModal }: HeaderMenuProps) {
   const handleDeleteClick = async () => {
     await deleteCard(cardId);
     closeModal();
+    updateTrigger.card();
     router.replace(`/dashboard/${dashboard?.id}`);
   };
 

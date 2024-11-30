@@ -11,6 +11,7 @@ import useMember from '../edit/_hooks/useMember';
 import useDashboardStore from '@/store/dashboardStore';
 import { ERROR_MESSAGES } from '@/constants/message';
 import { createCard } from '@/lib/cardService';
+import useTriggerStore from '@/store/triggerStore';
 import styles from './CreateCardModal.module.css';
 
 export interface TaskFormValues {
@@ -24,6 +25,7 @@ export interface TaskFormValues {
 
 export default function CreateTaskModal({ columnId }: { columnId: number }) {
   const { closeModal } = useModalStore();
+  const { updateTrigger } = useTriggerStore();
   const {
     register,
     handleSubmit,
@@ -35,7 +37,8 @@ export default function CreateTaskModal({ columnId }: { columnId: number }) {
 
   const onSubmit = async (data: TaskFormValues) => {
     if (dashboard) {
-      const response = await createCard(data, columnId, dashboard.id);
+      await createCard(data, columnId, dashboard.id);
+      updateTrigger.card();
       closeModal();
     }
   };

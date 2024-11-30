@@ -6,9 +6,6 @@ import { getBoard } from '@/lib/boardService';
 interface dashboardState {
   dashboard: Dashboard | null;
   setDashboard: (dashboard: number | null) => void;
-
-  color: string;
-  setColor: (newColor: string) => void;
 }
 
 const useDashboardStore = create(
@@ -31,8 +28,6 @@ const useDashboardStore = create(
           dashboard: { ...response },
         });
       },
-      color: 'var(--violet)',
-      setColor: (newColor) => set({ color: newColor }),
     }),
     {
       name: 'dashboardStorage',
