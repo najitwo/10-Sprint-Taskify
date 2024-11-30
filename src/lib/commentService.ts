@@ -51,6 +51,8 @@ export const updateComment = async ({
     const response = await axiosInstance.put(`/comments/${commentId}`, {
       ...data,
     });
+    toast.success({ message: '댓글이 수정되었습니다.' });
+
     return response.data;
   } catch (error) {
     throw error;

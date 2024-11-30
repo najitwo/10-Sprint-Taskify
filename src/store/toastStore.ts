@@ -34,7 +34,7 @@ const useToastStore = create<ToastsState>((set) => ({
     type: ToastState['type'],
     duration = 2000,
     showButton = true,
-    theme = 'dark'
+    theme = 'light'
   ) => {
     const id = Date.now();
 
@@ -158,7 +158,7 @@ const createToast =
     message,
     duration = 2000,
     showButton = true,
-    theme = 'dark',
+    theme = 'light',
   }: CreateToastProps) =>
     useToastStore
       .getState()
