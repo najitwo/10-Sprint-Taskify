@@ -1,15 +1,10 @@
-import {
-  useState,
-  ChangeEvent,
-  KeyboardEvent,
-  MouseEvent,
-  useRef,
-} from 'react';
+import { useState, ChangeEvent, KeyboardEvent, useRef } from 'react';
 import Avatar from '@/components/Avatar';
 import Button from '@/components/Button';
 import { formatDateToCustomFormat } from '@/utils/dateUtils';
 import type { Comment } from '@/types/comment';
 import { deleteComment, updateComment } from '@/lib/commentService';
+import { toast } from '@/store/toastStore';
 import styles from './CommentDetail.module.css';
 
 interface CommentDetailProps {
@@ -58,7 +53,7 @@ export default function CommentDetail({
       e.preventDefault();
       handleSave();
       toggleEditing();
-      // todo: 수정성공시 토스트 박스
+      toast.success({ message: '수정성공!' });
     }
   };
 
@@ -80,7 +75,7 @@ export default function CommentDetail({
   const handleDeleteOnClick = async () => {
     await deleteComment(id);
     onDelete(id);
-    // todo: 삭제성공시 토스트 박스
+    toast.success({ message: '삭제성공!' });
   };
 
   return (

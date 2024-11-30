@@ -1,10 +1,11 @@
 import { useForm } from 'react-hook-form';
 import Button from '@/components/Button';
 import DashboardInput from '@/components/DashboardInput';
-import styles from './CreateDashboardForm.module.css';
-import { CreateDashboardRequestBody } from '@/types/dashboards';
+import type { CreateDashboardRequestBody } from '@/types/dashboards';
 import { createDashboard } from '@/lib/boardService';
 import { useRouter } from 'next/navigation';
+import { toast } from '@/store/toastStore';
+import styles from './CreateDashboardForm.module.css';
 
 interface CreateDashboardFormProps {
   closeModal: () => void;
@@ -23,6 +24,7 @@ export default function CreateDashboardForm({
   const onSubmit = async (newDashboard: CreateDashboardRequestBody) => {
     const response = await createDashboard(newDashboard);
     closeModal();
+    toast.success({ message: '대시보드생성 성공!' });
     router.push(`/dashboard/${response.id}`);
   };
 
