@@ -1,6 +1,6 @@
 import React from 'react';
 import { Draggable } from 'react-beautiful-dnd';
-import { Card } from '@/types/dashboardView';
+import { Card as CardType } from '@/types/dashboardView';
 import { useModal } from '@/app/(with-header-sidebar)/mydashboard/_hooks/useModal';
 import Modal from '@/app/(with-header-sidebar)/mydashboard/_components/modal/Modal';
 import CardInfo from './card-detail/CardInfo';
@@ -13,7 +13,7 @@ import useCardStore from '@/store/cardStore';
 import styles from './Card.module.css';
 
 interface Props {
-  item: Card;
+  item: CardType;
   index: number;
   columnTitle: string;
 }
