@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react';
+import { useRef } from 'react';
 import UserInfo from './UserInfo';
 import Button from '../Button';
 import type { Menu } from '@/types/menu';

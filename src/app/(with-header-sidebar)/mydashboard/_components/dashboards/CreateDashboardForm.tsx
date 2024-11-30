@@ -4,8 +4,8 @@ import DashboardInput from '@/components/DashboardInput';
 import type { CreateDashboardRequestBody } from '@/types/dashboards';
 import { createDashboard } from '@/lib/boardService';
 import { useRouter } from 'next/navigation';
-import useDashboardTriggerStore from '@/store/dashboardTriggerStore';
 import styles from './CreateDashboardForm.module.css';
+import useTriggerStore from '@/store/triggerStore';
 
 interface CreateDashboardFormProps {
   closeModal: () => void;
@@ -14,7 +14,7 @@ interface CreateDashboardFormProps {
 export default function CreateDashboardForm({
   closeModal,
 }: CreateDashboardFormProps) {
-  const { updateTrigger } = useDashboardTriggerStore();
+  const { updateTrigger } = useTriggerStore();
 
   const {
     register,
@@ -26,7 +26,7 @@ export default function CreateDashboardForm({
   const onSubmit = async (newDashboard: CreateDashboardRequestBody) => {
     const response = await createDashboard(newDashboard);
     closeModal();
-    updateTrigger();
+    updateTrigger.dashboard();
     router.push(`/dashboard/${response.id}`);
   };
 
