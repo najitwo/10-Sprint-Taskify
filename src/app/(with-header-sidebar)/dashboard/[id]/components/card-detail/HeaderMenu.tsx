@@ -6,7 +6,7 @@ import { deleteCard } from '@/lib/cardService';
 import { useRouter } from 'next/navigation';
 import useDashboardStore from '@/store/dashboardStore';
 import useModalStore from '@/store/modalStore';
-import UpdateTaskModal from '../UpdateTaskModal';
+import UpdateTaskModal from '../UpdateCardModal';
 import styles from './HeaderMenu.module.css';
 
 interface HeaderMenuProps {
