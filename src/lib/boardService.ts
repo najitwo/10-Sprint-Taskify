@@ -4,7 +4,6 @@ import {
   CreateDashboardRequestBody,
   Dashboard,
 } from '@/types/dashboards';
-import { COLUMN_URL } from '@/constants/urls';
 
 export const getBoard = async (id: string) => {
   try {
@@ -55,10 +54,10 @@ export const deleteDashboard = async (dashboardId: string) => {
 
 export const getColumns = async (dashboardId: string) => {
   try {
-    const { data: responseData } = await axiosInstance.get(
-      `${COLUMN_URL}?dashboardId=${dashboardId}`
+    const { data: response } = await axiosInstance.get(
+      `/columns?dashboardId=${dashboardId}`
     );
-    return responseData.data;
+    return response.data;
   } catch (error) {
     throw error;
   }

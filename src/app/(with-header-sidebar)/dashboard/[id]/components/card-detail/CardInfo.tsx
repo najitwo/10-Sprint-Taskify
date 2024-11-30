@@ -1,4 +1,4 @@
-import { Cards } from '@/types/dashboardView';
+import { Card } from '@/types/dashboardView';
 import Assignment from './Assignment';
 import Tag from '@/components/card/Tag';
 import ColumnLabel from '@/components/card/ColumnLabel';
@@ -12,7 +12,7 @@ import type { Comment } from '@/types/comment';
 import styles from './CardInfo.module.css';
 
 interface CardInfoProps {
-  card: Cards;
+  card: Card;
   columnTitle: string;
 }
 

@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import debounce from 'lodash/debounce';
 import axiosInstance from '@/lib/axiosInstance';
 import { DropResult } from 'react-beautiful-dnd';
-import { DashboardColumn, Cards, Column } from '@/types/dashboardView';
+import { DashboardColumn, Card, Column } from '@/types/dashboardView';
 import { COLUMN_URL, CARD_URL } from '@/constants/urls';
 
 export default function useDashBoardView(dashboardId: string | undefined) {
@@ -64,13 +64,13 @@ export default function useDashBoardView(dashboardId: string | undefined) {
   }, [fetchData, dashboardId]);
 
   const sendCardUpdateRequest = useCallback(
-    debounce(async (cardId: string, updatedCardData: Cards) => {
+    debounce(async (cardId: string, updatedCardData: Card) => {
       try {
         await axiosInstance.put(`${CARD_URL}/${cardId}`, updatedCardData);
       } catch (err) {
         if (err instanceof Error) setError(err.message);
       }
-    }, 200),
+    }, 100),
     []
   );
 
@@ -166,7 +166,7 @@ export default function useDashBoardView(dashboardId: string | undefined) {
                   items: [
                     ...column.items,
                     ...newCards.filter(
-                      (newCard: Cards) =>
+                      (newCard: Card) =>
                         !column.items.some(
                           (prevCard) => prevCard.id === newCard.id
                         )
@@ -184,7 +184,7 @@ export default function useDashBoardView(dashboardId: string | undefined) {
       } catch (err) {
         if (err instanceof Error) setError(err.message);
       }
-    }, 200),
+    }, 100),
     [cursors]
   );
 

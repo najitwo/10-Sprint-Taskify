@@ -27,12 +27,12 @@ export default function DashBoardView() {
     if (dashboard?.id !== Number(id)) {
       setDashboard(Number(id));
     }
-  }, [id, dashboard?.id, columns]);
+  }, [id, dashboard?.id]);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
 
-  const COLCOUNT = columns.length >= 9;
+  const COlUMN_COUNT = columns.length >= 9;
 
   const handleCreateColumn = () => {
     openModal(<CreateColumnModal />);
@@ -44,16 +44,16 @@ export default function DashBoardView() {
         {columns.map((column) => (
           <Column
             key={column.id}
-            color={column.color}
+            color={color}
             title={column.title}
             totalCount={column.totalCount}
             id={column.id}
             items={column.items}
-            loadMoreData={column.loadMoreData}
+            loadMoreData={loadMoreData}
           />
         ))}
       </DragDropContext>
-      {!COLCOUNT && (
+      {!COlUMN_COUNT && (
         <div className={styles.createColumnSection}>
           <Button
             type="button"

@@ -1,14 +1,11 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import type { Dashboard } from '@/types/dashboards';
-import { getBoard, getColumns } from '@/lib/boardService';
-import { ColumnFormValue } from '@/types/dashboardView';
+import { getBoard } from '@/lib/boardService';
 
 interface dashboardState {
   dashboard: Dashboard | null;
-  columns: ColumnFormValue[];
-  setDashboard: (ddashboard: number | null) => void;
-  setColumns: (dashboardId: number) => void;
+  setDashboard: (dashboard: number | null) => void;
 
   color: string;
   setColor: (newColor: string) => void;
@@ -32,13 +29,6 @@ const useDashboardStore = create(
         const response = await getBoard(dashboardId.toString());
         set({
           dashboard: { ...response },
-        });
-      },
-      columns: [],
-      setColumns: async (dashboardId) => {
-        const response = await getColumns(dashboardId.toString());
-        set({
-          columns: response, //체크
         });
       },
       color: 'var(--violet)',

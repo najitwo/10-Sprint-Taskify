@@ -5,7 +5,7 @@ import Input from '@/components/Input';
 import useDashboardStore from '@/store/dashboardStore';
 import { ERROR_MESSAGES } from '@/constants/message';
 import { ColumnFormValue } from '@/types/dashboardView';
-import useDashBoardView from '../hooks/useDashBoardView';
+import useColumn from '../hooks/useColumn';
 import { deleteColumn, updateColumn } from '@/lib/columnServie';
 import CloseButton from './CloseButton';
 import styles from './CommonColumnModal.module.css';
@@ -16,7 +16,7 @@ export default function SettingsColumnModal({
 }: ColumnFormValue) {
   const { closeModal } = useModalStore();
   const dashboard = useDashboardStore((state) => state.dashboard);
-  const { columns } = useDashBoardView(dashboard ? `${dashboard.id}` : '');
+  const { columns } = useColumn(dashboard ? dashboard.id : null);
 
   const {
     register,
@@ -38,20 +38,20 @@ export default function SettingsColumnModal({
   const isDuplicate = restColumns.some((column) => column.title === title);
 
   const onDelete = async () => {
-    console.log(title);
     if (!title) {
       handleError('삭제하려면 해당 컬럼의 이름을 입력해주세요.');
       return;
     }
 
-    if (title !== prevTitle) {
-      if (isDuplicate) {
-        handleError('다른 컬럼은 삭제할 수 없습니다.');
-      } else {
-        handleError('존재하지 않는 컬럼입니다.');
-      }
+    if (title === prevTitle) {
       return;
     }
+
+    const errorMessage = isDuplicate
+      ? '다른 컬럼은 삭제할 수 없습니다.'
+      : '존재하지 않는 컬럼입니다.';
+
+    handleError(errorMessage);
 
     await deleteColumn(`${id}`);
     closeModal();

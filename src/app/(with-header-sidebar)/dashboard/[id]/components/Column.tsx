@@ -121,8 +121,8 @@ function Column({
                     />
                   ) : null
                 )}
-                <div ref={loadMoreRef} style={{ height: '1px' }} />
                 {provided.placeholder}
+                <div ref={loadMoreRef} style={{ height: '10px' }}></div>
               </div>
             )}
           </Droppable>
