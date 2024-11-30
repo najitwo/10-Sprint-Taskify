@@ -1,10 +1,10 @@
-import type { Cards } from '@/types/dashboardView';
+import type { Card } from '@/types/dashboardView';
 import Avatar from '@/components/Avatar';
 import { formatDateToCustomFormat } from '@/utils/dateUtils';
 import styles from './Assignment.module.css';
 
 interface AssignmentProps {
-  card: Pick<Cards, 'dueDate' | 'assignee'>;
+  card: Pick<Card, 'dueDate' | 'assignee'>;
 }
 
 export default function Assignment({ card }: AssignmentProps) {

@@ -8,9 +8,12 @@ import Column from './components/Column';
 import Button from '@/components/Button';
 import Image from 'next/image';
 import useDashboardStore from '@/store/dashboardStore';
+import useModalStore from '@/store/modalStore';
+import CreateColumnModal from './components/CreateColumnModal';
 import styles from './page.module.css';
 
 export default function DashBoardView() {
+  const { openModal } = useModalStore();
   const params = useParams();
   const id = params.id;
 
@@ -29,6 +32,12 @@ export default function DashBoardView() {
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
 
+  const COlUMN_COUNT = columns.length >= 9;
+
+  const handleCreateColumn = () => {
+    openModal(<CreateColumnModal />);
+  };
+
   return (
     <div className={styles.dashboardView}>
       <DragDropContext onDragEnd={handleOnDragEnd}>
@@ -43,9 +52,15 @@ export default function DashBoardView() {
             loadMoreData={loadMoreData}
           />
         ))}
+      </DragDropContext>
+      {!COlUMN_COUNT && (
         <div className={styles.createColumnSection}>
-          <Button type="button" className={styles.createColumn}>
-            <span>새로운 칼럼 추가하기</span>
+          <Button
+            type="button"
+            className={styles.createColumn}
+            onClick={handleCreateColumn}
+          >
+            <span>새로운 컬럼 추가하기</span>
             <Image
               src="/icons/add.svg"
               width={22}
@@ -55,7 +70,7 @@ export default function DashBoardView() {
             />
           </Button>
         </div>
-      </DragDropContext>
+      )}
     </div>
   );
 }

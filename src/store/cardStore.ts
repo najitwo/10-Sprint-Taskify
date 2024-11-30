@@ -1,14 +1,14 @@
 import { create } from 'zustand';
-import { Cards } from '@/types/dashboardView';
+import { Card } from '@/types/dashboardView';
 
 interface CardState {
-  card: Cards | null;
-  setCard: (newCard: Cards) => void;
+  card: Card | null;
+  setCard: (newCard: Card) => void;
 }
 
 const useCardStore = create<CardState>((set) => ({
   card: null,
-  setCard: (newCard: Cards) => set({ card: newCard }),
+  setCard: (newCard: Card) => set({ card: newCard }),
 }));
 
 export default useCardStore;

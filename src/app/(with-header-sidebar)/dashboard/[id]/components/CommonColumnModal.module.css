@@ -1,0 +1,73 @@
+.modal {
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 327px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  color: var(--black-100);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 32px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.form label {
+  color: var(--black-100);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 26px;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.footer button {
+  padding: 14px 46px;
+  width: 144px;
+  height: 54px;
+  font-size: 16px;
+  line-height: 26px;
+}
+
+.negativeButton {
+  border: 1px solid var(--gray-300);
+  background: inherit;
+  color: var(--gray-500);
+  font-weight: 500;
+}
+
+@media screen and (min-width: 768px) {
+  .modal {
+    width: 568px;
+    padding: 24px;
+    gap: 24px;
+  }
+
+  .title {
+    font-size: 24px;
+  }
+
+  .form label {
+    font-size: 18px;
+  }
+
+  .footer button {
+    width: 256px;
+  }
+}

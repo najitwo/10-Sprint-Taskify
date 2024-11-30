@@ -58,3 +58,14 @@ export const deleteDashboard = async (dashboardId: string) => {
     }
   }
 };
+
+export const getColumns = async (dashboardId: string) => {
+  try {
+    const { data: response } = await axiosInstance.get(
+      `/columns?dashboardId=${dashboardId}`
+    );
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
