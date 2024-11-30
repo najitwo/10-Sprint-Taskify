@@ -4,6 +4,7 @@ import { ERROR_MESSAGES } from '@/constants/message';
 import { ProfileFormValues } from '../_components/ProfileForm';
 import { PasswordFormValues } from '../_components/PasswordForm';
 import axiosInstance from '@/lib/axiosInstance';
+import { toast } from '@/store/toastStore';
 
 export const updateProfile = async (data: ProfileFormValues) => {
   const { image, nickname } = data;
@@ -26,8 +27,10 @@ export const updateProfile = async (data: ProfileFormValues) => {
       ...(url && { profileImageUrl: url }),
     });
     setUser(response.data);
+    toast.success({ message: '수정되었습니다.' });
   } catch (error) {
     if (error instanceof Error) {
+      toast.error({ message: error.message });
     }
   }
 };
