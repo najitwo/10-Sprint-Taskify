@@ -8,6 +8,7 @@ import axiosInstance from '@/lib/axiosInstance';
 import { ERROR_MESSAGES } from '@/constants/message';
 import ModalContainer from '../components/modal/ModalContainer';
 import useModalStore from '../modalStore/modalStore';
+import { EMAIL_REGEX } from '@/constants/regex';
 
 type SignupFormInputs = {
   email: string;
@@ -36,8 +37,7 @@ export default function SignupPage() {
         nickname: data.nickname,
         password: data.password,
       });
-      const successMessage = '가입이 완료되었습니다!';
-      openModal(successMessage, 'success');
+      openModal('가입이 완료되었습니다!', 'success');
     } catch (error) {
       openModal('이미 사용 중인 이메일입니다.', 'error');
     }
@@ -59,7 +59,7 @@ export default function SignupPage() {
             {...register('email', {
               required: ERROR_MESSAGES.EMAIL_REQUIRE,
               pattern: {
-                value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                value: EMAIL_REGEX,
                 message: ERROR_MESSAGES.INVALID_EMAIL,
               },
             })}
@@ -146,9 +146,8 @@ export default function SignupPage() {
         </div>
         <Button
           type="submit"
-          disabled={!isValid || !!errors.termsAccepted}
-          className={isValid ? '' : styles.disabled}
-          style={{ height: '40px' }}
+          disabled={!isValid}
+          className={`${styles.submitButton} ${isValid ? '' : styles.disabled}`}
         >
           가입하기
         </Button>

@@ -16,6 +16,10 @@
   max-width: 400px;
 }
 
+.submitButton {
+  height: 40px;
+}
+
 .inputWrapper {
   display: flex;
   flex-direction: column;
@@ -67,6 +71,7 @@
   align-items: center;
   gap: 8px;
 }
+
 .linkContainer {
   display: flex;
   justify-content: center;

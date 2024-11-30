@@ -10,7 +10,8 @@ import type { User } from '@/types/user';
 import styles from './loginPage.module.css';
 import ModalContainer from '../components/modal/ModalContainer';
 import useModalStore from '../modalStore/modalStore';
-import axios, { AxiosError, isAxiosError } from 'axios';
+import axios from 'axios';
+import { EMAIL_REGEX } from '@/constants/regex';
 
 type LoginFormInputs = {
   email: string;
@@ -66,7 +67,7 @@ export default function LoginPage() {
             {...register('email', {
               required: ERROR_MESSAGES.REQUIRED_EMAIL,
               pattern: {
-                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                value: EMAIL_REGEX,
                 message: ERROR_MESSAGES.INVALID_EMAIL,
               },
             })}
@@ -108,15 +109,11 @@ export default function LoginPage() {
           <p>
             회원이 아니신가요?{' '}
             <span
-              style={{
-                color: 'var(--violet)',
-                textDecoration: 'underline',
-                cursor: 'pointer',
-              }}
+              className={styles.signupLink}
               onClick={() => router.push('/signup')}
             >
               회원가입하기
-            </span>{' '}
+            </span>
           </p>
         </div>
       </form>
