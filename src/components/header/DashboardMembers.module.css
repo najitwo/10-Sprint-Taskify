@@ -2,6 +2,7 @@
   display: flex;
   align-items: center;
   gap: 0;
+  transform: translateX(5px);
 }
 
 .avatar,
@@ -12,4 +13,10 @@
 .avatarNumber.avatarNumber {
   color: #d25b68;
   background: #f4d7da;
+}
+
+@media screen and (min-width: 768px) {
+  .avatarWrapper {
+    transform: none;
+  }
 }
