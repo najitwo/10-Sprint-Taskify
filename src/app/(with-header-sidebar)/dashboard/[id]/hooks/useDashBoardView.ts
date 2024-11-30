@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import debounce from 'lodash/debounce';
 import axiosInstance from '@/lib/axiosInstance';
 import { DropResult } from 'react-beautiful-dnd';
@@ -57,11 +57,6 @@ export default function useDashBoardView(dashboardId: string | undefined) {
       setLoading(false);
     }
   }, [dashboardId]);
-
-  useEffect(() => {
-    if (!dashboardId) return;
-    fetchData();
-  }, [fetchData, dashboardId]);
 
   const sendCardUpdateRequest = useCallback(
     debounce(async (cardId: string, updatedCardData: Card) => {
@@ -188,5 +183,5 @@ export default function useDashBoardView(dashboardId: string | undefined) {
     [cursors]
   );
 
-  return { columns, loading, error, handleOnDragEnd, loadMoreData };
+  return { columns, loading, error, handleOnDragEnd, loadMoreData, fetchData };
 }

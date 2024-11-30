@@ -5,6 +5,7 @@ import { toast } from '@/store/toastStore';
 export const deleteCard = async (cardId: number) => {
   try {
     await axiosInstance.delete(`/cards/${cardId}`);
+    toast.success({ message: '카드가 삭제되었습니다.' });
   } catch (error) {
     throw error;
   }

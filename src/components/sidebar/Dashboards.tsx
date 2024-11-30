@@ -5,7 +5,6 @@ import type { Dashboard } from '@/types/dashboards';
 import Image from 'next/image';
 import Button from '../Button';
 import useDashboards from '@/app/(with-header-sidebar)/mydashboard/_hooks/useDashboards';
-import useDashboardStore from '@/store/dashboardStore';
 import useTriggerStore from '@/store/triggerStore';
 import styles from './Dashboards.module.css';
 
@@ -45,18 +44,12 @@ export default function Dashboards() {
 
 function DashboardItem({ id, color, title, createdByMe }: Dashboard) {
   const isActive = usePathname() === `/dashboard/${id}`;
-  const setColor = useDashboardStore((state) => state.setColor);
-
-  const handleViewClick = () => {
-    setColor(color);
-  };
 
   return (
     <li>
       <Link
         href={`/dashboard/${id}`}
         className={`link ${isActive ? styles.active : ''}`}
-        onClick={handleViewClick}
       >
         <div className={styles.titleContainer}>
           <div style={{ background: color }} className={styles.dot}></div>
