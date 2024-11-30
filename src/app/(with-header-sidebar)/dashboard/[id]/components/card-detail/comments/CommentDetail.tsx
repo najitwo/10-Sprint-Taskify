@@ -4,7 +4,6 @@ import Button from '@/components/Button';
 import { formatDateToCustomFormat } from '@/utils/dateUtils';
 import type { Comment } from '@/types/comment';
 import { deleteComment, updateComment } from '@/lib/commentService';
-import { toast } from '@/store/toastStore';
 import styles from './CommentDetail.module.css';
 
 interface CommentDetailProps {
