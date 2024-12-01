@@ -7,6 +7,7 @@ import Button from '../Button';
 import useDashboards from '@/app/(with-header-sidebar)/mydashboard/_hooks/useDashboards';
 import useTriggerStore from '@/store/triggerStore';
 import styles from './Dashboards.module.css';
+import useCardStore from '@/store/cardStore';
 
 const PAGE_SIZE = 12;
 
@@ -45,11 +46,14 @@ export default function Dashboards() {
 function DashboardItem({ id, color, title, createdByMe }: Dashboard) {
   const isActive = usePathname() === `/dashboard/${id}`;
 
+  const handleClick = () => useCardStore.getState().clearCards();
+
   return (
     <li>
       <Link
         href={`/dashboard/${id}`}
         className={`link ${isActive ? styles.active : ''}`}
+        onClick={handleClick}
       >
         <div className={styles.titleContainer}>
           <div style={{ background: color }} className={styles.dot}></div>

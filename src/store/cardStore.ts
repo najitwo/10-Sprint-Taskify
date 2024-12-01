@@ -11,11 +11,14 @@ interface CardState {
 
 const useCardStore = create<CardState>((set) => ({
   cards: [],
-
   addCard: (newCard: Card) =>
-    set((state) => ({
-      cards: [...state.cards, newCard],
-    })),
+    set((state) => {
+      const exists = state.cards.some((card) => card.id === newCard.id);
+      if (exists) return state;
+      return {
+        cards: [...state.cards, newCard],
+      };
+    }),
   modifyCard: (id, updatedCard) =>
     set((state) => ({
       cards: state.cards.map((card) =>
