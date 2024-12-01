@@ -9,17 +9,15 @@ export default function Header() {
   const [scroll, setScroll] = useState(0);
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const handleScroll = () => {
-        setScroll(window.scrollY);
-      };
+    const handleScroll = () => {
+      setScroll(window.scrollY);
+    };
 
-      window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll);
 
-      return () => {
-        window.removeEventListener('scroll', handleScroll);
-      };
-    }
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   const getGradientColor = () => {
