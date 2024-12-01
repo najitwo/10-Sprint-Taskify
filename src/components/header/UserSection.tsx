@@ -24,7 +24,9 @@ export default function UserSection() {
 
   const handleLogout = () => {
     clearUser();
-    router.replace('/');
+    setTimeout(() => {
+      router.push('/');
+    }, 0); // 비동기적 push 호출 보장
   };
 
   const myInfoMenus: Menu[] = [

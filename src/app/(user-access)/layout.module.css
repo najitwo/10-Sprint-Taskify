@@ -7,16 +7,15 @@
   width: 100%;
   background-color: var(--gray-100);
 }
+
 .authContent {
   width: 100%;
-  max-width: 400px;
-  box-sizing: border-box;
-  display: flex;
-  justify-content: center;
+  max-width: 351px;
   background-color: var(--gray-100);
   border-radius: 8px;
   padding: 20px;
 }
+
 .logoContainer {
   display: flex;
   flex-direction: column;
@@ -24,14 +23,10 @@
   align-items: center;
   margin: 16px 0;
 }
+
 .logo {
   width: 100%;
   height: auto;
-}
-@media screen and (min-width: 768px) {
-  .authContent {
-    max-width: 351px;
-  }
 }
 
 @media screen and (min-width: 1200px) {
