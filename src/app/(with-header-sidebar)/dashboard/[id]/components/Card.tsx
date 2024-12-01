@@ -20,10 +20,12 @@ interface Props {
 
 function Card({ item, index, columnTitle }: Props) {
   const { isOpen, openModal, isClosing, closeModal } = useModal();
-  const card = useCardStore((state) => state.card);
+  const card = useCardStore((state) =>
+    state.cards.find((card) => card.id === item.id)
+  );
 
   useEffect(() => {
-    useCardStore.getState().setCard(item);
+    useCardStore.getState().addCard(item);
   }, [item]);
 
   if (!item || !item.id) {

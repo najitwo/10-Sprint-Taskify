@@ -6,7 +6,7 @@ import { deleteCard } from '@/lib/cardService';
 import { useRouter } from 'next/navigation';
 import useDashboardStore from '@/store/dashboardStore';
 import useModalStore from '@/store/modalStore';
-import UpdateTaskModal from '../UpdateCardModal';
+import UpdateCardModal from '../UpdateCardModal';
 import styles from './HeaderMenu.module.css';
 import useTriggerStore from '@/store/triggerStore';
 
@@ -30,7 +30,7 @@ export default function HeaderMenu({ cardId, closeModal }: HeaderMenuProps) {
   };
 
   const handleUpdateClick = () => {
-    openModal(<UpdateTaskModal />);
+    openModal(<UpdateCardModal cardId={cardId} />);
   };
 
   const cardMenus: Menu[] = [
