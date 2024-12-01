@@ -25,7 +25,7 @@ export default function UserSection() {
   const handleLogout = () => {
     clearUser();
     setTimeout(() => {
-      router.push('/');
+      router.replace('/');
     }, 0); // 비동기적 push 호출 보장
   };
 

@@ -7,12 +7,14 @@ import { toast } from '@/store/toastStore';
 interface MemberState {
   page: number;
   totalPages: number;
+  totalCount: number;
   members: Member[];
 }
 
 const DEFAULT_MEMBERS_STATE: MemberState = {
   page: 1,
   totalPages: 0,
+  totalCount: 0,
   members: [],
 };
 
@@ -44,6 +46,7 @@ const useMember = (dashboardId: string | null, pageSize = 4) => {
           ...prevState,
           members,
           totalPages,
+          totalCount,
         }));
       } catch (error) {
         throw error;
@@ -84,6 +87,7 @@ const useMember = (dashboardId: string | null, pageSize = 4) => {
     page: memberState.page,
     members: memberState.members,
     totalPages: memberState.totalPages,
+    totalCount: memberState.totalCount,
     isLoading,
     error,
     handlePageChange,

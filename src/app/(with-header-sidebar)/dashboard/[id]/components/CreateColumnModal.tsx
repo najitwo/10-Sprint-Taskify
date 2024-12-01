@@ -46,7 +46,7 @@ export default function CreateColumnModal() {
         <Input
           name="title"
           label="이름"
-          placeholder="새로운 프로젝트"
+          placeholder="새로운 컬럼"
           register={register('title', {
             required: ERROR_MESSAGES.TITLE_REQUIRE,
             validate: (value) => {
