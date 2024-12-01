@@ -3,8 +3,8 @@ import type {
   Invitation,
   AcceptMyInvitationRequestBody,
 } from '@/types/invitation';
-import styles from './MyInvitationCard.module.css';
 import { updateMyInvitation } from '../../_lib/myInvitationService';
+import styles from './MyInvitationCard.module.css';
 
 interface MyInvitationCardProps extends Invitation {
   onActionComplete: () => void;

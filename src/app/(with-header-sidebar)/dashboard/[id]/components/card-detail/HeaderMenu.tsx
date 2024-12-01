@@ -3,11 +3,11 @@ import type { Menu } from '@/types/menu';
 import MenuDropdown from '@/components/MenuDropdown';
 import { useMenu } from '@/hooks/useMenu';
 import { deleteCard } from '@/lib/cardService';
-import { useRouter } from 'next/navigation';
-import useDashboardStore from '@/store/dashboardStore';
 import useModalStore from '@/store/modalStore';
-import UpdateTaskModal from '../UpdateTaskModal';
+import UpdateCardModal from '../UpdateCardModal';
 import styles from './HeaderMenu.module.css';
+import useTriggerStore from '@/store/triggerStore';
+import useCardStore from '@/store/cardStore';
 
 interface HeaderMenuProps {
   cardId: number;
@@ -15,19 +15,19 @@ interface HeaderMenuProps {
 }
 
 export default function HeaderMenu({ cardId, closeModal }: HeaderMenuProps) {
-  const router = useRouter();
-  const { dashboard } = useDashboardStore();
+  const { updateTrigger } = useTriggerStore();
   const { isMenuVisible, toggleMenu } = useMenu();
   const { openModal } = useModalStore();
 
   const handleDeleteClick = async () => {
     await deleteCard(cardId);
     closeModal();
-    router.replace(`/dashboard/${dashboard?.id}`);
+    useCardStore.getState().removeCard(cardId);
+    updateTrigger.card();
   };
 
   const handleUpdateClick = () => {
-    openModal(<UpdateTaskModal />);
+    openModal(<UpdateCardModal cardId={cardId} />);
   };
 
   const cardMenus: Menu[] = [

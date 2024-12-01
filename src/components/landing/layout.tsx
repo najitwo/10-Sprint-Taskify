@@ -1,7 +1,9 @@
 import { ReactNode } from 'react';
-import Header from './Header/Header';
+import dynamic from 'next/dynamic';
 import Footer from './Footer/Footer';
 import styles from './layout.module.css';
+
+const Header = dynamic(() => import('./Header/Header'), { ssr: false });
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (

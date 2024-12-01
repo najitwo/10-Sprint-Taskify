@@ -11,6 +11,9 @@
 
 .card.dragging {
   margin: 0;
+  box-shadow:
+    rgba(0, 0, 0, 0.16) 0px 3px 6px,
+    rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
 
 .cardContainer {
@@ -24,8 +27,8 @@
 
 .imageWrapper {
   position: relative;
-  width: 280px;
-  height: 150px;
+  width: 260px;
+  height: 121px;
   margin-bottom: 4px;
 }
 
@@ -60,19 +63,23 @@
   gap: 6px;
 }
 
-.tagContainer:empty {
+.imageContainer:empty {
   display: none;
 }
 
 .optionalInfo {
+  flex: 1;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
+  align-items: center;
 }
 
 .dueDateWrapper {
+  flex: 1;
   display: flex;
-  gap: 4px;
   align-items: center;
+  gap: 4px;
+  width: 125px;
 }
 
 .icon path {
@@ -89,13 +96,13 @@
   width: 22px;
   height: 22px;
   font-size: 12px;
+  padding-bottom: 2.5px;
 }
 
 @media screen and (min-width: 768px) {
   .card {
     padding: 16px 20px;
     margin-bottom: 16px;
-    min-height: 93px;
   }
 
   .modal {
@@ -114,12 +121,14 @@
 
   .contentContainer {
     flex-direction: row;
-    gap: 12px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0;
   }
 
   .imageWrapper {
-    width: 90px;
-    height: 57px;
+    width: 91px;
+    height: 53px;
     margin-bottom: 0;
   }
 
@@ -129,51 +138,20 @@
   }
 
   .optionalInfo {
-    flex: 1;
+    gap: 16px;
+  }
+
+  .dueDateWrapper {
+    justify-content: flex-end;
   }
 
   .modal {
     width: 680px;
-  }
-
-  .cardContainer {
-    flex-direction: row;
-    gap: 22px;
-  }
-
-  .cardInfo {
-    flex: 1;
-    gap: 10px;
-  }
-
-  .contentContainer {
-    flex-direction: row;
-    gap: 12px;
-  }
-
-  .imageWrapper {
-    width: 90px;
-    height: 57px;
-    margin-bottom: 0;
-  }
-
-  .title {
-    font-size: 16px;
-    line-height: 26px;
-  }
-
-  .optionalInfo {
-    flex: 1;
-  }
-
-  .modal {
-    width: 730px;
   }
 }
 
 @media screen and (min-width: 1200px) {
   .card {
-    min-height: 128px;
     height: auto;
     min-width: 312px;
   }
@@ -187,6 +165,10 @@
     gap: 0;
   }
 
+  .tagContainer {
+    max-width: none;
+  }
+
   .imageWrapper {
     width: 274px;
     height: 160px;
@@ -195,5 +177,17 @@
 
   .contentContainer {
     flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .optionalInfo {
+    width: 100%;
+    justify-content: space-between;
+    gap: 0;
+  }
+
+  .dueDateWrapper {
+    justify-content: flex-start;
   }
 }

@@ -1,4 +1,4 @@
-import { Cards } from '@/types/dashboardView';
+import { Card } from '@/types/dashboardView';
 import Assignment from './Assignment';
 import Tag from '@/components/card/Tag';
 import ColumnLabel from '@/components/card/ColumnLabel';
@@ -7,12 +7,12 @@ import Image from 'next/image';
 import CreateCommentForm from './comments/CreateCommentForm';
 import useDashboardStore from '@/store/dashboardStore';
 import Comments from './comments/Comments';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { Comment } from '@/types/comment';
 import styles from './CardInfo.module.css';
 
 interface CardInfoProps {
-  card: Cards;
+  card: Card;
   columnTitle: string;
 }
 
@@ -23,11 +23,15 @@ export default function CardInfo({ card, columnTitle }: CardInfoProps) {
 
   const [newComment, setNewComment] = useState<Comment | null>(null);
 
+  useEffect(() => {}, [card]);
+
   return (
     <div className={styles.cardInfo}>
-      <div className={styles.assignmentContainer}>
-        <Assignment card={card} />
-      </div>
+      {card.assignee && (
+        <div className={styles.assignmentContainer}>
+          <Assignment card={card} />
+        </div>
+      )}
       <div className={styles.infoContainer}>
         <div className={styles.labelArea}>
           <div>

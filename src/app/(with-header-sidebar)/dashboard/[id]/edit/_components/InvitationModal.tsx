@@ -18,10 +18,7 @@ export default function InvitationModal({
   } = useForm<{ email: string }>({ mode: 'onChange' });
   const { closeModal } = useModalStore();
 
-  const onSubmit = async ({ email }: { email: string }) => {
-    handleInvite(email);
-    closeModal();
-  };
+  const onSubmit = async ({ email }: { email: string }) => handleInvite(email);
 
   return (
     <form className={styles.modal} onSubmit={handleSubmit(onSubmit)}>

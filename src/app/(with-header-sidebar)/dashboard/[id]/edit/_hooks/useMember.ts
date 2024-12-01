@@ -2,16 +2,19 @@ import { useCallback, useEffect, useState } from 'react';
 import { getMembers, deleteMember } from '../_lib/memberService';
 import useApi from './useApi';
 import { GetMembersResponse, Member } from '@/types/member';
+import { toast } from '@/store/toastStore';
 
 interface MemberState {
   page: number;
   totalPages: number;
+  totalCount: number;
   members: Member[];
 }
 
 const DEFAULT_MEMBERS_STATE: MemberState = {
   page: 1,
   totalPages: 0,
+  totalCount: 0,
   members: [],
 };
 
@@ -43,6 +46,7 @@ const useMember = (dashboardId: string | null, pageSize = 4) => {
           ...prevState,
           members,
           totalPages,
+          totalCount,
         }));
       } catch (error) {
         throw error;
@@ -66,9 +70,12 @@ const useMember = (dashboardId: string | null, pageSize = 4) => {
   const handleDelete = async (memberId: number) => {
     try {
       await deleteMember(memberId);
+      toast.success({ message: '삭제되었습니다' });
       handleLoad(memberState.page);
     } catch (error) {
-      throw error;
+      if (error instanceof Error) {
+        toast.error({ message: error.message });
+      }
     }
   };
 
@@ -80,6 +87,7 @@ const useMember = (dashboardId: string | null, pageSize = 4) => {
     page: memberState.page,
     members: memberState.members,
     totalPages: memberState.totalPages,
+    totalCount: memberState.totalCount,
     isLoading,
     error,
     handlePageChange,

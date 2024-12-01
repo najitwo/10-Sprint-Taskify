@@ -4,7 +4,11 @@ import { TOKEN_KEY } from './constants/cookies';
 export function middleware(request: NextRequest) {
   const userToken = request.cookies.get(TOKEN_KEY);
 
-  if (!userToken) {
+  if (userToken && request.nextUrl.pathname === '/') {
+    return NextResponse.redirect(new URL('/mydashboard', request.url));
+  }
+
+  if (!userToken && request.nextUrl.pathname !== '/') {
     return NextResponse.redirect(new URL('/login', request.url));
   }
 
@@ -14,6 +18,7 @@ export function middleware(request: NextRequest) {
 // 아래에서 시작하는 경로에서만 미들웨어 제한
 export const config = {
   matcher: [
+    '/',
     '/dashboard/:path*',
     '/mypage',
     '/mydashboard/:path*',

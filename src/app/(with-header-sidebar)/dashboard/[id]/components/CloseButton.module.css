@@ -1,0 +1,17 @@
+.closeButtonWrapper {
+  position: relative;
+  width: 24px;
+  height: 24px;
+}
+
+.closeButton {
+  display: inline-flex;
+  align-items: center;
+}
+
+@media screen and (min-width: 768px) {
+  .closeButtonWrapper {
+    width: 36px;
+    height: 36px;
+  }
+}

@@ -1,4 +1,5 @@
 import axiosInstance from '@/lib/axiosInstance';
+import { toast } from '@/store/toastStore';
 import {
   GetMyInvitationsRequestParam,
   GetMyInvitationsResponse,
@@ -44,6 +45,10 @@ export const updateMyInvitation = async ({
       `/invitations/${invitationId}`,
       requestBody
     );
+
+    toast.success({
+      message: `${requestBody.inviteAccepted ? '수락' : '거절'} 완료!`,
+    });
 
     return response.data;
   } catch (error) {

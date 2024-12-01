@@ -8,17 +8,22 @@ import Column from './components/Column';
 import Button from '@/components/Button';
 import Image from 'next/image';
 import useDashboardStore from '@/store/dashboardStore';
+import useModalStore from '@/store/modalStore';
+import CreateColumnModal from './components/CreateColumnModal';
+import useTriggerStore from '@/store/triggerStore';
 import styles from './page.module.css';
 
+const DEFAULT_COLOR = 'var(--violet)';
+
 export default function DashBoardView() {
+  const { openModal } = useModalStore();
+  const { trigger } = useTriggerStore();
   const params = useParams();
   const id = params.id;
 
-  const { columns, loading, error, handleOnDragEnd, loadMoreData } =
+  const { columns, loading, error, handleOnDragEnd, loadMoreData, fetchData } =
     useDashBoardView(`${id}`);
-  const dashboard = useDashboardStore((state) => state.dashboard);
-  const setDashboard = useDashboardStore((state) => state.setDashboard);
-  const color = useDashboardStore((state) => state.color);
+  const { dashboard, setDashboard } = useDashboardStore();
 
   useEffect(() => {
     if (dashboard?.id !== Number(id)) {
@@ -26,8 +31,19 @@ export default function DashBoardView() {
     }
   }, [id, dashboard?.id]);
 
+  useEffect(() => {
+    if (!dashboard) return;
+    fetchData();
+  }, [dashboard, trigger]);
+
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
+
+  const COlUMN_COUNT = columns.length >= 9;
+
+  const handleCreateColumn = () => {
+    openModal(<CreateColumnModal />);
+  };
 
   return (
     <div className={styles.dashboardView}>
@@ -35,7 +51,7 @@ export default function DashBoardView() {
         {columns.map((column) => (
           <Column
             key={column.id}
-            color={color}
+            color={dashboard?.color || DEFAULT_COLOR}
             title={column.title}
             totalCount={column.totalCount}
             id={column.id}
@@ -43,9 +59,15 @@ export default function DashBoardView() {
             loadMoreData={loadMoreData}
           />
         ))}
+      </DragDropContext>
+      {!COlUMN_COUNT && (
         <div className={styles.createColumnSection}>
-          <Button type="button" className={styles.createColumn}>
-            <span>새로운 칼럼 추가하기</span>
+          <Button
+            type="button"
+            className={styles.createColumn}
+            onClick={handleCreateColumn}
+          >
+            <span>새로운 컬럼 추가하기</span>
             <Image
               src="/icons/add.svg"
               width={22}
@@ -55,7 +77,7 @@ export default function DashBoardView() {
             />
           </Button>
         </div>
-      </DragDropContext>
+      )}
     </div>
   );
 }

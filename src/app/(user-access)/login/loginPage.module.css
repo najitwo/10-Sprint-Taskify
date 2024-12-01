@@ -3,7 +3,6 @@
   flex-direction: column;
   gap: 18px;
   width: 100%;
-  max-width: 400px;
 }
 
 .inputWrapper {
@@ -33,6 +32,7 @@
   border-color: var(--violet);
   outline: none;
 }
+
 .errorMessage {
   color: var(--red);
   font-size: 12px;
@@ -48,4 +48,10 @@
 .greeting {
   font-size: 20px;
   text-align: center;
+}
+
+.signupLink {
+  color: var(--violet);
+  text-decoration: underline;
+  cursor: pointer;
 }

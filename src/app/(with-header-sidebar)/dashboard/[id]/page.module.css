@@ -3,12 +3,16 @@
   flex-direction: column;
   min-height: 100vh;
   background-color: var(--gray-100);
+  position: relative;
 }
 
 .createColumnSection {
   min-width: 284px;
-  width: auto;
   padding: 16px 12px;
+  position: sticky;
+  bottom: 0;
+  z-index: 1;
+  background-color: var(--gray-100);
 }
 
 .createColumn.createColumn {
@@ -25,7 +29,6 @@
   line-height: 26px;
   gap: 12px;
   border-radius: 8px;
-  margin-top: 48px;
 }
 
 .createColumnIcon {
@@ -50,5 +53,6 @@
 
   .createColumn.createColumn {
     width: 354px;
+    margin-top: 48px;
   }
 }

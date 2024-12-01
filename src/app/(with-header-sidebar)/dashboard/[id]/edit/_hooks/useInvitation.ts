@@ -6,6 +6,8 @@ import {
 } from '../_lib/invitationService';
 import useApi from './useApi';
 import { GetInvitationsResponse, Invitation } from '@/types/invitation';
+import { toast } from '@/store/toastStore';
+import useModalStore from '@/store/modalStore';
 
 interface InvitationState {
   page: number;
@@ -23,6 +25,7 @@ const useInvitation = (dashboardId: string | null, pageSize = 5) => {
   const [invitationState, setInvitationState] = useState<InvitationState>(
     DEFAULT_INVITATION_STATE
   );
+  const closeModal = useModalStore((state) => state.closeModal);
 
   const {
     isLoading,
@@ -72,18 +75,25 @@ const useInvitation = (dashboardId: string | null, pageSize = 5) => {
   const handleCancel = async (invitationId: number) => {
     try {
       await deleteInvitation(dashboardId!, invitationId);
+      toast.success({ message: '취소되었습니다.' });
       handleLoad(invitationState.page);
     } catch (error) {
-      throw error;
+      if (error instanceof Error) {
+        toast.error({ message: error.message });
+      }
     }
   };
 
   const handleInvite = async (email: string) => {
     try {
       await createInvitation(dashboardId!, email);
+      toast.success({ message: '초대되었습니다.' });
+      closeModal();
       handleLoad(invitationState.page);
     } catch (error) {
-      throw error;
+      if (error instanceof Error) {
+        toast.error({ message: error.message });
+      }
     }
   };
 

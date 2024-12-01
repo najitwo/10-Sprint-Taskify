@@ -7,9 +7,11 @@ import { getBoard, updateBoard } from '@/lib/boardService';
 import { Dashboard, UpdateDashboardRequestParams } from '@/types/dashboards';
 import Button from '@/components/Button';
 import DashboardInput from '@/components/DashboardInput';
+import useTriggerStore from '@/store/triggerStore';
 import styles from './EditForm.module.css';
 
 export default function EditForm() {
+  const { updateTrigger } = useTriggerStore();
   const [board, setBoard] = useState<Dashboard>();
   const id = useIdStore((state) => state.id);
   const {
@@ -26,6 +28,7 @@ export default function EditForm() {
 
   const onSubmit = async (data: UpdateDashboardRequestParams) => {
     const response = await updateBoard(id, data);
+    updateTrigger.dashboard();
     setBoard(response);
   };
 

@@ -15,12 +15,12 @@ export default function DashboardMembers() {
   const dashboard = useDashboardStore((state) => state.dashboard);
   const { isMobile } = useWindowSize();
 
-  const { members, totalPages } = useMember(
+  const { members, totalCount } = useMember(
     dashboard?.id.toString() || null,
     MEMBERS_VIEW_COUNT.desktop
   );
 
-  if (totalPages === 0) {
+  if (totalCount === 0) {
     return null;
   }
 
@@ -31,7 +31,7 @@ export default function DashboardMembers() {
   return (
     <div className={styles.avatarWrapper}>
       {members
-        .slice(0, totalPages > maxViewCount ? maxViewCount - 1 : maxViewCount)
+        .slice(0, totalCount > maxViewCount ? maxViewCount - 1 : maxViewCount)
         .map(({ id, nickname, profileImageUrl }) => (
           <Avatar
             key={id}
@@ -40,9 +40,9 @@ export default function DashboardMembers() {
             className={styles.avatar}
           />
         ))}
-      {totalPages > maxViewCount && (
+      {totalCount > maxViewCount && (
         <Avatar
-          name={totalPages - maxViewCount + 1}
+          name={totalCount - maxViewCount + 1}
           className={styles.avatarNumber}
         />
       )}
