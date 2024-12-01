@@ -53,5 +53,6 @@
 
   .createColumn.createColumn {
     width: 354px;
+    margin-top: 48px;
   }
 }
