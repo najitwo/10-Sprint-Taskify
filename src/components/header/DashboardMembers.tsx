@@ -28,10 +28,6 @@ export default function DashboardMembers() {
     ? MEMBERS_VIEW_COUNT.mobile
     : MEMBERS_VIEW_COUNT.desktop;
 
-  console.log({ maxViewCount });
-  console.log({ totalCount });
-  console.log(totalCount > maxViewCount);
-
   return (
     <div className={styles.avatarWrapper}>
       {members
