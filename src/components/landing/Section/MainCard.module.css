@@ -9,6 +9,14 @@
   text-align: center;
   margin-bottom: 60px;
   border-radius: 8px;
+  opacity: 0.3;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+}
+
+.card.inView {
+  opacity: 1;
 }
 
 .card:not(.imgFirst) .img {
