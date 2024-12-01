@@ -13,25 +13,27 @@ export default function Home() {
   });
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          const { id } = entry.target;
-          setInView((prev) => ({
-            ...prev,
-            [id]: !entry.isIntersecting,
-          }));
-        });
-      },
-      { threshold: 0.5 }
-    );
+    if (typeof window !== 'undefined') {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            const { id } = entry.target;
+            setInView((prev) => ({
+              ...prev,
+              [id]: !entry.isIntersecting,
+            }));
+          });
+        },
+        { threshold: 0.5 }
+      );
 
-    const sections = document.querySelectorAll('section');
-    sections.forEach((section) => {
-      observer.observe(section);
-    });
+      const sections = document.querySelectorAll('section');
+      sections.forEach((section) => {
+        observer.observe(section);
+      });
 
-    return () => observer.disconnect();
+      return () => observer.disconnect();
+    }
   }, []);
 
   return (
