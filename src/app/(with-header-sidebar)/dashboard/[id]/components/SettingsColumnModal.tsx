@@ -43,15 +43,13 @@ export default function SettingsColumnModal({
       return;
     }
 
-    if (title === prevTitle) {
+    if (title !== prevTitle) {
+      const errorMessage = isDuplicate
+        ? '다른 컬럼은 삭제할 수 없습니다.'
+        : '존재하지 않는 컬럼입니다.';
+      handleError(errorMessage);
       return;
     }
-
-    const errorMessage = isDuplicate
-      ? '다른 컬럼은 삭제할 수 없습니다.'
-      : '존재하지 않는 컬럼입니다.';
-
-    handleError(errorMessage);
 
     await deleteColumn(`${id}`);
     closeModal();
