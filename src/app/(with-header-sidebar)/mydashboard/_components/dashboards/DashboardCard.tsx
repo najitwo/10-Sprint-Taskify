@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import Button from '@/components/Button';
 import styles from './DashboardCard.module.css';
+import useCardStore from '@/store/cardStore';
 
 export default function DashboardCard({
   id,
@@ -12,11 +13,13 @@ export default function DashboardCard({
 }: Dashboard) {
   const router = useRouter();
 
+  const handleClick = () => {
+    useCardStore.getState().clearCards();
+    router.push(`/dashboard/${id}`);
+  };
+
   return (
-    <Button
-      className={styles.dashboardCard}
-      onClick={() => router.push(`/dashboard/${id}`)}
-    >
+    <Button className={styles.dashboardCard} onClick={handleClick}>
       <div className={styles.titleContainer}>
         <div style={{ background: color }} className={styles.dot}></div>
         <span className={styles.title}>{title}</span>

@@ -22,7 +22,7 @@ interface TaskUpdateFormValues extends TaskFormValues {
   columnId: number;
 }
 
-export default function UpdateTaskModal() {
+export default function UpdateCardModal({ cardId }: { cardId: number }) {
   const { closeModal } = useModalStore();
   const {
     register,
@@ -34,12 +34,15 @@ export default function UpdateTaskModal() {
   const dashboard = useDashboardStore((state) => state.dashboard);
   const { members } = useMember(dashboard?.id.toString() || null, 10);
   const { columns } = useColumn(dashboard?.id || null);
-  const { card, setCard } = useCardStore();
+  const card = useCardStore((state) =>
+    state.cards.find((card) => card.id === cardId)
+  );
+  const modifyCard = useCardStore((state) => state.modifyCard);
 
   const onSubmit = async (data: TaskUpdateFormValues) => {
     if (card) {
       const response = await updateCard(data, card.columnId, card.id);
-      setCard(response);
+      modifyCard(card.id, response);
       closeModal();
     }
   };
