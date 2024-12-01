@@ -5,8 +5,8 @@ import Button from '@/components/Button';
 import Image from 'next/image';
 import Card from './Card';
 import useModalStore from '@/store/modalStore';
-import SettingsColumnModal from './SettingsColumnModal';
 import CreateTaskModal from './CreateCardModal';
+import SettingsColumnModal from './SettingsColumnModal';
 import styles from './Column.module.css';
 
 function Column({
@@ -110,6 +110,11 @@ function Column({
                 }`}
                 ref={provided.innerRef}
                 {...provided.droppableProps}
+                style={{
+                  backgroundColor: snapshot.isDraggingOver
+                    ? 'var(--violet-light)'
+                    : '',
+                }}
               >
                 {items.map((item, index) =>
                   item ? (
@@ -122,7 +127,7 @@ function Column({
                   ) : null
                 )}
                 {provided.placeholder}
-                <div ref={loadMoreRef} style={{ height: '10px' }}></div>
+                <div ref={loadMoreRef} style={{ height: '5px' }}></div>
               </div>
             )}
           </Droppable>

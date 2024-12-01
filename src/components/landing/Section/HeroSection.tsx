@@ -4,7 +4,7 @@ import styles from './HeroSection.module.css';
 
 export default function HeroSection() {
   return (
-    <section className={styles.section}>
+    <section id="hero" className={styles.section}>
       <ImageWrapper
         src="/images/home.png"
         alt="일정 관리 웹 어플리케이션"

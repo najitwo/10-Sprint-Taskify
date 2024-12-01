@@ -8,6 +8,7 @@ interface Props {
   alt: string;
   className: string;
   imgFirst?: boolean;
+  inView?: boolean;
 }
 
 export default function MainCard({
@@ -17,10 +18,15 @@ export default function MainCard({
   alt,
   className,
   imgFirst = false,
+  inView,
 }: Props) {
   const destopFor = imgFirst ? styles.imgFirst : '';
+  const cardClassName = inView
+    ? `${styles.card} ${styles.inView}`
+    : styles.card;
+
   return (
-    <div className={`${styles.card} ${destopFor}`}>
+    <div className={`${cardClassName} ${destopFor}`}>
       {imgFirst && (
         <ImageWrapper
           src={src}

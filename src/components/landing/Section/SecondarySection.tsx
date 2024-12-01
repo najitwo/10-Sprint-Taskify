@@ -1,9 +1,13 @@
 import MiniCard from '@/components/landing/Section/MiniCard';
 import styles from './SecondarySection.module.css';
 
-export default function SecondarySection() {
+interface Props {
+  inView: boolean;
+}
+
+export default function SecondarySection({ inView }: Props) {
   return (
-    <section className={styles.section}>
+    <section id="primary" className={styles.section}>
       <div className={styles.title}>생산성을 높이는 다양한 설정 ⚡</div>
       <div className={styles.cards}>
         <MiniCard
@@ -12,6 +16,7 @@ export default function SecondarySection() {
           title="대시보드 설정"
           desc="대시보드 사진과 이름을 변경할 수 있어요."
           className={styles.cardSm1}
+          inView={inView}
         />
         <MiniCard
           src="/images/landing_sm_2.png"
@@ -19,6 +24,7 @@ export default function SecondarySection() {
           title="초대"
           desc="새로운 팀원을 초대할 수 있어요."
           className={styles.cardSm2}
+          inView={inView}
         />
         <MiniCard
           src="/images/landing_sm_3.png"
@@ -26,6 +32,7 @@ export default function SecondarySection() {
           title="구성원"
           desc="구성원을 초대하고 내보낼 수 있어요."
           className={styles.cardSm3}
+          inView={inView}
         />
       </div>
     </section>

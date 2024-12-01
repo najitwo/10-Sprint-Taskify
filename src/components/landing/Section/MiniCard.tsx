@@ -7,11 +7,23 @@ interface Props {
   title: string;
   desc: string;
   className: string;
+  inView?: boolean;
 }
 
-export default function MiniCard({ src, alt, title, desc, className }: Props) {
+export default function MiniCard({
+  src,
+  alt,
+  title,
+  desc,
+  className,
+  inView,
+}: Props) {
+  const cardClassName = inView
+    ? `${styles.card} ${styles.inView}`
+    : styles.card;
+
   return (
-    <div className={styles.card}>
+    <div className={`${cardClassName}`}>
       <div className={styles.imgContainer}>
         <ImageWrapper src={src} alt={alt} className={className} />
       </div>
