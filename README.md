@@ -1,7 +1,10 @@
-# ⚡ Project Title: **Taskify**
+## ⚡ Project Title
+
 ![Taskify Overview](https://github.com/user-attachments/assets/24eeb09b-b565-4a67-a40a-96c532c88333)
 
-A web application that provides scheduling management and sharing features.
+**Taskify**
+
+> A web application that provides scheduling management and sharing features.
 
 <br>
 
