@@ -13,7 +13,7 @@
 **Reason for Selection**
 - Real-time data synchronization
 - Intuitive and manageable UI/UX
-- 
+   
 **Key Features**
 - **Login**: Authenticate users and store session data in cookies or local storage.
 - **Logout**: Clear session data on logout to securely end the session.
@@ -40,7 +40,7 @@
 <br>
 
 ## 👊 Team Members
-| ![김지윤](https://avatars.githubusercontent.com/u/174712986?v=4) | ![김희진](https://avatars.githubusercontent.com/u/77238424?v=4) | ![나승엽](https://avatars.githubusercontent.com/u/166021800?v=4) | ![나지원](https://avatars.githubusercontent.com/u/176969129?v=4) |
+| <img src="https://avatars.githubusercontent.com/u/174712986?v=4" alt="김지윤" width="250" height="250"> | <img src="https://avatars.githubusercontent.com/u/77238424?v=4" alt="김희진" width="250" height="250"> | <img src="https://avatars.githubusercontent.com/u/166021800?v=4" alt="나승엽" width="250" height="250"> | <img src="https://avatars.githubusercontent.com/u/176969129?v=4" alt="나지원" width="250" height="250"> |
 | :----------------------------------------------------------: | :--------------------------------------------------------: | :-------------------------------------------------------: | :--------------------------------------------------------: |
 |                        김지윤                              |                        👑 김희진                              |                       나승엽                               |                       나지원                               |
 | [@21ow](https://github.com/21ow)                             | [@devmanta](https://github.com/devmanta)                    | [@najitwo](https://github.com/najitwo)                      | [@naseungyeop](https://github.com/naseungyeop)               |
