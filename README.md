@@ -93,31 +93,31 @@
 
 ```plain
 /public
-  ├── /icons                # Icon folder
-  └── /images               # Image folder
+  ├── /icons                 # Icon folder
+  └── /images                # Image folder
 
 /src
-  ├── (page folders)        # Page folders
-  │   ├ folder              # Specific page component folder
-  │   ├── layout.module.css # Layout styles
-  │   ├── layout.tsx        # Layout component
-  ├── /api                  # API-related files
-  │   ├── accessToken.ts    # Access token handling
-  │   └── login.ts          # Login API
-  ├── /app                  # App-wide files
-  │   ├── /fonts            # Font files
-  │   ├── layout.tsx        # App layout component
-  │   ├── page.tsx          # Main page component
-  │   ├── reset.css         # Global CSS reset
-  │   └── variables.css     # Global CSS variables
-  ├── /components           # Reusable components
-  ├── /constants            # Constants
-  │   ├── cookies.ts        # Cookie constants
-  │   └── urls.ts           # URL constants
-  ├── /hooks               # Custom React hooks
-  ├── /store               # State management
-  ├── /types               # Type definitions
-  └── /utils               # Utility functions
+  ├── (page folders)         # Page folders
+  │   ├ folder               # Specific page component folder
+  │   ├── layout.module.css  # Layout styles
+  │   ├── layout.tsx         # Layout component
+  ├── /api                   # API-related files
+  │   ├── accessToken.ts     # Access token handling
+  │   └── login.ts           # Login API
+  ├── /app                   # App-wide files
+  │   ├── /fonts             # Font files
+  │   ├── layout.tsx         # App layout component
+  │   ├── page.tsx           # Main page component
+  │   ├── reset.css          # Global CSS reset
+  │   └── variables.css      # Global CSS variables
+  ├── /components            # Reusable components
+  ├── /constants             # Constants
+  │   ├── cookies.ts         # Cookie constants
+  │   └── urls.ts            # URL constants
+  ├── /hooks                 # Custom React hooks
+  ├── /store                 # State management
+  ├── /types                 # Type definitions
+  └── /utils                 # Utility functions
 
 ```
 
