@@ -40,7 +40,7 @@
 <br>
 
 ## 👊 Team Members
-| <img src="https://avatars.githubusercontent.com/u/174712986?v=4" alt="김지윤" width="250" height="250"> | <img src="https://avatars.githubusercontent.com/u/77238424?v=4" alt="김희진" width="250" height="250"> | <img src="https://avatars.githubusercontent.com/u/166021800?v=4" alt="나승엽" width="250" height="250"> | <img src="https://avatars.githubusercontent.com/u/176969129?v=4" alt="나지원" width="250" height="250"> |
+| <img src="https://avatars.githubusercontent.com/u/174712986?v=4" alt="김지윤" style="width: 25vw; height: auto;"> | <img src="https://avatars.githubusercontent.com/u/77238424?v=4" alt="김희진" style="width: 25vw; height: auto;"> | <img src="https://avatars.githubusercontent.com/u/166021800?v=4" alt="나승엽" style="width: 25vw; height: auto;"> | <img src="https://avatars.githubusercontent.com/u/176969129?v=4" alt="나지원" style="width: 25vw; height: auto;"> |
 | :----------------------------------------------------------: | :--------------------------------------------------------: | :-------------------------------------------------------: | :--------------------------------------------------------: |
 |                        김지윤                              |                        👑 김희진                              |                       나승엽                               |                       나지원                               |
 | [@21ow](https://github.com/21ow)                             | [@devmanta](https://github.com/devmanta)                    | [@najitwo](https://github.com/najitwo)                      | [@naseungyeop](https://github.com/naseungyeop)               |
@@ -93,31 +93,31 @@
 
 ```plain
 /public
-  ├── /icons                 # Icon folder
-  └── /images                # Image folder
+  ├── /icons                  # Icon folder
+  └── /images                 # Image folder
 
 /src
-  ├── (page folders)         # Page folders
-  │   ├ folder               # Specific page component folder
-  │   ├── layout.module.css  # Layout styles
-  │   ├── layout.tsx         # Layout component
-  ├── /api                   # API-related files
-  │   ├── accessToken.ts     # Access token handling
-  │   └── login.ts           # Login API
-  ├── /app                   # App-wide files
-  │   ├── /fonts             # Font files
-  │   ├── layout.tsx         # App layout component
-  │   ├── page.tsx           # Main page component
-  │   ├── reset.css          # Global CSS reset
-  │   └── variables.css      # Global CSS variables
-  ├── /components            # Reusable components
-  ├── /constants             # Constants
-  │   ├── cookies.ts         # Cookie constants
-  │   └── urls.ts            # URL constants
-  ├── /hooks                 # Custom React hooks
-  ├── /store                 # State management
-  ├── /types                 # Type definitions
-  └── /utils                 # Utility functions
+  ├── (page folders)          # Page folders
+  │   ├ folder                # Specific page component folder
+  │   ├── layout.module.css   # Layout styles
+  │   ├── layout.tsx          # Layout component
+  ├── /api                    # API-related files
+  │   ├── accessToken.ts      # Access token handling
+  │   └── login.ts            # Login API
+  ├── /app                    # App-wide files
+  │   ├── /fonts              # Font files
+  │   ├── layout.tsx          # App layout component
+  │   ├── page.tsx            # Main page component
+  │   ├── reset.css           # Global CSS reset
+  │   └── variables.css       # Global CSS variables
+  ├── /components             # Reusable components
+  ├── /constants              # Constants
+  │   ├── cookies.ts          # Cookie constants
+  │   └── urls.ts             # URL constants
+  ├── /hooks                  # Custom React hooks
+  ├── /store                  # State management
+  ├── /types                  # Type definitions
+  └── /utils                  # Utility functions
 
 ```
 
